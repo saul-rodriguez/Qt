@@ -5,6 +5,7 @@
 #include <QtSerialPort/QSerialPort>
 #include "/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h"
 #include "cbio2016.h"
+#include "cvin2016.h"
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,8 @@ private slots:
 
     void on_pushButtonConfigure_clicked();
 
+    void on_pushButtonConfigAll_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -38,6 +41,7 @@ private:
     CSerialDriver *myserial;
 
     CBIO2016 m_bioASIC;
+    CVIN2016 m_vinASIC;
 
 private:
     void readPorts();

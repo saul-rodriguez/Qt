@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>739</width>
-    <height>463</height>
+    <height>454</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>10</y>
+      <y>0</y>
       <width>701</width>
       <height>391</height>
      </rect>
@@ -118,7 +118,7 @@
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">
-      <string>Configure ASIC</string>
+      <string>ASIC Radio Conf.</string>
      </attribute>
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
@@ -126,7 +126,7 @@
         <x>60</x>
         <y>10</y>
         <width>131</width>
-        <height>311</height>
+        <height>341</height>
        </rect>
       </property>
       <property name="title">
@@ -138,7 +138,7 @@
          <x>20</x>
          <y>30</y>
          <width>101</width>
-         <height>271</height>
+         <height>304</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout">
@@ -213,14 +213,14 @@
          </widget>
         </item>
         <item>
-         <spacer name="verticalSpacer_2">
+         <spacer name="verticalSpacer_6">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
           </property>
           <property name="sizeHint" stdset="0">
            <size>
-            <width>20</width>
-            <height>40</height>
+            <width>86</width>
+            <height>58</height>
            </size>
           </property>
          </spacer>
@@ -329,7 +329,7 @@
         <x>230</x>
         <y>10</y>
         <width>120</width>
-        <height>311</height>
+        <height>341</height>
        </rect>
       </property>
       <property name="title">
@@ -341,7 +341,7 @@
          <x>10</x>
          <y>30</y>
          <width>91</width>
-         <height>271</height>
+         <height>301</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -408,18 +408,243 @@
        <rect>
         <x>360</x>
         <y>30</y>
-        <width>80</width>
+        <width>101</width>
         <height>22</height>
        </rect>
       </property>
       <property name="text">
-       <string>Configure</string>
+       <string>Config Radio</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="title">
+      <string> ASIC Filter Conf.</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>10</y>
+        <width>401</width>
+        <height>321</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Filter Settings</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_4">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>30</y>
+         <width>121</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QCheckBox" name="checkBoxEnMF">
+          <property name="text">
+           <string>EnMF</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxEnHF">
+          <property name="text">
+           <string>EnHF</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxDN1">
+          <property name="text">
+           <string>DN1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxDN0">
+          <property name="text">
+           <string>DN0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxDP2">
+          <property name="text">
+           <string>DP2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxDP1">
+          <property name="text">
+           <string>DP1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxDP0">
+          <property name="text">
+           <string>DP0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxEnRdeg">
+          <property name="text">
+           <string>EnRdeg</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_4">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_5">
+       <property name="geometry">
+        <rect>
+         <x>270</x>
+         <y>30</y>
+         <width>121</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QCheckBox" name="checkBoxEnRdegHF1">
+          <property name="text">
+           <string>EnRdegHF1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxEnRdegHF0">
+          <property name="text">
+           <string>EnRdegHF0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCcompSel1">
+          <property name="text">
+           <string>CcompSel1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCcompSel0">
+          <property name="text">
+           <string>CcompSel0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCapSel3">
+          <property name="text">
+           <string>CapSel3</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCapSel2">
+          <property name="text">
+           <string>CapSel2</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCapSel1">
+          <property name="text">
+           <string>CapSel1</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxCapSel0">
+          <property name="text">
+           <string>CapSel0</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="verticalLayoutWidget_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>121</width>
+         <height>281</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QCheckBox" name="checkBoxEnLF">
+          <property name="text">
+           <string>EnLF</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_3">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="pushButtonConfigAll">
+      <property name="geometry">
+       <rect>
+        <x>480</x>
+        <y>30</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Config ASIC</string>
       </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
-      <string>Plot</string>
+      <string>Measure/Plot</string>
      </attribute>
     </widget>
    </widget>
@@ -430,7 +655,7 @@
      <x>0</x>
      <y>0</y>
      <width>739</width>
-     <height>19</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

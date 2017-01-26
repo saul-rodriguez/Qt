@@ -37,10 +37,13 @@ class CBIO2016 : public QObject
 public:
     explicit CBIO2016(QObject *parent = 0);
 
+    void clearbits();
     void setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bool GS2, bool GS1, bool GS0,
                  bool CE, bool NS, bool GD2, bool GD1, bool GD0, bool FS, bool RE);
+
     quint8 getByte0();
     quint8 getByte1();
+    quint8 getByte(int index);
 
 signals:
 

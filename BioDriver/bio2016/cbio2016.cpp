@@ -2,6 +2,13 @@
 
 CBIO2016::CBIO2016(QObject *parent) : QObject(parent)
 {
+    //m_bio3.data = 0x0000;
+    clearbits();
+}
+
+
+void CBIO2016::clearbits()
+{
     m_bio3.data = 0x0000;
 }
 
@@ -36,4 +43,9 @@ quint8 CBIO2016::getByte0()
 quint8 CBIO2016::getByte1()
 {
     return (quint8)((m_bio3.data >> 8) & 0xff);
+}
+
+quint8 CBIO2016::getByte(int index)
+{
+    return (quint8)(m_bio3.data >> (8*index) & 0xff);
 }
