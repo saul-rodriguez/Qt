@@ -113,6 +113,14 @@ public:
     QSpacerItem *verticalSpacer_3;
     QPushButton *pushButtonConfigAll;
     QWidget *tab_3;
+    QGroupBox *groupBox_5;
+    QWidget *verticalLayoutWidget_7;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *label_CH2;
+    QLabel *label_CH3;
+    QLabel *label_CH5;
+    QPushButton *pushButtonTestADC;
+    QPushButton *pushButtonAllTest;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -126,7 +134,7 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(20, 0, 701, 391));
+        tabWidget->setGeometry(QRect(10, 0, 701, 391));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         pushButtonRefreshPorts = new QPushButton(tab);
@@ -460,6 +468,38 @@ public:
         tabWidget->addTab(tab_4, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
+        groupBox_5 = new QGroupBox(tab_3);
+        groupBox_5->setObjectName(QStringLiteral("groupBox_5"));
+        groupBox_5->setGeometry(QRect(40, 30, 171, 181));
+        verticalLayoutWidget_7 = new QWidget(groupBox_5);
+        verticalLayoutWidget_7->setObjectName(QStringLiteral("verticalLayoutWidget_7"));
+        verticalLayoutWidget_7->setGeometry(QRect(10, 79, 151, 91));
+        verticalLayout_7 = new QVBoxLayout(verticalLayoutWidget_7);
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_7->setObjectName(QStringLiteral("verticalLayout_7"));
+        verticalLayout_7->setContentsMargins(0, 0, 0, 0);
+        label_CH2 = new QLabel(verticalLayoutWidget_7);
+        label_CH2->setObjectName(QStringLiteral("label_CH2"));
+
+        verticalLayout_7->addWidget(label_CH2);
+
+        label_CH3 = new QLabel(verticalLayoutWidget_7);
+        label_CH3->setObjectName(QStringLiteral("label_CH3"));
+
+        verticalLayout_7->addWidget(label_CH3);
+
+        label_CH5 = new QLabel(verticalLayoutWidget_7);
+        label_CH5->setObjectName(QStringLiteral("label_CH5"));
+
+        verticalLayout_7->addWidget(label_CH5);
+
+        pushButtonTestADC = new QPushButton(groupBox_5);
+        pushButtonTestADC->setObjectName(QStringLiteral("pushButtonTestADC"));
+        pushButtonTestADC->setGeometry(QRect(20, 40, 111, 25));
+        pushButtonAllTest = new QPushButton(tab_3);
+        pushButtonAllTest->setObjectName(QStringLiteral("pushButtonAllTest"));
+        pushButtonAllTest->setGeometry(QRect(80, 230, 89, 25));
         tabWidget->addTab(tab_3, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -475,7 +515,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -541,6 +581,12 @@ public:
         checkBoxEnLF->setText(QApplication::translate("MainWindow", "EnLF", Q_NULLPTR));
         pushButtonConfigAll->setText(QApplication::translate("MainWindow", "Config ASIC", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", " ASIC Filter Conf.", Q_NULLPTR));
+        groupBox_5->setTitle(QApplication::translate("MainWindow", "Test ADC", Q_NULLPTR));
+        label_CH2->setText(QApplication::translate("MainWindow", "CH2 (VP):", Q_NULLPTR));
+        label_CH3->setText(QApplication::translate("MainWindow", "CH4 (VN):", Q_NULLPTR));
+        label_CH5->setText(QApplication::translate("MainWindow", "CH5 (VSE):", Q_NULLPTR));
+        pushButtonTestADC->setText(QApplication::translate("MainWindow", "Measure ADC", Q_NULLPTR));
+        pushButtonAllTest->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Measure/Plot", Q_NULLPTR));
     } // retranslateUi
 

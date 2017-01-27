@@ -17,14 +17,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>0</y>
       <width>701</width>
       <height>391</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -646,6 +646,78 @@
      <attribute name="title">
       <string>Measure/Plot</string>
      </attribute>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>30</y>
+        <width>171</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string>Test ADC</string>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget_7">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>79</y>
+         <width>151</width>
+         <height>91</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_CH2">
+          <property name="text">
+           <string>CH2 (VP):</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_CH3">
+          <property name="text">
+           <string>CH4 (VN):</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_CH5">
+          <property name="text">
+           <string>CH5 (VSE):</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButtonTestADC">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>40</y>
+         <width>111</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Measure ADC</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="pushButtonAllTest">
+      <property name="geometry">
+       <rect>
+        <x>80</x>
+        <y>230</y>
+        <width>89</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>PushButton</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>

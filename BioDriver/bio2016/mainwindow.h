@@ -34,6 +34,10 @@ private slots:
 
     void on_pushButtonConfigAll_clicked();
 
+    void on_pushButtonTestADC_clicked();
+
+    void on_pushButtonAllTest_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -45,6 +49,7 @@ private:
 
 private:
     void readPorts();
+    void readADC(const QByteArray &Data);
 
 };
 

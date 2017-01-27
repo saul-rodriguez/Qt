@@ -80,6 +80,16 @@ void MainWindow::SerialRx(const QByteArray &Data)
     ui->plainTextEditLog->appendPlainText(aux);
 
     //Process received data
+    const char* read_pt = Data.constData();
+
+    if(read_pt[0] == 'm') {
+        readADC(Data);
+        qDebug()<<"Measure ADCs RX";
+    }
+
+
+
+
 }
 
 void MainWindow::on_pushButtonConfigure_clicked()
@@ -245,4 +255,58 @@ void MainWindow::on_pushButtonConfigAll_clicked()
     //Append log
     ui->plainTextEditLog->appendPlainText(command);
 
+}
+
+void MainWindow::on_pushButtonTestADC_clicked()
+{
+    //Prepare byte array for serial communications
+    QByteArray writedata;
+    writedata.append("m",1);
+    myserial->write(writedata);
+
+}
+
+void MainWindow::readADC(const QByteArray &Data)
+{
+    quint16 vop,von,vse;
+
+    const char* read_pt = Data.constData();
+
+    vop = 0;
+    vop |= (quint16)(read_pt[2] << 8) ;
+    vop |= (quint16)(read_pt[1] & 0xff);
+
+    von = 0;
+    von |= (quint16)(read_pt[4] << 8) ;
+    von |= (quint16)(read_pt[3] & 0xff);
+
+    vse = 0;
+    vse |= (quint16)(read_pt[6] << 8) ;
+    vse |= (quint16)(read_pt[5] & 0xff);
+
+    QString aux;
+
+    aux = "VOP (CH1): " + QString::number(vop);
+    ui->label_CH2->setText(aux);
+
+    aux = "VON (CH3): " + QString::number(von);
+    ui->label_CH3->setText(aux);
+
+    aux = "VSE (CH5): " + QString::number(vse);
+    ui->label_CH5->setText(aux);
+
+}
+
+void MainWindow::on_pushButtonAllTest_clicked()
+{
+    QByteArray aux;
+    aux.append('m');
+    aux.append(0xc1);
+    aux.append(0x02);
+    aux.append(0xc1);
+    aux.append(0x02);
+    aux.append(0xc1);
+    aux.append(0x02);
+
+    readADC(aux);;
 }
