@@ -18,6 +18,7 @@
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
@@ -121,6 +122,29 @@ public:
     QLabel *label_CH5;
     QPushButton *pushButtonTestADC;
     QPushButton *pushButtonAllTest;
+    QGroupBox *groupBox_6;
+    QPushButton *pushButtonSaveOffset;
+    QLineEdit *lineEditOffsetDiff;
+    QLineEdit *lineEditOffsetSE;
+    QGroupBox *groupBox_7;
+    QLineEdit *lineEditIDiff;
+    QLineEdit *lineEditISE;
+    QPushButton *pushButtonSaveI;
+    QGroupBox *groupBox_8;
+    QPushButton *pushButtonSaveQ;
+    QLineEdit *lineEditQDiff;
+    QLineEdit *lineEditQSE;
+    QLineEdit *lineEditMag;
+    QLabel *label_3;
+    QLabel *label_4;
+    QLineEdit *lineEditPhase;
+    QPushButton *pushButtonCalcZ;
+    QWidget *tab_5;
+    QPushButton *pushButtonMeasureZ;
+    QLineEdit *lineEditMeasuredMag;
+    QLineEdit *lineEditMeasuredPhase;
+    QLabel *label_5;
+    QLabel *label_6;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -129,12 +153,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(739, 454);
+        MainWindow->resize(789, 473);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(10, 0, 701, 391));
+        tabWidget->setGeometry(QRect(20, 0, 751, 411));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         pushButtonRefreshPorts = new QPushButton(tab);
@@ -500,11 +524,80 @@ public:
         pushButtonAllTest = new QPushButton(tab_3);
         pushButtonAllTest->setObjectName(QStringLiteral("pushButtonAllTest"));
         pushButtonAllTest->setGeometry(QRect(80, 230, 89, 25));
+        groupBox_6 = new QGroupBox(tab_3);
+        groupBox_6->setObjectName(QStringLiteral("groupBox_6"));
+        groupBox_6->setGeometry(QRect(230, 30, 141, 181));
+        pushButtonSaveOffset = new QPushButton(groupBox_6);
+        pushButtonSaveOffset->setObjectName(QStringLiteral("pushButtonSaveOffset"));
+        pushButtonSaveOffset->setGeometry(QRect(30, 40, 89, 25));
+        lineEditOffsetDiff = new QLineEdit(groupBox_6);
+        lineEditOffsetDiff->setObjectName(QStringLiteral("lineEditOffsetDiff"));
+        lineEditOffsetDiff->setGeometry(QRect(40, 80, 81, 25));
+        lineEditOffsetSE = new QLineEdit(groupBox_6);
+        lineEditOffsetSE->setObjectName(QStringLiteral("lineEditOffsetSE"));
+        lineEditOffsetSE->setGeometry(QRect(40, 140, 81, 25));
+        groupBox_7 = new QGroupBox(tab_3);
+        groupBox_7->setObjectName(QStringLiteral("groupBox_7"));
+        groupBox_7->setGeometry(QRect(390, 30, 151, 181));
+        lineEditIDiff = new QLineEdit(groupBox_7);
+        lineEditIDiff->setObjectName(QStringLiteral("lineEditIDiff"));
+        lineEditIDiff->setGeometry(QRect(40, 80, 81, 25));
+        lineEditISE = new QLineEdit(groupBox_7);
+        lineEditISE->setObjectName(QStringLiteral("lineEditISE"));
+        lineEditISE->setGeometry(QRect(40, 140, 81, 25));
+        pushButtonSaveI = new QPushButton(groupBox_7);
+        pushButtonSaveI->setObjectName(QStringLiteral("pushButtonSaveI"));
+        pushButtonSaveI->setGeometry(QRect(30, 40, 89, 25));
+        groupBox_8 = new QGroupBox(tab_3);
+        groupBox_8->setObjectName(QStringLiteral("groupBox_8"));
+        groupBox_8->setGeometry(QRect(550, 30, 141, 181));
+        pushButtonSaveQ = new QPushButton(groupBox_8);
+        pushButtonSaveQ->setObjectName(QStringLiteral("pushButtonSaveQ"));
+        pushButtonSaveQ->setGeometry(QRect(30, 40, 89, 25));
+        lineEditQDiff = new QLineEdit(groupBox_8);
+        lineEditQDiff->setObjectName(QStringLiteral("lineEditQDiff"));
+        lineEditQDiff->setGeometry(QRect(40, 80, 81, 25));
+        lineEditQSE = new QLineEdit(groupBox_8);
+        lineEditQSE->setObjectName(QStringLiteral("lineEditQSE"));
+        lineEditQSE->setGeometry(QRect(40, 140, 81, 25));
+        lineEditMag = new QLineEdit(tab_3);
+        lineEditMag->setObjectName(QStringLiteral("lineEditMag"));
+        lineEditMag->setGeometry(QRect(420, 240, 71, 25));
+        label_3 = new QLabel(tab_3);
+        label_3->setObjectName(QStringLiteral("label_3"));
+        label_3->setGeometry(QRect(330, 240, 81, 17));
+        label_4 = new QLabel(tab_3);
+        label_4->setObjectName(QStringLiteral("label_4"));
+        label_4->setGeometry(QRect(340, 280, 67, 17));
+        lineEditPhase = new QLineEdit(tab_3);
+        lineEditPhase->setObjectName(QStringLiteral("lineEditPhase"));
+        lineEditPhase->setGeometry(QRect(420, 280, 71, 25));
+        pushButtonCalcZ = new QPushButton(tab_3);
+        pushButtonCalcZ->setObjectName(QStringLiteral("pushButtonCalcZ"));
+        pushButtonCalcZ->setGeometry(QRect(230, 240, 89, 25));
         tabWidget->addTab(tab_3, QString());
+        tab_5 = new QWidget();
+        tab_5->setObjectName(QStringLiteral("tab_5"));
+        pushButtonMeasureZ = new QPushButton(tab_5);
+        pushButtonMeasureZ->setObjectName(QStringLiteral("pushButtonMeasureZ"));
+        pushButtonMeasureZ->setGeometry(QRect(100, 30, 89, 25));
+        lineEditMeasuredMag = new QLineEdit(tab_5);
+        lineEditMeasuredMag->setObjectName(QStringLiteral("lineEditMeasuredMag"));
+        lineEditMeasuredMag->setGeometry(QRect(100, 70, 113, 25));
+        lineEditMeasuredPhase = new QLineEdit(tab_5);
+        lineEditMeasuredPhase->setObjectName(QStringLiteral("lineEditMeasuredPhase"));
+        lineEditMeasuredPhase->setGeometry(QRect(100, 110, 113, 25));
+        label_5 = new QLabel(tab_5);
+        label_5->setObjectName(QStringLiteral("label_5"));
+        label_5->setGeometry(QRect(10, 70, 81, 17));
+        label_6 = new QLabel(tab_5);
+        label_6->setObjectName(QStringLiteral("label_6"));
+        label_6->setGeometry(QRect(40, 110, 51, 17));
+        tabWidget->addTab(tab_5, QString());
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 739, 22));
+        menuBar->setGeometry(QRect(0, 0, 789, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -515,7 +608,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -523,7 +616,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "NanoSense V1.0", Q_NULLPTR));
         pushButtonRefreshPorts->setText(QApplication::translate("MainWindow", "Refresh Ports", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Available Serial Ports:", Q_NULLPTR));
         pushButtonConnect->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));
@@ -586,8 +679,21 @@ public:
         label_CH3->setText(QApplication::translate("MainWindow", "CH4 (VN):", Q_NULLPTR));
         label_CH5->setText(QApplication::translate("MainWindow", "CH5 (VSE):", Q_NULLPTR));
         pushButtonTestADC->setText(QApplication::translate("MainWindow", "Measure ADC", Q_NULLPTR));
-        pushButtonAllTest->setText(QApplication::translate("MainWindow", "PushButton", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Measure/Plot", Q_NULLPTR));
+        pushButtonAllTest->setText(QApplication::translate("MainWindow", "Test ", Q_NULLPTR));
+        groupBox_6->setTitle(QApplication::translate("MainWindow", "Offset", Q_NULLPTR));
+        pushButtonSaveOffset->setText(QApplication::translate("MainWindow", "Save Offset", Q_NULLPTR));
+        groupBox_7->setTitle(QApplication::translate("MainWindow", "I", Q_NULLPTR));
+        pushButtonSaveI->setText(QApplication::translate("MainWindow", "Save I", Q_NULLPTR));
+        groupBox_8->setTitle(QApplication::translate("MainWindow", "Q", Q_NULLPTR));
+        pushButtonSaveQ->setText(QApplication::translate("MainWindow", "Save Q", Q_NULLPTR));
+        label_3->setText(QApplication::translate("MainWindow", "Magnitude", Q_NULLPTR));
+        label_4->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
+        pushButtonCalcZ->setText(QApplication::translate("MainWindow", "Calculate Z", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Measure ADC", Q_NULLPTR));
+        pushButtonMeasureZ->setText(QApplication::translate("MainWindow", "Measure Z", Q_NULLPTR));
+        label_5->setText(QApplication::translate("MainWindow", "Magnitude", Q_NULLPTR));
+        label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Measure Z", Q_NULLPTR));
     } // retranslateUi
 
 };
