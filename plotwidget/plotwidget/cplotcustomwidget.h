@@ -18,6 +18,9 @@ public:
     void setYMax(double max);
     void setYMin(double min);
 
+    void setXMinLog(double min);
+    void setYMinLog(double min);
+
     void enableGrid(bool en);
 
     void setXTicksNum(int num);
@@ -32,6 +35,8 @@ public:
     void DrawSemiLogGrid(QPainter &painter);
 
     void SetGridStyle(Qt::PenStyle a);
+
+    void setTickLog(bool en);
 
 protected:
     void paintEvent(QPaintEvent *e);
@@ -58,6 +63,13 @@ private:
 
     double m_yMin; // Minimum Y
     double m_yMax; // Maximum Y
+
+    double m_xMinlog; //minimum log value x
+    double m_yMinlog; //minimum log value y
+
+    bool m_ticklog; // display ticks as exp instead as float
+
+
 
     bool m_gridEnabled;
 

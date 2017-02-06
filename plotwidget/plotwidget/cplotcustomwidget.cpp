@@ -18,7 +18,7 @@ CPlotCustomWidget::CPlotCustomWidget(QWidget *parent) : QWidget(parent)
     m_yAxis = "Y";
 
     m_xMin = 0;
-    m_xMax = 100;
+    m_xMax = 10000;
 
     m_yMin = 0;
     m_yMax = 100;
@@ -29,14 +29,20 @@ CPlotCustomWidget::CPlotCustomWidget(QWidget *parent) : QWidget(parent)
     m_gridEnabled = true;
     m_linEnabled = false;
 
-    m_logEnabled = false;
+    m_logEnabled = true;
     m_semilogEnabled = true;
 
     m_xlogNumDecades = 3;
     m_ylogNumDecades = 2;
 
+    m_xMinlog = 1;
+    m_yMinlog = 1;
+
+    m_ticklog = true;
+
     //SetGridStyle(Qt::DotLine);
     SetGridStyle(Qt::DashLine);
+
 
 }
 
@@ -68,6 +74,16 @@ void CPlotCustomWidget::setYMax(double max)
 void CPlotCustomWidget::setYMin(double min)
 {
     m_yMin = min;
+}
+
+void CPlotCustomWidget::setXMinLog(double min)
+{
+    m_xMinlog = min;
+}
+
+void CPlotCustomWidget::setYMinLog(double min)
+{
+    m_yMinlog = min;
 }
 
 void CPlotCustomWidget::enableGrid(bool en)
@@ -123,12 +139,23 @@ void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
 
     QPoint P1,P2;
 
+    double aux;
+    QString tick;
+
     for(int i = 0; i < m_xTicks; i++) {
         P1.setX(origin.x()+ tickXoffsetDraw*(i+1));
         P1.setY(origin.y());
         P2.setX(origin.x()+ tickXoffsetDraw*(i+1));
         P2.setY(origin.y()-y_dimension);
         painter.drawLine(P1,P2);
+
+        aux = m_xMin + tickXoffset*(i+1);
+        if (!m_ticklog) {
+            tick.sprintf("%3.1f",aux);
+        } else {
+            tick.sprintf("%3.1e",aux);
+        }
+        painter.drawText(P1.x(),P1.y(),tick);
     }
 
     for(int i = 0; i < m_yTicks; i++) {
@@ -137,7 +164,19 @@ void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
         P2.setX(origin.x() + x_dimension);
         P2.setY(origin.y() - tickYoffsetDraw*(i+1));
         painter.drawLine(P1,P2);
+
+        aux = m_xMin + tickYoffset*(i+1);
+        if (!m_ticklog) {
+            tick.sprintf("%3.1f",aux);
+        } else {
+            tick.sprintf("%3.1e",aux);
+        }
+        painter.drawText(P1.x(),P1.y(),tick);
+
     }
+
+
+
 }
 
 void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
@@ -168,6 +207,7 @@ void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
     }
 
     QPoint P1,P2;
+    QString tick;
 
     for(int i = 0; i < tickXlogPlot.size(); i++) {
         P1.setX(origin.x()+ tickXlogPlot[i]);
@@ -175,6 +215,15 @@ void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
         P2.setX(origin.x()+ tickXlogPlot[i]);
         P2.setY(origin.y()-y_dimension);
         painter.drawLine(P1,P2);
+
+        //Text
+        if (!(i%9)) {
+            tick.sprintf("%3.1e",tickXlog[i]);
+            painter.drawText(P1.x(),P1.y()+10,tick);
+        }
+
+
+
     }
 
     //Horizontal Lines
@@ -264,6 +313,11 @@ void CPlotCustomWidget::SetGridStyle(Qt::PenStyle a)
     m_gridPen.setStyle(a);
 }
 
+void CPlotCustomWidget::setTickLog(bool en)
+{
+    m_ticklog = en;
+}
+
 void CPlotCustomWidget::paintEvent(QPaintEvent *e)
 {
     //Get the dimensions of the widget
@@ -283,10 +337,11 @@ void CPlotCustomWidget::paintEvent(QPaintEvent *e)
     painter.drawRect(rec);
 
     //Draw axis
-    int offset_factor = 20;
+    int offset_factorx = 20;
+    int offset_factory = 15;
 
-    int offsetx = width/offset_factor;
-    int offsety = height/offset_factor;
+    int offsetx = width/offset_factorx;
+    int offsety = height/offset_factory;
 
     x_dimension = width - 2*offsetx;
     y_dimension = height - 2*offsety;
@@ -301,7 +356,7 @@ void CPlotCustomWidget::paintEvent(QPaintEvent *e)
     QPoint axis_x1(offsetx,height - offsety);
     QPoint axis_x2(width- offsetx,height - offsety);
 
-    origin = QPoint(width/offset_factor,height - height/offset_factor);
+    origin = QPoint(width/offset_factorx,height - height/offset_factory);
 
     QPen axispen(m_axisColor);
     axispen.setWidth(2);
@@ -311,7 +366,7 @@ void CPlotCustomWidget::paintEvent(QPaintEvent *e)
     painter.drawLine(axis_x1,axis_x2);
 
     //Draw Axis names
-    QPoint xAxispos(width/2,height - offsety/3);
+    QPoint xAxispos(width/2,height - offsety/10);
     painter.drawText(xAxispos,m_xAxis);
 
     QPoint yAxispos(offsetx/2,height/2);
