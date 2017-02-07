@@ -24,6 +24,13 @@ MainWindow::MainWindow(QWidget *parent) :
     m_I_se = 0;
     m_Q_diff = 0;
     m_Q_se = 0;
+
+    //Setup plots
+    ui->widgetMagnitude->SetXAxisName(QString("Freq (Hz)"));
+    ui->widgetMagnitude->SetYAxisName(QString("Mag"));
+    ui->widgetPhase->SetXAxisName(QString("Freq (Hz)"));
+    ui->widgetPhase->SetYAxisName(QString("Phase"));
+
 }
 
 MainWindow::~MainWindow()

@@ -28,6 +28,7 @@ SOURCES += main.cpp\
     cplotcustomwidget.cpp
 
 HEADERS  += dialog.h \
+    cplotcustomwidget.h \
     cplotcustomwidget.h
 
 FORMS    += dialog.ui

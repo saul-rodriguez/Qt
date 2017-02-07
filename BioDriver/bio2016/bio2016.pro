@@ -27,11 +27,13 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     ../../SerialDriver/serial_driver/cserialdriver.cpp \
     cbio2016.cpp \
-    cvin2016.cpp
+    cvin2016.cpp \
+    cplotcustomwidget.cpp
 
 HEADERS  += mainwindow.h \
     ../../SerialDriver/serial_driver/cserialdriver.h \
     cbio2016.h \
-    cvin2016.h
+    cvin2016.h \
+    cplotcustomwidget.h
 
 FORMS    += mainwindow.ui

@@ -6,988 +6,1004 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>789</width>
-    <height>473</height>
+    <width>874</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>NanoSense V1.0</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QTabWidget" name="tabWidget">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>0</y>
-      <width>751</width>
-      <height>411</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>4</number>
-    </property>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>Connect</string>
-     </attribute>
-     <widget class="QPushButton" name="pushButtonRefreshPorts">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>20</y>
-        <width>101</width>
-        <height>22</height>
-       </rect>
+   <layout class="QVBoxLayout" name="verticalLayout_8">
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>5</number>
       </property>
-      <property name="text">
-       <string>Refresh Ports</string>
-      </property>
-     </widget>
-     <widget class="QComboBox" name="comboBoxPorts">
-      <property name="geometry">
-       <rect>
-        <x>240</x>
-        <y>20</y>
-        <width>111</width>
-        <height>22</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>20</y>
-        <width>121</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Available Serial Ports:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonConnect">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>20</y>
-        <width>80</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Connect</string>
-      </property>
-     </widget>
-     <widget class="QPlainTextEdit" name="plainTextEditLog">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>100</y>
-        <width>441</width>
-        <height>231</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_2">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>80</y>
-        <width>59</width>
-        <height>14</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Log:</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonTest">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>50</y>
-        <width>91</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Test Comm.</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>ASIC Radio Conf.</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="geometry">
-       <rect>
-        <x>60</x>
-        <y>10</y>
-        <width>131</width>
-        <height>341</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Signal Generator</string>
-      </property>
-      <widget class="QWidget" name="verticalLayoutWidget">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>30</y>
-         <width>101</width>
-         <height>304</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <widget class="QCheckBox" name="checkBoxF3">
-          <property name="text">
-           <string>F3</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxF2">
-          <property name="text">
-           <string>F2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxF1">
-          <property name="text">
-           <string>F1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxF0">
-          <property name="text">
-           <string>F0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGS3">
-          <property name="text">
-           <string>GS3</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGS2">
-          <property name="text">
-           <string>GS2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGS1">
-          <property name="text">
-           <string>GS1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGS0">
-          <property name="text">
-           <string>GS0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCE">
-          <property name="text">
-           <string>CE</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxNS">
-          <property name="text">
-           <string>NS</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_6">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>86</width>
-            <height>58</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QGroupBox" name="groupBox_2">
-       <property name="geometry">
-        <rect>
-         <x>200</x>
-         <y>0</y>
-         <width>151</width>
-         <height>351</height>
-        </rect>
-       </property>
-       <property name="title">
-        <string>Signal Generator</string>
-       </property>
-       <widget class="QWidget" name="verticalLayoutWidget_2">
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Connect</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButtonRefreshPorts">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>30</y>
-          <width>111</width>
-          <height>301</height>
+          <x>360</x>
+          <y>20</y>
+          <width>101</width>
+          <height>22</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_2">
-         <item>
-          <widget class="QCheckBox" name="checkBoxF3_2">
-           <property name="text">
-            <string>F3</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxF2_2">
-           <property name="text">
-            <string>F2</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxF1_2">
-           <property name="text">
-            <string>F1</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxF0_2">
-           <property name="text">
-            <string>F0</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxGS3_2">
-           <property name="text">
-            <string>GS3</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxGS2_2">
-           <property name="text">
-            <string>GS2</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxGS1_2">
-           <property name="text">
-            <string>GS1</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxGS0_2">
-           <property name="text">
-            <string>GS0</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxCE_2">
-           <property name="text">
-            <string>CE</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QCheckBox" name="checkBoxNS_2">
-           <property name="text">
-            <string>NS</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
+        <property name="text">
+         <string>Refresh Ports</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBoxPorts">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>20</y>
+          <width>111</width>
+          <height>22</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>20</y>
+          <width>121</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Available Serial Ports:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonConnect">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>20</y>
+          <width>80</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Connect</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEditLog">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>100</y>
+          <width>441</width>
+          <height>231</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>80</y>
+          <width>59</width>
+          <height>14</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Log:</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonTest">
+        <property name="geometry">
+         <rect>
+          <x>470</x>
+          <y>50</y>
+          <width>91</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Test Comm.</string>
+        </property>
        </widget>
       </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>10</y>
-        <width>120</width>
-        <height>341</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Demodulator</string>
-      </property>
-      <widget class="QWidget" name="verticalLayoutWidget_3">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>91</width>
-         <height>301</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_3">
-        <item>
-         <widget class="QCheckBox" name="checkBoxIQ">
-          <property name="text">
-           <string>IQ</string>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>ASIC Radio Conf.</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox">
+        <property name="geometry">
+         <rect>
+          <x>60</x>
+          <y>10</y>
+          <width>131</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Signal Generator</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>101</width>
+           <height>304</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="checkBoxF3">
+            <property name="text">
+             <string>F3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxF2">
+            <property name="text">
+             <string>F2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxF1">
+            <property name="text">
+             <string>F1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxF0">
+            <property name="text">
+             <string>F0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGS3">
+            <property name="text">
+             <string>GS3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGS2">
+            <property name="text">
+             <string>GS2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGS1">
+            <property name="text">
+             <string>GS1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGS0">
+            <property name="text">
+             <string>GS0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCE">
+            <property name="text">
+             <string>CE</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxNS">
+            <property name="text">
+             <string>NS</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>86</width>
+              <height>58</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="geometry">
+          <rect>
+           <x>200</x>
+           <y>0</y>
+           <width>151</width>
+           <height>351</height>
+          </rect>
+         </property>
+         <property name="title">
+          <string>Signal Generator</string>
+         </property>
+         <widget class="QWidget" name="verticalLayoutWidget_2">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>111</width>
+            <height>301</height>
+           </rect>
           </property>
+          <layout class="QVBoxLayout" name="verticalLayout_2">
+           <item>
+            <widget class="QCheckBox" name="checkBoxF3_2">
+             <property name="text">
+              <string>F3</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxF2_2">
+             <property name="text">
+              <string>F2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxF1_2">
+             <property name="text">
+              <string>F1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxF0_2">
+             <property name="text">
+              <string>F0</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxGS3_2">
+             <property name="text">
+              <string>GS3</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxGS2_2">
+             <property name="text">
+              <string>GS2</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxGS1_2">
+             <property name="text">
+              <string>GS1</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxGS0_2">
+             <property name="text">
+              <string>GS0</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxCE_2">
+             <property name="text">
+              <string>CE</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="checkBoxNS_2">
+             <property name="text">
+              <string>NS</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
          </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGD2">
-          <property name="text">
-           <string>GD2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGD1">
-          <property name="text">
-           <string>GD1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxGD0">
-          <property name="text">
-           <string>GD0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxFS">
-          <property name="text">
-           <string>FS</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxRE">
-          <property name="text">
-           <string>RE</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>86</width>
-            <height>58</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_3">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>10</y>
+          <width>120</width>
+          <height>341</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Demodulator</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_3">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>91</width>
+           <height>301</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <widget class="QCheckBox" name="checkBoxIQ">
+            <property name="text">
+             <string>IQ</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGD2">
+            <property name="text">
+             <string>GD2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGD1">
+            <property name="text">
+             <string>GD1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxGD0">
+            <property name="text">
+             <string>GD0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxFS">
+            <property name="text">
+             <string>FS</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxRE">
+            <property name="text">
+             <string>RE</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>86</width>
+              <height>58</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="pushButtonConfigure">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>30</y>
+          <width>101</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Config Radio</string>
+        </property>
+       </widget>
       </widget>
-     </widget>
-     <widget class="QPushButton" name="pushButtonConfigure">
-      <property name="geometry">
-       <rect>
-        <x>360</x>
-        <y>30</y>
-        <width>101</width>
-        <height>22</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Config Radio</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_4">
-     <attribute name="title">
-      <string> ASIC Filter Conf.</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox_4">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>10</y>
-        <width>401</width>
-        <height>321</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Filter Settings</string>
-      </property>
-      <widget class="QWidget" name="verticalLayoutWidget_4">
-       <property name="geometry">
-        <rect>
-         <x>140</x>
-         <y>30</y>
-         <width>121</width>
-         <height>281</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_4">
-        <item>
-         <widget class="QCheckBox" name="checkBoxEnMF">
-          <property name="text">
-           <string>EnMF</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxEnHF">
-          <property name="text">
-           <string>EnHF</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxDN1">
-          <property name="text">
-           <string>DN1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxDN0">
-          <property name="text">
-           <string>DN0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxDP2">
-          <property name="text">
-           <string>DP2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxDP1">
-          <property name="text">
-           <string>DP1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxDP0">
-          <property name="text">
-           <string>DP0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxEnRdeg">
-          <property name="text">
-           <string>EnRdeg</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_4">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string> ASIC Filter Conf.</string>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_4">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>10</y>
+          <width>401</width>
+          <height>321</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Filter Settings</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_4">
+         <property name="geometry">
+          <rect>
+           <x>140</x>
+           <y>30</y>
+           <width>121</width>
+           <height>281</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QCheckBox" name="checkBoxEnMF">
+            <property name="text">
+             <string>EnMF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxEnHF">
+            <property name="text">
+             <string>EnHF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxDN1">
+            <property name="text">
+             <string>DN1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxDN0">
+            <property name="text">
+             <string>DN0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxDP2">
+            <property name="text">
+             <string>DP2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxDP1">
+            <property name="text">
+             <string>DP1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxDP0">
+            <property name="text">
+             <string>DP0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxEnRdeg">
+            <property name="text">
+             <string>EnRdeg</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="verticalLayoutWidget_5">
+         <property name="geometry">
+          <rect>
+           <x>270</x>
+           <y>30</y>
+           <width>121</width>
+           <height>281</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QCheckBox" name="checkBoxEnRdegHF1">
+            <property name="text">
+             <string>EnRdegHF1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxEnRdegHF0">
+            <property name="text">
+             <string>EnRdegHF0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCcompSel1">
+            <property name="text">
+             <string>CcompSel1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCcompSel0">
+            <property name="text">
+             <string>CcompSel0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCapSel3">
+            <property name="text">
+             <string>CapSel3</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCapSel2">
+            <property name="text">
+             <string>CapSel2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCapSel1">
+            <property name="text">
+             <string>CapSel1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxCapSel0">
+            <property name="text">
+             <string>CapSel0</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_5">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="verticalLayoutWidget_6">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>30</y>
+           <width>121</width>
+           <height>281</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QCheckBox" name="checkBoxEnLF">
+            <property name="text">
+             <string>EnLF</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="pushButtonConfigAll">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>30</y>
+          <width>89</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Config ASIC</string>
+        </property>
+       </widget>
       </widget>
-      <widget class="QWidget" name="verticalLayoutWidget_5">
-       <property name="geometry">
-        <rect>
-         <x>270</x>
-         <y>30</y>
-         <width>121</width>
-         <height>281</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_5">
-        <item>
-         <widget class="QCheckBox" name="checkBoxEnRdegHF1">
-          <property name="text">
-           <string>EnRdegHF1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxEnRdegHF0">
-          <property name="text">
-           <string>EnRdegHF0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCcompSel1">
-          <property name="text">
-           <string>CcompSel1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCcompSel0">
-          <property name="text">
-           <string>CcompSel0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCapSel3">
-          <property name="text">
-           <string>CapSel3</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCapSel2">
-          <property name="text">
-           <string>CapSel2</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCapSel1">
-          <property name="text">
-           <string>CapSel1</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QCheckBox" name="checkBoxCapSel0">
-          <property name="text">
-           <string>CapSel0</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_5">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QWidget" name="verticalLayoutWidget_6">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>30</y>
-         <width>121</width>
-         <height>281</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_6">
-        <item>
-         <widget class="QCheckBox" name="checkBoxEnLF">
-          <property name="text">
-           <string>EnLF</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="verticalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </widget>
-     </widget>
-     <widget class="QPushButton" name="pushButtonConfigAll">
-      <property name="geometry">
-       <rect>
-        <x>480</x>
-        <y>30</y>
-        <width>89</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Config ASIC</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>Measure ADC</string>
-     </attribute>
-     <widget class="QGroupBox" name="groupBox_5">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>30</y>
-        <width>171</width>
-        <height>181</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Test ADC</string>
-      </property>
-      <widget class="QWidget" name="verticalLayoutWidget_7">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>79</y>
-         <width>151</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <layout class="QVBoxLayout" name="verticalLayout_7">
-        <item>
-         <widget class="QLabel" name="label_CH2">
-          <property name="text">
-           <string>CH2 (VP):</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_CH3">
-          <property name="text">
-           <string>CH4 (VN):</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_CH5">
-          <property name="text">
-           <string>CH5 (VSE):</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </widget>
-      <widget class="QPushButton" name="pushButtonTestADC">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>40</y>
-         <width>111</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="text">
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
         <string>Measure ADC</string>
-       </property>
+       </attribute>
+       <widget class="QGroupBox" name="groupBox_5">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>30</y>
+          <width>171</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Test ADC</string>
+        </property>
+        <widget class="QWidget" name="verticalLayoutWidget_7">
+         <property name="geometry">
+          <rect>
+           <x>10</x>
+           <y>79</y>
+           <width>151</width>
+           <height>91</height>
+          </rect>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QLabel" name="label_CH2">
+            <property name="text">
+             <string>CH2 (VP):</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_CH3">
+            <property name="text">
+             <string>CH4 (VN):</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_CH5">
+            <property name="text">
+             <string>CH5 (VSE):</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QPushButton" name="pushButtonTestADC">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>40</y>
+           <width>111</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Measure ADC</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QPushButton" name="pushButtonAllTest">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>230</y>
+          <width>89</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Test </string>
+        </property>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_6">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>30</y>
+          <width>141</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Offset</string>
+        </property>
+        <widget class="QPushButton" name="pushButtonSaveOffset">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>89</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Save Offset</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEditOffsetDiff">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>80</y>
+           <width>81</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEditOffsetSE">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>140</y>
+           <width>81</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>30</y>
+          <width>151</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>I</string>
+        </property>
+        <widget class="QLineEdit" name="lineEditIDiff">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>80</y>
+           <width>81</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEditISE">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>140</y>
+           <width>81</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="pushButtonSaveI">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>89</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Save I</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QGroupBox" name="groupBox_8">
+        <property name="geometry">
+         <rect>
+          <x>550</x>
+          <y>30</y>
+          <width>141</width>
+          <height>181</height>
+         </rect>
+        </property>
+        <property name="title">
+         <string>Q</string>
+        </property>
+        <widget class="QPushButton" name="pushButtonSaveQ">
+         <property name="geometry">
+          <rect>
+           <x>30</x>
+           <y>40</y>
+           <width>89</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Save Q</string>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEditQDiff">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>80</y>
+           <width>81</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="lineEditQSE">
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>140</y>
+           <width>81</width>
+           <height>25</height>
+          </rect>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QLineEdit" name="lineEditMag">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>240</y>
+          <width>71</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>330</x>
+          <y>240</y>
+          <width>81</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Magnitude</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>280</y>
+          <width>67</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Phase</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditPhase">
+        <property name="geometry">
+         <rect>
+          <x>420</x>
+          <y>280</y>
+          <width>71</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonCalcZ">
+        <property name="geometry">
+         <rect>
+          <x>230</x>
+          <y>240</y>
+          <width>89</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Calculate Z</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>Measure Z</string>
+       </attribute>
+       <widget class="QPushButton" name="pushButtonMeasureZ">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>30</y>
+          <width>89</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Measure Z</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditMeasuredMag">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>70</y>
+          <width>113</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditMeasuredPhase">
+        <property name="geometry">
+         <rect>
+          <x>100</x>
+          <y>110</y>
+          <width>113</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>70</y>
+          <width>81</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Magnitude</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>40</x>
+          <y>110</y>
+          <width>51</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Phase</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>Sweep Freq</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="verticalLayout_9">
+        <item>
+         <widget class="QPushButton" name="pushButtonSweep">
+          <property name="text">
+           <string>Sweep Freq</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="CPlotCustomWidget" name="widgetMagnitude" native="true"/>
+        </item>
+        <item>
+         <widget class="CPlotCustomWidget" name="widgetPhase" native="true"/>
+        </item>
+       </layout>
       </widget>
      </widget>
-     <widget class="QPushButton" name="pushButtonAllTest">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>230</y>
-        <width>89</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Test </string>
-      </property>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_6">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>30</y>
-        <width>141</width>
-        <height>181</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Offset</string>
-      </property>
-      <widget class="QPushButton" name="pushButtonSaveOffset">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>40</y>
-         <width>89</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Save Offset</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditOffsetDiff">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>80</y>
-         <width>81</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditOffsetSE">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>140</y>
-         <width>81</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_7">
-      <property name="geometry">
-       <rect>
-        <x>390</x>
-        <y>30</y>
-        <width>151</width>
-        <height>181</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>I</string>
-      </property>
-      <widget class="QLineEdit" name="lineEditIDiff">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>80</y>
-         <width>81</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditISE">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>140</y>
-         <width>81</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButtonSaveI">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>40</y>
-         <width>89</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Save I</string>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QGroupBox" name="groupBox_8">
-      <property name="geometry">
-       <rect>
-        <x>550</x>
-        <y>30</y>
-        <width>141</width>
-        <height>181</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string>Q</string>
-      </property>
-      <widget class="QPushButton" name="pushButtonSaveQ">
-       <property name="geometry">
-        <rect>
-         <x>30</x>
-         <y>40</y>
-         <width>89</width>
-         <height>25</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Save Q</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditQDiff">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>80</y>
-         <width>81</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="lineEditQSE">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>140</y>
-         <width>81</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-     </widget>
-     <widget class="QLineEdit" name="lineEditMag">
-      <property name="geometry">
-       <rect>
-        <x>420</x>
-        <y>240</y>
-        <width>71</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_3">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>240</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Magnitude</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_4">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>280</y>
-        <width>67</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Phase</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditPhase">
-      <property name="geometry">
-       <rect>
-        <x>420</x>
-        <y>280</y>
-        <width>71</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButtonCalcZ">
-      <property name="geometry">
-       <rect>
-        <x>230</x>
-        <y>240</y>
-        <width>89</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Calculate Z</string>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="tab_5">
-     <attribute name="title">
-      <string>Measure Z</string>
-     </attribute>
-     <widget class="QPushButton" name="pushButtonMeasureZ">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>30</y>
-        <width>89</width>
-        <height>25</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Measure Z</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditMeasuredMag">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>70</y>
-        <width>113</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="lineEditMeasuredPhase">
-      <property name="geometry">
-       <rect>
-        <x>100</x>
-        <y>110</y>
-        <width>113</width>
-        <height>25</height>
-       </rect>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>70</y>
-        <width>81</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Magnitude</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_6">
-      <property name="geometry">
-       <rect>
-        <x>40</x>
-        <y>110</y>
-        <width>51</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Phase</string>
-      </property>
-     </widget>
-    </widget>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>789</width>
+     <width>874</width>
      <height>22</height>
     </rect>
    </property>
@@ -1003,6 +1019,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CPlotCustomWidget</class>
+   <extends>QWidget</extends>
+   <header>cplotcustomwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

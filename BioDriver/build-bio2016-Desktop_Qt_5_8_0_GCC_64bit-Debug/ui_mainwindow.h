@@ -29,6 +29,7 @@
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "cplotcustomwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -36,6 +37,7 @@ class Ui_MainWindow
 {
 public:
     QWidget *centralWidget;
+    QVBoxLayout *verticalLayout_8;
     QTabWidget *tabWidget;
     QWidget *tab;
     QPushButton *pushButtonRefreshPorts;
@@ -145,6 +147,11 @@ public:
     QLineEdit *lineEditMeasuredPhase;
     QLabel *label_5;
     QLabel *label_6;
+    QWidget *tab_6;
+    QVBoxLayout *verticalLayout_9;
+    QPushButton *pushButtonSweep;
+    CPlotCustomWidget *widgetMagnitude;
+    CPlotCustomWidget *widgetPhase;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -153,12 +160,15 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(789, 473);
+        MainWindow->resize(874, 550);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        verticalLayout_8 = new QVBoxLayout(centralWidget);
+        verticalLayout_8->setSpacing(6);
+        verticalLayout_8->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_8->setObjectName(QStringLiteral("verticalLayout_8"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
-        tabWidget->setGeometry(QRect(20, 0, 751, 411));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
         pushButtonRefreshPorts = new QPushButton(tab);
@@ -594,10 +604,35 @@ public:
         label_6->setObjectName(QStringLiteral("label_6"));
         label_6->setGeometry(QRect(40, 110, 51, 17));
         tabWidget->addTab(tab_5, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName(QStringLiteral("tab_6"));
+        verticalLayout_9 = new QVBoxLayout(tab_6);
+        verticalLayout_9->setSpacing(6);
+        verticalLayout_9->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
+        pushButtonSweep = new QPushButton(tab_6);
+        pushButtonSweep->setObjectName(QStringLiteral("pushButtonSweep"));
+
+        verticalLayout_9->addWidget(pushButtonSweep);
+
+        widgetMagnitude = new CPlotCustomWidget(tab_6);
+        widgetMagnitude->setObjectName(QStringLiteral("widgetMagnitude"));
+
+        verticalLayout_9->addWidget(widgetMagnitude);
+
+        widgetPhase = new CPlotCustomWidget(tab_6);
+        widgetPhase->setObjectName(QStringLiteral("widgetPhase"));
+
+        verticalLayout_9->addWidget(widgetPhase);
+
+        tabWidget->addTab(tab_6, QString());
+
+        verticalLayout_8->addWidget(tabWidget);
+
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 789, 22));
+        menuBar->setGeometry(QRect(0, 0, 874, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -608,7 +643,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -694,6 +729,8 @@ public:
         label_5->setText(QApplication::translate("MainWindow", "Magnitude", Q_NULLPTR));
         label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Measure Z", Q_NULLPTR));
+        pushButtonSweep->setText(QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
     } // retranslateUi
 
 };
