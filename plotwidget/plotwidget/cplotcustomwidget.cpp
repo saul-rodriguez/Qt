@@ -13,7 +13,18 @@ CPlotCustomWidget::CPlotCustomWidget(QWidget *parent) : QWidget(parent)
 
     m_backgroundColor = QColor(Qt::black);
     m_axisColor = QColor(Qt::white);
-    m_lineColor = QColor(Qt::blue);
+
+    m_lineColor[0] = QColor(Qt::blue);
+    m_lineColor[1] = QColor(Qt::red);
+    m_lineColor[2] = QColor(Qt::green);
+    m_lineColor[3] = QColor(Qt::darkCyan);
+    m_lineColor[4] = QColor(Qt::lightGray);
+    m_lineColor[5] = QColor(Qt::cyan);
+    m_lineColor[6] = QColor(Qt::yellow);
+    m_lineColor[7] = QColor(Qt::magenta);
+    m_lineColor[8] = QColor(Qt::darkRed);
+    m_lineColor[9] = QColor(Qt::darkBlue);
+
 
     m_xAxis = "X";
     m_yAxis = "Y";
@@ -29,20 +40,22 @@ CPlotCustomWidget::CPlotCustomWidget(QWidget *parent) : QWidget(parent)
 
     m_gridEnabled = true;
 
-    m_linEnabled = true;
-    m_logEnabled = false;
+    m_linEnabled = false;
+    m_logEnabled = true;
     m_semilogEnabled = false;
 
     m_xlogNumDecades = 3;
-    m_ylogNumDecades = 2;
+    m_ylogNumDecades = 3;
 
-    m_xMinlog = 10;
+    m_xMinlog = 1;
     m_yMinlog = 1;
 
     m_ticklog = false;
 
     //SetGridStyle(Qt::DotLine);
     SetGridStyle(Qt::DashLine);
+
+    m_numUsedCurves = 0;
 
 
 }
@@ -131,10 +144,10 @@ void CPlotCustomWidget::setDataPoints(QList<double> &x, QList<double> &y)
     m_ydata = y;
 }
 
-void CPlotCustomWidget::DrawDataPoints(QPainter &painter)
+void CPlotCustomWidget::DrawDataPoints(QPainter &painter, int color)
 {
     //Set pen
-    QPen axispen(m_lineColor);
+    QPen axispen(m_lineColor[color]);
     axispen.setWidth(1);
     axispen.setStyle(Qt::SolidLine);
     painter.setPen(axispen);
@@ -189,7 +202,7 @@ void CPlotCustomWidget::DrawDataPoints(QPainter &painter)
     }
 
     //points
-    QPen dotpen(m_lineColor);
+    QPen dotpen(m_lineColor[color]);
     dotpen.setWidth(4);
     painter.setPen(dotpen);
 
@@ -197,6 +210,23 @@ void CPlotCustomWidget::DrawDataPoints(QPainter &painter)
         painter.drawPoint(data_points[i].x(),data_points[i].y());
     }
 
+}
+
+void CPlotCustomWidget::DrawCurves(QPainter &painter)
+{
+    for (int i = 0; i < m_numUsedCurves; i++) {
+        //Update x,y lists
+        m_xdata.clear();
+        m_ydata.clear();
+
+        for (int j = 0; j < m_size_curve[i]; j++) {
+            m_xdata.append(m_xcurve[i][j]);
+            m_ydata.append(m_ycurve[i][j]);
+        }
+
+        DrawDataPoints(painter,i);
+
+    }
 }
 
 void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
@@ -428,6 +458,24 @@ void CPlotCustomWidget::setTickLog(bool en)
     m_ticklog = en;
 }
 
+void CPlotCustomWidget::appendCurve(QList<double> &x, QList<double> &y)
+{
+    if (m_numUsedCurves == 10) {
+        m_numUsedCurves = 0;
+    }
+
+    int N = x.size();
+    m_size_curve[m_numUsedCurves] = N;
+    for (int i = 0; i < N; i++) {
+        m_xcurve[m_numUsedCurves][i] = x[i];
+        m_ycurve[m_numUsedCurves][i] = y[i];
+    }
+
+    m_numUsedCurves++;
+
+
+}
+
 void CPlotCustomWidget::paintEvent(QPaintEvent *e)
 {
     //Get the dimensions of the widget
@@ -501,5 +549,7 @@ void CPlotCustomWidget::paintEvent(QPaintEvent *e)
     }
 
     //Draw datapoints
-    DrawDataPoints(painter);
+    //DrawDataPoints(painter); //Single curve
+    DrawCurves(painter);
+
 }

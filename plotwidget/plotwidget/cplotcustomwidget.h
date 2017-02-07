@@ -33,7 +33,8 @@ public:
 
     void setDataPoints(QList<double> &x, QList<double> &y);
 
-    void DrawDataPoints(QPainter &painter);
+    void DrawDataPoints(QPainter &painter, int color);
+    void DrawCurves(QPainter &painter);
 
     void DrawLinearGrid(QPainter &painter);
     void DrawLogGrid(QPainter &painter);
@@ -43,9 +44,10 @@ public:
 
     void setTickLog(bool en);
 
+    void appendCurve(QList<double> &x, QList<double> &y);
+
 protected:
     void paintEvent(QPaintEvent *e);
-
 
 signals:
 
@@ -58,7 +60,7 @@ private:
 
     QColor m_backgroundColor;
     QColor m_axisColor;
-    QColor m_lineColor;
+    QColor m_lineColor[10];
 
     QPen m_gridPen;
 
@@ -95,6 +97,12 @@ private:
 
     QList<double> m_xdata;
     QList<double> m_ydata;
+
+   double m_xcurve[10][50];
+   double m_ycurve[10][50];
+   int m_size_curve[10];
+   int m_numUsedCurves;
+   //int m_numMaxCurves;
 
 };
 
