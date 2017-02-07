@@ -13,32 +13,33 @@ CPlotCustomWidget::CPlotCustomWidget(QWidget *parent) : QWidget(parent)
 
     m_backgroundColor = QColor(Qt::black);
     m_axisColor = QColor(Qt::white);
+    m_lineColor = QColor(Qt::blue);
 
     m_xAxis = "X";
     m_yAxis = "Y";
 
     m_xMin = 0;
-    m_xMax = 10000;
+    m_xMax = 100;
 
     m_yMin = 0;
-    m_yMax = 100;
+    m_yMax = 500;
 
     m_xTicks = 10;
     m_yTicks = 10;
 
     m_gridEnabled = true;
-    m_linEnabled = false;
 
-    m_logEnabled = true;
-    m_semilogEnabled = true;
+    m_linEnabled = true;
+    m_logEnabled = false;
+    m_semilogEnabled = false;
 
     m_xlogNumDecades = 3;
     m_ylogNumDecades = 2;
 
-    m_xMinlog = 1;
+    m_xMinlog = 10;
     m_yMinlog = 1;
 
-    m_ticklog = true;
+    m_ticklog = false;
 
     //SetGridStyle(Qt::DotLine);
     SetGridStyle(Qt::DashLine);
@@ -120,6 +121,82 @@ void CPlotCustomWidget::enableSemiLogPlot()
     m_semilogEnabled = true;
     m_linEnabled = false;
     m_logEnabled = false;
+}
+
+void CPlotCustomWidget::setDataPoints(QList<double> &x, QList<double> &y)
+{
+    if (!x.size() || !y.size()) return; // no data points!
+
+    m_xdata = x;
+    m_ydata = y;
+}
+
+void CPlotCustomWidget::DrawDataPoints(QPainter &painter)
+{
+    //Set pen
+    QPen axispen(m_lineColor);
+    axispen.setWidth(1);
+    axispen.setStyle(Qt::SolidLine);
+    painter.setPen(axispen);
+
+    int N = m_xdata.size();
+
+    QList<QPointF> data_points;
+    QPointF point;
+    double aux;
+
+    //Prepare plot points depending on the selected plot
+    if (m_linEnabled) {
+        for (int i = 0; i < N; i++) {
+            aux = origin.x() + m_xdata[i]*scalefactorx;
+            point.setX(aux);
+            aux = origin.y() - m_ydata[i]*scalefactory;
+            point.setY(aux);
+            data_points.append(point);
+        }
+    } else if (m_logEnabled) {
+        double scalelogx = x_dimension/m_xlogNumDecades;
+        double scalelogy = y_dimension/m_ylogNumDecades;
+
+        for (int i = 0; i < N; i++) {
+            aux = origin.x() + qLn(m_xdata[i]/m_xMinlog)/2.30258509299*scalelogx;
+            point.setX(aux);
+            aux = origin.y() - qLn(m_ydata[i]/m_yMinlog)/2.30258509299*scalelogy;
+            point.setY(aux);
+            data_points.append(point);
+        }
+    } else { //semilog
+        double scalelogx = x_dimension/m_xlogNumDecades;
+
+        for (int i = 0; i < N; i++) {
+            aux = origin.x() + qLn(m_xdata[i]/m_xMinlog)/2.30258509299*scalelogx;
+            point.setX(aux);
+            aux = origin.y() - m_ydata[i]*scalefactory;
+            //aux = origin.y() - qLn(m_ydata[i]/m_yMinlog)/2.30258509299*scalelogy;
+            point.setY(aux);
+            data_points.append(point);
+        }
+    }
+
+    QPointF P1,P2;
+
+    for (int i = 0; i < (N-1); i++) {
+        P1.setX(data_points[i].x());
+        P1.setY(data_points[i].y());
+        P2.setX(data_points[i+1].x());
+        P2.setY(data_points[i+1].y());
+        painter.drawLine(P1,P2);
+    }
+
+    //points
+    QPen dotpen(m_lineColor);
+    dotpen.setWidth(4);
+    painter.setPen(dotpen);
+
+    for (int i = 0; i < N; i++) {
+        painter.drawPoint(data_points[i].x(),data_points[i].y());
+    }
+
 }
 
 void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
@@ -218,12 +295,13 @@ void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
 
         //Text
         if (!(i%9)) {
-            tick.sprintf("%3.1e",tickXlog[i]);
-            painter.drawText(P1.x(),P1.y()+10,tick);
+            if (!m_ticklog) {
+                tick.sprintf("%3.1f",tickXlog[i]*m_xMinlog);
+            } else {
+                tick.sprintf("%3.1e",tickXlog[i]*m_xMinlog);
+            }
+            painter.drawText(P1.x(),P1.y()+11,tick);
         }
-
-
-
     }
 
     //Horizontal Lines
@@ -249,6 +327,16 @@ void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
         P2.setX(origin.x() + x_dimension);
         P2.setY(origin.y() - tickYlogPlot[i]);
         painter.drawLine(P1,P2);
+        //Text
+        if (!(i%9)) {
+            if (!m_ticklog) {
+                tick.sprintf("%3.1f",tickYlog[i]*m_yMinlog);
+            } else {
+                tick.sprintf("%3.1e",tickYlog[i]*m_yMinlog);
+            }
+            painter.drawText(P1.x(),P1.y()-2,tick);
+        }
+
     }
 
 
@@ -283,6 +371,7 @@ void CPlotCustomWidget::DrawSemiLogGrid(QPainter &painter)
     }
 
     QPoint P1,P2;
+    QString tick;
 
     for(int i = 0; i < tickXlogPlot.size(); i++) {
         P1.setX(origin.x()+ tickXlogPlot[i]);
@@ -290,6 +379,17 @@ void CPlotCustomWidget::DrawSemiLogGrid(QPainter &painter)
         P2.setX(origin.x()+ tickXlogPlot[i]);
         P2.setY(origin.y()-y_dimension);
         painter.drawLine(P1,P2);
+
+       //Text
+        if (!(i%9)) {
+            if (!m_ticklog) {
+                tick.sprintf("%3.1f",tickXlog[i]*m_xMinlog);
+            } else {
+                tick.sprintf("%3.1e",tickXlog[i]*m_xMinlog);
+            }
+            painter.drawText(P1.x(),P1.y()+11,tick);
+        }
+
     }
 
     //Horizontal Lines linear
@@ -297,12 +397,22 @@ void CPlotCustomWidget::DrawSemiLogGrid(QPainter &painter)
 
     double tickYoffsetDraw = tickYoffset*scalefactory;
 
+    double aux;
+
     for(int i = 0; i < m_yTicks; i++) {
         P1.setX(origin.x());
         P1.setY(origin.y() - tickYoffsetDraw*(i+1));
         P2.setX(origin.x() + x_dimension);
         P2.setY(origin.y() - tickYoffsetDraw*(i+1));
         painter.drawLine(P1,P2);
+
+        aux = m_xMin + tickYoffset*(i+1);
+        if (!m_ticklog) {
+            tick.sprintf("%3.1f",aux);
+        } else {
+            tick.sprintf("%3.1f",aux);
+        }
+        painter.drawText(P1.x(),P1.y(),tick);
     }
 }
 
@@ -390,5 +500,6 @@ void CPlotCustomWidget::paintEvent(QPaintEvent *e)
         }
     }
 
-
+    //Draw datapoints
+    DrawDataPoints(painter);
 }

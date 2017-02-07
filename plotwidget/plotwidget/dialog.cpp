@@ -9,6 +9,17 @@ Dialog::Dialog(QWidget *parent) :
 
     ui->widget->SetXAxisName(QString("Freq"));
     ui->widget->SetYAxisName(QString("Mag"));
+
+    //Generate sample data set
+
+    QList<double> x,y;
+
+    for (int i = 1; i < 20; i++) {
+        x.append((double)i);
+        y.append((double)i*i);
+    }
+
+    ui->widget->setDataPoints(x,y);
 }
 
 Dialog::~Dialog()

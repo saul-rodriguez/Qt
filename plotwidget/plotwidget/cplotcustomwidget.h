@@ -10,25 +10,30 @@ class CPlotCustomWidget : public QWidget
 public:
     explicit CPlotCustomWidget(QWidget *parent = 0);
 
-    void SetXAxisName(QString name);
-    void SetYAxisName(QString name);
+    void SetXAxisName(QString name);  // X Axis name
+    void SetYAxisName(QString name);  // Y Axis name
 
-    void setXMax(double max);
-    void setXMin(double min);
-    void setYMax(double max);
-    void setYMin(double min);
+    void setXMax(double max); // Max X value for linear plot
+    void setXMin(double min); // Min X value for linear plot
+    void setYMax(double max); // Max Y value for linear plot
+    void setYMin(double min); // Min Y value for linear plot
 
-    void setXMinLog(double min);
-    void setYMinLog(double min);
+    void setXMinLog(double min); // Min X value for logarithmic plot
+    void setYMinLog(double min); // Min Y value for logarithmic plot
 
-    void enableGrid(bool en);
+    void enableGrid(bool en); // enable/disable the grid
 
-    void setXTicksNum(int num);
-    void setYTicksNum(int num);
+    void setXTicksNum(int num); // number of X ticks for linear plot
+    void setYTicksNum(int num); // number of Y ticks for linear plot
 
-    void enableLinPlot();
-    void enableLogPlot();
-    void enableSemiLogPlot();
+    void enableLinPlot();   // Selects linear plot (default)
+    void enableLogPlot();   // Selects Log plot
+    void enableSemiLogPlot();   // Selects semilog plot
+
+
+    void setDataPoints(QList<double> &x, QList<double> &y);
+
+    void DrawDataPoints(QPainter &painter);
 
     void DrawLinearGrid(QPainter &painter);
     void DrawLogGrid(QPainter &painter);
@@ -53,6 +58,7 @@ private:
 
     QColor m_backgroundColor;
     QColor m_axisColor;
+    QColor m_lineColor;
 
     QPen m_gridPen;
 
@@ -68,8 +74,6 @@ private:
     double m_yMinlog; //minimum log value y
 
     bool m_ticklog; // display ticks as exp instead as float
-
-
 
     bool m_gridEnabled;
 
@@ -88,6 +92,10 @@ private:
 
     double scalefactorx;
     double scalefactory;
+
+    QList<double> m_xdata;
+    QList<double> m_ydata;
+
 };
 
 #endif // CPLOTCUSTOMWIDGET_H
