@@ -48,7 +48,19 @@ typedef union {
     RADIO_gain_bits data_bits;
 } RADIO_gain;
 
-//Radio gain states
+typedef struct RADIO_freq_bits_struct {
+    unsigned F0     :1;
+    unsigned F1     :1;
+    unsigned F2     :1;
+    unsigned F3     :1;
+} RADIO_freq_bits;
+
+typedef union {
+    quint8 data;
+    RADIO_freq_bits data_bits;
+} RADIO_freq;
+
+//Radio gain bit states
 #define GAIN0 0b00000100
 #define GAIN1 0b00100100
 #define GAIN2 0b01100100
@@ -68,6 +80,33 @@ typedef union {
 #define STAT_GAIN6 0.0005
 #define STAT_GAIN7 0.0015
 
+//Radio frequency bit states
+#define FREQ0  0b00000000
+#define FREQ1  0b00000001
+#define FREQ2  0b00000010
+#define FREQ3  0b00000011
+#define FREQ4  0b00000100
+#define FREQ5  0b00000101
+#define FREQ6  0b00000110
+#define FREQ7  0b00000111
+#define FREQ8  0b00001000
+#define FREQ9  0b00001001
+#define FREQ10 0b00001010
+
+//Radio Frequencies NS = 0
+#define STAT_FREQ0   1.0e6
+#define STAT_FREQ1   500.0e3
+#define STAT_FREQ2   250.0e3
+#define STAT_FREQ3   125.0e3
+#define STAT_FREQ4   62500.0
+#define STAT_FREQ5   31250.0
+#define STAT_FREQ6   15625.0
+#define STAT_FREQ7   7812.5
+#define STAT_FREQ8   3906.25
+#define STAT_FREQ9   1953.125
+#define STAT_FREQ10   976.5625
+
+
 class CBIO2016 : public QObject
 {
     Q_OBJECT
@@ -77,9 +116,12 @@ public:
     void clearbits();
     void setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bool GS2, bool GS1, bool GS0,
                  bool CE, bool NS, bool GD2, bool GD1, bool GD0, bool FS, bool RE);
+    void setFreqbits(RADIO_freq &freq);
 
     void setADCvalues(quint16 vp, quint16 vn, quint16 vse);
     void getADCVoltages(double* vp, double* vn, double* vse);
+
+
     void getImpedance(double* mag, double* pha, double v_I, double v_Q);
     void setMixerGainFactor(double factor);
     int getGainIndex();
@@ -95,6 +137,7 @@ public slots:
 private:
     BIO3 m_bio3;
     RADIO_gain m_gain;
+    RADIO_freq m_freq;
     quint8 gains[8];
     double static_gain[8];
     double mixer_gain_factor;

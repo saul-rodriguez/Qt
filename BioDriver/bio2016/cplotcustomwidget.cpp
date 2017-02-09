@@ -57,6 +57,9 @@ CPlotCustomWidget::CPlotCustomWidget(QWidget *parent) : QWidget(parent)
 
     m_numUsedCurves = 0;
 
+    for (int i = 0; i < 10; i++)
+        m_size_curve[i] = 0;
+
 
 }
 
@@ -100,6 +103,16 @@ void CPlotCustomWidget::setYMinLog(double min)
     m_yMinlog = min;
 }
 
+void CPlotCustomWidget::setXNumDec(int num)
+{
+    m_xlogNumDecades = num;
+}
+
+void CPlotCustomWidget::setYNumDec(int num)
+{
+    m_ylogNumDecades = num;
+}
+
 void CPlotCustomWidget::enableGrid(bool en)
 {
     m_gridEnabled = en;
@@ -134,6 +147,20 @@ void CPlotCustomWidget::enableSemiLogPlot()
     m_semilogEnabled = true;
     m_linEnabled = false;
     m_logEnabled = false;
+}
+
+void CPlotCustomWidget::setTheme(int theme)
+{
+    switch (theme) {
+        case 1:
+            m_backgroundColor = QColor(Qt::white);
+            m_axisColor = QColor(Qt::black);
+            break;
+        default:
+            m_backgroundColor = QColor(Qt::black);
+            m_axisColor = QColor(Qt::white);
+    }
+    m_gridPen.setColor(m_axisColor);
 }
 
 void CPlotCustomWidget::setDataPoints(QList<double> &x, QList<double> &y)
@@ -233,10 +260,11 @@ void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
 {
 
     //Draw Linear Grid
-    QPen axispen(m_axisColor);
-    axispen.setWidth(1);
-    axispen.setStyle(Qt::DashLine);
-    painter.setPen(axispen);
+    //QPen axispen(m_axisColor);
+    //axispen.setWidth(1);
+    //axispen.setStyle(Qt::DashLine);
+    //painter.setPen(axispen);
+    painter.setPen(m_gridPen);
 
     double tickXoffset = (m_xMax - m_xMin)/m_xTicks;
     double tickYoffset = (m_yMax - m_yMin)/m_yTicks;
@@ -272,7 +300,7 @@ void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
         P2.setY(origin.y() - tickYoffsetDraw*(i+1));
         painter.drawLine(P1,P2);
 
-        aux = m_xMin + tickYoffset*(i+1);
+        aux = m_yMin + tickYoffset*(i+1);
         if (!m_ticklog) {
             tick.sprintf("%3.1f",aux);
         } else {
@@ -289,12 +317,13 @@ void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
 void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
 {
     //Draw Log grid
-    QPen axispen(m_axisColor);
-    axispen.setWidth(1);
-    axispen.setStyle(Qt::DashLine);
+    //QPen axispen(m_axisColor);
+    //axispen.setWidth(1);
+    //axispen.setStyle(Qt::DashLine);
    // Qt::PenStyle a = Qt::DotLine;
    // axispen.setStyle(a);
-    painter.setPen(axispen);
+    //painter.setPen(axispen);
+    painter.setPen(m_gridPen);
 
     //Vertical lines
     QList<double> tickXlog;
@@ -436,7 +465,7 @@ void CPlotCustomWidget::DrawSemiLogGrid(QPainter &painter)
         P2.setY(origin.y() - tickYoffsetDraw*(i+1));
         painter.drawLine(P1,P2);
 
-        aux = m_xMin + tickYoffset*(i+1);
+        aux = m_yMin + tickYoffset*(i+1);
         if (!m_ticklog) {
             tick.sprintf("%3.1f",aux);
         } else {
@@ -474,6 +503,23 @@ void CPlotCustomWidget::appendCurve(QList<double> &x, QList<double> &y)
     m_numUsedCurves++;
 
 
+}
+
+void CPlotCustomWidget::appendPoint(double x, double y, int curve)
+{
+
+    int index = m_size_curve[curve];
+
+    if (index == 50) return; //Buffer limit reached!
+
+    m_xcurve[curve][index] = x;
+    m_ycurve[curve][index] = y;
+    m_size_curve[curve]++;
+}
+
+void CPlotCustomWidget::clearCurve(int curve)
+{
+    m_size_curve[curve] = 0;
 }
 
 void CPlotCustomWidget::paintEvent(QPaintEvent *e)

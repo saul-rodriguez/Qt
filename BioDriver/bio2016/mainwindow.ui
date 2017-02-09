@@ -400,7 +400,7 @@
        <widget class="QPushButton" name="pushButtonConfigure">
         <property name="geometry">
          <rect>
-          <x>360</x>
+          <x>530</x>
           <y>30</y>
           <width>101</width>
           <height>22</height>
@@ -408,6 +408,29 @@
         </property>
         <property name="text">
          <string>Config Radio</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBoxFreqs">
+        <property name="geometry">
+         <rect>
+          <x>380</x>
+          <y>40</y>
+          <width>101</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>390</x>
+          <y>10</y>
+          <width>81</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Frequency</string>
         </property>
        </widget>
       </widget>
@@ -980,11 +1003,69 @@
        </attribute>
        <layout class="QVBoxLayout" name="verticalLayout_9">
         <item>
-         <widget class="QPushButton" name="pushButtonSweep">
-          <property name="text">
-           <string>Sweep Freq</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="pushButtonSweep">
+            <property name="text">
+             <string>Sweep Freq</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxLightTheme">
+            <property name="text">
+             <string>LightTheme</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="checkBoxSemilog">
+            <property name="text">
+             <string>Semilog Plot</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_7">
+            <property name="text">
+             <string>Min Y</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditMinY"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_8">
+            <property name="text">
+             <string>Max Y</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditMaxY"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_9">
+            <property name="text">
+             <string>Min Y Log</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditMinYLog"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_10">
+            <property name="text">
+             <string>Num Dec</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLineEdit" name="lineEditNumDec"/>
+          </item>
+         </layout>
         </item>
         <item>
          <widget class="CPlotCustomWidget" name="widgetMagnitude" native="true"/>

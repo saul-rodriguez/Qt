@@ -16,6 +16,7 @@
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
@@ -86,6 +87,8 @@ public:
     QCheckBox *checkBoxRE;
     QSpacerItem *verticalSpacer;
     QPushButton *pushButtonConfigure;
+    QComboBox *comboBoxFreqs;
+    QLabel *label_11;
     QWidget *tab_4;
     QGroupBox *groupBox_4;
     QWidget *verticalLayoutWidget_4;
@@ -149,7 +152,18 @@ public:
     QLabel *label_6;
     QWidget *tab_6;
     QVBoxLayout *verticalLayout_9;
+    QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonSweep;
+    QCheckBox *checkBoxLightTheme;
+    QCheckBox *checkBoxSemilog;
+    QLabel *label_7;
+    QLineEdit *lineEditMinY;
+    QLabel *label_8;
+    QLineEdit *lineEditMaxY;
+    QLabel *label_9;
+    QLineEdit *lineEditMinYLog;
+    QLabel *label_10;
+    QLineEdit *lineEditNumDec;
     CPlotCustomWidget *widgetMagnitude;
     CPlotCustomWidget *widgetPhase;
     QMenuBar *menuBar;
@@ -368,7 +382,13 @@ public:
 
         pushButtonConfigure = new QPushButton(tab_2);
         pushButtonConfigure->setObjectName(QStringLiteral("pushButtonConfigure"));
-        pushButtonConfigure->setGeometry(QRect(360, 30, 101, 22));
+        pushButtonConfigure->setGeometry(QRect(530, 30, 101, 22));
+        comboBoxFreqs = new QComboBox(tab_2);
+        comboBoxFreqs->setObjectName(QStringLiteral("comboBoxFreqs"));
+        comboBoxFreqs->setGeometry(QRect(380, 40, 101, 25));
+        label_11 = new QLabel(tab_2);
+        label_11->setObjectName(QStringLiteral("label_11"));
+        label_11->setGeometry(QRect(390, 10, 81, 17));
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -610,10 +630,66 @@ public:
         verticalLayout_9->setSpacing(6);
         verticalLayout_9->setContentsMargins(11, 11, 11, 11);
         verticalLayout_9->setObjectName(QStringLiteral("verticalLayout_9"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         pushButtonSweep = new QPushButton(tab_6);
         pushButtonSweep->setObjectName(QStringLiteral("pushButtonSweep"));
 
-        verticalLayout_9->addWidget(pushButtonSweep);
+        horizontalLayout->addWidget(pushButtonSweep);
+
+        checkBoxLightTheme = new QCheckBox(tab_6);
+        checkBoxLightTheme->setObjectName(QStringLiteral("checkBoxLightTheme"));
+
+        horizontalLayout->addWidget(checkBoxLightTheme);
+
+        checkBoxSemilog = new QCheckBox(tab_6);
+        checkBoxSemilog->setObjectName(QStringLiteral("checkBoxSemilog"));
+
+        horizontalLayout->addWidget(checkBoxSemilog);
+
+        label_7 = new QLabel(tab_6);
+        label_7->setObjectName(QStringLiteral("label_7"));
+
+        horizontalLayout->addWidget(label_7);
+
+        lineEditMinY = new QLineEdit(tab_6);
+        lineEditMinY->setObjectName(QStringLiteral("lineEditMinY"));
+
+        horizontalLayout->addWidget(lineEditMinY);
+
+        label_8 = new QLabel(tab_6);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        horizontalLayout->addWidget(label_8);
+
+        lineEditMaxY = new QLineEdit(tab_6);
+        lineEditMaxY->setObjectName(QStringLiteral("lineEditMaxY"));
+
+        horizontalLayout->addWidget(lineEditMaxY);
+
+        label_9 = new QLabel(tab_6);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        horizontalLayout->addWidget(label_9);
+
+        lineEditMinYLog = new QLineEdit(tab_6);
+        lineEditMinYLog->setObjectName(QStringLiteral("lineEditMinYLog"));
+
+        horizontalLayout->addWidget(lineEditMinYLog);
+
+        label_10 = new QLabel(tab_6);
+        label_10->setObjectName(QStringLiteral("label_10"));
+
+        horizontalLayout->addWidget(label_10);
+
+        lineEditNumDec = new QLineEdit(tab_6);
+        lineEditNumDec->setObjectName(QStringLiteral("lineEditNumDec"));
+
+        horizontalLayout->addWidget(lineEditNumDec);
+
+
+        verticalLayout_9->addLayout(horizontalLayout);
 
         widgetMagnitude = new CPlotCustomWidget(tab_6);
         widgetMagnitude->setObjectName(QStringLiteral("widgetMagnitude"));
@@ -688,6 +764,7 @@ public:
         checkBoxFS->setText(QApplication::translate("MainWindow", "FS", Q_NULLPTR));
         checkBoxRE->setText(QApplication::translate("MainWindow", "RE", Q_NULLPTR));
         pushButtonConfigure->setText(QApplication::translate("MainWindow", "Config Radio", Q_NULLPTR));
+        label_11->setText(QApplication::translate("MainWindow", "Frequency", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "ASIC Radio Conf.", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Filter Settings", Q_NULLPTR));
         checkBoxEnMF->setText(QApplication::translate("MainWindow", "EnMF", Q_NULLPTR));
@@ -730,6 +807,12 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Measure Z", Q_NULLPTR));
         pushButtonSweep->setText(QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
+        checkBoxLightTheme->setText(QApplication::translate("MainWindow", "LightTheme", Q_NULLPTR));
+        checkBoxSemilog->setText(QApplication::translate("MainWindow", "Semilog Plot", Q_NULLPTR));
+        label_7->setText(QApplication::translate("MainWindow", "Min Y", Q_NULLPTR));
+        label_8->setText(QApplication::translate("MainWindow", "Max Y", Q_NULLPTR));
+        label_9->setText(QApplication::translate("MainWindow", "Min Y Log", Q_NULLPTR));
+        label_10->setText(QApplication::translate("MainWindow", "Num Dec", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
     } // retranslateUi
 

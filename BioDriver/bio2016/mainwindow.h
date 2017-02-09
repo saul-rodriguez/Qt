@@ -7,6 +7,9 @@
 #include "cbio2016.h"
 #include "cvin2016.h"
 
+#define IDLE 0
+#define RUN 1
+
 namespace Ui {
 class MainWindow;
 }
@@ -47,6 +50,14 @@ private slots:
 
     void on_pushButtonMeasureZ_clicked();
 
+    void on_checkBoxLightTheme_toggled(bool checked);
+
+    void on_checkBoxSemilog_toggled(bool checked);
+
+    void on_comboBoxFreqs_currentIndexChanged(int index);
+
+    void on_pushButtonSweep_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -66,10 +77,24 @@ private:
     double m_Q_diff;
     double m_Q_se;
 
+    //Plot Related
+    double m_minY;
+    double m_maxY;
+    bool   m_semilog; //0 == log , 1 == semilog
+    bool   m_light_theme; //0 == black, //1 == white
+
+    double m_currentFreq;
+    int m_currentFreqIndex;
+
+    int m_sweep_state;
+
 private:
     void readPorts();
+    void setComboFreq();
     void readADC(const QByteArray &Data);
     void receiveImpedance(const QByteArray &Data);
+    void measureImpedance();
+    void processSweep(double mag, double phase);
 
 };
 

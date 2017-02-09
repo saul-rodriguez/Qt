@@ -32,6 +32,7 @@ CBIO2016::CBIO2016(QObject *parent) : QObject(parent)
 
     mixer_gain_factor = 1; // mixer gain is around 2/PI. It must be set after calibration!!!
 
+    m_freq.data = 0;
 
 }
 
@@ -63,7 +64,7 @@ void CBIO2016::setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bo
     m_bio3.data_bits.FS = FS;
     m_bio3.data_bits.RE = RE;
 
-    //save radio gain configuration
+    //save current radio gain configuration
     m_gain.data_bits.NOTUSED = 0;
     m_gain.data_bits.GS3 = GS3;
     m_gain.data_bits.GS2 = GS2;
@@ -72,6 +73,28 @@ void CBIO2016::setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bo
     m_gain.data_bits.GD2 = GD2;
     m_gain.data_bits.GD1 = GD1;
     m_gain.data_bits.GD0 = GD0;
+
+    //save current radio frequency configuration
+    m_freq.data_bits.F3 = F3;
+    m_freq.data_bits.F2 = F2;
+    m_freq.data_bits.F1 = F1;
+    m_freq.data_bits.F0 = F0;
+
+}
+
+void CBIO2016::setFreqbits(RADIO_freq &freq)
+{
+    //Update configuration bits
+    m_bio3.data_bits.F3 = freq.data_bits.F3;
+    m_bio3.data_bits.F2 = freq.data_bits.F2;
+    m_bio3.data_bits.F1 = freq.data_bits.F1;
+    m_bio3.data_bits.F0 = freq.data_bits.F0;
+
+    //save current radio frequency configuation in local structure
+    m_freq.data_bits.F3 = freq.data_bits.F3;
+    m_freq.data_bits.F2 = freq.data_bits.F2;
+    m_freq.data_bits.F1 = freq.data_bits.F1;
+    m_freq.data_bits.F0 = freq.data_bits.F0;
 
 }
 

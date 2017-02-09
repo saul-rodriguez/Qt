@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(myserial, &CSerialDriver::RxAvailable,this,&MainWindow::SerialRx);
 
     readPorts();
+    setComboFreq();
 
     m_ADC_diff = 0;
     m_ADC_se = 0;
@@ -25,11 +26,47 @@ MainWindow::MainWindow(QWidget *parent) :
     m_Q_diff = 0;
     m_Q_se = 0;
 
+
+    ui->lineEditMinY->setText("0");
+    ui->lineEditMaxY->setText("10000");
+    ui->lineEditMinYLog->setText("10");
+    ui->lineEditNumDec->setText("4");
+
     //Setup plots
+    m_light_theme = 0; //black theme (default)
+    m_semilog = 0; // default for magnitude is log
+
+    //Magnitude plot
+    m_minY = 0;
+    m_maxY = 1e6;
+
     ui->widgetMagnitude->SetXAxisName(QString("Freq (Hz)"));
     ui->widgetMagnitude->SetYAxisName(QString("Mag"));
+    ui->widgetMagnitude->setYMin(m_minY);
+    ui->widgetMagnitude->setYMax(m_maxY);
+    ui->widgetMagnitude->setXMinLog(1e3);
+    ui->widgetMagnitude->setYMinLog(10);
+    ui->widgetMagnitude->setXNumDec(3);
+    ui->widgetMagnitude->setYNumDec(4);
+    ui->widgetMagnitude->enableLogPlot();
+    //ui->widgetMagnitude->setYMin(1);
+    //ui->widgetMagnitude->setYMax(10);
+
+
+    //Phase plot;
+    ui->widgetPhase->setYMin(0);
+    ui->widgetPhase->setYMax(90);
+    ui->widgetPhase->setYTicksNum(9);
+    ui->widgetPhase->setXMinLog(1e3);
+    ui->widgetPhase->setXNumDec(3);
+    ui->widgetPhase->enableSemiLogPlot();
     ui->widgetPhase->SetXAxisName(QString("Freq (Hz)"));
     ui->widgetPhase->SetYAxisName(QString("Phase"));
+
+    m_currentFreq = STAT_FREQ0;
+    m_currentFreqIndex = 0;
+
+    m_sweep_state = IDLE;
 
 }
 
@@ -52,6 +89,37 @@ void MainWindow::readPorts()
         //qDebug() << serialPortInfos[i].portName(); // Name of each serial port
         ui->comboBoxPorts->addItem(serialPortInfos[i].portName());
     }
+}
+
+void MainWindow::setComboFreq()
+{
+    //Setup combo frequencies
+    ui->comboBoxFreqs->clear();
+    QString aux;
+
+    aux.sprintf("%5.1f",STAT_FREQ0);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ1);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ2);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ3);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ4);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ5);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ6);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ7);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ8);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ9);
+    ui->comboBoxFreqs->addItem(aux);
+    aux.sprintf("%5.1f",STAT_FREQ10);
+    ui->comboBoxFreqs->addItem(aux);
+
 }
 
 void MainWindow::on_pushButtonRefreshPorts_clicked()
@@ -438,59 +506,7 @@ void MainWindow::on_pushButtonCalcZ_clicked()
 
 void MainWindow::on_pushButtonMeasureZ_clicked()
 {
-    bool F3 = ui->checkBoxF3->isChecked();
-    bool F2 = ui->checkBoxF2->isChecked();
-    bool F1 = ui->checkBoxF1->isChecked();
-    bool F0 = ui->checkBoxF0->isChecked();
-    bool IQ = ui->checkBoxIQ->isChecked();
-    bool GS3 = ui->checkBoxGS3->isChecked();
-    bool GS2 = ui->checkBoxGS2->isChecked();
-    bool GS1 = ui->checkBoxGS1->isChecked();
-    bool GS0 = ui->checkBoxGS0->isChecked();
-    bool CE = ui->checkBoxCE->isChecked();
-    bool NS = ui->checkBoxNS->isChecked();
-    bool GD2 = ui->checkBoxGD2->isChecked();
-    bool GD1 = ui->checkBoxGD1->isChecked();
-    bool GD0 = ui->checkBoxGD0->isChecked();
-    bool FS = ui->checkBoxFS->isChecked();
-    bool RE = ui->checkBoxRE->isChecked();
-
-    m_bioASIC.setbits(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);
-
-    //Prepare byte array for serial communications
-    QByteArray writedata;
-    writedata.append("z",1);
-    writedata.append(m_bioASIC.getByte(0));
-    writedata.append(m_bioASIC.getByte(1));
-
-
-    //Prepare log information
-    QString command = "<tx> z ";
-    if (F3) command += "1"; else command += "0";
-    if (F2) command += "1"; else command += "0";
-    if (F1) command += "1"; else command += "0";
-    if (F0) command += "1_"; else command += "0_";
-
-    if (IQ) command += "1"; else command += "0";
-    if (GS3) command += "1"; else command += "0";
-    if (GS2) command += "1"; else command += "0";
-    if (GS1) command += "1_"; else command += "0_";
-
-    if (GS0) command += "1"; else command += "0";
-    if (CE) command += "1"; else command += "0";
-    if (NS) command += "1"; else command += "0";
-    if (GD2) command += "1_"; else command += "0_";
-
-    if (GD1) command += "1"; else command += "0";
-    if (GD0) command += "1"; else command += "0";
-    if (FS) command += "1"; else command += "0";
-    if (RE) command += "1"; else command += "0";
-
-    //Transmit serial data
-    myserial->write(writedata);
-
-    //Append log
-    ui->plainTextEditLog->appendPlainText(command);
+    measureImpedance();
 }
 
 void MainWindow::receiveImpedance(const QByteArray &Data)
@@ -557,5 +573,166 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
 
     aux.sprintf("%5.2f",pha);
     ui->lineEditMeasuredPhase->setText(aux);
+
+}
+
+void MainWindow::measureImpedance()
+{
+    bool F3 = ui->checkBoxF3->isChecked();
+    bool F2 = ui->checkBoxF2->isChecked();
+    bool F1 = ui->checkBoxF1->isChecked();
+    bool F0 = ui->checkBoxF0->isChecked();
+    bool IQ = ui->checkBoxIQ->isChecked();
+    bool GS3 = ui->checkBoxGS3->isChecked();
+    bool GS2 = ui->checkBoxGS2->isChecked();
+    bool GS1 = ui->checkBoxGS1->isChecked();
+    bool GS0 = ui->checkBoxGS0->isChecked();
+    bool CE = ui->checkBoxCE->isChecked();
+    bool NS = ui->checkBoxNS->isChecked();
+    bool GD2 = ui->checkBoxGD2->isChecked();
+    bool GD1 = ui->checkBoxGD1->isChecked();
+    bool GD0 = ui->checkBoxGD0->isChecked();
+    bool FS = ui->checkBoxFS->isChecked();
+    bool RE = ui->checkBoxRE->isChecked();
+
+    m_bioASIC.setbits(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);
+
+    //Prepare byte array for serial communications
+    QByteArray writedata;
+    writedata.append("z",1);
+    writedata.append(m_bioASIC.getByte(0));
+    writedata.append(m_bioASIC.getByte(1));
+
+
+    //Prepare log information
+    QString command = "<tx> z ";
+    if (F3) command += "1"; else command += "0";
+    if (F2) command += "1"; else command += "0";
+    if (F1) command += "1"; else command += "0";
+    if (F0) command += "1_"; else command += "0_";
+
+    if (IQ) command += "1"; else command += "0";
+    if (GS3) command += "1"; else command += "0";
+    if (GS2) command += "1"; else command += "0";
+    if (GS1) command += "1_"; else command += "0_";
+
+    if (GS0) command += "1"; else command += "0";
+    if (CE) command += "1"; else command += "0";
+    if (NS) command += "1"; else command += "0";
+    if (GD2) command += "1_"; else command += "0_";
+
+    if (GD1) command += "1"; else command += "0";
+    if (GD0) command += "1"; else command += "0";
+    if (FS) command += "1"; else command += "0";
+    if (RE) command += "1"; else command += "0";
+
+    //Transmit serial data
+    myserial->write(writedata);
+
+    //Append log
+    ui->plainTextEditLog->appendPlainText(command);
+}
+
+void MainWindow::processSweep(double mag, double phase)
+{
+
+}
+
+void MainWindow::on_checkBoxLightTheme_toggled(bool checked)
+{
+    if(checked) {
+        ui->widgetMagnitude->setTheme(1);
+        ui->widgetPhase->setTheme(1);
+    } else {
+        ui->widgetMagnitude->setTheme(0);
+        ui->widgetPhase->setTheme(0);
+    }
+
+    ui->widgetMagnitude->update();
+    ui->widgetPhase->update();
+}
+
+void MainWindow::on_checkBoxSemilog_toggled(bool checked)
+{
+    if (checked) {
+        double min_y = ui->lineEditMinY->text().toDouble();
+        double max_y = ui->lineEditMaxY->text().toDouble();
+
+        ui->widgetMagnitude->setYMin(min_y);
+        ui->widgetMagnitude->setYMax(max_y);
+
+        ui->widgetMagnitude->enableSemiLogPlot();
+
+    } else {
+
+        int numdec = ui->lineEditNumDec->text().toInt();
+        double min_y_log = ui->lineEditMinYLog->text().toDouble();
+
+        ui->widgetMagnitude->setYMinLog(min_y_log);
+        ui->widgetMagnitude->setYNumDec(numdec);
+        ui->widgetMagnitude->enableLogPlot();
+    }
+
+    ui->widgetMagnitude->update();
+}
+
+void MainWindow::on_comboBoxFreqs_currentIndexChanged(int index)
+{
+    RADIO_freq aux;
+    aux.data = (quint8)index;
+
+    ui->checkBoxF3->setChecked(aux.data_bits.F3);
+    ui->checkBoxF2->setChecked(aux.data_bits.F2);
+    ui->checkBoxF1->setChecked(aux.data_bits.F1);
+    ui->checkBoxF0->setChecked(aux.data_bits.F0);
+
+    switch(aux.data) {
+        case FREQ0:
+                    m_currentFreq = STAT_FREQ0;
+                    break;
+        case FREQ1:
+                    m_currentFreq = STAT_FREQ1;
+                    break;
+        case FREQ2:
+                    m_currentFreq = STAT_FREQ2;
+                    break;
+        case FREQ3:
+                    m_currentFreq = STAT_FREQ3;
+                    break;
+        case FREQ4:
+                    m_currentFreq = STAT_FREQ4;
+                    break;
+        case FREQ5:
+                    m_currentFreq = STAT_FREQ5;
+                    break;
+        case FREQ6:
+                    m_currentFreq = STAT_FREQ6;
+                    break;
+        case FREQ7:
+                    m_currentFreq = STAT_FREQ7;
+                    break;
+        case FREQ8:
+                    m_currentFreq = STAT_FREQ8;
+                    break;
+        case FREQ9:
+                    m_currentFreq = STAT_FREQ9;
+                    break;
+        case FREQ10:
+                    m_currentFreq = STAT_FREQ10;
+                    break;
+        default:    m_currentFreq = STAT_FREQ0;
+    }
+}
+
+void MainWindow::on_pushButtonSweep_clicked()
+{
+
+    if (m_sweep_state == RUN) { //Already running!
+        return;
+    }
+    //ui->widgetMagnitude->appendPoint(10,20,1);
+    m_sweep_state = RUN;
+
+    on_comboBoxFreqs_currentIndexChanged(FREQ10);
 
 }

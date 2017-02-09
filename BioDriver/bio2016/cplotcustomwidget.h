@@ -21,6 +21,8 @@ public:
 
     void setXMinLog(double min); // Min X value for logarithmic plot
     void setYMinLog(double min); // Min Y value for logarithmic plot
+    void setXNumDec(int num);
+    void setYNumDec(int num);
 
     void enableGrid(bool en); // enable/disable the grid
 
@@ -30,6 +32,8 @@ public:
     void enableLinPlot();   // Selects linear plot (default)
     void enableLogPlot();   // Selects Log plot
     void enableSemiLogPlot();   // Selects semilog plot
+
+    void setTheme(int theme);
 
 
     void setDataPoints(QList<double> &x, QList<double> &y);
@@ -46,6 +50,8 @@ public:
     void setTickLog(bool en);
 
     void appendCurve(QList<double> &x, QList<double> &y);
+    void appendPoint(double x, double y, int curve);
+    void clearCurve(int curve);
 
 protected:
     void paintEvent(QPaintEvent *e);
