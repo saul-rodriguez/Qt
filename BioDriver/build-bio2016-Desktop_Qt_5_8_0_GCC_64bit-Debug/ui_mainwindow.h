@@ -154,6 +154,7 @@ public:
     QVBoxLayout *verticalLayout_9;
     QHBoxLayout *horizontalLayout;
     QPushButton *pushButtonSweep;
+    QCheckBox *checkBoxAppend;
     QCheckBox *checkBoxLightTheme;
     QCheckBox *checkBoxSemilog;
     QLabel *label_7;
@@ -638,6 +639,11 @@ public:
 
         horizontalLayout->addWidget(pushButtonSweep);
 
+        checkBoxAppend = new QCheckBox(tab_6);
+        checkBoxAppend->setObjectName(QStringLiteral("checkBoxAppend"));
+
+        horizontalLayout->addWidget(checkBoxAppend);
+
         checkBoxLightTheme = new QCheckBox(tab_6);
         checkBoxLightTheme->setObjectName(QStringLiteral("checkBoxLightTheme"));
 
@@ -807,6 +813,7 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Phase", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Measure Z", Q_NULLPTR));
         pushButtonSweep->setText(QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
+        checkBoxAppend->setText(QApplication::translate("MainWindow", "Append", Q_NULLPTR));
         checkBoxLightTheme->setText(QApplication::translate("MainWindow", "LightTheme", Q_NULLPTR));
         checkBoxSemilog->setText(QApplication::translate("MainWindow", "Semilog Plot", Q_NULLPTR));
         label_7->setText(QApplication::translate("MainWindow", "Min Y", Q_NULLPTR));

@@ -67,6 +67,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_currentFreqIndex = 0;
 
     m_sweep_state = IDLE;
+    m_append = false;
+    m_append_curve_num = 0;
 
 }
 
@@ -421,6 +423,7 @@ void MainWindow::on_pushButtonAllTest_clicked()
     readADC(aux);;
     */
 
+    /*
     QByteArray aux;
     aux.append('z');
     aux.append(0x99);
@@ -437,11 +440,13 @@ void MainWindow::on_pushButtonAllTest_clicked()
     aux.append(0x02);
 
     receiveImpedance(aux);
-
+    */
     //int aux = m_bioASIC.getGainIndex();
 //    double mag,pha;
 
 //    m_bioASIC.getImpedance(&mag,&pha,0,0.685864);
+
+    processSweep(1005.2,-5.5);
 }
 
 void MainWindow::on_pushButtonSaveOffset_clicked()
@@ -574,6 +579,11 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     aux.sprintf("%5.2f",pha);
     ui->lineEditMeasuredPhase->setText(aux);
 
+    //Check if the measurement comes from a sweep
+    if (m_sweep_state == RUN) {
+        processSweep(mag,pha);
+    }
+
 }
 
 void MainWindow::measureImpedance()
@@ -631,10 +641,39 @@ void MainWindow::measureImpedance()
 
     //Append log
     ui->plainTextEditLog->appendPlainText(command);
+
 }
 
 void MainWindow::processSweep(double mag, double phase)
 {
+    int num_curve;
+
+
+    if (m_append) {
+        num_curve = m_append_curve_num;
+    } else {
+        num_curve = 0;
+    }
+
+    qDebug() << "Entering process sweep: freq: " << m_currentFreq << " mag = " << mag << " phase = " << phase;
+    ui->widgetMagnitude->appendPoint(m_currentFreq,mag,num_curve);
+    ui->widgetPhase->appendPoint(m_currentFreq,-phase,num_curve); //Phase changed sign here!!
+
+    ui->widgetMagnitude->update();
+    ui->widgetPhase->update();
+
+    if (m_currentFreqIndex > 0) { //Change frequency and make a new measurement
+        m_currentFreqIndex--;
+        on_comboBoxFreqs_currentIndexChanged(m_currentFreqIndex);
+        measureImpedance();
+
+    } else {    //The Sweep has finished
+        m_sweep_state = IDLE;
+        qDebug() << "Sweep finished, changing state to IDLE";
+        m_append_curve_num++;
+        if (m_append_curve_num == 10)
+            m_append_curve_num = 0;
+    }
 
 }
 
@@ -686,6 +725,8 @@ void MainWindow::on_comboBoxFreqs_currentIndexChanged(int index)
     ui->checkBoxF1->setChecked(aux.data_bits.F1);
     ui->checkBoxF0->setChecked(aux.data_bits.F0);
 
+    m_currentFreqIndex = index;
+
     switch(aux.data) {
         case FREQ0:
                     m_currentFreq = STAT_FREQ0;
@@ -727,12 +768,42 @@ void MainWindow::on_comboBoxFreqs_currentIndexChanged(int index)
 void MainWindow::on_pushButtonSweep_clicked()
 {
 
-    if (m_sweep_state == RUN) { //Already running!
-        return;
-    }
+    //if (m_sweep_state == RUN) { //Already running!
+    //    return;
+   // }
     //ui->widgetMagnitude->appendPoint(10,20,1);
     m_sweep_state = RUN;
+    qDebug()<<"Sweeping started, changing state to RUN";
+
+    if (m_append == false) {
+        ui->widgetMagnitude->setNumUsedCurves(1);
+        ui->widgetMagnitude->clearCurve(0);
+        ui->widgetMagnitude->update();
+        ui->widgetPhase->setNumUsedCurves(1);
+        ui->widgetPhase->clearCurve(0);
+        ui->widgetPhase->update();
+    }
 
     on_comboBoxFreqs_currentIndexChanged(FREQ10);
+    measureImpedance();
 
+}
+
+void MainWindow::on_checkBoxAppend_stateChanged(int arg1)
+{
+    m_append = ui->checkBoxAppend->isChecked();
+
+    for (int i = 0; i < 10; i++) { //The checkbox also clears the curves
+        ui->widgetMagnitude->clearCurve(i);
+        ui->widgetPhase->clearCurve(i);
+    }
+
+    ui->widgetMagnitude->update();
+    ui->widgetPhase->update();
+
+    if (m_append == true) { //reset append counter
+        m_append_curve_num = 0;
+        ui->widgetMagnitude->setNumUsedCurves(10);
+        ui->widgetPhase->setNumUsedCurves(10);
+    }
 }

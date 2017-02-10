@@ -1012,6 +1012,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="checkBoxAppend">
+            <property name="text">
+             <string>Append</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QCheckBox" name="checkBoxLightTheme">
             <property name="text">
              <string>LightTheme</string>

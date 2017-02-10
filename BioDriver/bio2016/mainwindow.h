@@ -58,6 +58,8 @@ private slots:
 
     void on_pushButtonSweep_clicked();
 
+    void on_checkBoxAppend_stateChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 
@@ -87,6 +89,8 @@ private:
     int m_currentFreqIndex;
 
     int m_sweep_state;
+    bool m_append;
+    int m_append_curve_num;
 
 private:
     void readPorts();

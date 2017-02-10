@@ -49,8 +49,9 @@ public:
 
     void setTickLog(bool en);
 
-    void appendCurve(QList<double> &x, QList<double> &y);
-    void appendPoint(double x, double y, int curve);
+    void appendCurve(QList<double> &x, QList<double> &y); //This increments m_numUsedCurves
+    void appendPoint(double x, double y, int curve); //This does not increments m_numUsedCurves
+    void setNumUsedCurves(int num);
     void clearCurve(int curve);
 
 protected:

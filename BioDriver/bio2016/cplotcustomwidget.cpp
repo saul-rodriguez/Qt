@@ -190,7 +190,8 @@ void CPlotCustomWidget::DrawDataPoints(QPainter &painter, int color)
         for (int i = 0; i < N; i++) {
             aux = origin.x() + m_xdata[i]*scalefactorx;
             point.setX(aux);
-            aux = origin.y() - m_ydata[i]*scalefactory;
+            //aux = origin.y() - m_ydata[i]*scalefactory;
+            aux = origin.y() - (m_ydata[i]-m_yMin)*scalefactory;
             point.setY(aux);
             data_points.append(point);
         }
@@ -211,7 +212,8 @@ void CPlotCustomWidget::DrawDataPoints(QPainter &painter, int color)
         for (int i = 0; i < N; i++) {
             aux = origin.x() + qLn(m_xdata[i]/m_xMinlog)/2.30258509299*scalelogx;
             point.setX(aux);
-            aux = origin.y() - m_ydata[i]*scalefactory;
+            //aux = origin.y() - m_ydata[i]*scalefactory;
+            aux = origin.y() - (m_ydata[i]-m_yMin)*scalefactory;
             //aux = origin.y() - qLn(m_ydata[i]/m_yMinlog)/2.30258509299*scalelogy;
             point.setY(aux);
             data_points.append(point);
@@ -307,11 +309,7 @@ void CPlotCustomWidget::DrawLinearGrid(QPainter &painter)
             tick.sprintf("%3.1e",aux);
         }
         painter.drawText(P1.x(),P1.y(),tick);
-
     }
-
-
-
 }
 
 void CPlotCustomWidget::DrawLogGrid(QPainter &painter)
@@ -517,6 +515,11 @@ void CPlotCustomWidget::appendPoint(double x, double y, int curve)
     m_size_curve[curve]++;
 }
 
+void CPlotCustomWidget::setNumUsedCurves(int num)
+{
+    m_numUsedCurves = num;
+}
+
 void CPlotCustomWidget::clearCurve(int curve)
 {
     m_size_curve[curve] = 0;
@@ -584,7 +587,6 @@ void CPlotCustomWidget::paintEvent(QPaintEvent *e)
 
     //Draw Thicks
     if (m_gridEnabled) {
-
         if (m_linEnabled) {
             DrawLinearGrid(painter);
         } else if (m_logEnabled) {
