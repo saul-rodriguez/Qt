@@ -61,6 +61,7 @@ typedef union {
 } RADIO_freq;
 
 //Radio gain bit states
+
 #define GAIN0 0b00000100
 #define GAIN1 0b00100100
 #define GAIN2 0b01100100
@@ -69,6 +70,17 @@ typedef union {
 #define GAIN5 0b01111101
 #define GAIN6 0b01111111
 #define GAIN7 0b01111011
+
+/*
+#define GAIN0 0b00000100
+#define GAIN1 0b00000101
+#define GAIN2 0b00000111
+#define GAIN3 0b00000011
+#define GAIN4 0b00100011
+#define GAIN5 0b01100011
+#define GAIN6 0b01110011
+#define GAIN7 0b01111011
+*/
 
 //Radio gain configuration
 #define STAT_GAIN0 6.85864197530865E-07
@@ -125,6 +137,7 @@ public:
     void getImpedance(double* mag, double* pha, double v_I, double v_Q);
     void setMixerGainFactor(double factor);
     int getGainIndex();
+    quint8 getGainBits(int i);
 
     quint8 getByte0();
     quint8 getByte1();

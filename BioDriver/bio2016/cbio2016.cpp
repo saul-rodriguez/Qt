@@ -178,6 +178,11 @@ int CBIO2016::getGainIndex()
     return ind;
 }
 
+quint8 CBIO2016::getGainBits(int i)
+{
+    return gains[i];
+}
+
 void CBIO2016::setMixerGainFactor(double factor)
 {
     mixer_gain_factor = factor;

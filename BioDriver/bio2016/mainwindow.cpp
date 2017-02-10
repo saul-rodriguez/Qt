@@ -3,6 +3,7 @@
 
 #include <QtSerialPort/QSerialPortInfo>
 #include <QDebug>
+#include "math.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -16,6 +17,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     readPorts();
     setComboFreq();
+    setComboGain();
+    m_current_gain_counter = 0;
 
     m_ADC_diff = 0;
     m_ADC_se = 0;
@@ -121,6 +124,27 @@ void MainWindow::setComboFreq()
     ui->comboBoxFreqs->addItem(aux);
     aux.sprintf("%5.1f",STAT_FREQ10);
     ui->comboBoxFreqs->addItem(aux);
+
+    on_comboBoxFreqs_currentIndexChanged(0);
+
+}
+
+void MainWindow::setComboGain()
+{
+    //Setup combo gain
+    ui->comboBoxGain->clear();
+
+    ui->comboBoxGain->addItem("GAIN0");
+    ui->comboBoxGain->addItem("GAIN1");
+    ui->comboBoxGain->addItem("GAIN2");
+    ui->comboBoxGain->addItem("GAIN3");
+    ui->comboBoxGain->addItem("GAIN4");
+    ui->comboBoxGain->addItem("GAIN5");
+    ui->comboBoxGain->addItem("GAIN6");
+    ui->comboBoxGain->addItem("GAIN7");
+
+    on_comboBoxGain_currentIndexChanged(0);
+
 
 }
 
@@ -522,7 +546,7 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
 
     const char* read_pt = Data.constData();
 
-    //OFFSET
+    //OFFSET EXTRACTION
     vop = 0;
     vop |= (quint16)(read_pt[2] << 8) ;
     vop |= (quint16)(read_pt[1] & 0xff);
@@ -536,10 +560,9 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     m_bioASIC.setADCvalues(vop,von,vse);
     m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
 
-    Offset_diff = voutp - voutn;
+    Offset_diff = voutp - voutn; //differential offset
 
-    //I
-
+    //I EXTRACTION
     vop = 0;
     vop |= (quint16)(read_pt[6] << 8) ;
     vop |= (quint16)(read_pt[5] & 0xff);
@@ -551,9 +574,11 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     m_bioASIC.setADCvalues(vop,von,vse);
     m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
 
-    I_diff = (voutp - voutn) - Offset_diff;
+    I_diff = (voutp - voutn) - Offset_diff; //differential I without offset
 
-    //Q
+    qDebug()<<"Ip = " << voutp << " In = " << voutn;
+
+    //Q EXTRACTION
     vop = 0;
     vop |= (quint16)(read_pt[10] << 8) ;
     vop |= (quint16)(read_pt[9] & 0xff);
@@ -565,8 +590,48 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     m_bioASIC.setADCvalues(vop,von,vse);
     m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
 
-    Q_diff = (voutp - voutn) - Offset_diff;
+    Q_diff = (voutp - voutn) - Offset_diff; //differential Q without offet
 
+
+    qDebug()<<"Qp = " << voutp << " Qn = " << voutn;
+    qDebug()<<"I = " << I_diff << " Q = " << Q_diff;
+
+    //Automatic Gain Check if values are in range
+    double aux_vol;
+
+    if (fabs(I_diff) > fabs(Q_diff)) {
+        aux_vol = fabs(I_diff);
+    } else {
+        aux_vol = fabs(Q_diff);
+    }
+
+    qDebug()<< "aux_vol = " << aux_vol;
+
+
+    if (aux_vol > 0.7) { //reduce the gain
+        if (m_current_gain > 0) {
+            m_current_gain--;
+            qDebug() << "Reducing gain to: GAIN" << m_current_gain;
+            m_current_gain_counter++;
+            on_comboBoxGain_currentIndexChanged(m_current_gain);
+            measureImpedance();
+            return;
+        }
+
+    } else if (aux_vol < 0.2 && !m_current_gain_counter) { //Increase the gain
+        if (m_current_gain < 7) {
+            m_current_gain ++;
+            qDebug() << "Increasing gain to: GAIN" << m_current_gain;
+            on_comboBoxGain_currentIndexChanged(m_current_gain);
+            measureImpedance();
+            return;
+        }
+    }
+
+    //Value is in range
+    m_current_gain_counter = 0;
+
+    //Calculate Impedance Magnitude and Phase
     double mag, pha;
 
     m_bioASIC.setMixerGainFactor(0.5667049);
@@ -806,4 +871,22 @@ void MainWindow::on_checkBoxAppend_stateChanged(int arg1)
         ui->widgetMagnitude->setNumUsedCurves(10);
         ui->widgetPhase->setNumUsedCurves(10);
     }
+}
+
+void MainWindow::on_comboBoxGain_currentIndexChanged(int index)
+{
+    RADIO_gain gain;
+    gain.data = m_bioASIC.getGainBits(index);
+
+    ui->checkBoxGD0->setChecked(gain.data_bits.GD0);
+    ui->checkBoxGD1->setChecked(gain.data_bits.GD1);
+    ui->checkBoxGD2->setChecked(gain.data_bits.GD2);
+
+    ui->checkBoxGS0->setChecked(gain.data_bits.GS0);
+    ui->checkBoxGS1->setChecked(gain.data_bits.GS1);
+    ui->checkBoxGS2->setChecked(gain.data_bits.GS2);
+    ui->checkBoxGS3->setChecked(gain.data_bits.GS3);
+
+    m_current_gain = index;
+
 }

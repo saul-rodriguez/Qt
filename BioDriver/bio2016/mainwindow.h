@@ -60,6 +60,8 @@ private slots:
 
     void on_checkBoxAppend_stateChanged(int arg1);
 
+    void on_comboBoxGain_currentIndexChanged(int index);
+
 private:
     Ui::MainWindow *ui;
 
@@ -92,9 +94,13 @@ private:
     bool m_append;
     int m_append_curve_num;
 
+    int m_current_gain;
+    int m_current_gain_counter; //avoids bouncing conditions in the gain control
+
 private:
     void readPorts();
     void setComboFreq();
+    void setComboGain();
     void readADC(const QByteArray &Data);
     void receiveImpedance(const QByteArray &Data);
     void measureImpedance();

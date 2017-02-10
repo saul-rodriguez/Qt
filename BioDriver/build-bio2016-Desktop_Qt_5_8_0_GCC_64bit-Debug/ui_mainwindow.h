@@ -89,6 +89,8 @@ public:
     QPushButton *pushButtonConfigure;
     QComboBox *comboBoxFreqs;
     QLabel *label_11;
+    QComboBox *comboBoxGain;
+    QLabel *label_12;
     QWidget *tab_4;
     QGroupBox *groupBox_4;
     QWidget *verticalLayoutWidget_4;
@@ -175,7 +177,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(874, 550);
+        MainWindow->resize(922, 550);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_8 = new QVBoxLayout(centralWidget);
@@ -390,6 +392,12 @@ public:
         label_11 = new QLabel(tab_2);
         label_11->setObjectName(QStringLiteral("label_11"));
         label_11->setGeometry(QRect(390, 10, 81, 17));
+        comboBoxGain = new QComboBox(tab_2);
+        comboBoxGain->setObjectName(QStringLiteral("comboBoxGain"));
+        comboBoxGain->setGeometry(QRect(380, 160, 101, 25));
+        label_12 = new QLabel(tab_2);
+        label_12->setObjectName(QStringLiteral("label_12"));
+        label_12->setGeometry(QRect(400, 130, 67, 17));
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -714,7 +722,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 874, 22));
+        menuBar->setGeometry(QRect(0, 0, 922, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -771,6 +779,7 @@ public:
         checkBoxRE->setText(QApplication::translate("MainWindow", "RE", Q_NULLPTR));
         pushButtonConfigure->setText(QApplication::translate("MainWindow", "Config Radio", Q_NULLPTR));
         label_11->setText(QApplication::translate("MainWindow", "Frequency", Q_NULLPTR));
+        label_12->setText(QApplication::translate("MainWindow", "Gain", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "ASIC Radio Conf.", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Filter Settings", Q_NULLPTR));
         checkBoxEnMF->setText(QApplication::translate("MainWindow", "EnMF", Q_NULLPTR));
