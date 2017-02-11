@@ -78,7 +78,7 @@ typedef union {
 #define GAIN3 0b00000011
 #define GAIN4 0b00100011
 #define GAIN5 0b01100011
-#define GAIN6 0b01110011
+#define GAIN6 0b01101011
 #define GAIN7 0b01111011
 */
 
