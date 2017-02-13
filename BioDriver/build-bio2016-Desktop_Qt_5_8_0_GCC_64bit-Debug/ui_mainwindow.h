@@ -27,6 +27,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -169,6 +170,8 @@ public:
     QLineEdit *lineEditNumDec;
     CPlotCustomWidget *widgetMagnitude;
     CPlotCustomWidget *widgetPhase;
+    QWidget *tab_7;
+    QTableView *tableViewData;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -716,6 +719,12 @@ public:
         verticalLayout_9->addWidget(widgetPhase);
 
         tabWidget->addTab(tab_6, QString());
+        tab_7 = new QWidget();
+        tab_7->setObjectName(QStringLiteral("tab_7"));
+        tableViewData = new QTableView(tab_7);
+        tableViewData->setObjectName(QStringLiteral("tableViewData"));
+        tableViewData->setGeometry(QRect(10, 60, 871, 341));
+        tabWidget->addTab(tab_7, QString());
 
         verticalLayout_8->addWidget(tabWidget);
 
@@ -733,7 +742,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -830,6 +839,7 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "Min Y Log", Q_NULLPTR));
         label_10->setText(QApplication::translate("MainWindow", "Num Dec", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Data", Q_NULLPTR));
     } // retranslateUi
 
 };

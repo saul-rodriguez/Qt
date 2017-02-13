@@ -3,9 +3,12 @@
 
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
+#include <QStandardItemModel>
+
 #include "/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h"
 #include "cbio2016.h"
 #include "cvin2016.h"
+
 
 #define IDLE 0
 #define RUN 1
@@ -97,6 +100,11 @@ private:
     int m_current_gain;
     int m_current_gain_counter; //avoids bouncing conditions in the gain control
 
+    //Table Related
+    QStandardItemModel *model;
+    int m_current_table_row;
+    int m_current_table_column;
+
 private:
     void readPorts();
     void setComboFreq();
@@ -105,6 +113,8 @@ private:
     void receiveImpedance(const QByteArray &Data);
     void measureImpedance();
     void processSweep(double mag, double phase);
+    void clearTable();
+    void updateTable(double mag, double phase);
 
 };
 

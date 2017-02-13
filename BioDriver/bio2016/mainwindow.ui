@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>5</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1104,6 +1104,21 @@
          <widget class="CPlotCustomWidget" name="widgetPhase" native="true"/>
         </item>
        </layout>
+      </widget>
+      <widget class="QWidget" name="tab_7">
+       <attribute name="title">
+        <string>Data</string>
+       </attribute>
+       <widget class="QTableView" name="tableViewData">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>60</y>
+          <width>871</width>
+          <height>341</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>

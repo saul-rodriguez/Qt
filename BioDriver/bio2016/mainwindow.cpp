@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEditMinY->setText("0");
     ui->lineEditMaxY->setText("10000");
     ui->lineEditMinYLog->setText("10");
-    ui->lineEditNumDec->setText("4");
+    ui->lineEditNumDec->setText("5");
 
     //Setup plots
     m_light_theme = 0; //black theme (default)
@@ -50,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->widgetMagnitude->setXMinLog(1e3);
     ui->widgetMagnitude->setYMinLog(10);
     ui->widgetMagnitude->setXNumDec(3);
-    ui->widgetMagnitude->setYNumDec(4);
+    ui->widgetMagnitude->setYNumDec(5);
     ui->widgetMagnitude->enableLogPlot();
     //ui->widgetMagnitude->setYMin(1);
     //ui->widgetMagnitude->setYMax(10);
@@ -72,6 +72,18 @@ MainWindow::MainWindow(QWidget *parent) :
     m_sweep_state = IDLE;
     m_append = false;
     m_append_curve_num = 0;
+
+    //DataTable
+    model = new QStandardItemModel(10,11,this);
+    ui->tableViewData->setModel(model);
+    int widthTable = ui->tableViewData->width();
+
+    for (int i = 0; i < 10; i++)
+        ui->tableViewData->setColumnWidth(i,widthTable/12);
+
+    clearTable();
+    m_current_table_row = 0;
+    m_current_table_column = 0;
 
 }
 
@@ -727,6 +739,8 @@ void MainWindow::processSweep(double mag, double phase)
     ui->widgetMagnitude->update();
     ui->widgetPhase->update();
 
+    updateTable(mag,-phase);
+
     if (m_currentFreqIndex > 0) { //Change frequency and make a new measurement
         m_currentFreqIndex--;
         on_comboBoxFreqs_currentIndexChanged(m_currentFreqIndex);
@@ -736,10 +750,49 @@ void MainWindow::processSweep(double mag, double phase)
         m_sweep_state = IDLE;
         qDebug() << "Sweep finished, changing state to IDLE";
         m_append_curve_num++;
-        if (m_append_curve_num == 10)
+/*        if (m_append_curve_num == 10) {//All colors have been used
             m_append_curve_num = 0;
+
+            for (int i = 0; i < 10; i++) { //clears the curves
+                ui->widgetMagnitude->clearCurve(i);
+                ui->widgetPhase->clearCurve(i);
+            }
+        }*/
     }
 
+}
+
+void MainWindow::clearTable()
+{
+    for (int i = 0; i < 10; i++)
+        for (int j = 0; j < 11; j++) {
+            QModelIndex index = model->index(i,j,QModelIndex());
+            model->setData(index,(double)(0.0));
+        }
+    m_current_table_column = 0;
+    m_current_table_row = 0;
+    ui->tableViewData->selectRow(0);
+}
+
+void MainWindow::updateTable(double mag, double phase)
+{
+    if (m_current_table_row >= 10) { //restart the circular buffer
+        m_current_table_row = 0;
+        ui->tableViewData->selectRow(0);
+
+    }
+
+    //Update field
+    QModelIndex index = model->index(m_current_table_row,m_current_table_column,QModelIndex());
+    model->setData(index,phase);
+
+    m_current_table_column++;
+
+    if (m_current_table_column == 11) {
+            m_current_table_column = 0;
+            m_current_table_row++;
+            ui->tableViewData->selectRow(m_current_table_row);
+    }
 }
 
 void MainWindow::on_checkBoxLightTheme_toggled(bool checked)
@@ -840,16 +893,26 @@ void MainWindow::on_pushButtonSweep_clicked()
     m_sweep_state = RUN;
     qDebug()<<"Sweeping started, changing state to RUN";
 
-    if (m_append == false) {
+    if (m_append == false) { // Single sweep
         ui->widgetMagnitude->setNumUsedCurves(1);
         ui->widgetMagnitude->clearCurve(0);
         ui->widgetMagnitude->update();
         ui->widgetPhase->setNumUsedCurves(1);
         ui->widgetPhase->clearCurve(0);
         ui->widgetPhase->update();
-    }
+    } else { //Append sweep activated, check
+        if (m_append_curve_num == 10) {//All colors have been used
+            m_append_curve_num = 0;
 
-    on_comboBoxFreqs_currentIndexChanged(FREQ10);
+            for (int i = 0; i < 10; i++) { //clears the curves
+                ui->widgetMagnitude->clearCurve(i);
+                ui->widgetPhase->clearCurve(i);
+            }
+        }
+    }
+    on_comboBoxGain_currentIndexChanged(0); //Always start from Gain 0!
+
+    on_comboBoxFreqs_currentIndexChanged(FREQ10); //Start from low frequency
     measureImpedance();
 
 }
