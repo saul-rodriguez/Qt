@@ -1107,15 +1107,30 @@
       </widget>
       <widget class="QWidget" name="tab_7">
        <attribute name="title">
-        <string>Data</string>
+        <string>Mag Data</string>
        </attribute>
-       <widget class="QTableView" name="tableViewData">
+       <widget class="QTableView" name="tableViewMag">
         <property name="geometry">
          <rect>
-          <x>10</x>
-          <y>60</y>
-          <width>871</width>
-          <height>341</height>
+          <x>9</x>
+          <y>9</y>
+          <width>881</width>
+          <height>351</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_8">
+       <attribute name="title">
+        <string>Phase Data</string>
+       </attribute>
+       <widget class="QTableView" name="tableViewPhase">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>30</y>
+          <width>861</width>
+          <height>331</height>
          </rect>
         </property>
        </widget>

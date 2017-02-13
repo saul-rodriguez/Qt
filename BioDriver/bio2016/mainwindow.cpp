@@ -74,16 +74,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_append_curve_num = 0;
 
     //DataTable
-    model = new QStandardItemModel(10,11,this);
-    ui->tableViewData->setModel(model);
-    int widthTable = ui->tableViewData->width();
+    setTables();
 
-    for (int i = 0; i < 10; i++)
-        ui->tableViewData->setColumnWidth(i,widthTable/12);
 
-    clearTable();
-    m_current_table_row = 0;
-    m_current_table_column = 0;
 
 }
 
@@ -762,36 +755,67 @@ void MainWindow::processSweep(double mag, double phase)
 
 }
 
+void MainWindow::setTables()
+{
+    modelMag = new QStandardItemModel(10,11,this);
+    modelPha = new QStandardItemModel(10,11,this);
+
+    ui->tableViewMag->setModel(modelMag);
+    ui->tableViewPhase->setModel(modelPha);
+
+    int widthTable = ui->tableViewMag->width();
+
+    for (int i = 0; i < 10; i++)
+        ui->tableViewMag->setColumnWidth(i,widthTable/12);
+
+    widthTable = ui->tableViewPhase->width();
+    for (int i = 0; i < 10; i++)
+        ui->tableViewPhase->setColumnWidth(i,widthTable/12);
+
+    clearTable();
+    m_current_table_row = 0;
+    m_current_table_column = 0;
+}
+
 void MainWindow::clearTable()
 {
     for (int i = 0; i < 10; i++)
         for (int j = 0; j < 11; j++) {
-            QModelIndex index = model->index(i,j,QModelIndex());
-            model->setData(index,(double)(0.0));
+            QModelIndex index = modelMag->index(i,j,QModelIndex());
+            modelMag->setData(index,(double)(0.0));
+
+            QModelIndex indexpha = modelPha->index(i,j,QModelIndex());
+            modelPha->setData(indexpha,(double)(0.0));
         }
     m_current_table_column = 0;
     m_current_table_row = 0;
-    ui->tableViewData->selectRow(0);
+    ui->tableViewMag->selectRow(0);
+    ui->tableViewPhase->selectRow(0);
 }
 
 void MainWindow::updateTable(double mag, double phase)
 {
     if (m_current_table_row >= 10) { //restart the circular buffer
         m_current_table_row = 0;
-        ui->tableViewData->selectRow(0);
+        ui->tableViewMag->selectRow(0);
+        ui->tableViewPhase->selectRow(0);
 
     }
 
     //Update field
-    QModelIndex index = model->index(m_current_table_row,m_current_table_column,QModelIndex());
-    model->setData(index,phase);
+    QModelIndex index = modelMag->index(m_current_table_row,m_current_table_column,QModelIndex());
+    modelMag->setData(index,mag);
+
+    QModelIndex indexpha = modelPha->index(m_current_table_row,m_current_table_column,QModelIndex());
+    modelPha->setData(indexpha,phase);
 
     m_current_table_column++;
 
     if (m_current_table_column == 11) {
             m_current_table_column = 0;
             m_current_table_row++;
-            ui->tableViewData->selectRow(m_current_table_row);
+            ui->tableViewMag->selectRow(m_current_table_row);
+            ui->tableViewPhase->selectRow(m_current_table_row);
     }
 }
 

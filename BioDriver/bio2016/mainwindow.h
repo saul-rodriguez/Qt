@@ -100,8 +100,10 @@ private:
     int m_current_gain;
     int m_current_gain_counter; //avoids bouncing conditions in the gain control
 
-    //Table Related
-    QStandardItemModel *model;
+    //Tables Related
+    QStandardItemModel *modelMag;
+    QStandardItemModel *modelPha;
+
     int m_current_table_row;
     int m_current_table_column;
 
@@ -113,6 +115,7 @@ private:
     void receiveImpedance(const QByteArray &Data);
     void measureImpedance();
     void processSweep(double mag, double phase);
+    void setTables();
     void clearTable();
     void updateTable(double mag, double phase);
 

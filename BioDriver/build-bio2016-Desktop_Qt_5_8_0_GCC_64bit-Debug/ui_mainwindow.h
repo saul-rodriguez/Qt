@@ -171,7 +171,9 @@ public:
     CPlotCustomWidget *widgetMagnitude;
     CPlotCustomWidget *widgetPhase;
     QWidget *tab_7;
-    QTableView *tableViewData;
+    QTableView *tableViewMag;
+    QWidget *tab_8;
+    QTableView *tableViewPhase;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -721,10 +723,16 @@ public:
         tabWidget->addTab(tab_6, QString());
         tab_7 = new QWidget();
         tab_7->setObjectName(QStringLiteral("tab_7"));
-        tableViewData = new QTableView(tab_7);
-        tableViewData->setObjectName(QStringLiteral("tableViewData"));
-        tableViewData->setGeometry(QRect(10, 60, 871, 341));
+        tableViewMag = new QTableView(tab_7);
+        tableViewMag->setObjectName(QStringLiteral("tableViewMag"));
+        tableViewMag->setGeometry(QRect(9, 9, 881, 351));
         tabWidget->addTab(tab_7, QString());
+        tab_8 = new QWidget();
+        tab_8->setObjectName(QStringLiteral("tab_8"));
+        tableViewPhase = new QTableView(tab_8);
+        tableViewPhase->setObjectName(QStringLiteral("tableViewPhase"));
+        tableViewPhase->setGeometry(QRect(20, 30, 861, 331));
+        tabWidget->addTab(tab_8, QString());
 
         verticalLayout_8->addWidget(tabWidget);
 
@@ -839,7 +847,8 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "Min Y Log", Q_NULLPTR));
         label_10->setText(QApplication::translate("MainWindow", "Num Dec", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
-        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Data", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Mag Data", Q_NULLPTR));
+        tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("MainWindow", "Phase Data", Q_NULLPTR));
     } // retranslateUi
 
 };
