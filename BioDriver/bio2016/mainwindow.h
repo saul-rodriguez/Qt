@@ -108,11 +108,13 @@ private:
     QStandardItemModel *modelMag;
     QStandardItemModel *modelPha;
     QStandardItemModel *modelAveragePha;
+    QStandardItemModel *modelAverageMag;
 
     int m_current_table_row;
     int m_current_table_column;
 
     double m_PhaseCalibration[11];
+    double m_MagCalibration[11];
 
 private:
     void readPorts();

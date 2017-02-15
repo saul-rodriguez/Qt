@@ -788,11 +788,18 @@ void MainWindow::setTables()
     modelAveragePha = new QStandardItemModel(2,11,this);
     ui->tableViewAveragePhase->setModel(modelAveragePha);
 
-    for (int i = 0; i < 10; i++)
-        ui->tableViewAveragePhase->setColumnWidth(i,widthTable/12);
+    modelAverageMag = new QStandardItemModel(2,11,this);
+    ui->tableViewAverageMag->setModel(modelAverageMag);
 
-    for (int i = 0; i < 11; i++)
+    for (int i = 0; i < 10; i++) {
+        ui->tableViewAveragePhase->setColumnWidth(i,widthTable/12);
+        ui->tableViewAverageMag->setColumnWidth(i,widthTable/12);
+    }
+
+    for (int i = 0; i < 11; i++) {
         m_PhaseCalibration[i] = 0;
+        m_MagCalibration[i] = 0;
+    }
 
 }
 
@@ -857,7 +864,7 @@ void MainWindow::updateStatistics()
         rms[i] = 0;
     }
 
-    // Calculate Average Values
+    // Calculate phase Average Values
     for (int j = 0; j < 11; j++) {
         for (int i = 0; i < num_samples; i++) {
             QModelIndex indexpha = modelPha->index(i,j,QModelIndex());
@@ -871,13 +878,12 @@ void MainWindow::updateStatistics()
         m_PhaseCalibration[i] = average[i];
     }
 
-
     for (int i = 0; i < 11; i++) {
         QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
         modelAveragePha->setData(index,average[i]);
     }
 
-    // Calculate RMS values
+    // Calculate phase RMS values
     double diff;
     for (int j = 0; j < 11; j++) {
         for (int i = 0; i < num_samples; i++) {
@@ -897,6 +903,49 @@ void MainWindow::updateStatistics()
     for (int i = 0; i < 11; i++) {
         QModelIndex index = modelAveragePha->index(1,i,QModelIndex());
         modelAveragePha->setData(index,rms[i]);
+    }
+
+    // Calculate mag Average Values
+    for (int i = 0; i < 11; i++)
+        average[i] = 0;
+
+    for (int j = 0; j < 11; j++) {
+        for (int i = 0; i < num_samples; i++) {
+            QModelIndex indexmag = modelMag->index(i,j,QModelIndex());
+            aux = modelMag->data(indexmag).toDouble();
+            average[j] += (aux);
+        }
+    }
+
+    for (int i = 0; i < 11; i++) {
+        average[i] /= num_samples;
+        m_MagCalibration[i] = average[i];
+    }
+
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelAverageMag->index(0,i,QModelIndex());
+        modelAverageMag->setData(index,average[i]);
+    }
+
+    // Calculate mag rms values
+    for (int j = 0; j < 11; j++) {
+        for (int i = 0; i < num_samples; i++) {
+            QModelIndex indexmag = modelMag->index(i,j,QModelIndex());
+            aux = modelMag->data(indexmag).toDouble();
+            diff = aux - average[j];
+            rms[j] += diff*diff;
+        }
+    }
+
+    for (int i = 0; i < 11; i++) {
+        rms[i] /= num_samples;
+        rms[i] = sqrt(rms[i]);
+    }
+
+
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelAverageMag->index(1,i,QModelIndex());
+        modelAverageMag->setData(index,rms[i]);
     }
 
 }

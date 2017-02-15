@@ -172,6 +172,7 @@ public:
     CPlotCustomWidget *widgetPhase;
     QWidget *tab_7;
     QTableView *tableViewMag;
+    QTableView *tableViewAverageMag;
     QWidget *tab_8;
     QTableView *tableViewPhase;
     QTableView *tableViewAveragePhase;
@@ -731,6 +732,9 @@ public:
         tableViewMag = new QTableView(tab_7);
         tableViewMag->setObjectName(QStringLiteral("tableViewMag"));
         tableViewMag->setGeometry(QRect(9, 9, 881, 351));
+        tableViewAverageMag = new QTableView(tab_7);
+        tableViewAverageMag->setObjectName(QStringLiteral("tableViewAverageMag"));
+        tableViewAverageMag->setGeometry(QRect(10, 400, 881, 81));
         tabWidget->addTab(tab_7, QString());
         tab_8 = new QWidget();
         tab_8->setObjectName(QStringLiteral("tab_8"));
@@ -770,7 +774,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(7);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);

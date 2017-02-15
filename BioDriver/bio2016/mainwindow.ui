@@ -1105,21 +1105,6 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="tab_7">
-       <attribute name="title">
-        <string>Mag Data</string>
-       </attribute>
-       <widget class="QTableView" name="tableViewMag">
-        <property name="geometry">
-         <rect>
-          <x>9</x>
-          <y>9</y>
-          <width>881</width>
-          <height>351</height>
-         </rect>
-        </property>
-       </widget>
-      </widget>
       <widget class="QWidget" name="tab_8">
        <attribute name="title">
         <string>Phase Data</string>
@@ -1191,6 +1176,31 @@
         </property>
         <property name="text">
          <string>Clear Tables</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_7">
+       <attribute name="title">
+        <string>Mag Data</string>
+       </attribute>
+       <widget class="QTableView" name="tableViewMag">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>9</y>
+          <width>881</width>
+          <height>351</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QTableView" name="tableViewAverageMag">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>400</y>
+          <width>881</width>
+          <height>81</height>
+         </rect>
         </property>
        </widget>
       </widget>
