@@ -75,6 +75,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //DataTable
     setTables();
+    ui->lineEditStatisticSamples->setText("5");
 
 
 
@@ -725,6 +726,14 @@ void MainWindow::processSweep(double mag, double phase)
         num_curve = 0;
     }
 
+    //Check if phase calibration is enabled
+    bool calphase = ui->checkBoxCalibratePhase->isChecked();
+
+    if (calphase) {
+        phase += m_PhaseCalibration[FREQ10 - m_currentFreqIndex]; //
+    }
+
+
     qDebug() << "Entering process sweep: freq: " << m_currentFreq << " mag = " << mag << " phase = " << phase;
     ui->widgetMagnitude->appendPoint(m_currentFreq,mag,num_curve);
     ui->widgetPhase->appendPoint(m_currentFreq,-phase,num_curve); //Phase changed sign here!!
@@ -775,6 +784,16 @@ void MainWindow::setTables()
     clearTable();
     m_current_table_row = 0;
     m_current_table_column = 0;
+
+    modelAveragePha = new QStandardItemModel(2,11,this);
+    ui->tableViewAveragePhase->setModel(modelAveragePha);
+
+    for (int i = 0; i < 10; i++)
+        ui->tableViewAveragePhase->setColumnWidth(i,widthTable/12);
+
+    for (int i = 0; i < 11; i++)
+        m_PhaseCalibration[i] = 0;
+
 }
 
 void MainWindow::clearTable()
@@ -816,7 +835,70 @@ void MainWindow::updateTable(double mag, double phase)
             m_current_table_row++;
             ui->tableViewMag->selectRow(m_current_table_row);
             ui->tableViewPhase->selectRow(m_current_table_row);
+
+            updateStatistics();
     }
+}
+
+void MainWindow::updateStatistics()
+{
+
+    if (ui->checkBoxCalibratePhase->isChecked()) {  // Current average values are used for Calibration! they should not be overriden
+        return;
+    }
+
+    double average[11], rms[11], aux, num_samples;
+
+    num_samples = ui->lineEditStatisticSamples->text().toDouble();
+
+
+    for (int i = 0; i < 11; i++) {
+        average[i] = 0;
+        rms[i] = 0;
+    }
+
+    // Calculate Average Values
+    for (int j = 0; j < 11; j++) {
+        for (int i = 0; i < num_samples; i++) {
+            QModelIndex indexpha = modelPha->index(i,j,QModelIndex());
+            aux = modelPha->data(indexpha).toDouble();
+            average[j] += (aux);
+        }
+    }
+
+    for (int i = 0; i < 11; i++) {
+        average[i] /= num_samples;
+        m_PhaseCalibration[i] = average[i];
+    }
+
+
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
+        modelAveragePha->setData(index,average[i]);
+    }
+
+    // Calculate RMS values
+    double diff;
+    for (int j = 0; j < 11; j++) {
+        for (int i = 0; i < num_samples; i++) {
+            QModelIndex indexpha = modelPha->index(i,j,QModelIndex());
+            aux = modelPha->data(indexpha).toDouble();
+            diff = aux - average[j];
+            rms[j] += diff*diff;
+        }
+    }
+
+    for (int i = 0; i < 11; i++) {
+        rms[i] /= num_samples;
+        rms[i] = sqrt(rms[i]);
+    }
+
+
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelAveragePha->index(1,i,QModelIndex());
+        modelAveragePha->setData(index,rms[i]);
+    }
+
 }
 
 void MainWindow::on_checkBoxLightTheme_toggled(bool checked)
@@ -976,4 +1058,14 @@ void MainWindow::on_comboBoxGain_currentIndexChanged(int index)
 
     m_current_gain = index;
 
+}
+
+void MainWindow::on_lineEditStatisticSamples_editingFinished()
+{
+    updateStatistics();
+}
+
+void MainWindow::on_pushButtonClearTables_clicked()
+{
+    clearTable();
 }

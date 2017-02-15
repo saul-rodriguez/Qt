@@ -65,6 +65,10 @@ private slots:
 
     void on_comboBoxGain_currentIndexChanged(int index);
 
+    void on_lineEditStatisticSamples_editingFinished();
+
+    void on_pushButtonClearTables_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -103,9 +107,12 @@ private:
     //Tables Related
     QStandardItemModel *modelMag;
     QStandardItemModel *modelPha;
+    QStandardItemModel *modelAveragePha;
 
     int m_current_table_row;
     int m_current_table_column;
+
+    double m_PhaseCalibration[11];
 
 private:
     void readPorts();
@@ -118,6 +125,7 @@ private:
     void setTables();
     void clearTable();
     void updateTable(double mag, double phase);
+    void updateStatistics();
 
 };
 

@@ -174,6 +174,11 @@ public:
     QTableView *tableViewMag;
     QWidget *tab_8;
     QTableView *tableViewPhase;
+    QTableView *tableViewAveragePhase;
+    QLabel *label_13;
+    QLineEdit *lineEditStatisticSamples;
+    QCheckBox *checkBoxCalibratePhase;
+    QPushButton *pushButtonClearTables;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -182,7 +187,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(922, 550);
+        MainWindow->resize(922, 599);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_8 = new QVBoxLayout(centralWidget);
@@ -732,6 +737,21 @@ public:
         tableViewPhase = new QTableView(tab_8);
         tableViewPhase->setObjectName(QStringLiteral("tableViewPhase"));
         tableViewPhase->setGeometry(QRect(20, 30, 861, 331));
+        tableViewAveragePhase = new QTableView(tab_8);
+        tableViewAveragePhase->setObjectName(QStringLiteral("tableViewAveragePhase"));
+        tableViewAveragePhase->setGeometry(QRect(20, 400, 861, 81));
+        label_13 = new QLabel(tab_8);
+        label_13->setObjectName(QStringLiteral("label_13"));
+        label_13->setGeometry(QRect(280, 370, 271, 20));
+        lineEditStatisticSamples = new QLineEdit(tab_8);
+        lineEditStatisticSamples->setObjectName(QStringLiteral("lineEditStatisticSamples"));
+        lineEditStatisticSamples->setGeometry(QRect(550, 370, 41, 25));
+        checkBoxCalibratePhase = new QCheckBox(tab_8);
+        checkBoxCalibratePhase->setObjectName(QStringLiteral("checkBoxCalibratePhase"));
+        checkBoxCalibratePhase->setGeometry(QRect(620, 370, 171, 23));
+        pushButtonClearTables = new QPushButton(tab_8);
+        pushButtonClearTables->setObjectName(QStringLiteral("pushButtonClearTables"));
+        pushButtonClearTables->setGeometry(QRect(30, 370, 101, 25));
         tabWidget->addTab(tab_8, QString());
 
         verticalLayout_8->addWidget(tabWidget);
@@ -750,7 +770,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(7);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -848,6 +868,9 @@ public:
         label_10->setText(QApplication::translate("MainWindow", "Num Dec", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Mag Data", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "Average and RMS number of samples", Q_NULLPTR));
+        checkBoxCalibratePhase->setText(QApplication::translate("MainWindow", "Used for Calibration", Q_NULLPTR));
+        pushButtonClearTables->setText(QApplication::translate("MainWindow", "Clear Tables", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("MainWindow", "Phase Data", Q_NULLPTR));
     } // retranslateUi
 
