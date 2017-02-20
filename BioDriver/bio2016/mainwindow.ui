@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>922</width>
-    <height>599</height>
+    <width>974</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>8</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1152,19 +1152,6 @@
          </rect>
         </property>
        </widget>
-       <widget class="QCheckBox" name="checkBoxCalibratePhase">
-        <property name="geometry">
-         <rect>
-          <x>620</x>
-          <y>370</y>
-          <width>171</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="text">
-         <string>Used for Calibration</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pushButtonClearTables">
         <property name="geometry">
          <rect>
@@ -1197,10 +1184,74 @@
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>400</y>
+          <y>390</y>
           <width>881</width>
-          <height>81</height>
+          <height>91</height>
          </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_9">
+       <attribute name="title">
+        <string>Calib.</string>
+       </attribute>
+       <widget class="QTableView" name="tableViewCalibration">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>80</y>
+          <width>841</width>
+          <height>91</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonUpdateCalibration">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>40</y>
+          <width>141</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Update Calibration</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="checkBoxCalibratePhase">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>40</y>
+          <width>171</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enable Calibration</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditCalRes">
+        <property name="geometry">
+         <rect>
+          <x>340</x>
+          <y>40</y>
+          <width>71</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>40</y>
+          <width>101</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Calibration R</string>
         </property>
        </widget>
       </widget>
@@ -1213,7 +1264,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>922</width>
+     <width>974</width>
      <height>22</height>
     </rect>
    </property>

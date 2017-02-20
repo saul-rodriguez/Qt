@@ -69,6 +69,8 @@ private slots:
 
     void on_pushButtonClearTables_clicked();
 
+    void on_pushButtonUpdateCalibration_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -109,6 +111,8 @@ private:
     QStandardItemModel *modelPha;
     QStandardItemModel *modelAveragePha;
     QStandardItemModel *modelAverageMag;
+
+    QStandardItemModel *modelCalibration;
 
     int m_current_table_row;
     int m_current_table_column;

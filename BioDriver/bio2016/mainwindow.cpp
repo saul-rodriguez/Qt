@@ -77,6 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
     setTables();
     ui->lineEditStatisticSamples->setText("5");
 
+    //Calibration
+    ui->lineEditCalRes->setText("1000");
+
 
 
 }
@@ -730,7 +733,9 @@ void MainWindow::processSweep(double mag, double phase)
     bool calphase = ui->checkBoxCalibratePhase->isChecked();
 
     if (calphase) {
+        qDebug() << "Calibration Enabled!";
         phase += m_PhaseCalibration[FREQ10 - m_currentFreqIndex]; //
+        mag *= m_MagCalibration[FREQ10 - m_currentFreqIndex];
     }
 
 
@@ -781,7 +786,7 @@ void MainWindow::setTables()
     for (int i = 0; i < 10; i++)
         ui->tableViewPhase->setColumnWidth(i,widthTable/12);
 
-    clearTable();
+
     m_current_table_row = 0;
     m_current_table_column = 0;
 
@@ -791,15 +796,21 @@ void MainWindow::setTables()
     modelAverageMag = new QStandardItemModel(2,11,this);
     ui->tableViewAverageMag->setModel(modelAverageMag);
 
+    modelCalibration = new QStandardItemModel(2,11,this);
+    ui->tableViewCalibration->setModel(modelCalibration);
+
     for (int i = 0; i < 10; i++) {
         ui->tableViewAveragePhase->setColumnWidth(i,widthTable/12);
         ui->tableViewAverageMag->setColumnWidth(i,widthTable/12);
+        ui->tableViewCalibration->setColumnWidth(i,widthTable/12);
     }
 
     for (int i = 0; i < 11; i++) {
         m_PhaseCalibration[i] = 0;
         m_MagCalibration[i] = 0;
     }
+
+    clearTable();
 
 }
 
@@ -817,6 +828,17 @@ void MainWindow::clearTable()
     m_current_table_row = 0;
     ui->tableViewMag->selectRow(0);
     ui->tableViewPhase->selectRow(0);
+
+    for (int i = 0; i < 2; i++)
+        for (int j = 0; j < 11; j++) {
+            QModelIndex index = modelAverageMag->index(i,j,QModelIndex());
+            modelAverageMag->setData(index,(double)(0.0));
+
+            QModelIndex indexpha = modelAveragePha->index(i,j,QModelIndex());
+            modelAveragePha->setData(indexpha,(double)(0.0));
+        }
+
+
 }
 
 void MainWindow::updateTable(double mag, double phase)
@@ -850,10 +872,6 @@ void MainWindow::updateTable(double mag, double phase)
 void MainWindow::updateStatistics()
 {
 
-    if (ui->checkBoxCalibratePhase->isChecked()) {  // Current average values are used for Calibration! they should not be overriden
-        return;
-    }
-
     double average[11], rms[11], aux, num_samples;
 
     num_samples = ui->lineEditStatisticSamples->text().toDouble();
@@ -875,7 +893,7 @@ void MainWindow::updateStatistics()
 
     for (int i = 0; i < 11; i++) {
         average[i] /= num_samples;
-        m_PhaseCalibration[i] = average[i];
+        //m_PhaseCalibration[i] = average[i];
     }
 
     for (int i = 0; i < 11; i++) {
@@ -919,7 +937,7 @@ void MainWindow::updateStatistics()
 
     for (int i = 0; i < 11; i++) {
         average[i] /= num_samples;
-        m_MagCalibration[i] = average[i];
+   //     m_MagCalibration[i] = average[i];
     }
 
     for (int i = 0; i < 11; i++) {
@@ -1117,4 +1135,37 @@ void MainWindow::on_lineEditStatisticSamples_editingFinished()
 void MainWindow::on_pushButtonClearTables_clicked()
 {
     clearTable();
+}
+
+void MainWindow::on_pushButtonUpdateCalibration_clicked()
+{
+    double aux;
+
+    //Get phase values from statistic table and update calibration table
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
+        aux = modelAveragePha->data(index).toDouble();
+
+        QModelIndex indexCalPha = modelCalibration->index(0,i,QModelIndex());
+        modelCalibration->setData(indexCalPha,aux);
+        m_PhaseCalibration[i] = aux;
+    }
+
+    //Get mag values from statistics table, get calibration factor, and update calibration table
+
+    double ref_res;
+
+    ref_res = ui->lineEditCalRes->text().toDouble();
+
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelAverageMag->index(0,i,QModelIndex());
+        aux = modelAverageMag->data(index).toDouble();
+
+        aux =ref_res/aux;
+        QModelIndex indexCalPha = modelCalibration->index(1,i,QModelIndex());
+        modelCalibration->setData(indexCalPha,aux);
+        m_MagCalibration[i] = aux;
+    }
+
+
 }
