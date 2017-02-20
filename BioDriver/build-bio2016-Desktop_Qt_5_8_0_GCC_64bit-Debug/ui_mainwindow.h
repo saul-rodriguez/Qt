@@ -185,6 +185,8 @@ public:
     QCheckBox *checkBoxCalibratePhase;
     QLineEdit *lineEditCalRes;
     QLabel *label_14;
+    QPushButton *pushButtonSaveCal;
+    QPushButton *pushButtonLoadCal;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -776,6 +778,12 @@ public:
         label_14 = new QLabel(tab_9);
         label_14->setObjectName(QStringLiteral("label_14"));
         label_14->setGeometry(QRect(240, 40, 101, 17));
+        pushButtonSaveCal = new QPushButton(tab_9);
+        pushButtonSaveCal->setObjectName(QStringLiteral("pushButtonSaveCal"));
+        pushButtonSaveCal->setGeometry(QRect(30, 190, 131, 25));
+        pushButtonLoadCal = new QPushButton(tab_9);
+        pushButtonLoadCal->setObjectName(QStringLiteral("pushButtonLoadCal"));
+        pushButtonLoadCal->setGeometry(QRect(190, 190, 131, 25));
         tabWidget->addTab(tab_9, QString());
 
         verticalLayout_8->addWidget(tabWidget);
@@ -898,6 +906,8 @@ public:
         pushButtonUpdateCalibration->setText(QApplication::translate("MainWindow", "Update Calibration", Q_NULLPTR));
         checkBoxCalibratePhase->setText(QApplication::translate("MainWindow", "Enable Calibration", Q_NULLPTR));
         label_14->setText(QApplication::translate("MainWindow", "Calibration R", Q_NULLPTR));
+        pushButtonSaveCal->setText(QApplication::translate("MainWindow", "Save Calibration", Q_NULLPTR));
+        pushButtonLoadCal->setText(QApplication::translate("MainWindow", "Load Calibration", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QApplication::translate("MainWindow", "Calib.", Q_NULLPTR));
     } // retranslateUi
 

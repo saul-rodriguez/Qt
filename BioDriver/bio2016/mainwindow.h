@@ -71,6 +71,10 @@ private slots:
 
     void on_pushButtonUpdateCalibration_clicked();
 
+    void on_pushButtonSaveCal_clicked();
+
+    void on_pushButtonLoadCal_clicked();
+
 private:
     Ui::MainWindow *ui;
 

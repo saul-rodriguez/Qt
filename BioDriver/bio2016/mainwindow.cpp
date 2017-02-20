@@ -3,6 +3,8 @@
 
 #include <QtSerialPort/QSerialPortInfo>
 #include <QDebug>
+#include <QFile>
+#include <QTextStream>
 #include "math.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -1167,5 +1169,74 @@ void MainWindow::on_pushButtonUpdateCalibration_clicked()
         m_MagCalibration[i] = aux;
     }
 
+
+}
+
+void MainWindow::on_pushButtonSaveCal_clicked()
+{
+    QString filename = "calibration.txt";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+
+        for (int i = 0; i < 11; i++) {
+            stream << m_PhaseCalibration[i] << " ";
+        }
+
+        stream << "\n";
+
+        for (int i = 0; i < 11; i++) {
+            stream << m_MagCalibration[i] << " ";
+        }
+
+        stream << "\n";
+
+    }
+}
+
+void MainWindow::on_pushButtonLoadCal_clicked()
+{
+    QString filename = "calibration.txt";
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly)) {
+        qDebug()<< "error opening Calibration file";
+        return;
+    }
+
+    QTextStream in(&file);
+
+    QString line = in.readLine();
+    QStringList phase = line.split(" ");
+
+    line = in.readLine();
+    QStringList mag = line.split(" ");
+
+    QString aux;
+    //Get phase values from statistic table and update calibration table
+    for (int i = 0; i < 11; i++) {
+        //QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
+        //aux = modelAveragePha->data(index).toDouble();
+
+        aux = phase.at(i);
+
+        QModelIndex indexCalPha = modelCalibration->index(0,i,QModelIndex());
+        modelCalibration->setData(indexCalPha,aux);
+        m_PhaseCalibration[i] = aux.toDouble();
+    }
+
+    //Get mag values from statistics table, get calibration factor, and update calibration table
+
+    double ref_res;
+    ref_res = ui->lineEditCalRes->text().toDouble();
+
+    for (int i = 0; i < 11; i++) {
+      //  QModelIndex index = modelAverageMag->index(0,i,QModelIndex());
+      //  aux = modelAverageMag->data(index).toDouble();
+
+        aux =mag.at(i);
+        QModelIndex indexCalPha = modelCalibration->index(1,i,QModelIndex());
+        modelCalibration->setData(indexCalPha,aux);
+        m_MagCalibration[i] = aux.toDouble();
+    }
 
 }

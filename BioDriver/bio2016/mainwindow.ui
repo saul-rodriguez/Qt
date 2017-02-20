@@ -1254,6 +1254,32 @@
          <string>Calibration R</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButtonSaveCal">
+        <property name="geometry">
+         <rect>
+          <x>30</x>
+          <y>190</y>
+          <width>131</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Save Calibration</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButtonLoadCal">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>190</y>
+          <width>131</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Load Calibration</string>
+        </property>
+       </widget>
       </widget>
      </widget>
     </item>
