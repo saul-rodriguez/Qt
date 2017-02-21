@@ -21,6 +21,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
@@ -38,6 +39,9 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionSweep;
+    QAction *actionSave_Measurement;
+    QAction *actionAbout;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_8;
     QTabWidget *tabWidget;
@@ -179,6 +183,7 @@ public:
     QWidget *tab_7;
     QTableView *tableViewMag;
     QTableView *tableViewAverageMag;
+    QCheckBox *checkBoxRMSasPercentage;
     QWidget *tab_9;
     QTableView *tableViewCalibration;
     QPushButton *pushButtonUpdateCalibration;
@@ -188,6 +193,8 @@ public:
     QPushButton *pushButtonSaveCal;
     QPushButton *pushButtonLoadCal;
     QMenuBar *menuBar;
+    QMenu *menuMeasure;
+    QMenu *menuHelp;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -196,6 +203,19 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(974, 600);
+        actionSweep = new QAction(MainWindow);
+        actionSweep->setObjectName(QStringLiteral("actionSweep"));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/images/Button-Play-icon.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionSweep->setIcon(icon);
+        actionSave_Measurement = new QAction(MainWindow);
+        actionSave_Measurement->setObjectName(QStringLiteral("actionSave_Measurement"));
+        QIcon icon1;
+        icon1.addFile(QStringLiteral("images/Save-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        icon1.addFile(QStringLiteral(":/images/Save-icon.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionSave_Measurement->setIcon(icon1);
+        actionAbout = new QAction(MainWindow);
+        actionAbout->setObjectName(QStringLiteral("actionAbout"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_8 = new QVBoxLayout(centralWidget);
@@ -744,7 +764,7 @@ public:
         tableViewAveragePhase->setGeometry(QRect(20, 400, 861, 81));
         label_13 = new QLabel(tab_8);
         label_13->setObjectName(QStringLiteral("label_13"));
-        label_13->setGeometry(QRect(280, 370, 271, 20));
+        label_13->setGeometry(QRect(310, 370, 241, 20));
         lineEditStatisticSamples = new QLineEdit(tab_8);
         lineEditStatisticSamples->setObjectName(QStringLiteral("lineEditStatisticSamples"));
         lineEditStatisticSamples->setGeometry(QRect(550, 370, 41, 25));
@@ -760,6 +780,9 @@ public:
         tableViewAverageMag = new QTableView(tab_7);
         tableViewAverageMag->setObjectName(QStringLiteral("tableViewAverageMag"));
         tableViewAverageMag->setGeometry(QRect(10, 390, 881, 91));
+        checkBoxRMSasPercentage = new QCheckBox(tab_7);
+        checkBoxRMSasPercentage->setObjectName(QStringLiteral("checkBoxRMSasPercentage"));
+        checkBoxRMSasPercentage->setGeometry(QRect(360, 360, 92, 23));
         tabWidget->addTab(tab_7, QString());
         tab_9 = new QWidget();
         tab_9->setObjectName(QStringLiteral("tab_9"));
@@ -792,6 +815,10 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 974, 22));
+        menuMeasure = new QMenu(menuBar);
+        menuMeasure->setObjectName(QStringLiteral("menuMeasure"));
+        menuHelp = new QMenu(menuBar);
+        menuHelp->setObjectName(QStringLiteral("menuHelp"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -800,9 +827,17 @@ public:
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
 
+        menuBar->addAction(menuMeasure->menuAction());
+        menuBar->addAction(menuHelp->menuAction());
+        menuMeasure->addAction(actionSweep);
+        menuMeasure->addAction(actionSave_Measurement);
+        menuHelp->addAction(actionAbout);
+        mainToolBar->addAction(actionSweep);
+        mainToolBar->addAction(actionSave_Measurement);
+
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(8);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -811,6 +846,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "NanoSense V1.0", Q_NULLPTR));
+        actionSweep->setText(QApplication::translate("MainWindow", "Sweep", Q_NULLPTR));
+        actionSave_Measurement->setText(QApplication::translate("MainWindow", "Save Measurement", Q_NULLPTR));
+        actionAbout->setText(QApplication::translate("MainWindow", "About", Q_NULLPTR));
         pushButtonRefreshPorts->setText(QApplication::translate("MainWindow", "Refresh Ports", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Available Serial Ports:", Q_NULLPTR));
         pushButtonConnect->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));
@@ -899,9 +937,10 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "Min Y Log", Q_NULLPTR));
         label_10->setText(QApplication::translate("MainWindow", "Num Dec", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Sweep Freq", Q_NULLPTR));
-        label_13->setText(QApplication::translate("MainWindow", "Average and RMS number of samples", Q_NULLPTR));
+        label_13->setText(QApplication::translate("MainWindow", "Number of rows used for statistics", Q_NULLPTR));
         pushButtonClearTables->setText(QApplication::translate("MainWindow", "Clear Tables", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_8), QApplication::translate("MainWindow", "Phase Data", Q_NULLPTR));
+        checkBoxRMSasPercentage->setText(QApplication::translate("MainWindow", "RMS as %", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_7), QApplication::translate("MainWindow", "Mag Data", Q_NULLPTR));
         pushButtonUpdateCalibration->setText(QApplication::translate("MainWindow", "Update Calibration", Q_NULLPTR));
         checkBoxCalibratePhase->setText(QApplication::translate("MainWindow", "Enable Calibration", Q_NULLPTR));
@@ -909,6 +948,8 @@ public:
         pushButtonSaveCal->setText(QApplication::translate("MainWindow", "Save Calibration", Q_NULLPTR));
         pushButtonLoadCal->setText(QApplication::translate("MainWindow", "Load Calibration", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QApplication::translate("MainWindow", "Calib.", Q_NULLPTR));
+        menuMeasure->setTitle(QApplication::translate("MainWindow", "Measure", Q_NULLPTR));
+        menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
     } // retranslateUi
 
 };

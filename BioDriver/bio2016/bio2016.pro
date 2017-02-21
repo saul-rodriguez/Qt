@@ -37,3 +37,6 @@ HEADERS  += mainwindow.h \
     cplotcustomwidget.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES = resour.qrc
+

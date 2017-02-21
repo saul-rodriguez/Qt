@@ -30,6 +30,18 @@ CBIO2016::CBIO2016(QObject *parent) : QObject(parent)
     static_gain[6] = STAT_GAIN6;
     static_gain[7] = STAT_GAIN7;
 
+    freqs[0] = STAT_FREQ0;
+    freqs[1] = STAT_FREQ1;
+    freqs[2] = STAT_FREQ2;
+    freqs[3] = STAT_FREQ3;
+    freqs[4] = STAT_FREQ4;
+    freqs[5] = STAT_FREQ5;
+    freqs[6] = STAT_FREQ6;
+    freqs[7] = STAT_FREQ7;
+    freqs[8] = STAT_FREQ8;
+    freqs[9] = STAT_FREQ9;
+    freqs[10] = STAT_FREQ10;
+
     mixer_gain_factor = 1; // mixer gain is around 2/PI. It must be set after calibration!!!
 
     m_freq.data = 0;
@@ -181,6 +193,11 @@ int CBIO2016::getGainIndex()
 quint8 CBIO2016::getGainBits(int i)
 {
     return gains[i];
+}
+
+double CBIO2016::getFreqValue(int index)
+{
+    return freqs[index];
 }
 
 void CBIO2016::setMixerGainFactor(double factor)

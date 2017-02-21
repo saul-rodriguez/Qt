@@ -5,6 +5,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <QDateTime>
 #include "math.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -962,6 +963,13 @@ void MainWindow::updateStatistics()
         rms[i] = sqrt(rms[i]);
     }
 
+    if (ui->checkBoxRMSasPercentage->isChecked()) { // Convert to percentage
+        for (int i = 0; i < 11; i++) {
+            rms[i] = rms[i]/average[i]*100;
+        }
+
+    }
+
 
     for (int i = 0; i < 11; i++) {
         QModelIndex index = modelAverageMag->index(1,i,QModelIndex());
@@ -1239,4 +1247,73 @@ void MainWindow::on_pushButtonLoadCal_clicked()
         m_MagCalibration[i] = aux.toDouble();
     }
 
+}
+
+
+
+void MainWindow::on_actionSweep_triggered()
+{
+    on_pushButtonSweep_clicked();
+}
+
+void MainWindow::on_actionSave_Measurement_triggered()
+{
+    QDateTime meastime = QDateTime::currentDateTime();
+    QTime time = meastime.time();
+
+    int time_sec = time.hour()*3600 + time.minute()*60 + time.second();
+
+    QString filename = meastime.toString(Qt::ISODate) + QString(".txt");
+
+
+   // QString filename = "calibration.txt";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+
+        double aux;
+        /*
+        for (int i = 0; i < 11; i++) {
+            QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
+            aux = modelAveragePha->data(index).toDouble();
+
+            stream << aux << " ";
+        }
+
+        stream << "\n";
+
+        for (int i = 0; i < 11; i++) {
+            QModelIndex index = modelAverageMag->index(0,i,QModelIndex());
+            aux = modelAverageMag->data(index).toDouble();
+
+            stream << aux << " ";
+        }
+
+        stream << "\n";*/
+
+        for (int i = 0; i < 11; i++) {
+            stream << time_sec << " ";
+
+            stream << m_bioASIC.getFreqValue(FREQ10 - i) << " ";
+
+            QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
+            aux = modelAveragePha->data(index).toDouble();
+
+            stream << aux << " ";
+
+            QModelIndex indexmag = modelAverageMag->index(0,i,QModelIndex());
+            aux = modelAverageMag->data(indexmag).toDouble();
+
+            stream << aux << " \n";
+
+
+        }
+
+
+    }
+}
+
+void MainWindow::on_checkBoxRMSasPercentage_clicked()
+{
+    updateStatistics();
 }

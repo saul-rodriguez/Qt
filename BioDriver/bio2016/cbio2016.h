@@ -141,6 +141,8 @@ public:
     int getGainIndex();
     quint8 getGainBits(int i);
 
+    double getFreqValue(int index);
+
     quint8 getByte0();
     quint8 getByte1();
     quint8 getByte(int index);
@@ -156,6 +158,8 @@ private:
     quint8 gains[8];
     double static_gain[8];
     double mixer_gain_factor;
+
+    double freqs[11];
 
     quint16 m_vp,m_vn,m_vse;
 

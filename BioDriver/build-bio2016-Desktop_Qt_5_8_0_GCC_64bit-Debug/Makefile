@@ -53,7 +53,8 @@ SOURCES       = ../bio2016/main.cpp \
 		../../SerialDriver/serial_driver/cserialdriver.cpp \
 		../bio2016/cbio2016.cpp \
 		../bio2016/cvin2016.cpp \
-		../bio2016/cplotcustomwidget.cpp moc_mainwindow.cpp \
+		../bio2016/cplotcustomwidget.cpp qrc_resour.cpp \
+		moc_mainwindow.cpp \
 		moc_cserialdriver.cpp \
 		moc_cbio2016.cpp \
 		moc_cvin2016.cpp \
@@ -64,6 +65,7 @@ OBJECTS       = main.o \
 		cbio2016.o \
 		cvin2016.o \
 		cplotcustomwidget.o \
+		qrc_resour.o \
 		moc_mainwindow.o \
 		moc_cserialdriver.o \
 		moc_cbio2016.o \
@@ -431,6 +433,7 @@ Makefile: ../bio2016/bio2016.pro /opt/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf
 		/opt/Qt/5.8/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/5.8/gcc_64/mkspecs/features/lex.prf \
 		../bio2016/bio2016.pro \
+		../bio2016/resour.qrc \
 		/opt/Qt/5.8/gcc_64/lib/libQt5Widgets.prl \
 		/opt/Qt/5.8/gcc_64/lib/libQt5Gui.prl \
 		/opt/Qt/5.8/gcc_64/lib/libQt5SerialPort.prl \
@@ -607,6 +610,7 @@ Makefile: ../bio2016/bio2016.pro /opt/Qt/5.8/gcc_64/mkspecs/linux-g++/qmake.conf
 /opt/Qt/5.8/gcc_64/mkspecs/features/yacc.prf:
 /opt/Qt/5.8/gcc_64/mkspecs/features/lex.prf:
 ../bio2016/bio2016.pro:
+../bio2016/resour.qrc:
 /opt/Qt/5.8/gcc_64/lib/libQt5Widgets.prl:
 /opt/Qt/5.8/gcc_64/lib/libQt5Gui.prl:
 /opt/Qt/5.8/gcc_64/lib/libQt5SerialPort.prl:
@@ -625,6 +629,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../bio2016/resour.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.8/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../bio2016/mainwindow.h ../../SerialDriver/serial_driver/cserialdriver.h ../bio2016/cbio2016.h ../bio2016/cvin2016.h ../bio2016/cplotcustomwidget.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../bio2016/main.cpp ../bio2016/mainwindow.cpp ../../SerialDriver/serial_driver/cserialdriver.cpp ../bio2016/cbio2016.cpp ../bio2016/cvin2016.cpp ../bio2016/cplotcustomwidget.cpp $(DISTDIR)/
@@ -652,8 +657,15 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_resour.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_resour.cpp
+qrc_resour.cpp: ../bio2016/resour.qrc \
+		/opt/Qt/5.8/gcc_64/bin/rcc \
+		../bio2016/images/Save-icon.png \
+		../bio2016/images/Button-Play-icon.png
+	/opt/Qt/5.8/gcc_64/bin/rcc -name resour ../bio2016/resour.qrc -o qrc_resour.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -770,6 +782,9 @@ moc_mainwindow.cpp: /opt/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/QSerialPort \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialport.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialportglobal.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTimer \
@@ -1066,7 +1081,113 @@ compiler_uic_make_all: ui_mainwindow.h
 compiler_uic_clean:
 	-$(DEL_FILE) ui_mainwindow.h
 ui_mainwindow.h: ../bio2016/mainwindow.ui \
-		/opt/Qt/5.8/gcc_64/bin/uic
+		/opt/Qt/5.8/gcc_64/bin/uic \
+		../bio2016/cplotcustomwidget.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/QWidget \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qwidget.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qtguiglobal.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qtypetraits.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qatomic_msvc.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qmutex.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qtgui-config.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qwindowdefs.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qregexp.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qmargins.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpaintdevice.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qrect.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qsize.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qpoint.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpalette.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qcolor.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qrgb.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qrgba64.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qbrush.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qvector.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qmatrix.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpolygon.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qregion.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qline.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qtransform.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpainterpath.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qimage.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpixelformat.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpixmap.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qfont.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qfontmetrics.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qfontinfo.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qcursor.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qkeysequence.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qevent.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qurl.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qurlquery.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qfiledevice.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qvector2d.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qtouchdevice.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/QPainter \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpainter.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpen.h
 	/opt/Qt/5.8/gcc_64/bin/uic ../bio2016/mainwindow.ui -o ui_mainwindow.h
 
 compiler_yacc_decl_make_all:
@@ -1075,7 +1196,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1187,6 +1308,9 @@ main.o: ../bio2016/main.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/QSerialPort \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialport.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialportglobal.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTimer \
@@ -1312,6 +1436,9 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/QSerialPort \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialport.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialportglobal.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTimer \
@@ -1350,9 +1477,13 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qtabbar.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QGroupBox \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qgroupbox.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/QHBoxLayout \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QHeaderView \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qheaderview.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
@@ -1366,9 +1497,10 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qtextformat.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qpen.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qtextoption.h \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/QMenu \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qmenu.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QMenuBar \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qmenubar.h \
-		/opt/Qt/5.8/gcc_64/include/QtWidgets/qmenu.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QPlainTextEdit \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qplaintextedit.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qtextedit.h \
@@ -1381,20 +1513,23 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QPushButton \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qpushbutton.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QSpacerItem \
-		/opt/Qt/5.8/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QStatusBar \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qstatusbar.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QTabWidget \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/QTableView \
+		/opt/Qt/5.8/gcc_64/include/QtWidgets/qtableview.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QToolBar \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qtoolbar.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QVBoxLayout \
-		/opt/Qt/5.8/gcc_64/include/QtWidgets/qboxlayout.h \
-		/opt/Qt/5.8/gcc_64/include/QtWidgets/qlayout.h \
-		/opt/Qt/5.8/gcc_64/include/QtWidgets/qgridlayout.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QWidget \
+		../bio2016/cplotcustomwidget.h \
+		/opt/Qt/5.8/gcc_64/include/QtGui/QPainter \
+		/opt/Qt/5.8/gcc_64/include/QtGui/qpainter.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/QSerialPortInfo \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialportinfo.h \
-		/opt/Qt/5.8/gcc_64/include/QtCore/QDebug
+		/opt/Qt/5.8/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QFile \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QTextStream
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../bio2016/mainwindow.cpp
 
 cserialdriver.o: ../../SerialDriver/serial_driver/cserialdriver.cpp ../../SerialDriver/serial_driver/cserialdriver.h \
@@ -1682,6 +1817,9 @@ cplotcustomwidget.o: ../bio2016/cplotcustomwidget.cpp ../bio2016/cplotcustomwidg
 		/opt/Qt/5.8/gcc_64/include/QtCore/QtMath \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cplotcustomwidget.o ../bio2016/cplotcustomwidget.cpp
+
+qrc_resour.o: qrc_resour.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resour.o qrc_resour.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

@@ -75,6 +75,14 @@ private slots:
 
     void on_pushButtonLoadCal_clicked();
 
+
+
+    void on_actionSweep_triggered();
+
+    void on_actionSave_Measurement_triggered();
+
+    void on_checkBoxRMSasPercentage_clicked();
+
 private:
     Ui::MainWindow *ui;
 

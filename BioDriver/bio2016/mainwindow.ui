@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>8</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1132,14 +1132,14 @@
        <widget class="QLabel" name="label_13">
         <property name="geometry">
          <rect>
-          <x>280</x>
+          <x>310</x>
           <y>370</y>
-          <width>271</width>
+          <width>241</width>
           <height>20</height>
          </rect>
         </property>
         <property name="text">
-         <string>Average and RMS number of samples</string>
+         <string>Number of rows used for statistics</string>
         </property>
        </widget>
        <widget class="QLineEdit" name="lineEditStatisticSamples">
@@ -1188,6 +1188,19 @@
           <width>881</width>
           <height>91</height>
          </rect>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="checkBoxRMSasPercentage">
+        <property name="geometry">
+         <rect>
+          <x>360</x>
+          <y>360</y>
+          <width>92</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>RMS as %</string>
         </property>
        </widget>
       </widget>
@@ -1294,6 +1307,21 @@
      <height>22</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuMeasure">
+    <property name="title">
+     <string>Measure</string>
+    </property>
+    <addaction name="actionSweep"/>
+    <addaction name="actionSave_Measurement"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuMeasure"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -1302,8 +1330,35 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionSweep"/>
+   <addaction name="actionSave_Measurement"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionSweep">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/Button-Play-icon.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Sweep</string>
+   </property>
+  </action>
+  <action name="actionSave_Measurement">
+   <property name="icon">
+    <iconset>
+     <normaloff>images/Save-icon.png</normaloff>
+     <normalon>:/images/Save-icon.png</normalon>images/Save-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Measurement</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
