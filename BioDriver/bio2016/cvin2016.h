@@ -46,6 +46,7 @@ typedef struct VIN_bits_stuct {
 
 typedef union {
     //unsigned short data[3];
+    quint64 data64;
     quint16 data[3];
     VIN_bits data_bits;
 } VIN;

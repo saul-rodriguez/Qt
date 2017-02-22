@@ -90,7 +90,7 @@ private:
     CSerialDriver *myserial;
 
     CBIO2016 m_bioASIC;
-    CVIN2016 m_vinASIC;
+    //CVIN2016 m_vinASIC;
 
     double m_ADC_diff;
     double m_ADC_se;

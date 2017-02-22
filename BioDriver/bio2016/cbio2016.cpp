@@ -46,12 +46,27 @@ CBIO2016::CBIO2016(QObject *parent) : QObject(parent)
 
     m_freq.data = 0;
 
+    filter_conf[0] = FILT_FREQ0;
+    filter_conf[1] = FILT_FREQ1;
+    filter_conf[2] = FILT_FREQ2;
+    filter_conf[3] = FILT_FREQ3;
+    filter_conf[4] = FILT_FREQ4;
+    filter_conf[5] = FILT_FREQ5;
+    filter_conf[6] = FILT_FREQ6;
+    filter_conf[7] = FILT_FREQ7;
+    filter_conf[8] = FILT_FREQ8;
+    filter_conf[9] = FILT_FREQ9;
+    filter_conf[10] = FILT_FREQ10;
+
+
+
 }
 
 
 void CBIO2016::clearbits()
 {
     m_bio3.data = 0x0000;
+    m_filt.data = 0x00000000;
 }
 
 void CBIO2016::setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bool GS2, bool GS1, bool GS0,
@@ -94,6 +109,7 @@ void CBIO2016::setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bo
 
 }
 
+/*
 void CBIO2016::setFreqbits(RADIO_freq &freq)
 {
     //Update configuration bits
@@ -109,6 +125,7 @@ void CBIO2016::setFreqbits(RADIO_freq &freq)
     m_freq.data_bits.F0 = freq.data_bits.F0;
 
 }
+*/
 
 quint8 CBIO2016::getByte0()
 {
@@ -123,6 +140,44 @@ quint8 CBIO2016::getByte1()
 quint8 CBIO2016::getByte(int index)
 {
     return (quint8)(m_bio3.data >> (8*index) & 0xff);
+}
+
+quint8 CBIO2016::getFilterByte(int index)
+{
+    return (quint8)(m_filt.data >> (8*index) & 0xff);
+}
+
+void CBIO2016::setbitsFilter(bool EnLF, bool EnMF, bool EnHF, bool DN1, bool DN0, bool DP2, bool DP1, bool DP0, bool EnRdeg, bool EnRdegHF1, bool EnRdegHF0, bool CcompSel1, bool CcompSel0, bool CapSel3, bool CapSel2, bool CapSel1, bool CapSel0)
+{
+    m_filt.data_bits.EnLF = EnLF;
+
+    m_filt.data_bits.EnMF = EnMF;
+    m_filt.data_bits.EnHF = EnHF;
+    m_filt.data_bits.DN1 = DN1;
+    m_filt.data_bits.DN0 = DN0;
+    m_filt.data_bits.DP2 = DP2;
+    m_filt.data_bits.DP1 = DP1;
+    m_filt.data_bits.DP0 = DP0;
+    m_filt.data_bits.EnRdeg = EnRdeg;
+
+    m_filt.data_bits.EnRdegHF1 = EnRdegHF1;
+    m_filt.data_bits.EnRdegHF0 = EnRdegHF0;
+    m_filt.data_bits.CcompSel1 = CcompSel1;
+    m_filt.data_bits.CcompSel0 = CcompSel0;
+    m_filt.data_bits.CapSel3 = CapSel3;
+    m_filt.data_bits.CapSel2 = CapSel2;
+    m_filt.data_bits.CapSel1 = CapSel1;
+    m_filt.data_bits.CapSel0 = CapSel0;
+}
+
+void CBIO2016::setbitFilterbyFreq(int index)
+{
+    m_filt.data = filter_conf[index];
+}
+
+VINfilt CBIO2016::getFilter()
+{
+    return m_filt;
 }
 
 void CBIO2016::setADCvalues(quint16 vp, quint16 vn, quint16 vse)

@@ -120,6 +120,45 @@ typedef union {
 #define STAT_FREQ9   1953.125
 #define STAT_FREQ10   976.5625
 
+#define FILT_FREQ0  0b00100000011000111
+#define FILT_FREQ1  0b00100000011001111
+#define FILT_FREQ2  0b00100000001101111
+#define FILT_FREQ3  0b00100000000111111
+#define FILT_FREQ4  0b01000100100001111
+#define FILT_FREQ5  0b01000100000001111
+#define FILT_FREQ6  0b01010010000001111
+//#define FILT_FREQ7  0b01011001000001111
+#define FILT_FREQ7  0b10000100100001111
+#define FILT_FREQ8  0b10000100000001111
+#define FILT_FREQ9  0b10010010000001111
+#define FILT_FREQ10 0b10011001000001111
+
+typedef struct VINfilt_bits_struct {
+    unsigned CapSel0    :1;
+    unsigned CapSel1    :1;
+    unsigned CapSel2    :1;
+    unsigned CapSel3    :1;
+    unsigned CcompSel0  :1;
+    unsigned CcompSel1  :1;
+    unsigned EnRdegHF0  :1;
+    unsigned EnRdegHF1  :1;
+
+    unsigned EnRdeg     :1;
+    unsigned DP0        :1;
+    unsigned DP1        :1;
+    unsigned DP2        :1;
+    unsigned DN0        :1;
+    unsigned DN1        :1;
+    unsigned EnHF       :1;
+    unsigned EnMF       :1;
+
+    unsigned EnLF       :1;
+} VINfilt_bits;
+
+typedef union {
+    quint32 data;
+    VINfilt_bits data_bits;
+} VINfilt;
 
 class CBIO2016 : public QObject
 {
@@ -130,7 +169,7 @@ public:
     void clearbits();
     void setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bool GS2, bool GS1, bool GS0,
                  bool CE, bool NS, bool GD2, bool GD1, bool GD0, bool FS, bool RE);
-    void setFreqbits(RADIO_freq &freq);
+    //void setFreqbits(RADIO_freq &freq);
 
     void setADCvalues(quint16 vp, quint16 vn, quint16 vse);
     void getADCVoltages(double* vp, double* vn, double* vse);
@@ -147,6 +186,17 @@ public:
     quint8 getByte1();
     quint8 getByte(int index);
 
+
+
+    //filter
+    void setbitsFilter(bool EnLF, bool EnMF, bool EnHF, bool DN1, bool DN0, bool DP2, bool DP1, bool DP0, bool EnRdeg,
+                       bool EnRdegHF1, bool EnRdegHF0, bool CcompSel1, bool CcompSel0, bool CapSel3, bool CapSel2, bool CapSel1, bool CapSel0);
+    void setbitFilterbyFreq(int index);
+    VINfilt getFilter();
+    quint8 getFilterByte(int index);
+
+
+
 signals:
 
 public slots:
@@ -162,6 +212,10 @@ private:
     double freqs[11];
 
     quint16 m_vp,m_vn,m_vse;
+
+    //Vinnova filter
+    VINfilt m_filt;
+    quint32 filter_conf[11];
 
 };
 

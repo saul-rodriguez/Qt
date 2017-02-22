@@ -332,18 +332,18 @@ void MainWindow::on_pushButtonConfigAll_clicked()
     bool RE = ui->checkBoxRE->isChecked();
 
     //Set configuration bits
-    m_vinASIC.setbitsFilter(EnLF,EnMF,EnHF,DN1,DN0,DP2,DP1,DP0,EnRdeg,EnRdegHF1,
+    m_bioASIC.setbitsFilter(EnLF,EnMF,EnHF,DN1,DN0,DP2,DP1,DP0,EnRdeg,EnRdegHF1,
                             EnRdegHF0,CcompSel1,CcompSel0,CapSel3,CapSel2,CapSel1,CapSel0);
-    m_vinASIC.setbitsRadio(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);
+    m_bioASIC.setbits(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);
 
     //Prepare byte array for serial communications
     QByteArray writedata;
-    writedata.append("f",1);
-    writedata.append(m_vinASIC.getByte(0));
-    writedata.append(m_vinASIC.getByte(1));
-    writedata.append(m_vinASIC.getByte(2));
-    writedata.append(m_vinASIC.getByte(3));
-    writedata.append(m_vinASIC.getByte(4));
+    writedata.append("c",1);
+    writedata.append(m_bioASIC.getByte(0));
+    writedata.append(m_bioASIC.getByte(1));
+    writedata.append(m_bioASIC.getFilterByte(0));
+    writedata.append(m_bioASIC.getFilterByte(1));
+    writedata.append(m_bioASIC.getFilterByte(2));
 
     //Prepare log information
     QString command = "<tx> f ";
@@ -1064,6 +1064,32 @@ void MainWindow::on_comboBoxFreqs_currentIndexChanged(int index)
                     break;
         default:    m_currentFreq = STAT_FREQ0;
     }
+
+    //update filter by frequency profile
+    m_bioASIC.setbitFilterbyFreq(m_currentFreqIndex);
+
+    //Extract the filter bits and update check boxes
+    VINfilt auxfilter = m_bioASIC.getFilter();
+
+    ui->checkBoxCapSel0->setChecked(auxfilter.data_bits.CapSel0);
+    ui->checkBoxCapSel1->setChecked(auxfilter.data_bits.CapSel1);
+    ui->checkBoxCapSel2->setChecked(auxfilter.data_bits.CapSel2);
+    ui->checkBoxCapSel3->setChecked(auxfilter.data_bits.CapSel3);
+    ui->checkBoxCcompSel0->setChecked(auxfilter.data_bits.CcompSel0);
+    ui->checkBoxCcompSel1->setChecked(auxfilter.data_bits.CcompSel1);
+    ui->checkBoxEnRdegHF0->setChecked(auxfilter.data_bits.EnRdegHF0);
+    ui->checkBoxEnRdegHF1->setChecked(auxfilter.data_bits.EnRdegHF1);
+
+    ui->checkBoxEnRdeg->setChecked(auxfilter.data_bits.EnRdeg);
+    ui->checkBoxDP0->setChecked(auxfilter.data_bits.DP0);
+    ui->checkBoxDP1->setChecked(auxfilter.data_bits.DP1);
+    ui->checkBoxDP2->setChecked(auxfilter.data_bits.DP2);
+    ui->checkBoxDN0->setChecked(auxfilter.data_bits.DN0);
+    ui->checkBoxDN1->setChecked(auxfilter.data_bits.DN1);
+    ui->checkBoxEnHF->setChecked(auxfilter.data_bits.EnHF);
+    ui->checkBoxEnMF->setChecked(auxfilter.data_bits.EnMF);
+    ui->checkBoxEnLF->setChecked(auxfilter.data_bits.EnLF);
+
 }
 
 void MainWindow::on_pushButtonSweep_clicked()
