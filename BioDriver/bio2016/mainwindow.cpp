@@ -232,6 +232,12 @@ void MainWindow::SerialRx(const QByteArray &Data)
 
 void MainWindow::on_pushButtonConfigure_clicked()
 {
+
+   if (ui->checkBoxFilterEnable->isChecked()) {
+       on_pushButtonConfigAll_clicked();
+       return;
+   }
+
    bool F3 = ui->checkBoxF3->isChecked();
    bool F2 = ui->checkBoxF2->isChecked();
    bool F1 = ui->checkBoxF1->isChecked();
@@ -682,13 +688,44 @@ void MainWindow::measureImpedance()
     bool FS = ui->checkBoxFS->isChecked();
     bool RE = ui->checkBoxRE->isChecked();
 
-    m_bioASIC.setbits(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);
+    m_bioASIC.setbits(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);    
 
     //Prepare byte array for serial communications
     QByteArray writedata;
     writedata.append("z",1);
     writedata.append(m_bioASIC.getByte(0));
     writedata.append(m_bioASIC.getByte(1));
+
+    if (ui->checkBoxFilterEnable->isChecked()) {
+        //Filter bits
+        bool EnLF = ui->checkBoxEnLF->isChecked();
+
+        bool EnMF = ui->checkBoxEnMF->isChecked();
+        bool EnHF = ui->checkBoxEnHF->isChecked();
+        bool DN1 = ui->checkBoxDN1->isChecked();
+        bool DN0 = ui->checkBoxDN0->isChecked();
+        bool DP2 = ui->checkBoxDP2->isChecked();
+        bool DP1 = ui->checkBoxDP1->isChecked();
+        bool DP0 = ui->checkBoxDP0->isChecked();
+        bool EnRdeg = ui->checkBoxEnRdeg->isChecked();
+
+        bool EnRdegHF1 = ui->checkBoxEnRdegHF1->isChecked();
+        bool EnRdegHF0 = ui->checkBoxEnRdegHF0->isChecked();
+        bool CcompSel1 = ui->checkBoxCcompSel1->isChecked();
+        bool CcompSel0 = ui->checkBoxCcompSel0->isChecked();
+        bool CapSel3 = ui->checkBoxCapSel3->isChecked();
+        bool CapSel2 = ui->checkBoxCapSel2->isChecked();
+        bool CapSel1 = ui->checkBoxCapSel1->isChecked();
+        bool CapSel0 = ui->checkBoxCapSel0->isChecked();
+
+        m_bioASIC.setbitsFilter(EnLF,EnMF,EnHF,DN1,DN0,DP2,DP1,DP0,EnRdeg,EnRdegHF1,
+                                EnRdegHF0,CcompSel1,CcompSel0,CapSel3,CapSel2,CapSel1,CapSel0);
+
+        writedata.append(m_bioASIC.getFilterByte(0));
+        writedata.append(m_bioASIC.getFilterByte(1));
+        writedata.append(m_bioASIC.getFilterByte(2));
+
+    }
 
 
     //Prepare log information

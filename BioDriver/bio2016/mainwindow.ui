@@ -456,6 +456,19 @@
          <string>Gain</string>
         </property>
        </widget>
+       <widget class="QCheckBox" name="checkBoxFilterEnable">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>70</y>
+          <width>231</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enable Signal Generator Filter</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">

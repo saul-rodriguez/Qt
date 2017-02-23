@@ -96,6 +96,7 @@ public:
     QLabel *label_11;
     QComboBox *comboBoxGain;
     QLabel *label_12;
+    QCheckBox *checkBoxFilterEnable;
     QWidget *tab_4;
     QGroupBox *groupBox_4;
     QWidget *verticalLayoutWidget_4;
@@ -436,6 +437,9 @@ public:
         label_12 = new QLabel(tab_2);
         label_12->setObjectName(QStringLiteral("label_12"));
         label_12->setGeometry(QRect(400, 130, 67, 17));
+        checkBoxFilterEnable = new QCheckBox(tab_2);
+        checkBoxFilterEnable->setObjectName(QStringLiteral("checkBoxFilterEnable"));
+        checkBoxFilterEnable->setGeometry(QRect(530, 70, 231, 23));
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -887,6 +891,7 @@ public:
         pushButtonConfigure->setText(QApplication::translate("MainWindow", "Config Radio", Q_NULLPTR));
         label_11->setText(QApplication::translate("MainWindow", "Frequency", Q_NULLPTR));
         label_12->setText(QApplication::translate("MainWindow", "Gain", Q_NULLPTR));
+        checkBoxFilterEnable->setText(QApplication::translate("MainWindow", "Enable Signal Generator Filter", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "ASIC Radio Conf.", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Filter Settings", Q_NULLPTR));
         checkBoxEnMF->setText(QApplication::translate("MainWindow", "EnMF", Q_NULLPTR));
