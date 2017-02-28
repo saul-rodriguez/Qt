@@ -42,6 +42,8 @@ public:
     QAction *actionSweep;
     QAction *actionSave_Measurement;
     QAction *actionAbout;
+    QAction *actionClean_Tables;
+    QAction *actionSave_Tables;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_8;
     QTabWidget *tabWidget;
@@ -203,7 +205,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(974, 600);
+        MainWindow->resize(977, 622);
         actionSweep = new QAction(MainWindow);
         actionSweep->setObjectName(QStringLiteral("actionSweep"));
         QIcon icon;
@@ -217,6 +219,16 @@ public:
         actionSave_Measurement->setIcon(icon1);
         actionAbout = new QAction(MainWindow);
         actionAbout->setObjectName(QStringLiteral("actionAbout"));
+        actionClean_Tables = new QAction(MainWindow);
+        actionClean_Tables->setObjectName(QStringLiteral("actionClean_Tables"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/images/Clean-icon.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionClean_Tables->setIcon(icon2);
+        actionSave_Tables = new QAction(MainWindow);
+        actionSave_Tables->setObjectName(QStringLiteral("actionSave_Tables"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/images/Save-table-icon.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionSave_Tables->setIcon(icon3);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_8 = new QVBoxLayout(centralWidget);
@@ -818,7 +830,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 974, 22));
+        menuBar->setGeometry(QRect(0, 0, 977, 22));
         menuMeasure = new QMenu(menuBar);
         menuMeasure->setObjectName(QStringLiteral("menuMeasure"));
         menuHelp = new QMenu(menuBar);
@@ -838,10 +850,12 @@ public:
         menuHelp->addAction(actionAbout);
         mainToolBar->addAction(actionSweep);
         mainToolBar->addAction(actionSave_Measurement);
+        mainToolBar->addAction(actionSave_Tables);
+        mainToolBar->addAction(actionClean_Tables);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -853,6 +867,8 @@ public:
         actionSweep->setText(QApplication::translate("MainWindow", "Sweep", Q_NULLPTR));
         actionSave_Measurement->setText(QApplication::translate("MainWindow", "Save Measurement", Q_NULLPTR));
         actionAbout->setText(QApplication::translate("MainWindow", "About", Q_NULLPTR));
+        actionClean_Tables->setText(QApplication::translate("MainWindow", "Clean Tables", Q_NULLPTR));
+        actionSave_Tables->setText(QApplication::translate("MainWindow", "Save Tables", Q_NULLPTR));
         pushButtonRefreshPorts->setText(QApplication::translate("MainWindow", "Refresh Ports", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Available Serial Ports:", Q_NULLPTR));
         pushButtonConnect->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));

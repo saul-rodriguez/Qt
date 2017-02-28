@@ -662,8 +662,10 @@ compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resour.cpp
 qrc_resour.cpp: ../bio2016/resour.qrc \
 		/opt/Qt/5.8/gcc_64/bin/rcc \
+		../bio2016/images/Clean-icon.png \
 		../bio2016/images/Save-icon.png \
-		../bio2016/images/Button-Play-icon.png
+		../bio2016/images/Button-Play-icon.png \
+		../bio2016/images/Save-table-icon.png
 	/opt/Qt/5.8/gcc_64/bin/rcc -name resour ../bio2016/resour.qrc -o qrc_resour.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -1529,7 +1531,9 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtSerialPort/qserialportinfo.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QDebug \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QFile \
-		/opt/Qt/5.8/gcc_64/include/QtCore/QTextStream
+		/opt/Qt/5.8/gcc_64/include/QtCore/QTextStream \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QDateTime \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../bio2016/mainwindow.cpp
 
 cserialdriver.o: ../../SerialDriver/serial_driver/cserialdriver.cpp ../../SerialDriver/serial_driver/cserialdriver.h \

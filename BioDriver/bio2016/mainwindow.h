@@ -83,6 +83,10 @@ private slots:
 
     void on_checkBoxRMSasPercentage_clicked();
 
+    void on_actionClean_Tables_triggered();
+
+    void on_actionSave_Tables_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -144,6 +148,7 @@ private:
     void clearTable();
     void updateTable(double mag, double phase);
     void updateStatistics();
+    void clearCurves();
 
 };
 

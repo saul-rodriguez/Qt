@@ -626,7 +626,7 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     qDebug()<< "aux_vol = " << aux_vol;
 
 
-    if (aux_vol > 0.7) { //reduce the gain
+    if (aux_vol > 0.65) { //reduce the gain  //Change from 0.7 to 0.65
         if (m_current_gain > 0) {
             m_current_gain--;
             qDebug() << "Reducing gain to: GAIN" << m_current_gain;
@@ -636,7 +636,7 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
             return;
         }
 
-    } else if (aux_vol < 0.2 && !m_current_gain_counter) { //Increase the gain
+    } else if (aux_vol < 0.15 && !m_current_gain_counter) { //Increase the gain  //Changed from 0.2 to 0.15
         if (m_current_gain < 7) {
             m_current_gain ++;
             qDebug() << "Increasing gain to: GAIN" << m_current_gain;
@@ -1015,6 +1015,19 @@ void MainWindow::updateStatistics()
 
 }
 
+void MainWindow::clearCurves()
+{
+    m_append = ui->checkBoxAppend->isChecked();
+
+    for (int i = 0; i < 10; i++) { //The checkbox also clears the curves
+        ui->widgetMagnitude->clearCurve(i);
+        ui->widgetPhase->clearCurve(i);
+    }
+
+    ui->widgetMagnitude->update();
+    ui->widgetPhase->update();
+}
+
 void MainWindow::on_checkBoxLightTheme_toggled(bool checked)
 {
     if(checked) {
@@ -1165,15 +1178,7 @@ void MainWindow::on_pushButtonSweep_clicked()
 
 void MainWindow::on_checkBoxAppend_stateChanged(int arg1)
 {
-    m_append = ui->checkBoxAppend->isChecked();
-
-    for (int i = 0; i < 10; i++) { //The checkbox also clears the curves
-        ui->widgetMagnitude->clearCurve(i);
-        ui->widgetPhase->clearCurve(i);
-    }
-
-    ui->widgetMagnitude->update();
-    ui->widgetPhase->update();
+       clearCurves();
 
     if (m_append == true) { //reset append counter
         m_append_curve_num = 0;
@@ -1372,6 +1377,9 @@ void MainWindow::on_actionSave_Measurement_triggered()
 
         }
 
+        file.close();
+
+        qDebug()<< "Saving Average values in text file";
 
     }
 }
@@ -1379,4 +1387,57 @@ void MainWindow::on_actionSave_Measurement_triggered()
 void MainWindow::on_checkBoxRMSasPercentage_clicked()
 {
     updateStatistics();
+}
+
+void MainWindow::on_actionClean_Tables_triggered()
+{
+    clearTable();
+    clearCurves();
+}
+
+void MainWindow::on_actionSave_Tables_triggered()
+{
+
+    QDateTime meastime = QDateTime::currentDateTime();
+    QTime time = meastime.time();
+
+    int time_sec = time.hour()*3600 + time.minute()*60 + time.second();
+
+    QString filename = meastime.toString(Qt::ISODate) + QString(".txt");
+
+
+   // QString filename = "calibration.txt";
+    QFile file(filename);
+    if (file.open(QIODevice::ReadWrite)) {
+        QTextStream stream(&file);
+
+        double aux;
+
+        for (int i=0; i < 11; i++) {
+             stream << m_bioASIC.getFreqValue(FREQ10 - i) << " ";
+        }
+
+        stream << "\n";
+
+        for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < 11; i++) {
+
+                QModelIndex index = modelPha->index(0,i,QModelIndex());
+                aux = modelPha->data(index).toDouble();
+
+                stream << aux << " ";
+
+                //QModelIndex indexmag = modelMag->index(0,i,QModelIndex());
+                //aux = modelMag->data(indexmag).toDouble();
+
+
+            }
+            stream << aux << " \n";
+        }
+
+
+        file.close();
+
+        qDebug()<<"Saving tables in text file";
+    }
 }

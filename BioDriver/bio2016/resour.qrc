@@ -1,6 +1,8 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
     <file>images/Button-Play-icon.png</file>
-    <file>images/Save-icon.png</file>    
+    <file>images/Save-icon.png</file>
+    <file>images/Clean-icon.png</file>        
+    <file>images/Save-table-icon.png</file>
 </qresource>
 </RCC>
