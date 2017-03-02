@@ -149,6 +149,8 @@ private:
     void updateTable(double mag, double phase);
     void updateStatistics();
     void clearCurves();
+    void extractVoltagesOffset(const QByteArray &Data, double* offset, double* I, double* Q);
+    void extractVoltagesNoOffset(const QByteArray &Data, double* I, double* Q);
 
 };
 

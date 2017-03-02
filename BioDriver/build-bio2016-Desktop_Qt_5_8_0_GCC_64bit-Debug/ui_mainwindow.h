@@ -99,6 +99,7 @@ public:
     QComboBox *comboBoxGain;
     QLabel *label_12;
     QCheckBox *checkBoxFilterEnable;
+    QCheckBox *checkBoxSingleOffsetMeas;
     QWidget *tab_4;
     QGroupBox *groupBox_4;
     QWidget *verticalLayoutWidget_4;
@@ -452,6 +453,9 @@ public:
         checkBoxFilterEnable = new QCheckBox(tab_2);
         checkBoxFilterEnable->setObjectName(QStringLiteral("checkBoxFilterEnable"));
         checkBoxFilterEnable->setGeometry(QRect(530, 70, 231, 23));
+        checkBoxSingleOffsetMeas = new QCheckBox(tab_2);
+        checkBoxSingleOffsetMeas->setObjectName(QStringLiteral("checkBoxSingleOffsetMeas"));
+        checkBoxSingleOffsetMeas->setGeometry(QRect(530, 100, 231, 23));
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -855,7 +859,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -908,6 +912,7 @@ public:
         label_11->setText(QApplication::translate("MainWindow", "Frequency", Q_NULLPTR));
         label_12->setText(QApplication::translate("MainWindow", "Gain", Q_NULLPTR));
         checkBoxFilterEnable->setText(QApplication::translate("MainWindow", "Enable Signal Generator Filter", Q_NULLPTR));
+        checkBoxSingleOffsetMeas->setText(QApplication::translate("MainWindow", "Single offset measurement", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "ASIC Radio Conf.", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Filter Settings", Q_NULLPTR));
         checkBoxEnMF->setText(QApplication::translate("MainWindow", "EnMF", Q_NULLPTR));
