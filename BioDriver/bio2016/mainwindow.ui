@@ -482,6 +482,19 @@
          <string>Single offset measurement</string>
         </property>
        </widget>
+       <widget class="QPushButton" name="pushButtonMeasureOffset">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>140</y>
+          <width>141</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Measure Offset</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">

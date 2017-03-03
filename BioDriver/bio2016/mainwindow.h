@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
 #include <QStandardItemModel>
+#include <QTime>
 
 #include "/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h"
 #include "cbio2016.h"
@@ -87,6 +88,8 @@ private slots:
 
     void on_actionSave_Tables_triggered();
 
+    void on_pushButtonMeasureOffset_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -136,12 +139,15 @@ private:
     double m_PhaseCalibration[11];
     double m_MagCalibration[11];
 
+    QTime m_time;
+
 private:
     void readPorts();
     void setComboFreq();
     void setComboGain();
     void readADC(const QByteArray &Data);
     void receiveImpedance(const QByteArray &Data);
+    void receiveOffset(const QByteArray &Data);
     void measureImpedance();
     void processSweep(double mag, double phase);
     void setTables();

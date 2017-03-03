@@ -228,6 +228,10 @@ void MainWindow::SerialRx(const QByteArray &Data)
                 receiveImpedance(Data);
                 qDebug()<<"Impedance Measurement RX, No Offset";
                 break;
+        case 'o':
+                receiveOffset(Data);
+                qDebug() << "Offset received";
+                break;
         default:
                 break;
     }
@@ -679,6 +683,47 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
 
 }
 
+void MainWindow::receiveOffset(const QByteArray &Data)
+{
+    quint16 vop,von,vse;
+    double voutp,voutn,voutse;
+    double Offset_diff;
+
+    const char* read_pt = Data.constData();
+    /*
+    if (ui->checkBoxSingleOffsetMeas->isChecked()) {
+        extractVoltagesNoOffset(Data, &I_diff, &Q_diff);
+    } else {
+        extractVoltagesOffset(Data,&Offset_diff, &I_diff, &Q_diff);
+    }
+    */
+
+    //OFFSET EXTRACTION
+    vop = 0;
+    vop |= (quint16)(read_pt[2] << 8) ;
+    vop |= (quint16)(read_pt[1] & 0xff);
+
+    von = 0;
+    von |= (quint16)(read_pt[4] << 8) ;
+    von |= (quint16)(read_pt[3] & 0xff);
+
+    vse = 0;
+
+    m_bioASIC.setADCvalues(vop,von,vse);
+    m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
+
+    Offset_diff = voutp - voutn; //differential offset
+
+    m_offset_diff = Offset_diff;
+
+    QString aux;
+    aux.sprintf("%5.4f",m_offset_diff);
+    ui->lineEditOffsetDiff->setText(aux);
+
+
+
+}
+
 void MainWindow::measureImpedance()
 {
     bool F3 = ui->checkBoxF3->isChecked();
@@ -812,7 +857,7 @@ void MainWindow::processSweep(double mag, double phase)
         m_sweep_state = IDLE;
         qDebug() << "Sweep finished, changing state to IDLE";
         m_append_curve_num++;
-/*        if (m_append_curve_num == 10) {//All colors have been used
+        /* if (m_append_curve_num == 10) {//All colors have been used
             m_append_curve_num = 0;
 
             for (int i = 0; i < 10; i++) { //clears the curves
@@ -820,6 +865,9 @@ void MainWindow::processSweep(double mag, double phase)
                 ui->widgetPhase->clearCurve(i);
             }
         }*/
+        int time = m_time.elapsed();
+        qDebug() << "total sweep time = " << time << " ms";
+
     }
 
 }
@@ -1150,6 +1198,7 @@ void MainWindow::extractVoltagesNoOffset(const QByteArray &Data, double *I, doub
     von |= (quint16)(read_pt[4] << 8) ;
     von |= (quint16)(read_pt[3] & 0xff);
 
+    vse = 0;
     m_bioASIC.setADCvalues(vop,von,vse);
     m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
 
@@ -1325,8 +1374,10 @@ void MainWindow::on_pushButtonSweep_clicked()
         }
     }
     on_comboBoxGain_currentIndexChanged(0); //Always start from Gain 0!
-
     on_comboBoxFreqs_currentIndexChanged(FREQ10); //Start from low frequency
+
+    m_time.start();
+
     measureImpedance();
 
 }
@@ -1457,8 +1508,8 @@ void MainWindow::on_pushButtonLoadCal_clicked()
 
     //Get mag values from statistics table, get calibration factor, and update calibration table
 
-    double ref_res;
-    ref_res = ui->lineEditCalRes->text().toDouble();
+    //double ref_res;
+    //ref_res = ui->lineEditCalRes->text().toDouble();
 
     for (int i = 0; i < 11; i++) {
       //  QModelIndex index = modelAverageMag->index(0,i,QModelIndex());
@@ -1595,4 +1646,73 @@ void MainWindow::on_actionSave_Tables_triggered()
 
         qDebug()<<"Saving tables in text file";
     }
+}
+
+void MainWindow::on_pushButtonMeasureOffset_clicked()
+{
+    //Filter bits
+    bool EnLF = ui->checkBoxEnLF->isChecked();
+
+    bool EnMF = ui->checkBoxEnMF->isChecked();
+    bool EnHF = ui->checkBoxEnHF->isChecked();
+    bool DN1 = ui->checkBoxDN1->isChecked();
+    bool DN0 = ui->checkBoxDN0->isChecked();
+    bool DP2 = ui->checkBoxDP2->isChecked();
+    bool DP1 = ui->checkBoxDP1->isChecked();
+    bool DP0 = ui->checkBoxDP0->isChecked();
+    bool EnRdeg = ui->checkBoxEnRdeg->isChecked();
+
+    bool EnRdegHF1 = ui->checkBoxEnRdegHF1->isChecked();
+    bool EnRdegHF0 = ui->checkBoxEnRdegHF0->isChecked();
+    bool CcompSel1 = ui->checkBoxCcompSel1->isChecked();
+    bool CcompSel0 = ui->checkBoxCcompSel0->isChecked();
+    bool CapSel3 = ui->checkBoxCapSel3->isChecked();
+    bool CapSel2 = ui->checkBoxCapSel2->isChecked();
+    bool CapSel1 = ui->checkBoxCapSel1->isChecked();
+    bool CapSel0 = ui->checkBoxCapSel0->isChecked();
+
+    //Radio bits
+    bool F3 = ui->checkBoxF3->isChecked();
+    bool F2 = ui->checkBoxF2->isChecked();
+    bool F1 = ui->checkBoxF1->isChecked();
+    bool F0 = ui->checkBoxF0->isChecked();
+    bool IQ = ui->checkBoxIQ->isChecked();
+    bool GS3 = ui->checkBoxGS3->isChecked();
+    bool GS2 = ui->checkBoxGS2->isChecked();
+    bool GS1 = ui->checkBoxGS1->isChecked();
+
+    bool GS0 = ui->checkBoxGS0->isChecked();
+    bool CE = ui->checkBoxCE->isChecked();
+    bool NS = ui->checkBoxNS->isChecked();
+    bool GD2 = ui->checkBoxGD2->isChecked();
+    bool GD1 = ui->checkBoxGD1->isChecked();
+    bool GD0 = ui->checkBoxGD0->isChecked();
+    bool FS = ui->checkBoxFS->isChecked();
+    bool RE = ui->checkBoxRE->isChecked();
+
+    //Set configuration bits
+
+    // Disable the signal generator
+    CE = false;
+
+    m_bioASIC.setbitsFilter(EnLF,EnMF,EnHF,DN1,DN0,DP2,DP1,DP0,EnRdeg,EnRdegHF1,
+                            EnRdegHF0,CcompSel1,CcompSel0,CapSel3,CapSel2,CapSel1,CapSel0);
+    m_bioASIC.setbits(F3,F2,F1,F0,IQ,GS3,GS2,GS1,GS0,CE,NS,GD2,GD1,GD0,FS,RE);
+
+    //Prepare byte array for serial communications
+    QByteArray writedata;
+    writedata.append("o",1);
+    writedata.append(m_bioASIC.getByte(0));
+    writedata.append(m_bioASIC.getByte(1));
+
+    if (ui->checkBoxFilterEnable->isChecked()) {
+        writedata.append(m_bioASIC.getFilterByte(0));
+        writedata.append(m_bioASIC.getFilterByte(1));
+        writedata.append(m_bioASIC.getFilterByte(2));
+    }
+
+    //Transmit serial data
+    myserial->write(writedata);
+
+    qDebug() << "Tx Measure offset sent";
 }
