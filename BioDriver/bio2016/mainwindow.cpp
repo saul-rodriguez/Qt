@@ -187,6 +187,8 @@ void MainWindow::on_pushButtonTest_clicked()
 
     myserial->write(writedata);
 
+    m_time.start();
+
     //Update log
     test = "<tx> tes (test word)";
     ui->plainTextEditLog->appendPlainText(test);
@@ -214,6 +216,7 @@ void MainWindow::SerialRx(const QByteArray &Data)
     /*******************
      * MESSAGE HANDLER *
      *******************/
+    int tim;
 
     switch (read_pt[0]) {
         case 'm':
@@ -231,6 +234,10 @@ void MainWindow::SerialRx(const QByteArray &Data)
         case 'o':
                 receiveOffset(Data);
                 qDebug() << "Offset received";
+                break;
+        case 't':
+                tim = m_time.elapsed();
+                qDebug() << "test turn-around time: " << tim << " ms";
                 break;
         default:
                 break;
@@ -813,6 +820,8 @@ void MainWindow::measureImpedance()
     //Transmit serial data
     myserial->write(writedata);
 
+    //Count the number of times a transmission was done
+    m_iterations++;
     //Append log
     ui->plainTextEditLog->appendPlainText(command);
 
@@ -867,6 +876,9 @@ void MainWindow::processSweep(double mag, double phase)
         }*/
         int time = m_time.elapsed();
         qDebug() << "total sweep time = " << time << " ms";
+        qDebug() << "Number of tx needed: " << m_iterations;
+
+        m_iterations = 0;
 
     }
 
@@ -1377,6 +1389,7 @@ void MainWindow::on_pushButtonSweep_clicked()
     on_comboBoxFreqs_currentIndexChanged(FREQ10); //Start from low frequency
 
     m_time.start();
+    m_iterations = 0;
 
     measureImpedance();
 

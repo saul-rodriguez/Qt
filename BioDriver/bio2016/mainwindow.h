@@ -140,6 +140,7 @@ private:
     double m_MagCalibration[11];
 
     QTime m_time;
+    int m_iterations;
 
 private:
     void readPorts();
