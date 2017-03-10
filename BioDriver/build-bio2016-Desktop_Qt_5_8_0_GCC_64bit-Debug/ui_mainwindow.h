@@ -101,6 +101,7 @@ public:
     QCheckBox *checkBoxFilterEnable;
     QCheckBox *checkBoxSingleOffsetMeas;
     QPushButton *pushButtonMeasureOffset;
+    QCheckBox *checkBoxSingleEnded;
     QWidget *tab_4;
     QGroupBox *groupBox_4;
     QWidget *verticalLayoutWidget_4;
@@ -460,6 +461,9 @@ public:
         pushButtonMeasureOffset = new QPushButton(tab_2);
         pushButtonMeasureOffset->setObjectName(QStringLiteral("pushButtonMeasureOffset"));
         pushButtonMeasureOffset->setGeometry(QRect(530, 140, 141, 25));
+        checkBoxSingleEnded = new QCheckBox(tab_2);
+        checkBoxSingleEnded->setObjectName(QStringLiteral("checkBoxSingleEnded"));
+        checkBoxSingleEnded->setGeometry(QRect(530, 190, 231, 23));
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -918,6 +922,7 @@ public:
         checkBoxFilterEnable->setText(QApplication::translate("MainWindow", "Enable Signal Generator Filter", Q_NULLPTR));
         checkBoxSingleOffsetMeas->setText(QApplication::translate("MainWindow", "Single offset measurement", Q_NULLPTR));
         pushButtonMeasureOffset->setText(QApplication::translate("MainWindow", "Measure Offset", Q_NULLPTR));
+        checkBoxSingleEnded->setText(QApplication::translate("MainWindow", "Singled Ended Measurement", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "ASIC Radio Conf.", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Filter Settings", Q_NULLPTR));
         checkBoxEnMF->setText(QApplication::translate("MainWindow", "EnMF", Q_NULLPTR));

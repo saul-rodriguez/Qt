@@ -495,6 +495,19 @@
          <string>Measure Offset</string>
         </property>
        </widget>
+       <widget class="QCheckBox" name="checkBoxSingleEnded">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>190</y>
+          <width>231</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Singled Ended Measurement</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">

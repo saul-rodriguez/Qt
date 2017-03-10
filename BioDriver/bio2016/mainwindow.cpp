@@ -231,6 +231,11 @@ void MainWindow::SerialRx(const QByteArray &Data)
                 receiveImpedance(Data);
                 qDebug()<<"Impedance Measurement RX, No Offset";
                 break;
+        case 's':
+                receiveImpedance(Data);
+                qDebug()<<"Impedance Measurement RX, No Offset, Single Ended";
+                break;
+
         case 'o':
                 receiveOffset(Data);
                 qDebug() << "Offset received";
@@ -581,59 +586,13 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     if (ui->checkBoxSingleOffsetMeas->isChecked()) {
         extractVoltagesNoOffset(Data, &I_diff, &Q_diff);
     } else {
-        extractVoltagesOffset(Data,&Offset_diff, &I_diff, &Q_diff);
+        if (ui->checkBoxSingleEnded->isChecked()) {
+            extractVoltagesOffsetSE(Data,&Offset_diff, &I_diff, &Q_diff);
+        } else {
+            extractVoltagesOffset(Data,&Offset_diff, &I_diff, &Q_diff);
+        }
     }
-    /*
-    //OFFSET EXTRACTION
-    vop = 0;
-    vop |= (quint16)(read_pt[2] << 8) ;
-    vop |= (quint16)(read_pt[1] & 0xff);
 
-    von = 0;
-    von |= (quint16)(read_pt[4] << 8) ;
-    von |= (quint16)(read_pt[3] & 0xff);
-
-    vse = 0;
-
-    m_bioASIC.setADCvalues(vop,von,vse);
-    m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
-
-    Offset_diff = voutp - voutn; //differential offset
-
-    //I EXTRACTION
-    vop = 0;
-    vop |= (quint16)(read_pt[6] << 8) ;
-    vop |= (quint16)(read_pt[5] & 0xff);
-
-    von = 0;
-    von |= (quint16)(read_pt[8] << 8) ;
-    von |= (quint16)(read_pt[7] & 0xff);
-
-    m_bioASIC.setADCvalues(vop,von,vse);
-    m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
-
-    I_diff = (voutp - voutn) - Offset_diff; //differential I without offset
-
-    qDebug()<<"Ip = " << voutp << " In = " << voutn;
-
-    //Q EXTRACTION
-    vop = 0;
-    vop |= (quint16)(read_pt[10] << 8) ;
-    vop |= (quint16)(read_pt[9] & 0xff);
-
-    von = 0;
-    von |= (quint16)(read_pt[12] << 8) ;
-    von |= (quint16)(read_pt[11] & 0xff);
-
-    m_bioASIC.setADCvalues(vop,von,vse);
-    m_bioASIC.getADCVoltages(&voutp,&voutn,&voutse);
-
-    Q_diff = (voutp - voutn) - Offset_diff; //differential Q without offet
-
-
-    qDebug()<<"Qp = " << voutp << " Qn = " << voutn;
-    qDebug()<<"I = " << I_diff << " Q = " << Q_diff;
-    */
 
     //Automatic Gain Check if values are in range
     double aux_vol;
@@ -673,7 +632,11 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
     //Calculate Impedance Magnitude and Phase
     double mag, pha;
 
-    m_bioASIC.setMixerGainFactor(0.5667049);
+    if (ui->checkBoxSingleEnded->isChecked()) {
+        m_bioASIC.setMixerGainFactor(0.5667049*2.0); //Diff to SE converter has a gain of 2
+    } else {
+        m_bioASIC.setMixerGainFactor(0.5667049);
+    }
     m_bioASIC.getImpedance(&mag,&pha,I_diff,Q_diff);
 
     QString aux;
@@ -755,11 +718,16 @@ void MainWindow::measureImpedance()
     //Prepare byte array for serial communications
     QByteArray writedata;
 
-    if(ui->checkBoxSingleOffsetMeas->isChecked()) {
-        writedata.append("y",1);
-    } else {
-        writedata.append("z",1);
+    if (ui->checkBoxSingleEnded->isChecked()) {
+        writedata.append("s",1); //Only Single Ended ASIC Output is used
+    } else { // Differential Output used
+        if(ui->checkBoxSingleOffsetMeas->isChecked()) {  // Request measurement without offset (offset estimated in a previous order)
+         writedata.append("y",1);
+        } else { // Normal measurement including offset
+         writedata.append("z",1);
+        }
     }
+
     writedata.append(m_bioASIC.getByte(0));
     writedata.append(m_bioASIC.getByte(1));
 
@@ -1241,6 +1209,47 @@ void MainWindow::extractVoltagesNoOffset(const QByteArray &Data, double *I, doub
     qDebug()<<"I = " << I_diff << " Q = " << Q_diff;
 
 
+
+}
+
+void MainWindow::extractVoltagesOffsetSE(const QByteArray &Data, double *offset, double *I, double *Q)
+{
+
+    quint16 Im,Qm,off;
+    //double voutp,voutn,voutse;
+    double Offset_diff, I_diff, Q_diff;
+
+    const char* read_pt = Data.constData();
+
+    //OFFSET EXTRACTION
+    off = 0;
+    off |= (quint16)(read_pt[2] << 8) ;
+    off |= (quint16)(read_pt[1] & 0xff);
+
+    Im = 0;
+    Im |= (quint16)(read_pt[4] << 8) ;
+    Im |= (quint16)(read_pt[3] & 0xff);
+
+    Qm = 0;
+    Qm |= (quint16)(read_pt[6] << 8) ;
+    Qm |= (quint16)(read_pt[5] & 0xff);
+
+
+    m_bioASIC.setADCvalues(Im,Qm,off);
+    m_bioASIC.getADCVoltages(&I_diff,&Q_diff,&Offset_diff);
+
+    //Offset_diff = voutp - voutn; //differential offset
+
+    *offset = Offset_diff;
+
+    I_diff -= Offset_diff; //differential I without offset
+    *I = I_diff;
+
+    Q_diff -= Offset_diff; //differential Q without offet
+    *Q = Q_diff;
+
+    qDebug()<<"Single Ended Selected";
+    qDebug()<<"I = " << I_diff << " Q = " << Q_diff;
 
 }
 
