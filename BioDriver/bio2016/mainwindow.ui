@@ -508,6 +508,19 @@
          <string>Singled Ended Measurement</string>
         </property>
        </widget>
+       <widget class="QCheckBox" name="checkBoxErrorCheck">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>220</y>
+          <width>111</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Error Check</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">

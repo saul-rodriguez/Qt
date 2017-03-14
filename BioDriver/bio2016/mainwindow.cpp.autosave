@@ -1236,8 +1236,6 @@ int MainWindow::extractVoltagesOffsetSE(const QByteArray &Data, double *offset, 
             return 0; // Any value different than 0 means an error was detected
 
         }
-
-
     }
 
 

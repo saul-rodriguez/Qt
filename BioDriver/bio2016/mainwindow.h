@@ -158,7 +158,7 @@ private:
     void clearCurves();
     void extractVoltagesOffset(const QByteArray &Data, double* offset, double* I, double* Q);
     void extractVoltagesNoOffset(const QByteArray &Data, double* I, double* Q);
-    void extractVoltagesOffsetSE(const QByteArray &Data, double* offset, double* I, double* Q);
+    int extractVoltagesOffsetSE(const QByteArray &Data, double* offset, double* I, double* Q);
 
 };
 
