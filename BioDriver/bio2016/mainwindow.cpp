@@ -83,6 +83,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //Calibration
     ui->lineEditCalRes->setText("1000");
 
+    //Initialize measurement timer
+    measurement_timer = new QTimer(this);
+    measurement_timer->setSingleShot(true);
+    connect(measurement_timer,SIGNAL(timeout()),this,SLOT(measurement_timeout()));
+
+    m_measurement_retrial = 0;
 
 
 }
@@ -578,20 +584,27 @@ void MainWindow::on_pushButtonMeasureZ_clicked()
 
 void MainWindow::receiveImpedance(const QByteArray &Data)
 {
-    //quint16 vop,von,vse;
-    //double voutp,voutn,voutse;
-    double Offset_diff, I_diff, Q_diff;
 
-    //const char* read_pt = Data.constData();
+    double Offset_diff, I_diff, Q_diff;
+    int res;
+
     if (ui->checkBoxSingleOffsetMeas->isChecked()) {
         extractVoltagesNoOffset(Data, &I_diff, &Q_diff);
     } else {
         if (ui->checkBoxSingleEnded->isChecked()) {
-            extractVoltagesOffsetSE(Data,&Offset_diff, &I_diff, &Q_diff);
+            res = extractVoltagesOffsetSE(Data,&Offset_diff, &I_diff, &Q_diff);
+            if (!res) { //Communications error, repeat measurement
+                   measureImpedance();
+                   return;
+            }
         } else {
             extractVoltagesOffset(Data,&Offset_diff, &I_diff, &Q_diff);
         }
     }
+
+    //Valid measurement has been received, stop timer and reset retrial counter
+    measurement_timer->stop();
+    m_measurement_retrial = 0;
 
 
     //Automatic Gain Check if values are in range
@@ -728,6 +741,7 @@ void MainWindow::measureImpedance()
         }
     }
 
+    //append Radio configuration bits
     writedata.append(m_bioASIC.getByte(0));
     writedata.append(m_bioASIC.getByte(1));
 
@@ -756,10 +770,18 @@ void MainWindow::measureImpedance()
         m_bioASIC.setbitsFilter(EnLF,EnMF,EnHF,DN1,DN0,DP2,DP1,DP0,EnRdeg,EnRdegHF1,
                                 EnRdegHF0,CcompSel1,CcompSel0,CapSel3,CapSel2,CapSel1,CapSel0);
 
+        //Append Filter configuration bits
         writedata.append(m_bioASIC.getFilterByte(0));
         writedata.append(m_bioASIC.getFilterByte(1));
         writedata.append(m_bioASIC.getFilterByte(2));
 
+    }
+
+    //Append checksum if needed (only BIO!)
+    if (ui->checkBoxErrorCheck) {
+        const char* read_pt = writedata.constData();
+        quint8 check = calculate_checksum(read_pt,3);
+        writedata.append(check);
     }
 
 
@@ -792,6 +814,8 @@ void MainWindow::measureImpedance()
     m_iterations++;
     //Append log
     ui->plainTextEditLog->appendPlainText(command);
+
+    measurement_timer->start(500);
 
 }
 
@@ -834,14 +858,7 @@ void MainWindow::processSweep(double mag, double phase)
         m_sweep_state = IDLE;
         qDebug() << "Sweep finished, changing state to IDLE";
         m_append_curve_num++;
-        /* if (m_append_curve_num == 10) {//All colors have been used
-            m_append_curve_num = 0;
 
-            for (int i = 0; i < 10; i++) { //clears the curves
-                ui->widgetMagnitude->clearCurve(i);
-                ui->widgetPhase->clearCurve(i);
-            }
-        }*/
         int time = m_time.elapsed();
         qDebug() << "total sweep time = " << time << " ms";
         qDebug() << "Number of tx needed: " << m_iterations;
@@ -1222,22 +1239,18 @@ int MainWindow::extractVoltagesOffsetSE(const QByteArray &Data, double *offset, 
     const char* read_pt = Data.constData();
 
     //Check for errors
-    int N = 8; // The checksum is also processed!
+    //int N = 8; // The checksum is also processed!
     quint8 check;
 
     if (ui->checkBoxErrorCheck->isChecked()) {
-        check = 0;
-        for (int i = 0; i < N; i++) {
-            check ^= read_pt[i];
-        }
+
+      check = calculate_checksum(read_pt,8);
 
         if (check) {
             qDebug()<<"ERROR checksum!";
             return 0; // Any value different than 0 means an error was detected
 
         }
-
-
     }
 
 
@@ -1274,6 +1287,18 @@ int MainWindow::extractVoltagesOffsetSE(const QByteArray &Data, double *offset, 
 
     return 1;
 
+}
+
+quint8 MainWindow::calculate_checksum(const char *data, quint8 num)
+{
+    quint8 check, i;
+
+    check = 0;
+    for (i = 0; i < num; i++) {
+            check ^= data[i];
+    }
+
+    return check;
 }
 
 void MainWindow::on_checkBoxLightTheme_toggled(bool checked)
@@ -1650,9 +1675,9 @@ void MainWindow::on_actionSave_Tables_triggered()
 {
 
     QDateTime meastime = QDateTime::currentDateTime();
-    QTime time = meastime.time();
 
-    int time_sec = time.hour()*3600 + time.minute()*60 + time.second();
+    //QTime time = meastime.time();
+    //int time_sec = time.hour()*3600 + time.minute()*60 + time.second();
 
     QString filename = meastime.toString(Qt::ISODate) + QString(".txt");
 
@@ -1760,4 +1785,18 @@ void MainWindow::on_pushButtonMeasureOffset_clicked()
     myserial->write(writedata);
 
     qDebug() << "Tx Measure offset sent";
+}
+
+void MainWindow::measurement_timeout()
+{
+    qDebug() << "Measurement Timeout: " << m_measurement_retrial;
+
+    if (m_measurement_retrial < 10) {
+        m_measurement_retrial++;
+
+        measureImpedance();
+    } else {
+        m_measurement_retrial = 0;
+        qDebug() << "Retrial unsuccessful";
+    }
 }

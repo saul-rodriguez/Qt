@@ -90,6 +90,8 @@ private slots:
 
     void on_pushButtonMeasureOffset_clicked();
 
+    void measurement_timeout();
+
 private:
     Ui::MainWindow *ui;
 
@@ -140,7 +142,11 @@ private:
     double m_MagCalibration[11];
 
     QTime m_time;
+
     int m_iterations;
+
+    QTimer *measurement_timer;
+    int m_measurement_retrial;
 
 private:
     void readPorts();
@@ -159,6 +165,8 @@ private:
     void extractVoltagesOffset(const QByteArray &Data, double* offset, double* I, double* Q);
     void extractVoltagesNoOffset(const QByteArray &Data, double* I, double* Q);
     int extractVoltagesOffsetSE(const QByteArray &Data, double* offset, double* I, double* Q);
+    quint8 calculate_checksum(const char *data, quint8 num);
+
 
 };
 
