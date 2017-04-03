@@ -229,27 +229,32 @@ void MainWindow::SerialRx(const QByteArray &Data)
                 readADC(Data);
                 qDebug()<<"Measure ADCs RX";
                 break;
-        case 'z':
-                receiveImpedance(Data);
+        case 'z':                
                 qDebug()<<"Impedance Measurement RX";
+                receiveImpedance(Data);
                 break;
         case 'y':
-                receiveImpedance(Data);
                 qDebug()<<"Impedance Measurement RX, No Offset";
+                receiveImpedance(Data);                
                 break;
         case 's':
-                receiveImpedance(Data);
                 qDebug()<<"Impedance Measurement RX, No Offset, Single Ended";
+                receiveImpedance(Data);                
                 break;
 
         case 'o':
-                receiveOffset(Data);
                 qDebug() << "Offset received";
+                receiveOffset(Data);                
                 break;
         case 't':
                 tim = m_time.elapsed();
                 qDebug() << "test turn-around time: " << tim << " ms";
                 break;
+        case 'f':
+                qDebug() << "Single shot sweep measurement RX";
+                receiveImpedanceSingleShot(Data);
+                break;
+
         default:
                 break;
     }
@@ -491,9 +496,9 @@ void MainWindow::on_pushButtonAllTest_clicked()
     readADC(aux);;
     */
 
-    /*
+
     QByteArray aux;
-    aux.append('z');
+    aux.append('f');
     aux.append(0x99);
     aux.append(0x02);
     aux.append(0xA3);
@@ -507,14 +512,11 @@ void MainWindow::on_pushButtonAllTest_clicked()
     aux.append(0xab);
     aux.append(0x02);
 
-    receiveImpedance(aux);
-    */
-    //int aux = m_bioASIC.getGainIndex();
-//    double mag,pha;
 
-//    m_bioASIC.getImpedance(&mag,&pha,0,0.685864);
+    double I,Q;
 
-    processSweep(1005.2,-5.5);
+    extractVoltagesSingleShot(aux, &I, &Q);
+
 }
 
 void MainWindow::on_pushButtonSaveOffset_clicked()
@@ -658,6 +660,45 @@ void MainWindow::receiveImpedance(const QByteArray &Data)
 
     aux.sprintf("%5.2f",pha);
     ui->lineEditMeasuredPhase->setText(aux);
+
+    //Check if the measurement comes from a sweep
+    if (m_sweep_state == RUN) {
+        processSweep(mag,pha);
+    }
+
+}
+
+void MainWindow::receiveImpedanceSingleShot(const QByteArray &Data)
+{
+    double I, Q;
+
+    int ret = extractVoltagesSingleShot(Data, &I, &Q);
+
+    if (!ret) {
+        qDebug("Checksum Error detected, skipped measurement");
+        return;
+    }
+
+    //Valid measurement has been received, stop timer and reset retrial counter
+    measurement_timer->stop();
+    m_measurement_retrial = 0;
+
+    //Calculate Impedance Magnitude and Phase
+    double mag, pha;
+
+    //Note that this is valid only for single shot!
+    m_bioASIC.setMixerGainFactor(0.5667049*2.0); //Diff to SE converter has a gain of 2
+
+    m_bioASIC.getImpedance(&mag,&pha,I,Q);
+
+    QString aux;
+    aux.sprintf("%5.2f",mag);
+    ui->lineEditMeasuredMag->setText(aux);
+    qDebug()<<"Z= "<< aux;
+
+    aux.sprintf("%5.2f",pha);
+    ui->lineEditMeasuredPhase->setText(aux);
+    qDebug()<<"PHA = "<< aux;
 
     //Check if the measurement comes from a sweep
     if (m_sweep_state == RUN) {
@@ -823,7 +864,6 @@ void MainWindow::processSweep(double mag, double phase)
 {
     int num_curve;
 
-
     if (m_append) {
         num_curve = m_append_curve_num;
     } else {
@@ -852,7 +892,9 @@ void MainWindow::processSweep(double mag, double phase)
     if (m_currentFreqIndex > 0) { //Change frequency and make a new measurement
         m_currentFreqIndex--;
         on_comboBoxFreqs_currentIndexChanged(m_currentFreqIndex);
-        measureImpedance();
+
+        if(!ui->checkBoxSingleShot->isChecked()) //Single shot automatically send next sample
+            measureImpedance();
 
     } else {    //The Sweep has finished
         m_sweep_state = IDLE;
@@ -1289,6 +1331,59 @@ int MainWindow::extractVoltagesOffsetSE(const QByteArray &Data, double *offset, 
 
 }
 
+int MainWindow::extractVoltagesSingleShot(const QByteArray &Data, double *I, double *Q)
+{
+    qint16 Is,Qs;
+
+    quint8 check;
+    const char* read_pt = Data.constData();
+
+    if (ui->checkBoxErrorCheck->isChecked()) {
+
+      check = calculate_checksum(read_pt,7);
+
+        if (check) {
+            qDebug()<<"ERROR checksum!";
+            return 0; // Any value of check different than 0 means an error was detected
+        }
+    }
+
+    //Extract I
+    Is= 0;
+    Is |= (quint16)(read_pt[2] << 8) ;
+    Is |= (quint16)(read_pt[1] & 0xff);
+
+    *I = Is/1024.*1.8;
+
+    //Extract Q/
+    Qs= 0;
+    Qs |= (quint16)(read_pt[4] << 8) ;
+    Qs |= (quint16)(read_pt[3] & 0xff);
+
+    *Q = Qs/1024.*1.8;
+
+    //Extract freq and gain indexes
+    quint8 newfreq, newgain;
+    newfreq = (quint8)((read_pt[5] >> 4) & 0x0f);
+    newgain = (quint8)(read_pt[5] & 0x0f);
+
+    //Update freq and gain
+
+    m_bioASIC.setFreqbits(newfreq);
+    m_bioASIC.setGainbits(newgain);
+    m_bioASIC.setbitFilterbyFreq(newfreq);
+
+    on_comboBoxFreqs_currentIndexChanged(newfreq); //updates gui checkboxes
+    on_comboBoxGain_currentIndexChanged(newgain);  //updates gui checkboxes
+
+
+    qDebug()<<"Single shot meas. " << "Is=" << Is << " Qs=" << Qs << " Freq_ind= " << newfreq << " Gain_ind= "<< newgain;
+    qDebug()<<"Single shot volt. " << "I= " << *I << "Q= " << *Q;
+
+
+    return 1;
+}
+
 quint8 MainWindow::calculate_checksum(const char *data, quint8 num)
 {
     quint8 check, i;
@@ -1448,7 +1543,16 @@ void MainWindow::on_pushButtonSweep_clicked()
     m_time.start();
     m_iterations = 0;
 
-    measureImpedance();
+    if(ui->checkBoxSingleShot->isChecked())
+    {
+        QByteArray writedata;
+        writedata.append("f",1);
+        myserial->write(writedata);
+        qDebug()<<"Single shot sweep order sent";
+
+    } else {
+        measureImpedance();
+    }
 
 }
 
@@ -1791,7 +1895,10 @@ void MainWindow::measurement_timeout()
 {
     qDebug() << "Measurement Timeout: " << m_measurement_retrial;
 
-    if (m_measurement_retrial < 10) {
+    if (ui->checkBoxSingleShot->isChecked())
+        return;
+
+    if (m_measurement_retrial < 20) {
         m_measurement_retrial++;
 
         measureImpedance();

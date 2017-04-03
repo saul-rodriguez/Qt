@@ -103,6 +103,7 @@ public:
     QPushButton *pushButtonMeasureOffset;
     QCheckBox *checkBoxSingleEnded;
     QCheckBox *checkBoxErrorCheck;
+    QCheckBox *checkBoxSingleShot;
     QWidget *tab_4;
     QGroupBox *groupBox_4;
     QWidget *verticalLayoutWidget_4;
@@ -468,6 +469,9 @@ public:
         checkBoxErrorCheck = new QCheckBox(tab_2);
         checkBoxErrorCheck->setObjectName(QStringLiteral("checkBoxErrorCheck"));
         checkBoxErrorCheck->setGeometry(QRect(530, 220, 111, 23));
+        checkBoxSingleShot = new QCheckBox(tab_2);
+        checkBoxSingleShot->setObjectName(QStringLiteral("checkBoxSingleShot"));
+        checkBoxSingleShot->setGeometry(QRect(530, 290, 161, 23));
         tabWidget->addTab(tab_2, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QStringLiteral("tab_4"));
@@ -928,6 +932,7 @@ public:
         pushButtonMeasureOffset->setText(QApplication::translate("MainWindow", "Measure Offset", Q_NULLPTR));
         checkBoxSingleEnded->setText(QApplication::translate("MainWindow", "Singled Ended Measurement", Q_NULLPTR));
         checkBoxErrorCheck->setText(QApplication::translate("MainWindow", "Error Check", Q_NULLPTR));
+        checkBoxSingleShot->setText(QApplication::translate("MainWindow", "Single shot sweep", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "ASIC Radio Conf.", Q_NULLPTR));
         groupBox_4->setTitle(QApplication::translate("MainWindow", "Filter Settings", Q_NULLPTR));
         checkBoxEnMF->setText(QApplication::translate("MainWindow", "EnMF", Q_NULLPTR));

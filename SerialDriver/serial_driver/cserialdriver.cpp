@@ -11,7 +11,7 @@ CSerialDriver::CSerialDriver(QSerialPort *serialPort, QObject *parent) : QObject
     m_bytesWritten = 0;
 
     m_readState = IDLE;
-    m_timeout = 50; //ms
+    m_timeout = 45; //ms
 
     m_timer.setSingleShot(true);
     connect(m_serialPort, &QSerialPort::bytesWritten, this, &CSerialDriver::handleBytesWritten);

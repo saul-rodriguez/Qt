@@ -521,6 +521,19 @@
          <string>Error Check</string>
         </property>
        </widget>
+       <widget class="QCheckBox" name="checkBoxSingleShot">
+        <property name="geometry">
+         <rect>
+          <x>530</x>
+          <y>290</y>
+          <width>161</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Single shot sweep</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">

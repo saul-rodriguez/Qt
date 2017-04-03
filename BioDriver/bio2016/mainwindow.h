@@ -154,6 +154,7 @@ private:
     void setComboGain();
     void readADC(const QByteArray &Data);
     void receiveImpedance(const QByteArray &Data);
+    void receiveImpedanceSingleShot(const QByteArray &Data);
     void receiveOffset(const QByteArray &Data);
     void measureImpedance();
     void processSweep(double mag, double phase);
@@ -165,6 +166,7 @@ private:
     void extractVoltagesOffset(const QByteArray &Data, double* offset, double* I, double* Q);
     void extractVoltagesNoOffset(const QByteArray &Data, double* I, double* Q);
     int extractVoltagesOffsetSE(const QByteArray &Data, double* offset, double* I, double* Q);
+    int extractVoltagesSingleShot(const QByteArray &Data, double* I, double* Q);
     quint8 calculate_checksum(const char *data, quint8 num);
 
 

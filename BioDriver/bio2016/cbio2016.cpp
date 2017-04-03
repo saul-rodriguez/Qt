@@ -109,6 +109,20 @@ void CBIO2016::setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bo
 
 }
 
+void CBIO2016::setFreqbits(quint8 freq_index)
+{
+
+    m_freq.data = freqs[freq_index];
+
+    m_bio3.data_bits.F0 = m_freq.data_bits.F0;
+    m_bio3.data_bits.F1 = m_freq.data_bits.F1;
+    m_bio3.data_bits.F2 = m_freq.data_bits.F2;
+    m_bio3.data_bits.F3 = m_freq.data_bits.F3;
+
+    m_filt.data = filter_conf[freq_index];
+
+}
+
 /*
 void CBIO2016::setFreqbits(RADIO_freq &freq)
 {
@@ -248,6 +262,19 @@ int CBIO2016::getGainIndex()
 quint8 CBIO2016::getGainBits(int i)
 {
     return gains[i];
+}
+
+void CBIO2016::setGainbits(quint8 gain_index)
+{
+    m_gain.data = gains[gain_index];
+
+    m_bio3.data_bits.GS3 = m_gain.data_bits.GS3;
+    m_bio3.data_bits.GS2 = m_gain.data_bits.GS2;
+    m_bio3.data_bits.GS1 = m_gain.data_bits.GS1;
+    m_bio3.data_bits.GS0 = m_gain.data_bits.GS0;
+    m_bio3.data_bits.GD2 = m_gain.data_bits.GD2;
+    m_bio3.data_bits.GD1 = m_gain.data_bits.GD1;
+    m_bio3.data_bits.GD0 = m_gain.data_bits.GD0;
 }
 
 double CBIO2016::getFreqValue(int index)

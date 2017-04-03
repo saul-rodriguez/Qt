@@ -169,7 +169,7 @@ public:
     void clearbits();
     void setbits(bool F3, bool F2, bool F1, bool F0, bool IQ, bool GS3, bool GS2, bool GS1, bool GS0,
                  bool CE, bool NS, bool GD2, bool GD1, bool GD0, bool FS, bool RE);
-    //void setFreqbits(RADIO_freq &freq);
+    void setFreqbits(quint8 freq_index);
 
     void setADCvalues(quint16 vp, quint16 vn, quint16 vse);
     void getADCVoltages(double* vp, double* vn, double* vse);
@@ -179,6 +179,7 @@ public:
     void setMixerGainFactor(double factor);
     int getGainIndex();
     quint8 getGainBits(int i);
+    void setGainbits(quint8 gain_index);
 
     double getFreqValue(int index);
 
