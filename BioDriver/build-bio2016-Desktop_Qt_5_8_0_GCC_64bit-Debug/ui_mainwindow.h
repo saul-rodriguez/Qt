@@ -44,6 +44,7 @@ public:
     QAction *actionAbout;
     QAction *actionClean_Tables;
     QAction *actionSave_Tables;
+    QAction *actionDelete_icon;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_8;
     QTabWidget *tabWidget;
@@ -234,6 +235,11 @@ public:
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/images/Save-table-icon.png"), QSize(), QIcon::Normal, QIcon::On);
         actionSave_Tables->setIcon(icon3);
+        actionDelete_icon = new QAction(MainWindow);
+        actionDelete_icon->setObjectName(QStringLiteral("actionDelete_icon"));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/images/Delete-icon.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionDelete_icon->setIcon(icon4);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_8 = new QVBoxLayout(centralWidget);
@@ -869,6 +875,7 @@ public:
         menuMeasure->addAction(actionSave_Measurement);
         menuHelp->addAction(actionAbout);
         mainToolBar->addAction(actionSweep);
+        mainToolBar->addAction(actionDelete_icon);
         mainToolBar->addAction(actionSave_Measurement);
         mainToolBar->addAction(actionSave_Tables);
         mainToolBar->addAction(actionClean_Tables);
@@ -885,10 +892,15 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "NanoSense V1.0", Q_NULLPTR));
         actionSweep->setText(QApplication::translate("MainWindow", "Sweep", Q_NULLPTR));
+        actionSweep->setShortcut(QApplication::translate("MainWindow", "M", Q_NULLPTR));
         actionSave_Measurement->setText(QApplication::translate("MainWindow", "Save Measurement", Q_NULLPTR));
         actionAbout->setText(QApplication::translate("MainWindow", "About", Q_NULLPTR));
         actionClean_Tables->setText(QApplication::translate("MainWindow", "Clean Tables", Q_NULLPTR));
+        actionClean_Tables->setShortcut(QApplication::translate("MainWindow", "E", Q_NULLPTR));
         actionSave_Tables->setText(QApplication::translate("MainWindow", "Save Tables", Q_NULLPTR));
+        actionSave_Tables->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", Q_NULLPTR));
+        actionDelete_icon->setText(QApplication::translate("MainWindow", "Delete icon", Q_NULLPTR));
+        actionDelete_icon->setShortcut(QApplication::translate("MainWindow", "Del", Q_NULLPTR));
         pushButtonRefreshPorts->setText(QApplication::translate("MainWindow", "Refresh Ports", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Available Serial Ports:", Q_NULLPTR));
         pushButtonConnect->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));

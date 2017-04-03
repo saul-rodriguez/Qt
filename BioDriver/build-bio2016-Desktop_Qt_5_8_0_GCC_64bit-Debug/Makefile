@@ -665,6 +665,7 @@ qrc_resour.cpp: ../bio2016/resour.qrc \
 		../bio2016/images/Clean-icon.png \
 		../bio2016/images/Save-icon.png \
 		../bio2016/images/Button-Play-icon.png \
+		../bio2016/images/Delete-icon.png \
 		../bio2016/images/Save-table-icon.png
 	/opt/Qt/5.8/gcc_64/bin/rcc -name resour ../bio2016/resour.qrc -o qrc_resour.cpp
 
@@ -787,6 +788,8 @@ moc_mainwindow.cpp: /opt/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QTime \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTimer \
@@ -1313,6 +1316,8 @@ main.o: ../bio2016/main.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QTime \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTimer \
@@ -1441,6 +1446,8 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QTime \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTimer \
@@ -1532,8 +1539,7 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QDebug \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QFile \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTextStream \
-		/opt/Qt/5.8/gcc_64/include/QtCore/QDateTime \
-		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h
+		/opt/Qt/5.8/gcc_64/include/QtCore/QDateTime
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../bio2016/mainwindow.cpp
 
 cserialdriver.o: ../../SerialDriver/serial_driver/cserialdriver.cpp ../../SerialDriver/serial_driver/cserialdriver.h \

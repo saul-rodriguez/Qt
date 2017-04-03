@@ -4,5 +4,6 @@
     <file>images/Save-icon.png</file>
     <file>images/Clean-icon.png</file>        
     <file>images/Save-table-icon.png</file>
+    <file>images/Delete-icon.png</file>
 </qresource>
 </RCC>

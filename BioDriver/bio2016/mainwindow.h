@@ -92,6 +92,8 @@ private slots:
 
     void measurement_timeout();
 
+    void on_actionDelete_icon_triggered();
+
 private:
     Ui::MainWindow *ui;
 
@@ -147,6 +149,8 @@ private:
 
     QTimer *measurement_timer;
     int m_measurement_retrial;
+
+    int m_singleShot;
 
 private:
     void readPorts();

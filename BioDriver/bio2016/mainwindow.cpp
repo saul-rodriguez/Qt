@@ -90,6 +90,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_measurement_retrial = 0;
 
+    m_singleShot = 0;
+
 
 }
 
@@ -681,7 +683,9 @@ void MainWindow::receiveImpedanceSingleShot(const QByteArray &Data)
 
     //Valid measurement has been received, stop timer and reset retrial counter
     measurement_timer->stop();
+    measurement_timer->start(500);
     m_measurement_retrial = 0;
+    m_singleShot++;
 
     //Calculate Impedance Magnitude and Phase
     double mag, pha;
@@ -893,7 +897,7 @@ void MainWindow::processSweep(double mag, double phase)
         m_currentFreqIndex--;
         on_comboBoxFreqs_currentIndexChanged(m_currentFreqIndex);
 
-        if(!ui->checkBoxSingleShot->isChecked()) //Single shot automatically send next sample
+        if(!ui->checkBoxSingleShot->isChecked()) //Single shot automatically send next sample, not necessary to ask for a meas.
             measureImpedance();
 
     } else {    //The Sweep has finished
@@ -1549,6 +1553,7 @@ void MainWindow::on_pushButtonSweep_clicked()
         writedata.append("f",1);
         myserial->write(writedata);
         qDebug()<<"Single shot sweep order sent";
+        measurement_timer->start(500); // Start Timer
 
     } else {
         measureImpedance();
@@ -1895,9 +1900,41 @@ void MainWindow::measurement_timeout()
 {
     qDebug() << "Measurement Timeout: " << m_measurement_retrial;
 
-    if (ui->checkBoxSingleShot->isChecked())
-        return;
+    if (ui->checkBoxSingleShot->isChecked()) {
+        if (m_singleShot == 0) { // device is not connected, retry sweep
 
+            if (m_measurement_retrial < 20) {
+                m_measurement_retrial++;
+                on_pushButtonSweep_clicked();
+                return;
+
+            } else {
+                m_measurement_retrial = 0;
+                qDebug() << "Retrial unsuccessful";
+            }
+
+        }
+
+        if (m_singleShot != 11) { //Let the table advance as normal, and let the user delete the measurement
+            m_current_table_column = 0;
+            if (m_current_table_row >= 10) {
+                m_current_table_row = 0;
+            } else {
+                m_current_table_row++;
+            }
+
+            ui->tableViewMag->selectRow(m_current_table_row);
+            ui->tableViewPhase->selectRow(m_current_table_row);
+
+        }
+
+        qDebug()<<"Single shot counter: " << m_singleShot;
+        m_singleShot = 0;
+
+        return;
+    }
+
+    //Normal timeout
     if (m_measurement_retrial < 20) {
         m_measurement_retrial++;
 
@@ -1906,4 +1943,28 @@ void MainWindow::measurement_timeout()
         m_measurement_retrial = 0;
         qDebug() << "Retrial unsuccessful";
     }
+}
+
+void MainWindow::on_actionDelete_icon_triggered()
+{
+    if (m_current_table_row != 0) {
+        m_current_table_row--;
+    } else {
+        m_current_table_row = 9; // Last row needs to be deleted
+    }
+
+    for (int i = 0; i < 11; i++) {
+        QModelIndex index = modelMag->index(m_current_table_row,i,QModelIndex());
+        modelMag->setData(index,0);
+
+        QModelIndex indexpha = modelPha->index(m_current_table_row,i,QModelIndex());
+        modelPha->setData(indexpha,0);
+
+    }
+
+    ui->tableViewMag->selectRow(m_current_table_row);
+    ui->tableViewPhase->selectRow(m_current_table_row);
+
+    updateStatistics();
+
 }
