@@ -80,6 +80,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setTables();
     ui->lineEditStatisticSamples->setText("5");
 
+
+
     //Calibration
     ui->lineEditCalRes->setText("1000");
 
@@ -958,6 +960,12 @@ void MainWindow::setTables()
 
     clearTable();
 
+    sm_mag = ui->tableViewMag->selectionModel();
+    connect(sm_mag, SIGNAL(currentChanged(QModelIndex,QModelIndex)),this,SLOT(tableChanged(QModelIndex,QModelIndex)));
+
+    sm_pha = ui->tableViewPhase->selectionModel();
+    connect(sm_pha, SIGNAL(currentChanged(QModelIndex,QModelIndex)),this,SLOT(tableChanged(QModelIndex,QModelIndex)));
+
 }
 
 void MainWindow::clearTable()
@@ -1807,7 +1815,7 @@ void MainWindow::on_actionSave_Tables_triggered()
         for (int j = 0; j < 10; j++) {
             for (int i = 0; i < 11; i++) {
 
-                QModelIndex index = modelPha->index(0,i,QModelIndex());
+                QModelIndex index = modelPha->index(j,i,QModelIndex());
                 aux = modelPha->data(index).toDouble();
 
                 stream << aux << " ";
@@ -1820,6 +1828,19 @@ void MainWindow::on_actionSave_Tables_triggered()
             stream << aux << " \n";
         }
 
+        stream << " \n";
+
+        for (int j = 0; j < 10; j++) {
+            for (int i = 0; i < 11; i++) {
+
+                QModelIndex index = modelMag->index(j,i,QModelIndex());
+                aux = modelMag->data(index).toDouble();
+
+                stream << aux << " ";
+
+            }
+            stream << aux << " \n";
+        }
 
         file.close();
 
@@ -1947,11 +1968,13 @@ void MainWindow::measurement_timeout()
 
 void MainWindow::on_actionDelete_icon_triggered()
 {
+   /*
     if (m_current_table_row != 0) {
         m_current_table_row--;
     } else {
         m_current_table_row = 9; // Last row needs to be deleted
     }
+    */
 
     for (int i = 0; i < 11; i++) {
         QModelIndex index = modelMag->index(m_current_table_row,i,QModelIndex());
@@ -1968,3 +1991,39 @@ void MainWindow::on_actionDelete_icon_triggered()
     updateStatistics();
 
 }
+
+void MainWindow::on_tableViewPhase_clicked(const QModelIndex &index)
+{
+    int row = index.row();
+
+    m_current_table_row = row;
+
+    ui->tableViewMag->selectRow(m_current_table_row);
+    ui->tableViewPhase->selectRow(m_current_table_row);
+
+    //int col = index.column();
+   // qDebug()<<"Row: " << row << "Col: " << col;
+}
+
+void MainWindow::on_tableViewMag_clicked(const QModelIndex &index)
+{
+    int row = index.row();
+
+    m_current_table_row = row;
+
+    ui->tableViewMag->selectRow(m_current_table_row);
+    ui->tableViewPhase->selectRow(m_current_table_row);
+
+}
+
+void MainWindow::tableChanged(const QModelIndex &index1, const QModelIndex &index2)
+{
+ int row = index1.row();
+ //qDebug()<<"current row: "<< row;
+ m_current_table_row = row;
+
+ ui->tableViewMag->selectRow(m_current_table_row);
+ ui->tableViewPhase->selectRow(m_current_table_row);
+
+}
+

@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QtSerialPort/QSerialPort>
 #include <QStandardItemModel>
+#include <QItemSelectionModel>
 #include <QTime>
 
 #include "/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h"
@@ -94,6 +95,14 @@ private slots:
 
     void on_actionDelete_icon_triggered();
 
+    void on_tableViewPhase_clicked(const QModelIndex &index);
+
+    void on_tableViewMag_clicked(const QModelIndex &index);
+
+    void tableChanged(const QModelIndex &index1, const QModelIndex &index2);
+
+
+
 private:
     Ui::MainWindow *ui;
 
@@ -137,11 +146,16 @@ private:
 
     QStandardItemModel *modelCalibration;
 
+    QItemSelectionModel *sm_mag;
+    QItemSelectionModel *sm_pha;
+
     int m_current_table_row;
     int m_current_table_column;
 
     double m_PhaseCalibration[11];
     double m_MagCalibration[11];
+
+    //timeout related
 
     QTime m_time;
 
