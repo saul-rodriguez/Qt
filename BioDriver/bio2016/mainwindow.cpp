@@ -507,7 +507,7 @@ void MainWindow::on_pushButtonAllTest_clicked()
     readADC(aux);;
     */
 
-
+ /*
     QByteArray aux;
     aux.append('f');
     aux.append(0x99);
@@ -527,6 +527,23 @@ void MainWindow::on_pushButtonAllTest_clicked()
     double I,Q;
 
     extractVoltagesSingleShot(aux, &I, &Q);
+    */
+
+    double Mmag = 998.0319;
+    double Mpha = -6.2749e-2/3.14159265*180;
+    double Calmag, Calpha;
+
+    Calibration cal;
+    cal.setCalibrateCableCap(true);
+    cal.setCableCap(10.0e-12);
+    cal.setMeasImpedance(Mmag,Mpha,10);
+    cal.getCalImpedance(&Calmag,&Calpha);
+
+    Mmag = 9540.2821;
+    Mpha = -0.3043957/3.14159265*180;
+
+    cal.setMeasImpedance(Mmag,Mpha,9);
+    cal.getCalImpedance(&Calmag,&Calpha);
 
 }
 

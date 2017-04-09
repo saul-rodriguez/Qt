@@ -10,6 +10,7 @@
 #include "/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h"
 #include "cbio2016.h"
 #include "cvin2016.h"
+#include "calibration.h"
 
 
 #define IDLE 0
