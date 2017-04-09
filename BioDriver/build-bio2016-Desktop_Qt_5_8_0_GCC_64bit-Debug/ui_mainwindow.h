@@ -45,6 +45,7 @@ public:
     QAction *actionClean_Tables;
     QAction *actionSave_Tables;
     QAction *actionDelete_icon;
+    QAction *actionPlay_Delay;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout_8;
     QTabWidget *tabWidget;
@@ -240,6 +241,11 @@ public:
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/images/Delete-icon.png"), QSize(), QIcon::Normal, QIcon::On);
         actionDelete_icon->setIcon(icon4);
+        actionPlay_Delay = new QAction(MainWindow);
+        actionPlay_Delay->setObjectName(QStringLiteral("actionPlay_Delay"));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/images/Button-PlayDelay-icon.png"), QSize(), QIcon::Normal, QIcon::On);
+        actionPlay_Delay->setIcon(icon5);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         verticalLayout_8 = new QVBoxLayout(centralWidget);
@@ -879,10 +885,11 @@ public:
         mainToolBar->addAction(actionSave_Measurement);
         mainToolBar->addAction(actionSave_Tables);
         mainToolBar->addAction(actionClean_Tables);
+        mainToolBar->addAction(actionPlay_Delay);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(7);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -901,6 +908,8 @@ public:
         actionSave_Tables->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", Q_NULLPTR));
         actionDelete_icon->setText(QApplication::translate("MainWindow", "Delete icon", Q_NULLPTR));
         actionDelete_icon->setShortcut(QApplication::translate("MainWindow", "Del", Q_NULLPTR));
+        actionPlay_Delay->setText(QApplication::translate("MainWindow", "Play Delay", Q_NULLPTR));
+        actionPlay_Delay->setShortcut(QApplication::translate("MainWindow", "T", Q_NULLPTR));
         pushButtonRefreshPorts->setText(QApplication::translate("MainWindow", "Refresh Ports", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Available Serial Ports:", Q_NULLPTR));
         pushButtonConnect->setText(QApplication::translate("MainWindow", "Connect", Q_NULLPTR));

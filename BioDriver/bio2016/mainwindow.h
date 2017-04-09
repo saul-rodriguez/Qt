@@ -103,6 +103,10 @@ private slots:
 
 
 
+    void on_actionPlay_Delay_triggered();
+
+    void delayed_trigger_timeout();
+
 private:
     Ui::MainWindow *ui;
 
@@ -165,6 +169,10 @@ private:
     int m_measurement_retrial;
 
     int m_singleShot;
+
+    QTimer *shotmeas_timer;
+    int m_shotTime;
+    int m_delcount;
 
 private:
     void readPorts();

@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>7</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1413,6 +1413,7 @@
    <addaction name="actionSave_Measurement"/>
    <addaction name="actionSave_Tables"/>
    <addaction name="actionClean_Tables"/>
+   <addaction name="actionPlay_Delay"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="actionSweep">
@@ -1480,6 +1481,19 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="actionPlay_Delay">
+   <property name="icon">
+    <iconset>
+     <normalon>:/images/Button-PlayDelay-icon.png</normalon>
+    </iconset>
+   </property>
+   <property name="text">
+    <string>Play Delay</string>
+   </property>
+   <property name="shortcut">
+    <string>T</string>
    </property>
   </action>
  </widget>

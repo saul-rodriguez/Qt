@@ -94,6 +94,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_singleShot = 0;
 
+    //Delay timer
+    shotmeas_timer = new QTimer(this);
+    shotmeas_timer->setSingleShot(true);
+    connect(shotmeas_timer,SIGNAL(timeout()),this,SLOT(delayed_trigger_timeout()));
+
+
+
 
 }
 
@@ -1567,6 +1574,11 @@ void MainWindow::on_pushButtonSweep_clicked()
         measureImpedance();
     }
 
+    qDebug() << "************************************";
+    qDebug() << "************************************";
+    qDebug() << "************************************";
+
+
 }
 
 void MainWindow::on_checkBoxAppend_stateChanged(int arg1)
@@ -2027,3 +2039,33 @@ void MainWindow::tableChanged(const QModelIndex &index1, const QModelIndex &inde
 
 }
 
+
+void MainWindow::on_actionPlay_Delay_triggered()
+{
+    m_shotTime = 5;
+    m_delcount = 5;
+
+    shotmeas_timer->start(1000);
+
+}
+
+void MainWindow::delayed_trigger_timeout()
+{
+
+    if (m_shotTime) {
+        qDebug() << m_shotTime << "sec remaining";
+        shotmeas_timer->start(1000);
+        m_shotTime--;
+    } else {
+        if (!m_delcount) return;
+
+        qDebug() << "# Auto Measurement: " << m_delcount;
+        shotmeas_timer->start(2500);
+        m_delcount--;
+
+        on_pushButtonSweep_clicked();
+
+    }
+
+
+}

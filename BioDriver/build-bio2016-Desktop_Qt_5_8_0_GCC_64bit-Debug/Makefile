@@ -665,6 +665,7 @@ qrc_resour.cpp: ../bio2016/resour.qrc \
 		../bio2016/images/Clean-icon.png \
 		../bio2016/images/Save-icon.png \
 		../bio2016/images/Button-Play-icon.png \
+		../bio2016/images/Button-PlayDelay-icon.png \
 		../bio2016/images/Delete-icon.png \
 		../bio2016/images/Save-table-icon.png
 	/opt/Qt/5.8/gcc_64/bin/rcc -name resour ../bio2016/resour.qrc -o qrc_resour.cpp
@@ -788,6 +789,8 @@ moc_mainwindow.cpp: /opt/Qt/5.8/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QItemSelectionModel \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTime \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
@@ -1316,6 +1319,8 @@ main.o: ../bio2016/main.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QItemSelectionModel \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTime \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
@@ -1446,6 +1451,8 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtGui/QStandardItemModel \
 		/opt/Qt/5.8/gcc_64/include/QtGui/qstandarditemmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt/5.8/gcc_64/include/QtCore/QItemSelectionModel \
+		/opt/Qt/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtCore/QTime \
 		/opt/Qt/5.8/gcc_64/include/QtCore/qdatetime.h \
 		/home/saul/projects/Qt/SerialDriver/serial_driver/cserialdriver.h \
@@ -1497,7 +1504,6 @@ mainwindow.o: ../bio2016/mainwindow.cpp ../bio2016/mainwindow.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qheaderview.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qabstractitemview.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/opt/Qt/5.8/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/qlabel.h \
 		/opt/Qt/5.8/gcc_64/include/QtWidgets/QLineEdit \
