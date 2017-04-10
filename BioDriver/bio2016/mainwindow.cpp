@@ -84,6 +84,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Calibration
     ui->lineEditCalRes->setText("1000");
+    ui->lineEditCableCap->setText("0");
+
+    m_cal.setCalibrateCableCap(true);
 
     //Initialize measurement timer
     measurement_timer = new QTimer(this);
@@ -905,8 +908,19 @@ void MainWindow::processSweep(double mag, double phase)
 
     if (calphase) {
         qDebug() << "Calibration Enabled!";
-        phase += m_PhaseCalibration[FREQ10 - m_currentFreqIndex]; //
-        mag *= m_MagCalibration[FREQ10 - m_currentFreqIndex];
+       // phase += m_PhaseCalibration[FREQ10 - m_currentFreqIndex]; //
+       // mag *= m_MagCalibration[FREQ10 - m_currentFreqIndex];
+
+        if (ui->checkBoxCapCalibration->isChecked()) {
+            m_cal.setCalibrateCableCap(true);
+            double cap = ui->lineEditCableCap->text().toDouble()*1e-12;
+            m_cal.setCableCap(cap);
+        } else {
+            m_cal.setCalibrateCableCap(false);
+        }
+        m_cal.setMeasImpedance(mag,phase,(FREQ10 - m_currentFreqIndex));
+        m_cal.getCalImpedance(&mag,&phase);
+
     }
 
 
@@ -917,7 +931,7 @@ void MainWindow::processSweep(double mag, double phase)
     ui->widgetMagnitude->update();
     ui->widgetPhase->update();
 
-    updateTable(mag,-phase);
+    updateTable(mag,-phase); //Phase sign changed here!!
 
     if (m_currentFreqIndex > 0) { //Change frequency and make a new measurement
         m_currentFreqIndex--;
@@ -1667,6 +1681,9 @@ void MainWindow::on_pushButtonUpdateCalibration_clicked()
         m_MagCalibration[i] = aux;
     }
 
+    //Update Calibration object
+    m_cal.setCalParam(m_MagCalibration,m_PhaseCalibration);
+
 
 }
 
@@ -1689,6 +1706,15 @@ void MainWindow::on_pushButtonSaveCal_clicked()
 
         stream << "\n";
 
+        //Save cables's cap (pF)
+        double cap = ui->lineEditCableCap->text().toDouble();
+        qDebug()<<"cap = " << cap;
+        stream << cap;
+
+        stream << "\n";
+
+
+
     }
 }
 
@@ -1708,6 +1734,11 @@ void MainWindow::on_pushButtonLoadCal_clicked()
 
     line = in.readLine();
     QStringList mag = line.split(" ");
+
+    line = in.readLine();
+    QStringList cap = line.split(" ");
+
+
 
     QString aux;
     //Get phase values from statistic table and update calibration table
@@ -1736,6 +1767,13 @@ void MainWindow::on_pushButtonLoadCal_clicked()
         modelCalibration->setData(indexCalPha,aux);
         m_MagCalibration[i] = aux.toDouble();
     }
+
+    aux = cap.at(0);
+    ui->lineEditCableCap->setText(aux);
+
+    //Update Calibration object
+    m_cal.setCalParam(m_MagCalibration,m_PhaseCalibration);
+    m_cal.setCableCap((aux.toDouble()*1e-12));
 
 }
 
@@ -1782,18 +1820,30 @@ void MainWindow::on_actionSave_Measurement_triggered()
         stream << "\n";*/
 
         for (int i = 0; i < 11; i++) {
+            // Save time of the day in secs
             stream << time_sec << " ";
 
+            // Save frequency
             stream << m_bioASIC.getFreqValue(FREQ10 - i) << " ";
 
+            // Save average phase
             QModelIndex index = modelAveragePha->index(0,i,QModelIndex());
             aux = modelAveragePha->data(index).toDouble();
-
             stream << aux << " ";
 
+            // Save rms phase
+            index = modelAveragePha->index(1,i,QModelIndex());
+            aux = modelAveragePha->data(index).toDouble();
+            stream << aux << " ";
+
+            // Save average Mag
             QModelIndex indexmag = modelAverageMag->index(0,i,QModelIndex());
             aux = modelAverageMag->data(indexmag).toDouble();
+            stream << aux << " ";
 
+            // Save tms Mag
+            indexmag = modelAverageMag->index(1,i,QModelIndex());
+            aux = modelAverageMag->data(indexmag).toDouble();
             stream << aux << " \n";
 
 

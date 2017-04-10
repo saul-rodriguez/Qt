@@ -18,7 +18,7 @@
     <item>
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>1</number>
+       <number>8</number>
       </property>
       <widget class="QWidget" name="tab">
        <attribute name="title">
@@ -1348,8 +1348,8 @@
        <widget class="QPushButton" name="pushButtonSaveCal">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>190</y>
+          <x>80</x>
+          <y>290</y>
           <width>131</width>
           <height>25</height>
          </rect>
@@ -1361,14 +1361,50 @@
        <widget class="QPushButton" name="pushButtonLoadCal">
         <property name="geometry">
          <rect>
-          <x>190</x>
-          <y>190</y>
+          <x>230</x>
+          <y>290</y>
           <width>131</width>
           <height>25</height>
          </rect>
         </property>
         <property name="text">
          <string>Load Calibration</string>
+        </property>
+       </widget>
+       <widget class="QCheckBox" name="checkBoxCapCalibration">
+        <property name="geometry">
+         <rect>
+          <x>290</x>
+          <y>190</y>
+          <width>291</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Enable Cable's Capacitance Calibration</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="lineEditCableCap">
+        <property name="geometry">
+         <rect>
+          <x>220</x>
+          <y>190</y>
+          <width>51</width>
+          <height>25</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_15">
+        <property name="geometry">
+         <rect>
+          <x>110</x>
+          <y>190</y>
+          <width>101</width>
+          <height>17</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Cable cap (pF)</string>
         </property>
        </widget>
       </widget>

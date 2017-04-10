@@ -202,6 +202,9 @@ public:
     QLabel *label_14;
     QPushButton *pushButtonSaveCal;
     QPushButton *pushButtonLoadCal;
+    QCheckBox *checkBoxCapCalibration;
+    QLineEdit *lineEditCableCap;
+    QLabel *label_15;
     QMenuBar *menuBar;
     QMenu *menuMeasure;
     QMenu *menuHelp;
@@ -851,10 +854,19 @@ public:
         label_14->setGeometry(QRect(240, 40, 101, 17));
         pushButtonSaveCal = new QPushButton(tab_9);
         pushButtonSaveCal->setObjectName(QStringLiteral("pushButtonSaveCal"));
-        pushButtonSaveCal->setGeometry(QRect(30, 190, 131, 25));
+        pushButtonSaveCal->setGeometry(QRect(80, 290, 131, 25));
         pushButtonLoadCal = new QPushButton(tab_9);
         pushButtonLoadCal->setObjectName(QStringLiteral("pushButtonLoadCal"));
-        pushButtonLoadCal->setGeometry(QRect(190, 190, 131, 25));
+        pushButtonLoadCal->setGeometry(QRect(230, 290, 131, 25));
+        checkBoxCapCalibration = new QCheckBox(tab_9);
+        checkBoxCapCalibration->setObjectName(QStringLiteral("checkBoxCapCalibration"));
+        checkBoxCapCalibration->setGeometry(QRect(290, 190, 291, 23));
+        lineEditCableCap = new QLineEdit(tab_9);
+        lineEditCableCap->setObjectName(QStringLiteral("lineEditCableCap"));
+        lineEditCableCap->setGeometry(QRect(220, 190, 51, 25));
+        label_15 = new QLabel(tab_9);
+        label_15->setObjectName(QStringLiteral("label_15"));
+        label_15->setGeometry(QRect(110, 190, 101, 17));
         tabWidget->addTab(tab_9, QString());
 
         verticalLayout_8->addWidget(tabWidget);
@@ -889,7 +901,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(8);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1014,6 +1026,8 @@ public:
         label_14->setText(QApplication::translate("MainWindow", "Calibration R", Q_NULLPTR));
         pushButtonSaveCal->setText(QApplication::translate("MainWindow", "Save Calibration", Q_NULLPTR));
         pushButtonLoadCal->setText(QApplication::translate("MainWindow", "Load Calibration", Q_NULLPTR));
+        checkBoxCapCalibration->setText(QApplication::translate("MainWindow", "Enable Cable's Capacitance Calibration", Q_NULLPTR));
+        label_15->setText(QApplication::translate("MainWindow", "Cable cap (pF)", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QApplication::translate("MainWindow", "Calib.", Q_NULLPTR));
         menuMeasure->setTitle(QApplication::translate("MainWindow", "Measure", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));

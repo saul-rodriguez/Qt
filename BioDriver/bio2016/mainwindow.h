@@ -157,8 +157,11 @@ private:
     int m_current_table_row;
     int m_current_table_column;
 
+    //Calibration related
     double m_PhaseCalibration[11];
     double m_MagCalibration[11];
+
+    Calibration m_cal;
 
     //timeout related
 
