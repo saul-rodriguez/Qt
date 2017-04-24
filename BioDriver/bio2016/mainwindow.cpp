@@ -2109,8 +2109,8 @@ void MainWindow::tableChanged(const QModelIndex &index1, const QModelIndex &inde
 
 void MainWindow::on_actionPlay_Delay_triggered()
 {
-    m_shotTime = 5;
-    m_delcount = 5;
+    m_shotTime = 10; //Seconds before sweeps start
+    m_delcount = 10; //Number of sweeps
 
     shotmeas_timer->start(1000);
 
