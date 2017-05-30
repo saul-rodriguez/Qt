@@ -15,10 +15,13 @@ public:
     void setCalibrateCableCap(bool param);
     void setMeasImpedance(double mag, double pha, quint8 freqIndex);
     void getCalImpedance(double *mag, double *pha);
+    void setAddedRes(double res);
+    void setCalibrateAddedRes(bool param);
 
 private:
 
     bool usecap;
+    bool useAddedRes;
 
     double m_measMag;
     double m_measPha;
@@ -30,6 +33,8 @@ private:
     double m_freq[11];
 
     double m_cap; // Cables capacitance
+
+    double m_res; // Added Parallel Resistor
 
 signals:
 

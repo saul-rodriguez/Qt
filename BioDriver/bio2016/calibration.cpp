@@ -20,6 +20,8 @@ Calibration::Calibration(QObject *parent) : QObject(parent)
 
     m_cap = 0;
 
+    m_res = 0;
+
 }
 
 void Calibration::setCalParam(double *magcal, double *magpha)
@@ -56,6 +58,7 @@ void Calibration::getCalImpedance(double *mag, double *pha)
    magnitude = m_measMag*m_magcal[m_freqIndex];
    phase = m_measPha + m_phacal[m_freqIndex];
 
+   // Capacitance substraction
    if (usecap) {
        double PI = 3.14159265359;
 
@@ -69,6 +72,14 @@ void Calibration::getCalImpedance(double *mag, double *pha)
        std::complex<double> Gcap(0,C_adm);
 
        std::complex<double> Gcal =Gm - Gcap;
+
+       // Parallel resistance substraction
+       if (useAddedRes) {
+           double R_adm = 1/m_res;
+           std::complex<double> Gres(R_adm,0);
+           Gcal -= Gres;
+       }
+
        std::complex<double> Zcal = pow(Gcal,-1);
 
        magnitude = std::abs(Zcal);
@@ -77,4 +88,14 @@ void Calibration::getCalImpedance(double *mag, double *pha)
 
    *mag = magnitude;
    *pha = phase;
+}
+
+void Calibration::setAddedRes(double res)
+{
+    m_res = res;
+}
+
+void Calibration::setCalibrateAddedRes(bool param)
+{
+    useAddedRes = param;
 }

@@ -78,15 +78,18 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //DataTable
     setTables();
-    ui->lineEditStatisticSamples->setText("5");
+    ui->lineEditStatisticSamples->setText("10");
 
 
 
     //Calibration
     ui->lineEditCalRes->setText("1000");
     ui->lineEditCableCap->setText("0");
-
     m_cal.setCalibrateCableCap(true);
+
+    ui->lineEditAddedRes->setText("1000000");
+    m_cal.setCalibrateAddedRes(false);
+
 
     //Initialize measurement timer
     measurement_timer = new QTimer(this);
@@ -917,6 +920,14 @@ void MainWindow::processSweep(double mag, double phase)
             m_cal.setCableCap(cap);
         } else {
             m_cal.setCalibrateCableCap(false);
+        }
+
+        if (ui->checkBoxAddedRes->isChecked()) {
+            m_cal.setCalibrateAddedRes(true);
+            double res = ui->lineEditAddedRes->text().toDouble();
+            m_cal.setAddedRes(res);
+        } else {
+            m_cal.setCalibrateAddedRes(false);
         }
         m_cal.setMeasImpedance(mag,phase,(FREQ10 - m_currentFreqIndex));
         m_cal.getCalImpedance(&mag,&phase);
@@ -2109,7 +2120,7 @@ void MainWindow::tableChanged(const QModelIndex &index1, const QModelIndex &inde
 
 void MainWindow::on_actionPlay_Delay_triggered()
 {
-    m_shotTime = 10; //Seconds before sweeps start
+    m_shotTime = 3; //Seconds before sweeps start
     m_delcount = 10; //Number of sweeps
 
     shotmeas_timer->start(1000);

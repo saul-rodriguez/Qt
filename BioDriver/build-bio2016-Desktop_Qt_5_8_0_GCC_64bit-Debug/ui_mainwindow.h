@@ -205,6 +205,9 @@ public:
     QCheckBox *checkBoxCapCalibration;
     QLineEdit *lineEditCableCap;
     QLabel *label_15;
+    QCheckBox *checkBoxAddedRes;
+    QLabel *label_16;
+    QLineEdit *lineEditAddedRes;
     QMenuBar *menuBar;
     QMenu *menuMeasure;
     QMenu *menuHelp;
@@ -860,13 +863,22 @@ public:
         pushButtonLoadCal->setGeometry(QRect(230, 290, 131, 25));
         checkBoxCapCalibration = new QCheckBox(tab_9);
         checkBoxCapCalibration->setObjectName(QStringLiteral("checkBoxCapCalibration"));
-        checkBoxCapCalibration->setGeometry(QRect(290, 190, 291, 23));
+        checkBoxCapCalibration->setGeometry(QRect(310, 190, 291, 23));
         lineEditCableCap = new QLineEdit(tab_9);
         lineEditCableCap->setObjectName(QStringLiteral("lineEditCableCap"));
         lineEditCableCap->setGeometry(QRect(220, 190, 51, 25));
         label_15 = new QLabel(tab_9);
         label_15->setObjectName(QStringLiteral("label_15"));
         label_15->setGeometry(QRect(110, 190, 101, 17));
+        checkBoxAddedRes = new QCheckBox(tab_9);
+        checkBoxAddedRes->setObjectName(QStringLiteral("checkBoxAddedRes"));
+        checkBoxAddedRes->setGeometry(QRect(310, 220, 281, 23));
+        label_16 = new QLabel(tab_9);
+        label_16->setObjectName(QStringLiteral("label_16"));
+        label_16->setGeometry(QRect(110, 220, 91, 17));
+        lineEditAddedRes = new QLineEdit(tab_9);
+        lineEditAddedRes->setObjectName(QStringLiteral("lineEditAddedRes"));
+        lineEditAddedRes->setGeometry(QRect(200, 220, 91, 25));
         tabWidget->addTab(tab_9, QString());
 
         verticalLayout_8->addWidget(tabWidget);
@@ -1028,6 +1040,8 @@ public:
         pushButtonLoadCal->setText(QApplication::translate("MainWindow", "Load Calibration", Q_NULLPTR));
         checkBoxCapCalibration->setText(QApplication::translate("MainWindow", "Enable Cable's Capacitance Calibration", Q_NULLPTR));
         label_15->setText(QApplication::translate("MainWindow", "Cable cap (pF)", Q_NULLPTR));
+        checkBoxAddedRes->setText(QApplication::translate("MainWindow", "Enable Parallel Resistance Calibration", Q_NULLPTR));
+        label_16->setText(QApplication::translate("MainWindow", "Parallel Res:", Q_NULLPTR));
         tabWidget->setTabText(tabWidget->indexOf(tab_9), QApplication::translate("MainWindow", "Calib.", Q_NULLPTR));
         menuMeasure->setTitle(QApplication::translate("MainWindow", "Measure", Q_NULLPTR));
         menuHelp->setTitle(QApplication::translate("MainWindow", "Help", Q_NULLPTR));
