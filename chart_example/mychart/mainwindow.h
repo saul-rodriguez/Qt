@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QChart>
 #include <QtCharts/QChartGlobal>
+#include <QtCharts/QLineSeries>
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +32,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_pushButton_Test_clicked();
+
 private:
     Ui::MainWindow *ui;
 
@@ -38,13 +41,16 @@ private:
     QLineEdit *lineEdit2;
     QPushButton *pbutton;
 
-    QChartView *m_chart;
-    QChart *createLineChart() const;
+    QChartView *m_chartView;
+    QChart *m_chart;
+    void initializeChart();
+    void updateChartOptions();
+    int m_color;
+
     void generate_data(void);
 
     QList <trace> traces;
-
-    int m_trace_factor;
+    double m_trace_factor;
 
 
 };

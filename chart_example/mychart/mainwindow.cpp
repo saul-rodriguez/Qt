@@ -11,7 +11,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    m_trace_factor = 1;
+    m_trace_factor = 0;
+    m_color = 0;
     generate_data();
 
 
@@ -25,13 +26,14 @@ MainWindow::MainWindow(QWidget *parent) :
     //pbutton->setMaximumHeight(55);
     //ui->verticalLayout->addStretch(100);
 
-    QChartView *chartView;
-
-    chartView = new QChartView(createLineChart());
-    ui->myverticalLayout->addWidget(chartView,1,0);
-    m_chart = chartView;
+   // QChartView *chartView;
 
 
+    //Creates a QChart object, attach it to a QChartView, and assign it to a place in layout
+   // m_chart = createLineChart();
+   // m_chartView = new QChartView(m_chart);
+    initializeChart();
+    ui->myverticalLayout->addWidget(m_chartView,1,0);
 
 }
 
@@ -40,37 +42,40 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-QChart *MainWindow::createLineChart() const
+void MainWindow::initializeChart()
 {
     QChart *chart = new QChart();
-    chart->setTitle("Line chart");
+    chart->setTitle("Line chart"); //Title
+    m_chart = chart;
 
-    QLineSeries *series = new QLineSeries(chart);
+    QLineSeries *series = new QLineSeries();
+    series->append(0,0);
+    //series->append(0,1);
+    m_chart->addSeries(series);
 
-    int size = traces.size();
-
-    if (size) {
-        for (int i = 0; i < size; i++) {
-            series->append(traces[i]);
-            series->setName(QString::number(i));
-        }
-
-        chart->addSeries(series);
-
-    }
-
-    chart->createDefaultAxes();
-    chart->axisX()->setRange(0, 1);
-    chart->axisY()->setRange(0, 1);
-
-   // static_cast<QValueAxis *>(chart->axisY())->setLabelFormat("%.1f  ");
+    //updateChartOptions
+    updateChartOptions();
 
 
-    return chart;
+    m_chartView = new QChartView(m_chart);
+    m_chartView->setRenderHint(QPainter::Antialiasing, true);
+}
+
+void MainWindow::updateChartOptions()
+{
+    m_chart->createDefaultAxes();
+    m_chart->axisX()->setRange(0, 1);
+    m_chart->axisX()->setTitleText("time");
+    m_chart->axisY()->setRange(0, 1);
+    m_chart->axisY()->setTitleText("Voltage");
+    m_chart->legend()->hide();
+    //m_chart->setAnimationOptions(QChart::AllAnimations);
+    static_cast<QValueAxis *>(m_chart->axisY())->setLabelFormat("%.1f  ");
 }
 
 void MainWindow::generate_data()
 {
+    QLineSeries aux_series;
     trace aux_trace;
     double x,y;
     QPointF aux;
@@ -87,12 +92,48 @@ void MainWindow::generate_data()
 
 void MainWindow::on_pushButton_clicked()
 {
-    m_trace_factor *= 2;
-
-  // QLineSeries *series = new QLineSeries();
-
-   // series->append(0,5)
-   // m_chart->add
+   m_trace_factor +=0.1;
+   generate_data();
 
 
+   //Update the data in the chart
+   QLineSeries *series; //Contains points, colors, etc of a single trace
+   series = new QLineSeries();
+
+   int size = traces.size();
+
+   m_chart->removeAllSeries(); //removes and deletes series objects
+   if (size) {
+       for (int i = 0; i < size; i++) {
+           series = new QLineSeries(); //create a new trace
+           series->append(traces[i]); //Append the trace (QList <QPointF>)
+           series->setName(QString::number(i));
+           m_chart->addSeries(series);
+       }
+
+    //Update the axis
+       m_chart->createDefaultAxes();
+       m_chart->axisX()->setRange(0, 1);
+       m_chart->axisY()->setRange(0, 1);
+       m_chart->createDefaultAxes();
+       m_chart->axisX()->setRange(0, 1);
+       m_chart->axisX()->setTitleText("time");
+       m_chart->axisY()->setRange(0, 1);
+       m_chart->axisY()->setTitleText("Voltage");
+       m_chartView->setRenderHint(QPainter::Antialiasing, true);
+
+   }
+
+}
+
+void MainWindow::on_pushButton_Test_clicked()
+{
+    if (m_color < 7) {
+        m_color++;
+
+        m_chart->setTheme(static_cast<QChart::ChartTheme>(m_color));
+
+    } else {
+        m_color = 0;
+    }
 }

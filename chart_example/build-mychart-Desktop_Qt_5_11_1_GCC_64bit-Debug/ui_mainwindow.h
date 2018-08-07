@@ -33,6 +33,7 @@ public:
     QHBoxLayout *myhorizontalLayout;
     QLineEdit *lineEdit;
     QPushButton *pushButton;
+    QPushButton *pushButton_Test;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -65,6 +66,11 @@ public:
 
         myhorizontalLayout->addWidget(pushButton);
 
+        pushButton_Test = new QPushButton(centralWidget);
+        pushButton_Test->setObjectName(QStringLiteral("pushButton_Test"));
+
+        myhorizontalLayout->addWidget(pushButton_Test);
+
 
         myverticalLayout->addLayout(myhorizontalLayout);
 
@@ -92,6 +98,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
+        pushButton_Test->setText(QApplication::translate("MainWindow", "Test", nullptr));
     } // retranslateUi
 
 };

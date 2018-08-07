@@ -1273,6 +1273,7 @@ mainwindow.o: ../mychart/mainwindow.cpp ../mychart/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QHBoxLayout \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmenubar.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmenu.h \
@@ -1283,7 +1284,21 @@ mainwindow.o: ../mychart/mainwindow.cpp ../mychart/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QToolBar \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtoolbar.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QWidget
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QWidget \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChartView \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchartview.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsView \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLineSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlineseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QXYSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QValueAxis \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qvalueaxis.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../mychart/mainwindow.cpp
 
 mychart.o: ../mychart/mychart.cpp ../mychart/mychart.h \
