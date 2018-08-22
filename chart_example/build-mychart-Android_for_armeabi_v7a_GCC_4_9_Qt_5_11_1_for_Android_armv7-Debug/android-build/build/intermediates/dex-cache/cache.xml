@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/chart_example/build-mychart-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Debug/android-build/libs/QtAndroid.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="61597ce917e370b1a18343dafa3b5a68249e30ad">
+        <dex dex="/home/saul/projects/Qt/chart_example/build-mychart-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Debug/android-build/build/intermediates/pre-dexed/debug/QtAndroid_fe23c166a4b1b525f044072aad20b2455e1d9b1e.jar" />
+    </item>
+
+</items>
