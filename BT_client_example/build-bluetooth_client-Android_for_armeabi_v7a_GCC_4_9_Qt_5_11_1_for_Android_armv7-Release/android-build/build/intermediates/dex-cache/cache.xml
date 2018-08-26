@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/BT_client_example/build-bluetooth_client-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidBluetooth.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="bff17c3b543d4ec43b38a122971ebd051e554bbd">
+        <dex dex="/home/saul/projects/Qt/BT_client_example/build-bluetooth_client-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidBluetooth_d075bbfca90047b1cd0249c0f8c15c5d9db8ec9e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/BT_client_example/build-bluetooth_client-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidExtras.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="c52d6a497e23a34655af461abd0261f73811c3dc">
+        <dex dex="/home/saul/projects/Qt/BT_client_example/build-bluetooth_client-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidExtras_4e5bda5e59aa1950c981d63ec28ec38037e6bfec.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/BT_client_example/build-bluetooth_client-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroid.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="61597ce917e370b1a18343dafa3b5a68249e30ad">
+        <dex dex="/home/saul/projects/Qt/BT_client_example/build-bluetooth_client-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroid_0750060aa4f750b31e77c00e4f3294b32fe04b9d.jar" />
+    </item>
+
+</items>
