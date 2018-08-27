@@ -1,0 +1,231 @@
+/********************************************************************************
+** Form generated from reading UI file 'mainwindow.ui'
+**
+** Created by: Qt User Interface Compiler version 5.11.1
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_MAINWINDOW_H
+#define UI_MAINWINDOW_H
+
+#include <QtCore/QVariant>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QComboBox>
+#include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
+#include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLabel>
+#include <QtWidgets/QLineEdit>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTabWidget>
+#include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_MainWindow
+{
+public:
+    QWidget *centralWidget;
+    QGridLayout *gridLayout;
+    QVBoxLayout *verticalLayout;
+    QTabWidget *tabWidget;
+    QWidget *Connect;
+    QGridLayout *gridLayout_3;
+    QGroupBox *groupBoxWirelessInterface;
+    QGridLayout *gridLayout_2;
+    QGridLayout *gridLayout_4;
+    QPushButton *pushButtonBTdiscoverDevices;
+    QRadioButton *radioButtonWiFi;
+    QLabel *labelBTstatus;
+    QRadioButton *radioButtonBT;
+    QComboBox *comboBoxBTdevices;
+    QPushButton *pushButtonBTconnect;
+    QWidget *tab_2;
+    QGridLayout *gridLayout_5;
+    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *lineEditAT;
+    QPushButton *pushButtonATSend;
+    QPlainTextEdit *plainTextEditAT;
+    QWidget *tab;
+    QGridLayout *gridLayout_6;
+    QVBoxLayout *verticalLayout_3;
+    QMenuBar *menuBar;
+    QToolBar *mainToolBar;
+    QStatusBar *statusBar;
+
+    void setupUi(QMainWindow *MainWindow)
+    {
+        if (MainWindow->objectName().isEmpty())
+            MainWindow->setObjectName(QStringLiteral("MainWindow"));
+        MainWindow->resize(598, 461);
+        centralWidget = new QWidget(MainWindow);
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QStringLiteral("gridLayout"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
+        tabWidget = new QTabWidget(centralWidget);
+        tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        Connect = new QWidget();
+        Connect->setObjectName(QStringLiteral("Connect"));
+        gridLayout_3 = new QGridLayout(Connect);
+        gridLayout_3->setSpacing(6);
+        gridLayout_3->setContentsMargins(11, 11, 11, 11);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        groupBoxWirelessInterface = new QGroupBox(Connect);
+        groupBoxWirelessInterface->setObjectName(QStringLiteral("groupBoxWirelessInterface"));
+        gridLayout_2 = new QGridLayout(groupBoxWirelessInterface);
+        gridLayout_2->setSpacing(6);
+        gridLayout_2->setContentsMargins(11, 11, 11, 11);
+        gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
+        gridLayout_4 = new QGridLayout();
+        gridLayout_4->setSpacing(6);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        pushButtonBTdiscoverDevices = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBTdiscoverDevices->setObjectName(QStringLiteral("pushButtonBTdiscoverDevices"));
+
+        gridLayout_4->addWidget(pushButtonBTdiscoverDevices, 1, 0, 1, 1);
+
+        radioButtonWiFi = new QRadioButton(groupBoxWirelessInterface);
+        radioButtonWiFi->setObjectName(QStringLiteral("radioButtonWiFi"));
+
+        gridLayout_4->addWidget(radioButtonWiFi, 0, 1, 1, 1);
+
+        labelBTstatus = new QLabel(groupBoxWirelessInterface);
+        labelBTstatus->setObjectName(QStringLiteral("labelBTstatus"));
+
+        gridLayout_4->addWidget(labelBTstatus, 3, 0, 1, 1);
+
+        radioButtonBT = new QRadioButton(groupBoxWirelessInterface);
+        radioButtonBT->setObjectName(QStringLiteral("radioButtonBT"));
+        radioButtonBT->setChecked(true);
+
+        gridLayout_4->addWidget(radioButtonBT, 0, 0, 1, 1);
+
+        comboBoxBTdevices = new QComboBox(groupBoxWirelessInterface);
+        comboBoxBTdevices->setObjectName(QStringLiteral("comboBoxBTdevices"));
+
+        gridLayout_4->addWidget(comboBoxBTdevices, 2, 0, 1, 1);
+
+        pushButtonBTconnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBTconnect->setObjectName(QStringLiteral("pushButtonBTconnect"));
+
+        gridLayout_4->addWidget(pushButtonBTconnect, 4, 0, 1, 1);
+
+
+        gridLayout_2->addLayout(gridLayout_4, 0, 0, 1, 1);
+
+
+        gridLayout_3->addWidget(groupBoxWirelessInterface, 0, 0, 1, 1);
+
+        tabWidget->addTab(Connect, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        gridLayout_5 = new QGridLayout(tab_2);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        verticalLayout_2 = new QVBoxLayout();
+        verticalLayout_2->setSpacing(6);
+        verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setSpacing(6);
+        horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
+        lineEditAT = new QLineEdit(tab_2);
+        lineEditAT->setObjectName(QStringLiteral("lineEditAT"));
+
+        horizontalLayout->addWidget(lineEditAT);
+
+        pushButtonATSend = new QPushButton(tab_2);
+        pushButtonATSend->setObjectName(QStringLiteral("pushButtonATSend"));
+
+        horizontalLayout->addWidget(pushButtonATSend);
+
+
+        verticalLayout_2->addLayout(horizontalLayout);
+
+
+        gridLayout_5->addLayout(verticalLayout_2, 0, 0, 1, 1);
+
+        plainTextEditAT = new QPlainTextEdit(tab_2);
+        plainTextEditAT->setObjectName(QStringLiteral("plainTextEditAT"));
+
+        gridLayout_5->addWidget(plainTextEditAT, 1, 0, 1, 1);
+
+        tabWidget->addTab(tab_2, QString());
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        gridLayout_6 = new QGridLayout(tab);
+        gridLayout_6->setSpacing(6);
+        gridLayout_6->setContentsMargins(11, 11, 11, 11);
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
+        verticalLayout_3 = new QVBoxLayout();
+        verticalLayout_3->setSpacing(6);
+        verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+
+        gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab, QString());
+
+        verticalLayout->addWidget(tabWidget);
+
+
+        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
+
+        MainWindow->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 598, 22));
+        MainWindow->setMenuBar(menuBar);
+        mainToolBar = new QToolBar(MainWindow);
+        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        MainWindow->insertToolBarBreak(mainToolBar);
+        statusBar = new QStatusBar(MainWindow);
+        statusBar->setObjectName(QStringLiteral("statusBar"));
+        MainWindow->setStatusBar(statusBar);
+
+        retranslateUi(MainWindow);
+
+        tabWidget->setCurrentIndex(2);
+
+
+        QMetaObject::connectSlotsByName(MainWindow);
+    } // setupUi
+
+    void retranslateUi(QMainWindow *MainWindow)
+    {
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
+        pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
+        radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
+        labelBTstatus->setText(QApplication::translate("MainWindow", "Status:", nullptr));
+        radioButtonBT->setText(QApplication::translate("MainWindow", "Bluetooth", nullptr));
+        pushButtonBTconnect->setText(QApplication::translate("MainWindow", "Connect BT", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(Connect), QApplication::translate("MainWindow", "Connect", nullptr));
+        pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class MainWindow: public Ui_MainWindow {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_MAINWINDOW_H
