@@ -22,13 +22,20 @@ private:
     Ui::MainWindow *ui;
 
     BTClient *m_bt;
+    QByteArray m_data;
 
     QChartView *m_chartView;
     CPlotChart *m_chart;
     DataTrace m_trace;
     DataTrace m_plot_trace;
-    int m_DataCounter; //Stores number of received bin samples
+    int m_DataCounter; //Stores number of received bin samples    
+
     int m_MaxDataPlot; //Max number of samples to plot
+    int m_PlotCounter;
+    int m_PlotNumUpdate; // Number of additional data points to plot at timeout
+    QTimer *m_timer;
+
+    int m_PlotTimeout;
 
 private slots:
     void BTgetDevice(QString name);
@@ -36,7 +43,7 @@ private slots:
     void BTrxData(const QByteArray &data);
 
     void PlotRx(const QByteArray &data);
-
+    void PlotTimeout();
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
