@@ -1430,7 +1430,10 @@ mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qscrollarea.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsscene.h
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMessageBox \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmessagebox.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qdialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../logger/mainwindow.cpp
 
 btclient.o: ../logger/btclient.cpp ../logger/btclient.h \

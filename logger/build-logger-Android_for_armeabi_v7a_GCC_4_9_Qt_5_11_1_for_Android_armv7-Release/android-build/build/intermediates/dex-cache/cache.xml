@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidBluetooth.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="bff17c3b543d4ec43b38a122971ebd051e554bbd">
+        <dex dex="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidBluetooth_4a7f3f9fdf15ac7bf699a5b57516d415c0c9b505.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroid.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="61597ce917e370b1a18343dafa3b5a68249e30ad">
+        <dex dex="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroid_5ec11ac2dfc06bc7c5e916d97fc3fab1f10fd861.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidBearer.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="240d63fd32eeb8ff0c72f271e3bc9b18fe3963b0">
+        <dex dex="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidBearer_5633ba4c14961e37fa7fd87ae83cab3c1d468f9c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidExtras.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="c52d6a497e23a34655af461abd0261f73811c3dc">
+        <dex dex="/home/saul/projects/Qt/logger/build-logger-Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidExtras_2e0ad4c4313e7e60e5f95247c0b44d225c1b414e.jar" />
+    </item>
+
+</items>

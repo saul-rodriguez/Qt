@@ -55,7 +55,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //timer to refresh the plot
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
-    m_timer->start(m_PlotTimeout);
+    //m_timer->start(m_PlotTimeout);
 
 }
 
@@ -83,6 +83,10 @@ void MainWindow::BTrxData(const QByteArray &data)
 
     m_data.append(data);
 
+    //Continuous sampling processing
+    if (!m_timer->isActive())
+        return;
+
     int size = data.count();
     if (size%2) { //each values is 2 bytes. There is an incomplete value!
         qDebug()<<"Odd number of bytes received";
@@ -104,6 +108,14 @@ void MainWindow::WiFiRead()
         return;
     }
 
+    //Data is valid
+    ui->plainTextEditAT->appendPlainText(QString::fromStdString(data.toStdString()));
+
+
+    //Continuous sampling processing
+    if (!m_timer->isActive())
+        return;
+
     m_data.append(data);
 
     int size = data.count();
@@ -115,8 +127,7 @@ void MainWindow::WiFiRead()
         m_data.clear();
     }
 
-    //Data is valid
-    ui->plainTextEditAT->appendPlainText(QString::fromStdString(data.toStdString()));
+
 }
 
 void MainWindow::WiFiDisplayError(QAbstractSocket::SocketError socketError)
@@ -220,13 +231,25 @@ void MainWindow::on_pushButtonATSend_clicked()
 
     QByteArray data;
     data.append(aux);
-    //data.append('\r');
-    //data.append('\n');
+
 
     if (ui->radioButtonBT->isChecked()) {
         m_bt->BTwrite(data);
-    } else {
+    } else {    //The communication with the ESP-01 module is always terminated by cr + nl
+        data.append('\r');
+        data.append('\n');
         m_WiFiTcpSocket->write(data);
+    }
+
+    //if continuous sampling is sent, start the timer
+    switch (data.at(0)) {
+        case 's':   m_timer->start(m_PlotTimeout);
+                    break;
+        case 'S':   m_timer->stop();
+                    break;
+        default:
+                    break;
+
     }
 }
 
@@ -269,5 +292,12 @@ void MainWindow::on_pushButtonWiFiConnect_clicked()
        }
 
        ui->labelWiFiStatus->setText("Connected");
+
+}
+
+void MainWindow::on_pushButtonWiFiDisconnect_clicked()
+{
+    ui->labelWiFiStatus->setText("Disconnecting...");
+    m_WiFiTcpSocket->disconnectFromHost();;
 
 }
