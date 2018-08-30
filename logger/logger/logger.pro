@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui widgets bluetooth charts
+QT       += core gui widgets bluetooth charts network
 
 TARGET = logger
 TEMPLATE = app

@@ -12,10 +12,10 @@ MAKEFILE      = Makefile
 
 CC            = gcc
 CXX           = g++
-DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_BLUETOOTH_LIB -DQT_CORE_LIB
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_QML_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_BLUETOOTH_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -g -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -g -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I../logger -I. -I/pkg/Qt/5.11.1/gcc_64/include -I/pkg/Qt/5.11.1/gcc_64/include/QtCharts -I/pkg/Qt/5.11.1/gcc_64/include/QtWidgets -I/pkg/Qt/5.11.1/gcc_64/include/QtGui -I/pkg/Qt/5.11.1/gcc_64/include/QtBluetooth -I/pkg/Qt/5.11.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++
+INCPATH       = -I../logger -I. -I/pkg/Qt/5.11.1/gcc_64/include -I/pkg/Qt/5.11.1/gcc_64/include/QtCharts -I/pkg/Qt/5.11.1/gcc_64/include/QtWidgets -I/pkg/Qt/5.11.1/gcc_64/include/QtGui -I/pkg/Qt/5.11.1/gcc_64/include/QtBluetooth -I/pkg/Qt/5.11.1/gcc_64/include/QtNetwork -I/pkg/Qt/5.11.1/gcc_64/include/QtCore -I. -isystem /usr/include/libdrm -I. -I/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++
 QMAKE         = /pkg/Qt/5.11.1/gcc_64/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -38,7 +38,7 @@ DISTNAME      = logger1.0.0
 DISTDIR = /home/saul/projects/Qt/logger/build-logger-Desktop_Qt_5_11_1_GCC_64bit-Debug/.tmp/logger1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/pkg/Qt/5.11.1/gcc_64/lib -Wl,-rpath-link,/pkg/Qt/5.11.1/gcc_64/lib
-LIBS          = $(SUBLIBS) -L/pkg/Qt/5.11.1/gcc_64/lib -lQt5Charts -lQt5Widgets -lQt5Gui -lQt5Bluetooth -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/pkg/Qt/5.11.1/gcc_64/lib -lQt5Charts -lQt5Widgets -lQt5Gui -lQt5Bluetooth -lQt5Network -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -461,6 +461,7 @@ Makefile: ../logger/logger.pro /pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.con
 		/pkg/Qt/5.11.1/gcc_64/lib/libQt5Widgets.prl \
 		/pkg/Qt/5.11.1/gcc_64/lib/libQt5Gui.prl \
 		/pkg/Qt/5.11.1/gcc_64/lib/libQt5Bluetooth.prl \
+		/pkg/Qt/5.11.1/gcc_64/lib/libQt5Network.prl \
 		/pkg/Qt/5.11.1/gcc_64/lib/libQt5Core.prl
 	$(QMAKE) -o Makefile ../logger/logger.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
 /pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf:
@@ -657,6 +658,7 @@ Makefile: ../logger/logger.pro /pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.con
 /pkg/Qt/5.11.1/gcc_64/lib/libQt5Widgets.prl:
 /pkg/Qt/5.11.1/gcc_64/lib/libQt5Gui.prl:
 /pkg/Qt/5.11.1/gcc_64/lib/libQt5Bluetooth.prl:
+/pkg/Qt/5.11.1/gcc_64/lib/libQt5Network.prl:
 /pkg/Qt/5.11.1/gcc_64/lib/libQt5Core.prl:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ../logger/logger.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug
@@ -807,52 +809,83 @@ moc_mainwindow.cpp: ../logger/btclient.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../logger/cplotchart.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChart \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchart.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qabstractseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChartGlobal \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchartglobal.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractAxis \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qabstractaxis.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QPen \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpen.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtguiglobal.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtgui-config.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qwidget.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpalette.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcolor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrgb.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrgba64.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qbrush.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qmatrix.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpolygon.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qregion.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qline.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtransform.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainterpath.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qimage.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpixelformat.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpixmap.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QFont \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfont.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontmetrics.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontinfo.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLegend \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlegend.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsWidget \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcursor.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qkeysequence.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qevent.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qkeysequence.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qurl.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qurlquery.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qfile.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qfiledevice.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qvector2d.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtouchdevice.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpalette.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QBrush \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/QMargins \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLineSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlineseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QXYSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qwidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontmetrics.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontinfo.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcursor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qicon.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/QTcpSocket \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qtcpsocket.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/QNetworkSession \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworksession.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qhostaddress.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		../logger/mainwindow.h \
 		moc_predefs.h \
 		/pkg/Qt/5.11.1/gcc_64/bin/moc
-	/pkg/Qt/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger/logger -I/pkg/Qt/5.11.1/gcc_64/include -I/pkg/Qt/5.11.1/gcc_64/include/QtCharts -I/pkg/Qt/5.11.1/gcc_64/include/QtWidgets -I/pkg/Qt/5.11.1/gcc_64/include/QtGui -I/pkg/Qt/5.11.1/gcc_64/include/QtBluetooth -I/pkg/Qt/5.11.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/mainwindow.h -o moc_mainwindow.cpp
+	/pkg/Qt/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger/logger -I/pkg/Qt/5.11.1/gcc_64/include -I/pkg/Qt/5.11.1/gcc_64/include/QtCharts -I/pkg/Qt/5.11.1/gcc_64/include/QtWidgets -I/pkg/Qt/5.11.1/gcc_64/include/QtGui -I/pkg/Qt/5.11.1/gcc_64/include/QtBluetooth -I/pkg/Qt/5.11.1/gcc_64/include/QtNetwork -I/pkg/Qt/5.11.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/mainwindow.h -o moc_mainwindow.cpp
 
 moc_btclient.cpp: /pkg/Qt/5.11.1/gcc_64/include/QtCore/QObject \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qobject.h \
@@ -953,7 +986,7 @@ moc_btclient.cpp: /pkg/Qt/5.11.1/gcc_64/include/QtCore/QObject \
 		../logger/btclient.h \
 		moc_predefs.h \
 		/pkg/Qt/5.11.1/gcc_64/bin/moc
-	/pkg/Qt/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger/logger -I/pkg/Qt/5.11.1/gcc_64/include -I/pkg/Qt/5.11.1/gcc_64/include/QtCharts -I/pkg/Qt/5.11.1/gcc_64/include/QtWidgets -I/pkg/Qt/5.11.1/gcc_64/include/QtGui -I/pkg/Qt/5.11.1/gcc_64/include/QtBluetooth -I/pkg/Qt/5.11.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/btclient.h -o moc_btclient.cpp
+	/pkg/Qt/5.11.1/gcc_64/bin/moc $(DEFINES) --include ./moc_predefs.h -I/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger/logger -I/pkg/Qt/5.11.1/gcc_64/include -I/pkg/Qt/5.11.1/gcc_64/include/QtCharts -I/pkg/Qt/5.11.1/gcc_64/include/QtWidgets -I/pkg/Qt/5.11.1/gcc_64/include/QtGui -I/pkg/Qt/5.11.1/gcc_64/include/QtBluetooth -I/pkg/Qt/5.11.1/gcc_64/include/QtNetwork -I/pkg/Qt/5.11.1/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/btclient.h -o moc_btclient.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1074,48 +1107,79 @@ main.o: ../logger/main.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../logger/cplotchart.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChart \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchart.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qabstractseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChartGlobal \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchartglobal.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractAxis \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qabstractaxis.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QPen \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpen.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtguiglobal.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtgui-config.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qwidget.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpalette.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcolor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrgb.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrgba64.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qbrush.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qmatrix.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpolygon.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qregion.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qline.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtransform.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainterpath.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qimage.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpixelformat.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpixmap.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QFont \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfont.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontmetrics.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontinfo.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLegend \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlegend.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsWidget \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcursor.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qkeysequence.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qevent.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qkeysequence.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qurl.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qurlquery.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qfile.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qfiledevice.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qvector2d.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtouchdevice.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpalette.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QBrush \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/QMargins \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLineSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlineseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QXYSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qwidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontmetrics.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontinfo.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcursor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qicon.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/QTcpSocket \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qtcpsocket.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/QNetworkSession \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworksession.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qhostaddress.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1223,48 +1287,79 @@ mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/QTimer \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qtimer.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qbasictimer.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		../logger/cplotchart.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChart \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchart.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qabstractseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChartGlobal \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchartglobal.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QAbstractAxis \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qabstractaxis.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QPen \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpen.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtguiglobal.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtgui-config.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qwidget.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpalette.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcolor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrgb.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrgba64.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qbrush.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qmatrix.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpolygon.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qrect.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qmargins.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qsize.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qregion.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qwindowdefs_win.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qline.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtransform.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainterpath.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qimage.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpaintdevice.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpixelformat.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpixmap.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QFont \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfont.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontmetrics.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontinfo.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLegend \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlegend.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsWidget \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qsizepolicy.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcursor.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qkeysequence.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qevent.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qkeysequence.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qurl.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qurlquery.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qfile.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qfiledevice.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qvector2d.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtouchdevice.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpalette.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/QBrush \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/QMargins \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QLineSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qlineseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QXYSeries \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qxyseries.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMainWindow \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmainwindow.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qwidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontmetrics.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontinfo.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qcursor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtabwidget.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qicon.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/QTcpSocket \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qtcpsocket.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/QNetworkSession \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworksession.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkinterface.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qhostaddress.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		ui_mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
@@ -1301,7 +1396,6 @@ mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlineedit.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextcursor.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextformat.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpen.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextoption.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmenubar.h \
@@ -1329,7 +1423,14 @@ mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QToolBar \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtoolbar.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QWidget
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QWidget \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChartView \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchartview.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsView \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsscene.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../logger/mainwindow.cpp
 
 btclient.o: ../logger/btclient.cpp ../logger/btclient.h \
