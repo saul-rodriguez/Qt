@@ -15,14 +15,15 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButtonBTconnect->setEnabled(true);
     ui->pushButtonBTdiscoverDevices->setEnabled(true);
     ui->pushButtonWiFiConnect->setEnabled(false);
+    ui->pushButtonWiFiDisconnect->setEnabled(false);
     ui->lineEditWiFiAddress->setEnabled(false);
     ui->lineEditWiFiPort->setEnabled(false);
 
     m_MaxDataPlot = 640;
     m_DataCounter = 0;
     m_PlotCounter = 0;
-    m_PlotTimeout = 20; //time in ms
-    m_PlotNumUpdate = 2; //number of samples to update every m_PlotTimeout
+    m_PlotTimeout = 100; //time in ms
+    m_PlotNumUpdate = 10; //number of samples to update every m_PlotTimeout
 
     //Bluetooth
     m_bt = new BTClient(this);
@@ -49,7 +50,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chart->initializePlot();
     m_chartView = new QChartView(static_cast<QChart*>(m_chart));
     //Set antialising properties and the chartview object to a place in layout
-    m_chartView->setRenderHint(QPainter::Antialiasing, true); //false or true
+    m_chartView->setRenderHint(QPainter::Antialiasing, false); //false or true
     ui->verticalLayout_3->addWidget(m_chartView,1,0);
 
     //timer to refresh the plot
@@ -119,7 +120,7 @@ void MainWindow::WiFiRead()
     m_data.append(data);
 
     int size = data.count();
-    if (size%2) { //each values is 2 bytes. There is an incomplete value!
+    if (size%2) { //each value is 2 bytes. There is an incomplete value!
         qDebug()<<"Odd number of bytes received";
         return; //wait for the next rx
     } else { // Process the received values
@@ -181,6 +182,7 @@ void MainWindow::PlotRx(const QByteArray &data)
 
 void MainWindow::PlotTimeout()
 {
+    int head;
     int plot_index;
      DataPoint aux_point;
 
@@ -188,7 +190,24 @@ void MainWindow::PlotTimeout()
         return;
 
     //Update the plot's trace list
-    int head = m_PlotCounter + m_PlotNumUpdate;
+    //Uncomment the following lines in order to smooth the updating ofplot (only works fine in desktop)
+   /* head = m_PlotCounter + m_PlotNumUpdate;
+    if (head > m_DataCounter)
+        head = m_DataCounter;
+   */
+
+    //Uncomment the next line in order to update the plot with all the new data at once
+    //head = m_DataCounter;
+
+    if (ui->checkBoxConfigSmoothPlot->isChecked()) { //Only add M_PlotNumUpdate samples to the plot
+        head = m_PlotCounter + m_PlotNumUpdate;
+        if (head > m_DataCounter) {
+                head = m_DataCounter;
+        }
+    } else {    //Add all new samples to the plot
+        head = m_DataCounter;
+    }
+
     for (int i = m_PlotCounter; i < head; i++) {
         plot_index = m_PlotCounter%m_MaxDataPlot; //create a index between 0 - m_MaxDataPot
         if (plot_index == 0) {  //clear the plot trace
@@ -259,6 +278,7 @@ void MainWindow::on_radioButtonWiFi_toggled(bool checked)
         ui->pushButtonBTconnect->setEnabled(false);
         ui->pushButtonBTdiscoverDevices->setEnabled(false);
         ui->pushButtonWiFiConnect->setEnabled(true);
+        ui->pushButtonWiFiDisconnect->setEnabled(true);
         ui->lineEditWiFiAddress->setEnabled(true);
         ui->lineEditWiFiPort->setEnabled(true);
     }
@@ -270,6 +290,7 @@ void MainWindow::on_radioButtonBT_toggled(bool checked)
         ui->pushButtonBTconnect->setEnabled(true);
         ui->pushButtonBTdiscoverDevices->setEnabled(true);
         ui->pushButtonWiFiConnect->setEnabled(false);
+        ui->pushButtonWiFiDisconnect->setEnabled(false);
         ui->lineEditWiFiAddress->setEnabled(false);
         ui->lineEditWiFiPort->setEnabled(false);
     }
@@ -300,4 +321,14 @@ void MainWindow::on_pushButtonWiFiDisconnect_clicked()
     ui->labelWiFiStatus->setText("Disconnecting...");
     m_WiFiTcpSocket->disconnectFromHost();;
 
+}
+
+
+void MainWindow::on_checkBoxConfigAntialias_toggled(bool checked)
+{
+    if (checked) {
+        m_chartView->setRenderHint(QPainter::Antialiasing, true); //false or true
+    } else {
+        m_chartView->setRenderHint(QPainter::Antialiasing, false); //false or true
+    }
 }

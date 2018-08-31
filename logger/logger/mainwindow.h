@@ -67,7 +67,8 @@ private slots:
     void on_radioButtonWiFi_toggled(bool checked);
     void on_radioButtonBT_toggled(bool checked);
     void on_pushButtonWiFiConnect_clicked();
-    void on_pushButtonWiFiDisconnect_clicked();
+    void on_pushButtonWiFiDisconnect_clicked();       
+    void on_checkBoxConfigAntialias_toggled(bool checked);
 };
 
 #endif // MAINWINDOW_H

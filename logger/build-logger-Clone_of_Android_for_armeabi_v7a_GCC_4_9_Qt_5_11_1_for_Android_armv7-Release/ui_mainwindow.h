@@ -11,6 +11,7 @@
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -22,6 +23,7 @@
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
@@ -37,6 +39,12 @@ public:
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
     QTabWidget *tabWidget;
+    QWidget *tab_3;
+    QGridLayout *gridLayout_7;
+    QVBoxLayout *verticalLayout_4;
+    QCheckBox *checkBoxConfigSmoothPlot;
+    QCheckBox *checkBoxConfigAntialias;
+    QSpacerItem *verticalSpacer;
     QWidget *Connect;
     QGridLayout *gridLayout_3;
     QGroupBox *groupBoxWirelessInterface;
@@ -56,6 +64,7 @@ public:
     QHBoxLayout *horizontalLayout_4;
     QLabel *labelWiFiPort;
     QLineEdit *lineEditWiFiPort;
+    QPushButton *pushButtonWiFiDisconnect;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
     QVBoxLayout *verticalLayout_2;
@@ -86,6 +95,33 @@ public:
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QStringLiteral("tabWidget"));
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        gridLayout_7 = new QGridLayout(tab_3);
+        gridLayout_7->setSpacing(6);
+        gridLayout_7->setContentsMargins(11, 11, 11, 11);
+        gridLayout_7->setObjectName(QStringLiteral("gridLayout_7"));
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QStringLiteral("verticalLayout_4"));
+        checkBoxConfigSmoothPlot = new QCheckBox(tab_3);
+        checkBoxConfigSmoothPlot->setObjectName(QStringLiteral("checkBoxConfigSmoothPlot"));
+
+        verticalLayout_4->addWidget(checkBoxConfigSmoothPlot);
+
+        checkBoxConfigAntialias = new QCheckBox(tab_3);
+        checkBoxConfigAntialias->setObjectName(QStringLiteral("checkBoxConfigAntialias"));
+
+        verticalLayout_4->addWidget(checkBoxConfigAntialias);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_4->addItem(verticalSpacer);
+
+
+        gridLayout_7->addLayout(verticalLayout_4, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_3, QString());
         Connect = new QWidget();
         Connect->setObjectName(QStringLiteral("Connect"));
         gridLayout_3 = new QGridLayout(Connect);
@@ -130,7 +166,7 @@ public:
         pushButtonBTconnect = new QPushButton(groupBoxWirelessInterface);
         pushButtonBTconnect->setObjectName(QStringLiteral("pushButtonBTconnect"));
 
-        gridLayout_4->addWidget(pushButtonBTconnect, 4, 0, 1, 1);
+        gridLayout_4->addWidget(pushButtonBTconnect, 5, 0, 1, 1);
 
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
@@ -156,7 +192,7 @@ public:
         pushButtonWiFiConnect = new QPushButton(groupBoxWirelessInterface);
         pushButtonWiFiConnect->setObjectName(QStringLiteral("pushButtonWiFiConnect"));
 
-        gridLayout_4->addWidget(pushButtonWiFiConnect, 4, 2, 1, 1);
+        gridLayout_4->addWidget(pushButtonWiFiConnect, 5, 2, 1, 1);
 
         labelWiFiStatus = new QLabel(groupBoxWirelessInterface);
         labelWiFiStatus->setObjectName(QStringLiteral("labelWiFiStatus"));
@@ -183,6 +219,11 @@ public:
 
 
         gridLayout_4->addLayout(horizontalLayout_4, 2, 2, 1, 1);
+
+        pushButtonWiFiDisconnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonWiFiDisconnect->setObjectName(QStringLiteral("pushButtonWiFiDisconnect"));
+
+        gridLayout_4->addWidget(pushButtonWiFiDisconnect, 6, 2, 1, 1);
 
 
         gridLayout_2->addLayout(gridLayout_4, 0, 0, 1, 1);
@@ -255,6 +296,18 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+        QWidget::setTabOrder(radioButtonBT, radioButtonWiFi);
+        QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
+        QWidget::setTabOrder(lineEditWiFiAddress, lineEditWiFiPort);
+        QWidget::setTabOrder(lineEditWiFiPort, pushButtonWiFiConnect);
+        QWidget::setTabOrder(pushButtonWiFiConnect, pushButtonWiFiDisconnect);
+        QWidget::setTabOrder(pushButtonWiFiDisconnect, pushButtonBTdiscoverDevices);
+        QWidget::setTabOrder(pushButtonBTdiscoverDevices, comboBoxBTdevices);
+        QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
+        QWidget::setTabOrder(pushButtonBTconnect, tabWidget);
+        QWidget::setTabOrder(tabWidget, lineEditAT);
+        QWidget::setTabOrder(lineEditAT, pushButtonATSend);
+        QWidget::setTabOrder(pushButtonATSend, plainTextEditAT);
 
         retranslateUi(MainWindow);
 
@@ -267,6 +320,9 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        checkBoxConfigSmoothPlot->setText(QApplication::translate("MainWindow", "Smooth Plot", nullptr));
+        checkBoxConfigAntialias->setText(QApplication::translate("MainWindow", "Antialias filtering", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
@@ -277,6 +333,7 @@ public:
         pushButtonWiFiConnect->setText(QApplication::translate("MainWindow", "Connect WiFi", nullptr));
         labelWiFiStatus->setText(QApplication::translate("MainWindow", "Status:", nullptr));
         labelWiFiPort->setText(QApplication::translate("MainWindow", "Port:", nullptr));
+        pushButtonWiFiDisconnect->setText(QApplication::translate("MainWindow", "Disconnect WiFi", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Connect), QApplication::translate("MainWindow", "Connect", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
