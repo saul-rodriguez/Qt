@@ -21,6 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_MaxDataPlot = 640;
     m_DataCounter = 0;
+    m_MaxNumSamples = 6000; //Max Number of samples to be recorded before the buffers are cleared
     m_PlotCounter = 0;
     m_PlotTimeout = 100; //time in ms
     m_PlotNumUpdate = 10; //number of samples to update every m_PlotTimeout
@@ -74,7 +75,8 @@ void MainWindow::BTgetDevice(QString name)
 void MainWindow::BTConnected(QString name)
 {
     QString message = "Connected to: " + name;
-    ui->labelBTstatus->setText(message);
+    //ui->labelBTstatus->setText(message);
+    ui->labelBTstatus->setText("Connected");
     qDebug()<< message;
 }
 
@@ -227,7 +229,13 @@ void MainWindow::PlotTimeout()
         m_chart->updatePlot();
     }
 
-
+    //Check if number of samples are exceeded
+    if (m_trace.count() >= m_MaxNumSamples) {
+        m_trace.clear();
+        m_DataCounter = 0;
+        m_plot_trace.clear();
+        m_PlotCounter = 0;
+    }
 }
 
 
@@ -331,4 +339,10 @@ void MainWindow::on_checkBoxConfigAntialias_toggled(bool checked)
     } else {
         m_chartView->setRenderHint(QPainter::Antialiasing, false); //false or true
     }
+}
+
+void MainWindow::on_pushButtonBTdisconnect_clicked()
+{
+    m_bt->BTdisconnect();
+    ui->labelBTstatus->setText("Disconnected");
 }

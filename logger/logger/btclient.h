@@ -35,9 +35,10 @@ private slots:
     void BTread();
     void BTrxTimeOut();
 
-public slots:
+public:
     void BTfindDevices(); //Discover active devices in the vecinity
     void BTconnect(QString name); //Connect to one device
+    void BTdisconnect(); //Disconnect
 
     void BTstopClient();
     void BTwrite(const QByteArray &data); //write to the connected BT device

@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_BTClient_t {
-    QByteArrayData data[19];
-    char stringdata0[218];
+    QByteArrayData data[13];
+    char stringdata0[150];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -43,21 +43,13 @@ QT_MOC_LITERAL(8, 91, 20), // "QBluetoothDeviceInfo"
 QT_MOC_LITERAL(9, 112, 6), // "device"
 QT_MOC_LITERAL(10, 119, 11), // "BTconnected"
 QT_MOC_LITERAL(11, 131, 6), // "BTread"
-QT_MOC_LITERAL(12, 138, 11), // "BTrxTimeOut"
-QT_MOC_LITERAL(13, 150, 13), // "BTfindDevices"
-QT_MOC_LITERAL(14, 164, 9), // "BTconnect"
-QT_MOC_LITERAL(15, 174, 12), // "BTstopClient"
-QT_MOC_LITERAL(16, 187, 7), // "BTwrite"
-QT_MOC_LITERAL(17, 195, 14), // "BTsetRxTimeout"
-QT_MOC_LITERAL(18, 210, 7) // "timeout"
+QT_MOC_LITERAL(12, 138, 11) // "BTrxTimeOut"
 
     },
     "BTClient\0BTnewDeviceDiscovered\0\0name\0"
     "BTnewDeviceConnected\0BTrxData\0data\0"
     "BTdeviceDiscovered\0QBluetoothDeviceInfo\0"
-    "device\0BTconnected\0BTread\0BTrxTimeOut\0"
-    "BTfindDevices\0BTconnect\0BTstopClient\0"
-    "BTwrite\0BTsetRxTimeout\0timeout"
+    "device\0BTconnected\0BTread\0BTrxTimeOut"
 };
 #undef QT_MOC_LITERAL
 
@@ -67,7 +59,7 @@ static const uint qt_meta_data_BTClient[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-      12,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -75,20 +67,15 @@ static const uint qt_meta_data_BTClient[] = {
        3,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   74,    2, 0x06 /* Public */,
-       4,    1,   77,    2, 0x06 /* Public */,
-       5,    1,   80,    2, 0x06 /* Public */,
+       1,    1,   49,    2, 0x06 /* Public */,
+       4,    1,   52,    2, 0x06 /* Public */,
+       5,    1,   55,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       7,    1,   83,    2, 0x08 /* Private */,
-      10,    0,   86,    2, 0x08 /* Private */,
-      11,    0,   87,    2, 0x08 /* Private */,
-      12,    0,   88,    2, 0x08 /* Private */,
-      13,    0,   89,    2, 0x0a /* Public */,
-      14,    1,   90,    2, 0x0a /* Public */,
-      15,    0,   93,    2, 0x0a /* Public */,
-      16,    1,   94,    2, 0x0a /* Public */,
-      17,    1,   97,    2, 0x0a /* Public */,
+       7,    1,   58,    2, 0x08 /* Private */,
+      10,    0,   61,    2, 0x08 /* Private */,
+      11,    0,   62,    2, 0x08 /* Private */,
+      12,    0,   63,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -100,11 +87,6 @@ static const uint qt_meta_data_BTClient[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    3,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QByteArray,    6,
-    QMetaType::Void, QMetaType::Int,   18,
 
        0        // eod
 };
@@ -122,11 +104,6 @@ void BTClient::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 4: _t->BTconnected(); break;
         case 5: _t->BTread(); break;
         case 6: _t->BTrxTimeOut(); break;
-        case 7: _t->BTfindDevices(); break;
-        case 8: _t->BTconnect((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 9: _t->BTstopClient(); break;
-        case 10: _t->BTwrite((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
-        case 11: _t->BTsetRxTimeout((*reinterpret_cast< int(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -191,13 +168,13 @@ int BTClient::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 12)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 7;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 12)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 12;
+        _id -= 7;
     }
     return _id;
 }

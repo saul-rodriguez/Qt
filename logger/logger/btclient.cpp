@@ -54,6 +54,11 @@ void BTClient::BTconnect(QString name)
 
 }
 
+void BTClient::BTdisconnect()
+{
+    socket->disconnectFromService();
+}
+
 void BTClient::BTconnected()
 {
     emit BTnewDeviceConnected(BtDevice);

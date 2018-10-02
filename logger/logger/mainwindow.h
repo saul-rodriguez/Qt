@@ -37,7 +37,8 @@ private:
 
     //Data storage
     DataTrace m_trace;
-    int m_DataCounter; //Stores number of received binary samples (same as m_trac.count())
+    int m_DataCounter; //Stores number of received binary samples (same as m_trace.count())
+    int m_MaxNumSamples; //Maximum number of samples that are recorder before the m_trace buffer is cleared
 
     //Plot
     QChartView *m_chartView;
@@ -69,6 +70,7 @@ private slots:
     void on_pushButtonWiFiConnect_clicked();
     void on_pushButtonWiFiDisconnect_clicked();       
     void on_checkBoxConfigAntialias_toggled(bool checked);
+    void on_pushButtonBTdisconnect_clicked();
 };
 
 #endif // MAINWINDOW_H
