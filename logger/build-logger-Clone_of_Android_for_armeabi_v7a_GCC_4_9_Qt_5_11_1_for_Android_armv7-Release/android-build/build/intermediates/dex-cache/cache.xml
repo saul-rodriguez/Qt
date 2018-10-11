@@ -12,21 +12,21 @@
     </item>
     <item
         is-multidex="false"
-        jar="/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidExtras.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="28.0.2"
-        sha1="c52d6a497e23a34655af461abd0261f73811c3dc">
-        <dex dex="/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidExtras_2640050b46b6222f042ac3634f9e676aac197243.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroid.jar"
         jumboMode="false"
         optimize="true"
         revision="28.0.2"
         sha1="61597ce917e370b1a18343dafa3b5a68249e30ad">
         <dex dex="/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroid_d29196a9e55a490111b2e2ac57ed6d96634edd79.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/libs/QtAndroidExtras.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.2"
+        sha1="c52d6a497e23a34655af461abd0261f73811c3dc">
+        <dex dex="/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/android-build/build/intermediates/pre-dexed/debug/QtAndroidExtras_2640050b46b6222f042ac3634f9e676aac197243.jar" />
     </item>
     <item
         is-multidex="false"

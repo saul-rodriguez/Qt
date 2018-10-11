@@ -61,7 +61,21 @@ OBJECTS       = main.o \
 		cplotchart.o \
 		moc_mainwindow.o \
 		moc_btclient.o
-DIST          = /pkg/Qt/5.11.1/android_armv7/mkspecs/features/spec_pre.prf \
+DIST          = ../logger/android/AndroidManifest.xml \
+		../logger/android/gradle/wrapper/gradle-wrapper.jar \
+		../logger/android/gradlew \
+		../logger/android/res/values/libs.xml \
+		../logger/android/build.gradle \
+		../logger/android/gradle/wrapper/gradle-wrapper.properties \
+		../logger/android/gradlew.bat \
+		../logger/android/AndroidManifest.xml \
+		../logger/android/gradle/wrapper/gradle-wrapper.jar \
+		../logger/android/gradlew \
+		../logger/android/res/values/libs.xml \
+		../logger/android/build.gradle \
+		../logger/android/gradle/wrapper/gradle-wrapper.properties \
+		../logger/android/gradlew.bat \
+		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/spec_pre.prf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/common/unix.conf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/common/linux.conf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/common/sanitize.conf \
@@ -210,6 +224,7 @@ DIST          = /pkg/Qt/5.11.1/android_armv7/mkspecs/features/spec_pre.prf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/common/android-base-tail.conf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/android-g++/qmake.conf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/spec_post.prf \
+		../logger/.qmake.stash \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/exclusive_builds.prf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/toolchain.prf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/default_pre.prf \
@@ -397,6 +412,7 @@ Makefile: ../logger/logger.pro /pkg/Qt/5.11.1/android_armv7/mkspecs/android-g++/
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/common/android-base-tail.conf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/android-g++/qmake.conf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/exclusive_builds.prf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/toolchain.prf \
 		/pkg/Qt/5.11.1/android_armv7/mkspecs/features/default_pre.prf \
@@ -575,6 +591,7 @@ Makefile: ../logger/logger.pro /pkg/Qt/5.11.1/android_armv7/mkspecs/android-g++/
 /pkg/Qt/5.11.1/android_armv7/mkspecs/common/android-base-tail.conf:
 /pkg/Qt/5.11.1/android_armv7/mkspecs/android-g++/qmake.conf:
 /pkg/Qt/5.11.1/android_armv7/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /pkg/Qt/5.11.1/android_armv7/mkspecs/features/exclusive_builds.prf:
 /pkg/Qt/5.11.1/android_armv7/mkspecs/features/toolchain.prf:
 /pkg/Qt/5.11.1/android_armv7/mkspecs/features/default_pre.prf:
@@ -1309,15 +1326,78 @@ mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtNetwork/qhostaddress.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtNetwork/qnetworkconfiguration.h \
 		ui_mainwindow.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QApplication \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qapplication.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtCore/qcoreapplication.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtCore/qeventloop.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qdesktopwidget.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qguiapplication.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qinputmethod.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QCheckBox \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qcheckbox.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qabstractbutton.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QComboBox \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qcombobox.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qabstractitemdelegate.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qstyleoption.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qabstractspinbox.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qvalidator.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtCore/qregularexpression.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qslider.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qabstractslider.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qstyle.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qtabbar.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qrubberband.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qframe.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QGridLayout \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qgridlayout.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qlayout.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qlayoutitem.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qboxlayout.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QGroupBox \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qgroupbox.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QHBoxLayout \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QLabel \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qlabel.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QLineEdit \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qlineedit.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qtextcursor.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qtextformat.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qtextoption.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QMenuBar \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qmenubar.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qmenu.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qaction.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qactiongroup.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QPlainTextEdit \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qplaintextedit.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qtextedit.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qtextdocument.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qabstracttextdocumentlayout.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qtextlayout.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qglyphrun.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qrawfont.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qfontdatabase.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QPushButton \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qpushbutton.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QRadioButton \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qradiobutton.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QSpacerItem \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QStatusBar \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qstatusbar.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QTabWidget \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QToolBar \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qtoolbar.h \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QVBoxLayout \
+		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QWidget \
 		/pkg/Qt/5.11.1/android_armv7/include/QtCharts/QChartView \
 		/pkg/Qt/5.11.1/android_armv7/include/QtCharts/qchartview.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QGraphicsView \
 		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qgraphicsview.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qpainter.h \
-		/pkg/Qt/5.11.1/android_armv7/include/QtGui/qtextoption.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qscrollarea.h \
-		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qabstractscrollarea.h \
-		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qframe.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qgraphicsscene.h \
 		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/QMessageBox \
 		/pkg/Qt/5.11.1/android_armv7/include/QtWidgets/qmessagebox.h \

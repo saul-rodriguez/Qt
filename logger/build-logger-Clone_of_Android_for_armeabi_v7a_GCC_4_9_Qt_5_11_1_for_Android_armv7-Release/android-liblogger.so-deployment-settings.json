@@ -9,6 +9,7 @@
    "toolchain-version": "4.9",
    "ndk-host": "linux-x86_64",
    "target-architecture": "armeabi-v7a",
+   "android-package-source-directory": "/home/saul/projects/Qt/logger/logger/android",
    "qml-root-path": "/home/saul/projects/Qt/logger/logger",
    "stdcpp-path": "/home/saul/Android/Sdk/ndk-bundle/sources/cxx-stl/gnu-libstdc++/4.9/libs/armeabi-v7a/libgnustl_shared.so",
    "application-binary": "/home/saul/projects/Qt/logger/build-logger-Clone_of_Android_for_armeabi_v7a_GCC_4_9_Qt_5_11_1_for_Android_armv7-Release/liblogger.so"

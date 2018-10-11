@@ -65,6 +65,7 @@ public:
     QLabel *labelWiFiPort;
     QLineEdit *lineEditWiFiPort;
     QPushButton *pushButtonWiFiDisconnect;
+    QPushButton *pushButtonBTdisconnect;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
     QVBoxLayout *verticalLayout_2;
@@ -225,6 +226,11 @@ public:
 
         gridLayout_4->addWidget(pushButtonWiFiDisconnect, 6, 2, 1, 1);
 
+        pushButtonBTdisconnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBTdisconnect->setObjectName(QStringLiteral("pushButtonBTdisconnect"));
+
+        gridLayout_4->addWidget(pushButtonBTdisconnect, 6, 0, 1, 1);
+
 
         gridLayout_2->addLayout(gridLayout_4, 0, 0, 1, 1);
 
@@ -311,7 +317,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -334,6 +340,7 @@ public:
         labelWiFiStatus->setText(QApplication::translate("MainWindow", "Status:", nullptr));
         labelWiFiPort->setText(QApplication::translate("MainWindow", "Port:", nullptr));
         pushButtonWiFiDisconnect->setText(QApplication::translate("MainWindow", "Disconnect WiFi", nullptr));
+        pushButtonBTdisconnect->setText(QApplication::translate("MainWindow", "Disconnect BT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Connect), QApplication::translate("MainWindow", "Connect", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
