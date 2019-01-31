@@ -14,6 +14,9 @@ CPlotChart::CPlotChart()
     m_maxX = 10.0;
     m_minY = 0.1;
     m_maxY = 10000.0;
+
+    axisX = new QValueAxis();
+    axisY = new QLogValueAxis();
 }
 
 void CPlotChart::initializePlot()
@@ -21,7 +24,7 @@ void CPlotChart::initializePlot()
 
     //Add an initial point in the origin to avoid an exception when plotting
     //QLineSeries *series = new QLineSeries();
-    QScatterSeries *series = new QScatterSeries();
+    QScatterSeries *series = new QScatterSeries(); //scattered points
     series->setMarkerShape(QScatterSeries::MarkerShapeRectangle);
     series->setMarkerSize(7);
     series->setColor(Qt::blue);
@@ -29,8 +32,6 @@ void CPlotChart::initializePlot()
     //series->setBrush(Qt::NoPen);
     series->append(0.1,2e-09);
     series->append(0.4,2e-8);
-    //series->append(0.8,2e-7);
-    //series->append(1.6,2e-6);
 
     addSeries(series);
 
@@ -38,30 +39,26 @@ void CPlotChart::initializePlot()
     setTheme(static_cast<QChart::ChartTheme>(QChart::ChartThemeLight)); // select a theme  0-7
 
     //createDefaultAxes(); //Select an axis
-
-    QValueAxis *axisX = new QValueAxis();
     axisX->setTitleText(m_xAxisName);
     axisX->setLabelFormat("%3.2f");
     axisX->setRange(m_minX, m_maxX);
     axisX->setTickCount(7);
+
     addAxis(axisX, Qt::AlignBottom);
     series->attachAxis(axisX);
 
-    QLogValueAxis *axisY = new QLogValueAxis();
     axisY->setTitleText(m_yAxisName);
-    axisY->setLabelFormat("%3.2f");
+    axisY->setLabelFormat("%3.1e");
     axisY->setBase(10.0);
     axisY->setRange(m_minY, m_maxY);
     axisY->setMinorTickCount(-1);
+
     addAxis(axisY, Qt::AlignLeft);
     series->attachAxis(axisY);
 
-   // axisY()->setRange(m_minY, m_maxY);
     legend()->hide(); // hide()/show()
     //legend()->setAlignment(Qt::AlignmentFlag::AlignRight);
     setTitle(m_title);
-    //axisX()->setTitleText(m_xAxisName);
-    //axisY()->setTitleText(m_yAxisName);
 
 }
 
@@ -75,7 +72,8 @@ void CPlotChart::setTitles(const QString &title, const QString &xaxis, const QSt
 void CPlotChart::updatePlot()
 {
     removeAllSeries();
-    removeAxis()
+    removeAxis(axisX);
+    removeAxis(axisY);
 
 
     int size = m_DataTable.count();
@@ -94,7 +92,9 @@ void CPlotChart::updatePlot()
 
             //update series to be plotted
             for (int j = 0; j < N; j++) {
-                series->append((m_DataTable[i])[j].first.rx(),(m_DataTable[i])[j].first.ry());
+                double x = (m_DataTable[i])[j].first.rx();
+                double y = (m_DataTable[i])[j].first.ry();
+                series->append(x,y);
             }
 
             series->setName((m_DataTable[i])[0].second); //
@@ -104,7 +104,7 @@ void CPlotChart::updatePlot()
             //axisX()->setRange(m_minX, m_maxX);
             //axisY()->setRange(m_minY, m_maxY);
 
-            QValueAxis *axisX = new QValueAxis();            
+            //QValueAxis *axisX = new QValueAxis();
             axisX->setTitleText(m_xAxisName);
             axisX->setLabelFormat("%3.2f");
             axisX->setRange(m_minX, m_maxX);
@@ -112,15 +112,14 @@ void CPlotChart::updatePlot()
             addAxis(axisX, Qt::AlignBottom);
             series->attachAxis(axisX);
 
-            QLogValueAxis *axisY = new QLogValueAxis();
+            //QLogValueAxis *axisY = new QLogValueAxis();
             axisY->setTitleText(m_yAxisName);
-            axisY->setLabelFormat("%3.2f");
+            axisY->setLabelFormat("%3.1e");
             axisY->setBase(10.0);
             axisY->setRange(m_minY, m_maxY);
             axisY->setMinorTickCount(-1);
             addAxis(axisY, Qt::AlignLeft);
             series->attachAxis(axisY);
-
 
         }
     }

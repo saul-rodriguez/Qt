@@ -1,7 +1,9 @@
 #ifndef CPLOTCHART_H
 #define CPLOTCHART_H
 
+#include <QLogValueAxis>
 #include <QObject>
+#include <qvalueaxis.h>
 
 #include <QChart>
 #include <QtCharts/QChartGlobal>
@@ -44,6 +46,9 @@ private:
     double m_maxY;
 
     DataTable m_DataTable;
+
+    QValueAxis *axisX;
+    QLogValueAxis *axisY;
 
 };
 

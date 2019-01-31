@@ -101,14 +101,18 @@ void MainWindow::BTrxData(const QByteArray &data)
         return;
     */
 
-    int size = data.count();
+    //int size = data.count();
+    int size = m_data.count();
 
-    if (size != 24) {
-        qDebug()<<"Odd number of bytes received";
-        return; //wait for the next rx
-    } else {
+    if (size == 24) {
         PlotRx(m_data);
         m_data.clear();
+    } else if (size < 24) {
+        qDebug()<<"Waiting for rest of packet";
+        return; //wait for the next rx
+    } else {
+        qDebug()<<"packet error, discarding";
+        return; //wait for the next rx
     }
 
 }
@@ -279,7 +283,7 @@ void MainWindow::on_pushButtonBTconnect_clicked()
 
 void MainWindow::on_pushButtonATSend_clicked()
 {
-    QByteArray mydat;
+  /*  QByteArray mydat;
     mydat.append(0xff);
     mydat.append((unsigned char)0x00);
     mydat.append(0xff);
@@ -307,7 +311,7 @@ void MainWindow::on_pushButtonATSend_clicked()
 
     PlotRx(mydat);
     return;
-
+*/
     QString aux = ui->lineEditAT->text();
 
     QByteArray data;
