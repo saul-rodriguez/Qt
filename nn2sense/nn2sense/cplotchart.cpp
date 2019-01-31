@@ -39,7 +39,6 @@ void CPlotChart::initializePlot()
 
     //createDefaultAxes(); //Select an axis
 
-
     QValueAxis *axisX = new QValueAxis();
     axisX->setTitleText(m_xAxisName);
     axisX->setLabelFormat("%3.2f");
@@ -50,7 +49,7 @@ void CPlotChart::initializePlot()
 
     QLogValueAxis *axisY = new QLogValueAxis();
     axisY->setTitleText(m_yAxisName);
-    axisY->setLabelFormat("%3.1f");
+    axisY->setLabelFormat("%3.2f");
     axisY->setBase(10.0);
     axisY->setRange(m_minY, m_maxY);
     axisY->setMinorTickCount(-1);
@@ -76,6 +75,8 @@ void CPlotChart::setTitles(const QString &title, const QString &xaxis, const QSt
 void CPlotChart::updatePlot()
 {
     removeAllSeries();
+    removeAxis()
+
 
     int size = m_DataTable.count();
 
@@ -102,7 +103,8 @@ void CPlotChart::updatePlot()
             //createDefaultAxes();
             //axisX()->setRange(m_minX, m_maxX);
             //axisY()->setRange(m_minY, m_maxY);
-            QValueAxis *axisX = new QValueAxis();
+
+            QValueAxis *axisX = new QValueAxis();            
             axisX->setTitleText(m_xAxisName);
             axisX->setLabelFormat("%3.2f");
             axisX->setRange(m_minX, m_maxX);
@@ -112,19 +114,20 @@ void CPlotChart::updatePlot()
 
             QLogValueAxis *axisY = new QLogValueAxis();
             axisY->setTitleText(m_yAxisName);
-            axisY->setLabelFormat("%3.1f");
+            axisY->setLabelFormat("%3.2f");
             axisY->setBase(10.0);
             axisY->setRange(m_minY, m_maxY);
             axisY->setMinorTickCount(-1);
             addAxis(axisY, Qt::AlignLeft);
             series->attachAxis(axisY);
 
+
         }
     }
 
     setTitle(m_title);
-    axisX()->setTitleText(m_xAxisName);
-    axisY()->setTitleText(m_yAxisName);
+   // axisX()->setTitleText(m_xAxisName);
+   // axisY()->setTitleText(m_yAxisName);
    //legend()->show(); // hide()/show()
    // legend()->setAlignment(Qt::AlignmentFlag::AlignRight);
 

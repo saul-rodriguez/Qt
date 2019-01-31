@@ -279,6 +279,35 @@ void MainWindow::on_pushButtonBTconnect_clicked()
 
 void MainWindow::on_pushButtonATSend_clicked()
 {
+    QByteArray mydat;
+    mydat.append(0xff);
+    mydat.append((unsigned char)0x00);
+    mydat.append(0xff);
+    mydat.append(0x01);
+    mydat.append(0xff);
+    mydat.append(0x2);
+    mydat.append(0xff);
+    mydat.append(0x3);
+    mydat.append(0xff);
+    mydat.append(0x4);
+    mydat.append(0xff);
+    mydat.append(0x05);
+    mydat.append(0xff);
+    mydat.append(0x06);
+    mydat.append(0xff);
+    mydat.append(0x07);
+    mydat.append(0xff);
+    mydat.append(0x08);
+    mydat.append(0xff);
+    mydat.append(0x09);
+    mydat.append(0xff);
+    mydat.append(0x0a);
+    mydat.append(0xff);
+    mydat.append(0x0b);
+
+    PlotRx(mydat);
+    return;
+
     QString aux = ui->lineEditAT->text();
 
     QByteArray data;
