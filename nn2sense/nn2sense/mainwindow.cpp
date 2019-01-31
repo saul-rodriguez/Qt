@@ -404,3 +404,29 @@ void MainWindow::on_pushButtonBTdisconnect_clicked()
     m_bt->BTdisconnect();
     ui->labelBTstatus->setText("Disconnected");
 }
+
+void MainWindow::on_pushButtonTestNN2S_clicked()
+{
+    ui->lineEditAT->setText("t");
+    on_pushButtonATSend_clicked();
+}
+
+void MainWindow::on_pushButtonClearPlot_clicked()
+{
+    m_trace.clear();
+
+    DataPoint aux_point;
+    aux_point.first.setX(2.5);
+    aux_point.first.setY(1e-9);
+
+    m_trace.append(aux_point);
+
+
+
+    if(m_trace.count()) {
+        m_chart->clearTable();
+        m_chart->addTrace(m_trace);
+        m_chart->updatePlot();
+    }
+
+}

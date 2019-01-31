@@ -26,12 +26,12 @@ void CPlotChart::initializePlot()
     //QLineSeries *series = new QLineSeries();
     QScatterSeries *series = new QScatterSeries(); //scattered points
     series->setMarkerShape(QScatterSeries::MarkerShapeRectangle);
-    series->setMarkerSize(7);
+    series->setMarkerSize(10);
     series->setColor(Qt::blue);
     //series->setBorderColor(Qt::red);
     //series->setBrush(Qt::NoPen);
-    series->append(0.1,2e-09);
-    series->append(0.4,2e-8);
+    series->append(2,2e-09);
+    series->append(4,2e-8);
 
     addSeries(series);
 
@@ -85,7 +85,7 @@ void CPlotChart::updatePlot()
         for (int i = 0; i < size; i++) {
             series = new QScatterSeries(); //create a new trace
             series->setMarkerShape(QScatterSeries::MarkerShapeRectangle);
-            series->setMarkerSize(7);
+            series->setMarkerSize(10);
             series->setColor(Qt::blue);
 
             int N = m_DataTable[i].count();

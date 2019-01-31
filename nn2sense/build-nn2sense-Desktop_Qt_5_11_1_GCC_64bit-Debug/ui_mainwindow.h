@@ -76,6 +76,10 @@ public:
     QWidget *tab;
     QGridLayout *gridLayout_6;
     QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *pushButtonTestNN2S;
+    QPushButton *pushButtonMeasNN2S;
+    QSpacerItem *horizontalSpacer;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -281,6 +285,26 @@ public:
         verticalLayout_3 = new QVBoxLayout();
         verticalLayout_3->setSpacing(6);
         verticalLayout_3->setObjectName(QStringLiteral("verticalLayout_3"));
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
+        pushButtonTestNN2S = new QPushButton(tab);
+        pushButtonTestNN2S->setObjectName(QStringLiteral("pushButtonTestNN2S"));
+
+        horizontalLayout_2->addWidget(pushButtonTestNN2S);
+
+        pushButtonMeasNN2S = new QPushButton(tab);
+        pushButtonMeasNN2S->setObjectName(QStringLiteral("pushButtonMeasNN2S"));
+
+        horizontalLayout_2->addWidget(pushButtonMeasNN2S);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_2->addItem(horizontalSpacer);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_2);
+
 
         gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
@@ -317,7 +341,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -325,7 +349,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Nanonets2Sense", nullptr));
         checkBoxConfigSmoothPlot->setText(QApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QApplication::translate("MainWindow", "Antialias filtering", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
@@ -344,6 +368,8 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(Connect), QApplication::translate("MainWindow", "Connect", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
+        pushButtonTestNN2S->setText(QApplication::translate("MainWindow", "Self Test", nullptr));
+        pushButtonMeasNN2S->setText(QApplication::translate("MainWindow", "Measure", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
     } // retranslateUi
 

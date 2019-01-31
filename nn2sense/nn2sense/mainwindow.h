@@ -73,6 +73,8 @@ private slots:
     void on_pushButtonWiFiDisconnect_clicked();       
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();
+    void on_pushButtonTestNN2S_clicked();
+    void on_pushButtonClearPlot_clicked();
 };
 
 #endif // MAINWINDOW_H
