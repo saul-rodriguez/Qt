@@ -35,3 +35,22 @@ int sweep::getCount()
 {
     return m_measurement.size();
 }
+
+DataTrace sweep::getTrace()
+{
+    DataPoint aux_point;
+    DataTrace aux_trace;
+
+    int count = m_measurement.size();
+
+    for (int i=0; i < count; i++) {
+        aux_point.first.setX(m_measurement[i]->getFrequency());
+        aux_point.first.setY(m_measurement[i]->getMagnitude());
+        aux_point.second = QString::number(m_measurement[i]->getFrequency());
+
+        aux_trace.append(aux_point);
+
+    }
+
+    return aux_trace;
+}

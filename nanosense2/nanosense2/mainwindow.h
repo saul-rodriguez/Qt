@@ -55,8 +55,8 @@ private:
     bioimpedance *p_bioimpedance;
     sweep m_measurements[10];
     int m_currentMeasurement;
-    QTimer *m_timerMeas;
-    QTime m_timearrival;
+    QTimer *m_timerMeas;    //timeout for the measurent
+    QTime m_timearrival;    //used to check speed of the measurement (time elapsed)
 
 private slots:
     void BTgetDevice(QString name);
@@ -70,6 +70,7 @@ private slots:
     void PlotTimeout();
 
     void MeasurementTimeout();
+    void PlotMeasurement();
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
@@ -79,10 +80,7 @@ private slots:
     void on_pushButtonWiFiConnect_clicked();
     void on_pushButtonWiFiDisconnect_clicked();       
     void on_checkBoxConfigAntialias_toggled(bool checked);
-    void on_pushButtonBTdisconnect_clicked();
-    //void on_pushButtonTestNN2S_clicked();
-    //void on_pushButtonClearPlot_clicked();
-    //void on_pushButtonMeasNN2S_clicked();
+    void on_pushButtonBTdisconnect_clicked();    
     void on_pushButtonMeas_clicked();
 };
 

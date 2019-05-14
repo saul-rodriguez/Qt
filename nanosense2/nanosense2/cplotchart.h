@@ -23,6 +23,13 @@ typedef QPair<QPointF, QString> DataPoint;
 typedef QList<DataPoint> DataTrace;
 typedef QList<DataTrace> DataTable;
 
+enum plotType {
+  NORMAL,
+  LOGLOG,
+  SEMILOGX
+};
+
+typedef enum plotType plotType;
 
 class CPlotChart : public QChart
 {
@@ -35,6 +42,7 @@ public:
     void clearTable();
     void setXMinXax(double min, double max);
     void setYMinXax(double min, double max);
+    void setType(plotType ptype);
 
 private:
     QString m_title;
@@ -48,7 +56,13 @@ private:
     DataTable m_DataTable;
 
     QValueAxis *axisX;
-    QLogValueAxis *axisY;
+    QValueAxis *axisY;
+
+    QLogValueAxis *axisXlog;
+    QLogValueAxis *axisYlog;
+
+    plotType m_type;
+    QColor colors[10];
 
 };
 

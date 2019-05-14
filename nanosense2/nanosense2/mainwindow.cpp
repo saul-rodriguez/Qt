@@ -46,11 +46,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Plot
     m_chart = new CPlotChart();
-    m_chart->setTitles("","VSG","ID");
+    m_chart->setType(LOGLOG);
+    m_chart->setTitles("","Frequency","Magnitude");
   //  m_chart->setXMinXax(0,m_MaxDataPlot);
   //  m_chart->setYMinXax(0,1024);
-    m_chart->setXMinXax(0,1.8);
-    m_chart->setYMinXax(0.1e-9,10e-6);
+    m_chart->setXMinXax(100.0,10e6);
+    m_chart->setYMinXax(10,1e6);
     m_chart->initializePlot();
     m_chartView = new QChartView(static_cast<QChart*>(m_chart));
     //Set antialising properties and the chartview object to a place in layout
@@ -61,7 +62,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //m_timer = new QTimer(this);
     //connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
     //m_timer->start(m_PlotTimeout);
-
 
     //nanosense
     m_currentMeasurement = 0;
@@ -297,8 +297,9 @@ void MainWindow::MeasurementTimeout()
         return;
     }
 
-    m_measurements->printSweep();
+    m_measurements->printSweep(); //print sweep in debug mode
 
+    PlotMeasurement();
 
     //increment index in circular buffer, clean the next sweep object
     m_currentMeasurement++;
@@ -306,6 +307,30 @@ void MainWindow::MeasurementTimeout()
         m_currentMeasurement = 0;
 
     m_measurements[m_currentMeasurement].cleanSweep();
+
+}
+
+void MainWindow::PlotMeasurement()
+{
+    //DataPoint aux_point;
+    DataTrace aux_trace;
+
+    m_chart->clearTable();
+
+    for (int i = 0; i < 10; i++) {
+
+        int count = m_measurements[i].getCount();
+
+        if (count) {
+            aux_trace = m_measurements[i].getTrace();
+
+
+            m_chart->addTrace(aux_trace);
+        }
+
+    }
+    m_chart->updatePlot();
+
 
 }
 

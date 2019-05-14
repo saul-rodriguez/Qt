@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[25];
-    char stringdata0[482];
+    QByteArrayData data[26];
+    char stringdata0[498];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -45,24 +45,25 @@ QT_MOC_LITERAL(10, 110, 11), // "socketError"
 QT_MOC_LITERAL(11, 122, 6), // "PlotRx"
 QT_MOC_LITERAL(12, 129, 11), // "PlotTimeout"
 QT_MOC_LITERAL(13, 141, 18), // "MeasurementTimeout"
-QT_MOC_LITERAL(14, 160, 38), // "on_pushButtonBTdiscoverDevice..."
-QT_MOC_LITERAL(15, 199, 30), // "on_pushButtonBTconnect_clicked"
-QT_MOC_LITERAL(16, 230, 27), // "on_pushButtonATSend_clicked"
-QT_MOC_LITERAL(17, 258, 26), // "on_radioButtonWiFi_toggled"
-QT_MOC_LITERAL(18, 285, 7), // "checked"
-QT_MOC_LITERAL(19, 293, 24), // "on_radioButtonBT_toggled"
-QT_MOC_LITERAL(20, 318, 32), // "on_pushButtonWiFiConnect_clicked"
-QT_MOC_LITERAL(21, 351, 35), // "on_pushButtonWiFiDisconnect_c..."
-QT_MOC_LITERAL(22, 387, 34), // "on_checkBoxConfigAntialias_to..."
-QT_MOC_LITERAL(23, 422, 33), // "on_pushButtonBTdisconnect_cli..."
-QT_MOC_LITERAL(24, 456, 25) // "on_pushButtonMeas_clicked"
+QT_MOC_LITERAL(14, 160, 15), // "PlotMeasurement"
+QT_MOC_LITERAL(15, 176, 38), // "on_pushButtonBTdiscoverDevice..."
+QT_MOC_LITERAL(16, 215, 30), // "on_pushButtonBTconnect_clicked"
+QT_MOC_LITERAL(17, 246, 27), // "on_pushButtonATSend_clicked"
+QT_MOC_LITERAL(18, 274, 26), // "on_radioButtonWiFi_toggled"
+QT_MOC_LITERAL(19, 301, 7), // "checked"
+QT_MOC_LITERAL(20, 309, 24), // "on_radioButtonBT_toggled"
+QT_MOC_LITERAL(21, 334, 32), // "on_pushButtonWiFiConnect_clicked"
+QT_MOC_LITERAL(22, 367, 35), // "on_pushButtonWiFiDisconnect_c..."
+QT_MOC_LITERAL(23, 403, 34), // "on_checkBoxConfigAntialias_to..."
+QT_MOC_LITERAL(24, 438, 33), // "on_pushButtonBTdisconnect_cli..."
+QT_MOC_LITERAL(25, 472, 25) // "on_pushButtonMeas_clicked"
 
     },
     "MainWindow\0BTgetDevice\0\0name\0BTConnected\0"
     "BTrxData\0data\0WiFiRead\0WiFiDisplayError\0"
     "QAbstractSocket::SocketError\0socketError\0"
     "PlotRx\0PlotTimeout\0MeasurementTimeout\0"
-    "on_pushButtonBTdiscoverDevices_clicked\0"
+    "PlotMeasurement\0on_pushButtonBTdiscoverDevices_clicked\0"
     "on_pushButtonBTconnect_clicked\0"
     "on_pushButtonATSend_clicked\0"
     "on_radioButtonWiFi_toggled\0checked\0"
@@ -81,7 +82,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      18,   14, // methods
+      19,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -89,24 +90,25 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  104,    2, 0x08 /* Private */,
-       4,    1,  107,    2, 0x08 /* Private */,
-       5,    1,  110,    2, 0x08 /* Private */,
-       7,    0,  113,    2, 0x08 /* Private */,
-       8,    1,  114,    2, 0x08 /* Private */,
-      11,    1,  117,    2, 0x08 /* Private */,
-      12,    0,  120,    2, 0x08 /* Private */,
-      13,    0,  121,    2, 0x08 /* Private */,
-      14,    0,  122,    2, 0x08 /* Private */,
-      15,    0,  123,    2, 0x08 /* Private */,
-      16,    0,  124,    2, 0x08 /* Private */,
-      17,    1,  125,    2, 0x08 /* Private */,
-      19,    1,  128,    2, 0x08 /* Private */,
-      20,    0,  131,    2, 0x08 /* Private */,
-      21,    0,  132,    2, 0x08 /* Private */,
-      22,    1,  133,    2, 0x08 /* Private */,
-      23,    0,  136,    2, 0x08 /* Private */,
-      24,    0,  137,    2, 0x08 /* Private */,
+       1,    1,  109,    2, 0x08 /* Private */,
+       4,    1,  112,    2, 0x08 /* Private */,
+       5,    1,  115,    2, 0x08 /* Private */,
+       7,    0,  118,    2, 0x08 /* Private */,
+       8,    1,  119,    2, 0x08 /* Private */,
+      11,    1,  122,    2, 0x08 /* Private */,
+      12,    0,  125,    2, 0x08 /* Private */,
+      13,    0,  126,    2, 0x08 /* Private */,
+      14,    0,  127,    2, 0x08 /* Private */,
+      15,    0,  128,    2, 0x08 /* Private */,
+      16,    0,  129,    2, 0x08 /* Private */,
+      17,    0,  130,    2, 0x08 /* Private */,
+      18,    1,  131,    2, 0x08 /* Private */,
+      20,    1,  134,    2, 0x08 /* Private */,
+      21,    0,  137,    2, 0x08 /* Private */,
+      22,    0,  138,    2, 0x08 /* Private */,
+      23,    1,  139,    2, 0x08 /* Private */,
+      24,    0,  142,    2, 0x08 /* Private */,
+      25,    0,  143,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -120,11 +122,12 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   18,
-    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,   19,
+    QMetaType::Void, QMetaType::Bool,   19,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   18,
+    QMetaType::Void, QMetaType::Bool,   19,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -145,16 +148,17 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 5: _t->PlotRx((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
         case 6: _t->PlotTimeout(); break;
         case 7: _t->MeasurementTimeout(); break;
-        case 8: _t->on_pushButtonBTdiscoverDevices_clicked(); break;
-        case 9: _t->on_pushButtonBTconnect_clicked(); break;
-        case 10: _t->on_pushButtonATSend_clicked(); break;
-        case 11: _t->on_radioButtonWiFi_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 12: _t->on_radioButtonBT_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 13: _t->on_pushButtonWiFiConnect_clicked(); break;
-        case 14: _t->on_pushButtonWiFiDisconnect_clicked(); break;
-        case 15: _t->on_checkBoxConfigAntialias_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 16: _t->on_pushButtonBTdisconnect_clicked(); break;
-        case 17: _t->on_pushButtonMeas_clicked(); break;
+        case 8: _t->PlotMeasurement(); break;
+        case 9: _t->on_pushButtonBTdiscoverDevices_clicked(); break;
+        case 10: _t->on_pushButtonBTconnect_clicked(); break;
+        case 11: _t->on_pushButtonATSend_clicked(); break;
+        case 12: _t->on_radioButtonWiFi_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 13: _t->on_radioButtonBT_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 14: _t->on_pushButtonWiFiConnect_clicked(); break;
+        case 15: _t->on_pushButtonWiFiDisconnect_clicked(); break;
+        case 16: _t->on_checkBoxConfigAntialias_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 17: _t->on_pushButtonBTdisconnect_clicked(); break;
+        case 18: _t->on_pushButtonMeas_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -200,13 +204,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 18)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 19;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 18)
+        if (_id < 19)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 18;
+        _id -= 19;
     }
     return _id;
 }

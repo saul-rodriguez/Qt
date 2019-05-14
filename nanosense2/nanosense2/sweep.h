@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include "bioimpedance.h"
+#include "cplotchart.h"
 
 class sweep : public QObject
 {
@@ -13,6 +14,7 @@ public:
     void cleanSweep();
     void printSweep();
     int getCount();
+    DataTrace getTrace();
 signals:
 
 public slots:
