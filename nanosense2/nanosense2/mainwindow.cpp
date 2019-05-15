@@ -45,18 +45,32 @@ MainWindow::MainWindow(QWidget *parent) :
                this, &MainWindow::WiFiDisplayError);
 
     //Plot
-    m_chart = new CPlotChart();
-    m_chart->setType(LOGLOG);
-    m_chart->setTitles("","Frequency","Magnitude");
+    // plot Magnitude
+    m_chartMag = new CPlotChart();
+    m_chartMag->setType(LOGLOG);
+    m_chartMag->setTitles("","Frequency","Magnitude");
   //  m_chart->setXMinXax(0,m_MaxDataPlot);
   //  m_chart->setYMinXax(0,1024);
-    m_chart->setXMinXax(100.0,10e6);
-    m_chart->setYMinXax(10,1e6);
-    m_chart->initializePlot();
-    m_chartView = new QChartView(static_cast<QChart*>(m_chart));
+    m_chartMag->setXMinXax(100.0,10e6);
+    m_chartMag->setYMinXax(10,1e6);
+    m_chartMag->initializePlot();
+    m_chartViewMag = new QChartView(static_cast<QChart*>(m_chartMag));
     //Set antialising properties and the chartview object to a place in layout
-    m_chartView->setRenderHint(QPainter::Antialiasing, false); //false or true
-    ui->verticalLayout_3->addWidget(m_chartView,1,0);
+    m_chartViewMag->setRenderHint(QPainter::Antialiasing, false); //false or true
+    ui->verticalLayout_3->addWidget(m_chartViewMag,1,0);
+
+    //plot Phase
+    m_chartPha = new CPlotChart();
+    m_chartPha->setType(SEMILOGX);
+    m_chartPha->setTitles("","Frequency","Phase");
+    m_chartPha->setXMinXax(100.0,10e6);
+    m_chartPha->setYMinXax(0,100);
+    m_chartPha->initializePlot();
+    m_chartViewPha = new QChartView(static_cast<QChart*>(m_chartPha));
+    //Set antialising properties and the chartview object to a place in layout
+    m_chartViewPha->setRenderHint(QPainter::Antialiasing, false); //false or true
+    ui->verticalLayout_3->addWidget(m_chartViewPha,1,0);
+
 
     //timer to refresh the plot
     //m_timer = new QTimer(this);
@@ -222,9 +236,9 @@ void MainWindow::PlotRx(const QByteArray &data)
     }
 
     if(m_trace.count()) {
-        m_chart->clearTable();
-        m_chart->addTrace(m_trace);
-        m_chart->updatePlot();
+        m_chartMag->clearTable();
+        m_chartMag->addTrace(m_trace);
+        m_chartMag->updatePlot();
     }
 }
 
@@ -270,9 +284,9 @@ void MainWindow::PlotTimeout()
 
     //replot the trace
     if(m_plot_trace.count()) {
-        m_chart->clearTable();
-        m_chart->addTrace(m_plot_trace);
-        m_chart->updatePlot();
+        m_chartMag->clearTable();
+        m_chartMag->addTrace(m_plot_trace);
+        m_chartMag->updatePlot();
     }
 
     //Check if number of samples are exceeded
@@ -308,6 +322,9 @@ void MainWindow::MeasurementTimeout()
 
     m_measurements[m_currentMeasurement].cleanSweep();
 
+    //reenable measurement button
+    ui->pushButtonMeas->setEnabled(true);
+
 }
 
 void MainWindow::PlotMeasurement()
@@ -315,21 +332,24 @@ void MainWindow::PlotMeasurement()
     //DataPoint aux_point;
     DataTrace aux_trace;
 
-    m_chart->clearTable();
+    m_chartMag->clearTable();
+    m_chartPha->clearTable();
 
     for (int i = 0; i < 10; i++) {
 
         int count = m_measurements[i].getCount();
 
         if (count) {
-            aux_trace = m_measurements[i].getTrace();
+            aux_trace = m_measurements[i].getTraceMag();
+            m_chartMag->addTrace(aux_trace);
 
-
-            m_chart->addTrace(aux_trace);
+            aux_trace =m_measurements[i].getTracePha();
+            m_chartPha->addTrace(aux_trace);
         }
 
     }
-    m_chart->updatePlot();
+    m_chartMag->updatePlot();
+    m_chartPha->updatePlot();
 
 
 }
@@ -450,9 +470,11 @@ void MainWindow::on_pushButtonWiFiDisconnect_clicked()
 void MainWindow::on_checkBoxConfigAntialias_toggled(bool checked)
 {
     if (checked) {
-        m_chartView->setRenderHint(QPainter::Antialiasing, true); //false or true
+        m_chartViewMag->setRenderHint(QPainter::Antialiasing, true); //false or true
+        m_chartViewPha->setRenderHint(QPainter::Antialiasing, true); //false or true
     } else {
-        m_chartView->setRenderHint(QPainter::Antialiasing, false); //false or true
+        m_chartViewMag->setRenderHint(QPainter::Antialiasing, false); //false or true
+        m_chartViewPha->setRenderHint(QPainter::Antialiasing, false); //false or true
     }
 }
 
@@ -500,5 +522,7 @@ void MainWindow::on_pushButtonMeas_clicked()
     on_pushButtonATSend_clicked();
     m_timerMeas->start(2000); //sweep must be completed before this timeout!
     m_timearrival.start(); //This is used to determine the measurement total time
+
+    ui->pushButtonMeas->setEnabled(false);
 
 }

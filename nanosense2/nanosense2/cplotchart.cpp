@@ -48,7 +48,7 @@ void CPlotChart::initializePlot()
     //series->setBorderColor(Qt::red);
     //series->setBrush(Qt::NoPen);
     series->append(2e-3,2e-09);
-    series->append(4e2,2e-8);
+    series->append(4e-2,2e-8);
 
     addSeries(series);
 
@@ -98,7 +98,7 @@ void CPlotChart::initializePlot()
                         series->attachAxis(axisXlog);
 
                         axisY->setTitleText(m_yAxisName);
-                        axisY->setLabelFormat("%3.1e");
+                        axisY->setLabelFormat("%3.1f");
                         axisY->setRange(m_minY, m_maxY);
                         axisY->setMinorTickCount(-1);
                         addAxis(axisY, Qt::AlignLeft);
@@ -237,7 +237,7 @@ void CPlotChart::updatePlot()
                                 series->attachAxis(axisXlog);
 
                                 axisY->setTitleText(m_yAxisName);
-                                axisY->setLabelFormat("%3.1e");
+                                axisY->setLabelFormat("%3.1f");
                                 axisY->setRange(m_minY, m_maxY);
                                 axisY->setMinorTickCount(-1);
                                 addAxis(axisY, Qt::AlignLeft);

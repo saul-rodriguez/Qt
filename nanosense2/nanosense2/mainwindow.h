@@ -42,14 +42,18 @@ private:
     int m_MaxNumSamples; //Maximum number of samples that are recorder before the m_trace buffer is cleared
 
     //Plot
-    QChartView *m_chartView;
-    CPlotChart *m_chart;    
+    QChartView *m_chartViewMag;
+    CPlotChart *m_chartMag;
+    QChartView *m_chartViewPha;
+    CPlotChart *m_chartPha;
     DataTrace m_plot_trace;
     int m_MaxDataPlot; //Max number of samples to plot
     int m_PlotCounter;
     int m_PlotNumUpdate; // Number of additional data points to plot at timeout
     QTimer *m_timer;
     int m_PlotTimeout;
+
+
 
     //nanosense
     bioimpedance *p_bioimpedance;

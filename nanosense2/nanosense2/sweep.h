@@ -14,7 +14,9 @@ public:
     void cleanSweep();
     void printSweep();
     int getCount();
-    DataTrace getTrace();
+    DataTrace getTraceMag();
+    DataTrace getTracePha();
+
 signals:
 
 public slots:

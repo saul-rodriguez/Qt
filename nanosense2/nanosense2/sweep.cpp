@@ -36,7 +36,7 @@ int sweep::getCount()
     return m_measurement.size();
 }
 
-DataTrace sweep::getTrace()
+DataTrace sweep::getTraceMag()
 {
     DataPoint aux_point;
     DataTrace aux_trace;
@@ -46,6 +46,26 @@ DataTrace sweep::getTrace()
     for (int i=0; i < count; i++) {
         aux_point.first.setX(m_measurement[i]->getFrequency());
         aux_point.first.setY(m_measurement[i]->getMagnitude());
+        aux_point.second = QString::number(m_measurement[i]->getFrequency());
+
+        aux_trace.append(aux_point);
+
+    }
+
+    return aux_trace;
+}
+
+DataTrace sweep::getTracePha()
+{
+    DataPoint aux_point;
+    DataTrace aux_trace;
+
+    int count = m_measurement.size();
+
+    for (int i=0; i < count; i++) {
+        aux_point.first.setX(m_measurement[i]->getFrequency());
+ //Note: Here the sign of the phase is inverted in order to be consistent with Nevisense
+        aux_point.first.setY(-(m_measurement[i]->getPhase()));
         aux_point.second = QString::number(m_measurement[i]->getFrequency());
 
         aux_trace.append(aux_point);
