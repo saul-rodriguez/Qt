@@ -16,6 +16,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -26,6 +27,7 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
+#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -79,6 +81,16 @@ public:
     QHBoxLayout *horizontalLayout_2;
     QPushButton *pushButtonMeas;
     QSpacerItem *horizontalSpacer;
+    QWidget *tab_4;
+    QLabel *label_2;
+    QTableView *tableViewMag;
+    QLabel *label_3;
+    QTableView *tableViewMagStat;
+    QWidget *tab_5;
+    QLabel *label_4;
+    QTableView *tableViewPha;
+    QTableView *tableViewPhaStat;
+    QLabel *label_5;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -87,7 +99,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(598, 461);
+        MainWindow->resize(799, 584);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -303,6 +315,42 @@ public:
         gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
         tabWidget->addTab(tab, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        label_2 = new QLabel(tab_4);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(10, 10, 179, 17));
+        tableViewMag = new QTableView(tab_4);
+        tableViewMag->setObjectName(QString::fromUtf8("tableViewMag"));
+        tableViewMag->setGeometry(QRect(10, 33, 761, 331));
+        label_3 = new QLabel(tab_4);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+        label_3->setGeometry(QRect(10, 370, 243, 17));
+        tableViewMagStat = new QTableView(tab_4);
+        tableViewMagStat->setObjectName(QString::fromUtf8("tableViewMagStat"));
+        tableViewMagStat->setGeometry(QRect(10, 390, 761, 81));
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(tableViewMagStat->sizePolicy().hasHeightForWidth());
+        tableViewMagStat->setSizePolicy(sizePolicy2);
+        tableViewMagStat->setBaseSize(QSize(0, 0));
+        tabWidget->addTab(tab_4, QString());
+        tab_5 = new QWidget();
+        tab_5->setObjectName(QString::fromUtf8("tab_5"));
+        label_4 = new QLabel(tab_5);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+        label_4->setGeometry(QRect(10, 10, 146, 17));
+        tableViewPha = new QTableView(tab_5);
+        tableViewPha->setObjectName(QString::fromUtf8("tableViewPha"));
+        tableViewPha->setGeometry(QRect(10, 33, 761, 331));
+        tableViewPhaStat = new QTableView(tab_5);
+        tableViewPhaStat->setObjectName(QString::fromUtf8("tableViewPhaStat"));
+        tableViewPhaStat->setGeometry(QRect(10, 390, 761, 81));
+        label_5 = new QLabel(tab_5);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+        label_5->setGeometry(QRect(10, 370, 279, 17));
+        tabWidget->addTab(tab_5, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -312,7 +360,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 598, 22));
+        menuBar->setGeometry(QRect(0, 0, 799, 22));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -328,14 +376,13 @@ public:
         QWidget::setTabOrder(pushButtonWiFiDisconnect, pushButtonBTdiscoverDevices);
         QWidget::setTabOrder(pushButtonBTdiscoverDevices, comboBoxBTdevices);
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
-        QWidget::setTabOrder(pushButtonBTconnect, tabWidget);
-        QWidget::setTabOrder(tabWidget, lineEditAT);
+        QWidget::setTabOrder(pushButtonBTconnect, lineEditAT);
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
         QWidget::setTabOrder(pushButtonATSend, plainTextEditAT);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -364,6 +411,12 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
         pushButtonMeas->setText(QApplication::translate("MainWindow", "Measure", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Magnitude Measurements", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Average and Standard deviation (%)", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Mag", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "Phase Measurements", nullptr));
+        label_5->setText(QApplication::translate("MainWindow", "Average and Standard deviation (degree)", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Pha", nullptr));
     } // retranslateUi
 
 };

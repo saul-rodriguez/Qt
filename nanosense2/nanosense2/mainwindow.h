@@ -11,6 +11,7 @@
 #include <QTcpSocket>
 #include <QNetworkSession>
 #include <QTime>
+#include <QStandardItemModel>
 
 namespace Ui {
 class MainWindow;
@@ -53,14 +54,20 @@ private:
     QTimer *m_timer;
     int m_PlotTimeout;
 
-
-
     //nanosense
     bioimpedance *p_bioimpedance;
     sweep m_measurements[10];
     int m_currentMeasurement;
     QTimer *m_timerMeas;    //timeout for the measurent
     QTime m_timearrival;    //used to check speed of the measurement (time elapsed)
+
+    //Tables
+    QStandardItemModel *modelMag;
+    QStandardItemModel *modelMagStat;
+
+    QStandardItemModel *modelPha;
+    QStandardItemModel *modelPhaStat;
+
 
 private slots:
     void BTgetDevice(QString name);
@@ -76,6 +83,12 @@ private slots:
     void MeasurementTimeout();
     void PlotMeasurement();
 
+    void setUpTables();
+    void clearTables();
+    void updateTables();
+    void updateStatistics();
+
+
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
     void on_pushButtonATSend_clicked();
@@ -86,6 +99,8 @@ private slots:
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();    
     void on_pushButtonMeas_clicked();
+
+    void resizeEvent(QResizeEvent* event);
 };
 
 #endif // MAINWINDOW_H

@@ -4,6 +4,7 @@
 #include <QtCharts/QChartView>
 
 #include <QMessageBox>
+#include <QtMath>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -82,6 +83,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_timerMeas = new QTimer(this);
     m_timerMeas->setSingleShot(true);
     connect(m_timerMeas, SIGNAL(timeout()), this, SLOT(MeasurementTimeout()));
+
+    //Tables
+    setUpTables();
 
 
 }
@@ -351,6 +355,198 @@ void MainWindow::PlotMeasurement()
     m_chartMag->updatePlot();
     m_chartPha->updatePlot();
 
+    //update the tables with the
+    updateTables();
+
+
+}
+
+void MainWindow::clearTables()
+{
+    for (int i = 0; i < 10; i++) {
+        for (int j = 0; j < 11; j++) {
+            QModelIndex index = modelMag->index(i,j,QModelIndex());
+            modelMag->setData(index,"");
+
+            index = modelPha->index(i,j,QModelIndex());
+            modelMag->setData(index,"");
+
+        }
+    }
+
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 11; j++) {
+            QModelIndex index = modelMagStat->index(i,j,QModelIndex());
+            modelMag->setData(index,"");
+
+            index = modelPhaStat->index(i,j,QModelIndex());
+            modelMag->setData(index,"");
+
+        }
+    }
+
+
+}
+
+void MainWindow::updateTables()
+{
+    DataTrace aux_trace;
+
+    for (int i = 0; i < 10; i++) {
+
+        int count = m_measurements[i].getCount();
+
+        if (count) { //Only valid measurements are appended!
+            aux_trace = m_measurements[i].getTraceMag();
+
+            for (int j = 0; j < 11; j++) {
+                QModelIndex index = modelMag->index(i,j,QModelIndex());
+                modelMag->setData(index,aux_trace[j].first.y());
+            }
+
+            aux_trace = m_measurements[i].getTracePha();
+
+            for (int j = 0; j < 11; j++) {
+                QModelIndex index = modelPha->index(i,j,QModelIndex());
+                modelPha->setData(index,aux_trace[j].first.y());
+            }
+
+        }
+
+    }
+
+    updateStatistics();
+
+}
+
+void MainWindow::updateStatistics()
+{
+    double average[11], rms[11], aux, diff;
+    int count;
+
+    //Magnitude
+    for (int i = 0; i < 11; i++) {
+        average[i] = 0;
+        rms[i] = 0;
+    }
+
+    //Average Mag
+    for (int j = 0; j < 11; j++) {
+        for (count = 0; count < 10; count++) {
+            QModelIndex indexmag = modelMag->index(count,j,QModelIndex());
+            aux = modelMag->data(indexmag).toDouble();
+            if (aux == 0) break; //No more valid rows available!
+
+            average[j] += (aux);
+        }
+
+        average[j] /= count;
+    }
+
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelMagStat->index(0,i,QModelIndex());
+        modelMagStat->setData(index,QString("%1").arg(average[i]));
+    }
+
+    //RMS Mag
+    for (int j = 0; j < 11; j++) {
+        for (count = 0; count < 10; count++) {
+            QModelIndex indexmag = modelMag->index(count,j,QModelIndex());
+            aux = modelMag->data(indexmag).toDouble();
+            if (aux == 0) break; //No more valid rows available!
+
+            diff = aux - average[j];
+            rms[j] += diff*diff;
+        }
+
+        rms[j] /= count;
+        rms[j] = qSqrt(rms[j]);
+
+        //Conversion to %
+        rms[j] = rms[j]/average[j]*100.0;
+    }
+
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelMagStat->index(1,i,QModelIndex());
+        //modelMagStat->setData(index,rms[i]);
+        modelMagStat->setData(index,QString::number(rms[i],'g',4));
+    }
+
+    //Phase
+    for (int i = 0; i < 11; i++) {
+        average[i] = 0;
+        rms[i] = 0;
+    }
+
+    //Average Phase
+    for (int j = 0; j < 11; j++) {
+        for (count = 0; count < 10; count++) {
+            QModelIndex indexmag = modelPha->index(count,j,QModelIndex());
+            aux = modelPha->data(indexmag).toDouble();
+            if (aux == 0) break; //No more valid rows available!
+
+            average[j] += (aux);
+        }
+
+        average[j] /= count;
+    }
+
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelPhaStat->index(0,i,QModelIndex());
+        modelPhaStat->setData(index,QString("%1").arg(average[i]));
+    }
+
+    //Phase Error
+    for (int j = 0; j < 11; j++) {
+        for (count = 0; count < 10; count++) {
+            QModelIndex indexmag = modelPha->index(count,j,QModelIndex());
+            aux = modelPha->data(indexmag).toDouble();
+            if (aux == 0) break; //No more valid rows available!
+
+            diff = aux - average[j];
+            rms[j] += diff*diff;
+        }
+
+        rms[j] /= count;
+        rms[j] = qSqrt(rms[j]);
+
+        //Conversion to %
+        //rms[j] = rms[j]/average[j]*100.0;
+    }
+
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelPhaStat->index(1,i,QModelIndex());
+        //modelMagStat->setData(index,rms[i]);
+        modelPhaStat->setData(index,QString::number(rms[i],'g',4));
+    }
+
+
+}
+
+void MainWindow::setUpTables()
+{
+    modelMag = new QStandardItemModel(10,11,this);
+    modelMagStat = new QStandardItemModel(2,11,this);
+
+    modelPha = new QStandardItemModel(10,11,this);
+    modelPhaStat = new QStandardItemModel(2,11,this);
+
+    ui->tableViewMag->setModel(modelMag);
+    ui->tableViewMagStat->setModel(modelMagStat);
+
+    ui->tableViewPha->setModel(modelPha);
+    ui->tableViewPhaStat->setModel(modelPhaStat);
+
+    int widthTable = ui->tableViewMag->width()/12;
+
+    for (int i = 0; i < 11; i++) {
+        ui->tableViewMag->setColumnWidth(i,widthTable);
+        ui->tableViewMagStat->setColumnWidth(i,widthTable);
+        ui->tableViewPha->setColumnWidth(i,widthTable);
+        ui->tableViewPhaStat->setColumnWidth(i,widthTable);
+    }
+
+    clearTables();
 
 }
 
@@ -524,5 +720,21 @@ void MainWindow::on_pushButtonMeas_clicked()
     m_timearrival.start(); //This is used to determine the measurement total time
 
     ui->pushButtonMeas->setEnabled(false);
+
+}
+
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+    QMainWindow::resizeEvent(event);
+
+    /*
+    int widthTable = ui->tableViewMag->width()/12;
+
+    for (int i = 0; i < 11; i++) {
+        ui->tableViewMag->setColumnWidth(i,widthTable);
+        ui->tableViewMagStat->setColumnWidth(i,widthTable);
+       // ui->tableViewPha->setColumnWidth(i,widthTable);
+       // ui->tableViewPhaStat->setColumnWidth(i,widthTable);
+    }*/
 
 }

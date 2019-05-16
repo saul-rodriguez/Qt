@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>598</width>
-    <height>461</height>
+    <width>799</width>
+    <height>584</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -254,6 +254,120 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_4">
+         <attribute name="title">
+          <string>Mag</string>
+         </attribute>
+         <widget class="QLabel" name="label_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>179</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Magnitude Measurements</string>
+          </property>
+         </widget>
+         <widget class="QTableView" name="tableViewMag">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>33</y>
+            <width>761</width>
+            <height>331</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>370</y>
+            <width>243</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Average and Standard deviation (%)</string>
+          </property>
+         </widget>
+         <widget class="QTableView" name="tableViewMagStat">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>390</y>
+            <width>761</width>
+            <height>81</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="baseSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_5">
+         <attribute name="title">
+          <string>Pha</string>
+         </attribute>
+         <widget class="QLabel" name="label_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>10</y>
+            <width>146</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Phase Measurements</string>
+          </property>
+         </widget>
+         <widget class="QTableView" name="tableViewPha">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>33</y>
+            <width>761</width>
+            <height>331</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QTableView" name="tableViewPhaStat">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>390</y>
+            <width>761</width>
+            <height>81</height>
+           </rect>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_5">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>370</y>
+            <width>279</width>
+            <height>17</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>Average and Standard deviation (degree)</string>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -265,7 +379,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>598</width>
+     <width>799</width>
      <height>22</height>
     </rect>
    </property>
@@ -291,7 +405,6 @@
   <tabstop>pushButtonBTdiscoverDevices</tabstop>
   <tabstop>comboBoxBTdevices</tabstop>
   <tabstop>pushButtonBTconnect</tabstop>
-  <tabstop>tabWidget</tabstop>
   <tabstop>lineEditAT</tabstop>
   <tabstop>pushButtonATSend</tabstop>
   <tabstop>plainTextEditAT</tabstop>
