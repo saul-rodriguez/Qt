@@ -12,6 +12,7 @@
 #include <QNetworkSession>
 #include <QTime>
 #include <QStandardItemModel>
+#include <QXmlStreamWriter>
 
 namespace Ui {
 class MainWindow;
@@ -71,7 +72,9 @@ private:
     QStandardItemModel *modelPha;
     QStandardItemModel *modelPhaStat;
 
+    //Calibration
     QStandardItemModel *modelCal;
+    QXmlStreamReader xmlRead;
 
 
 private slots:
@@ -93,6 +96,8 @@ private slots:
     void updateTables();
     void updateStatistics();
 
+    void saveCalibrationXml();
+
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
@@ -107,6 +112,8 @@ private slots:
 
     void resizeEvent(QResizeEvent* event);
     void on_pushButtonGenerateCalibration_clicked();
+    void on_pushButtonOpenCalFile_clicked();
+    void on_pushButtonSaveCalFile_clicked();
 };
 
 #endif // MAINWINDOW_H

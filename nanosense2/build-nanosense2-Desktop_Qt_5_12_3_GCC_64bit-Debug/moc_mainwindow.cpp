@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[34];
-    char stringdata0[625];
+    QByteArrayData data[37];
+    char stringdata0[710];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,21 +50,24 @@ QT_MOC_LITERAL(15, 176, 11), // "setUpTables"
 QT_MOC_LITERAL(16, 188, 11), // "clearTables"
 QT_MOC_LITERAL(17, 200, 12), // "updateTables"
 QT_MOC_LITERAL(18, 213, 16), // "updateStatistics"
-QT_MOC_LITERAL(19, 230, 38), // "on_pushButtonBTdiscoverDevice..."
-QT_MOC_LITERAL(20, 269, 30), // "on_pushButtonBTconnect_clicked"
-QT_MOC_LITERAL(21, 300, 27), // "on_pushButtonATSend_clicked"
-QT_MOC_LITERAL(22, 328, 26), // "on_radioButtonWiFi_toggled"
-QT_MOC_LITERAL(23, 355, 7), // "checked"
-QT_MOC_LITERAL(24, 363, 24), // "on_radioButtonBT_toggled"
-QT_MOC_LITERAL(25, 388, 32), // "on_pushButtonWiFiConnect_clicked"
-QT_MOC_LITERAL(26, 421, 35), // "on_pushButtonWiFiDisconnect_c..."
-QT_MOC_LITERAL(27, 457, 34), // "on_checkBoxConfigAntialias_to..."
-QT_MOC_LITERAL(28, 492, 33), // "on_pushButtonBTdisconnect_cli..."
-QT_MOC_LITERAL(29, 526, 25), // "on_pushButtonMeas_clicked"
-QT_MOC_LITERAL(30, 552, 11), // "resizeEvent"
-QT_MOC_LITERAL(31, 564, 13), // "QResizeEvent*"
-QT_MOC_LITERAL(32, 578, 5), // "event"
-QT_MOC_LITERAL(33, 584, 40) // "on_pushButtonGenerateCalibrat..."
+QT_MOC_LITERAL(19, 230, 18), // "saveCalibrationXml"
+QT_MOC_LITERAL(20, 249, 38), // "on_pushButtonBTdiscoverDevice..."
+QT_MOC_LITERAL(21, 288, 30), // "on_pushButtonBTconnect_clicked"
+QT_MOC_LITERAL(22, 319, 27), // "on_pushButtonATSend_clicked"
+QT_MOC_LITERAL(23, 347, 26), // "on_radioButtonWiFi_toggled"
+QT_MOC_LITERAL(24, 374, 7), // "checked"
+QT_MOC_LITERAL(25, 382, 24), // "on_radioButtonBT_toggled"
+QT_MOC_LITERAL(26, 407, 32), // "on_pushButtonWiFiConnect_clicked"
+QT_MOC_LITERAL(27, 440, 35), // "on_pushButtonWiFiDisconnect_c..."
+QT_MOC_LITERAL(28, 476, 34), // "on_checkBoxConfigAntialias_to..."
+QT_MOC_LITERAL(29, 511, 33), // "on_pushButtonBTdisconnect_cli..."
+QT_MOC_LITERAL(30, 545, 25), // "on_pushButtonMeas_clicked"
+QT_MOC_LITERAL(31, 571, 11), // "resizeEvent"
+QT_MOC_LITERAL(32, 583, 13), // "QResizeEvent*"
+QT_MOC_LITERAL(33, 597, 5), // "event"
+QT_MOC_LITERAL(34, 603, 40), // "on_pushButtonGenerateCalibrat..."
+QT_MOC_LITERAL(35, 644, 32), // "on_pushButtonOpenCalFile_clicked"
+QT_MOC_LITERAL(36, 677, 32) // "on_pushButtonSaveCalFile_clicked"
 
     },
     "MainWindow\0BTgetDevice\0\0name\0BTConnected\0"
@@ -73,6 +76,7 @@ QT_MOC_LITERAL(33, 584, 40) // "on_pushButtonGenerateCalibrat..."
     "PlotRx\0PlotTimeout\0MeasurementTimeout\0"
     "PlotMeasurement\0setUpTables\0clearTables\0"
     "updateTables\0updateStatistics\0"
+    "saveCalibrationXml\0"
     "on_pushButtonBTdiscoverDevices_clicked\0"
     "on_pushButtonBTconnect_clicked\0"
     "on_pushButtonATSend_clicked\0"
@@ -84,7 +88,9 @@ QT_MOC_LITERAL(33, 584, 40) // "on_pushButtonGenerateCalibrat..."
     "on_pushButtonBTdisconnect_clicked\0"
     "on_pushButtonMeas_clicked\0resizeEvent\0"
     "QResizeEvent*\0event\0"
-    "on_pushButtonGenerateCalibration_clicked"
+    "on_pushButtonGenerateCalibration_clicked\0"
+    "on_pushButtonOpenCalFile_clicked\0"
+    "on_pushButtonSaveCalFile_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -94,7 +100,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      25,   14, // methods
+      28,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -102,31 +108,34 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  139,    2, 0x08 /* Private */,
-       4,    1,  142,    2, 0x08 /* Private */,
-       5,    1,  145,    2, 0x08 /* Private */,
-       7,    0,  148,    2, 0x08 /* Private */,
-       8,    1,  149,    2, 0x08 /* Private */,
-      11,    1,  152,    2, 0x08 /* Private */,
-      12,    0,  155,    2, 0x08 /* Private */,
-      13,    0,  156,    2, 0x08 /* Private */,
-      14,    0,  157,    2, 0x08 /* Private */,
-      15,    0,  158,    2, 0x08 /* Private */,
-      16,    0,  159,    2, 0x08 /* Private */,
-      17,    0,  160,    2, 0x08 /* Private */,
-      18,    0,  161,    2, 0x08 /* Private */,
-      19,    0,  162,    2, 0x08 /* Private */,
-      20,    0,  163,    2, 0x08 /* Private */,
-      21,    0,  164,    2, 0x08 /* Private */,
-      22,    1,  165,    2, 0x08 /* Private */,
-      24,    1,  168,    2, 0x08 /* Private */,
-      25,    0,  171,    2, 0x08 /* Private */,
-      26,    0,  172,    2, 0x08 /* Private */,
-      27,    1,  173,    2, 0x08 /* Private */,
-      28,    0,  176,    2, 0x08 /* Private */,
-      29,    0,  177,    2, 0x08 /* Private */,
-      30,    1,  178,    2, 0x08 /* Private */,
-      33,    0,  181,    2, 0x08 /* Private */,
+       1,    1,  154,    2, 0x08 /* Private */,
+       4,    1,  157,    2, 0x08 /* Private */,
+       5,    1,  160,    2, 0x08 /* Private */,
+       7,    0,  163,    2, 0x08 /* Private */,
+       8,    1,  164,    2, 0x08 /* Private */,
+      11,    1,  167,    2, 0x08 /* Private */,
+      12,    0,  170,    2, 0x08 /* Private */,
+      13,    0,  171,    2, 0x08 /* Private */,
+      14,    0,  172,    2, 0x08 /* Private */,
+      15,    0,  173,    2, 0x08 /* Private */,
+      16,    0,  174,    2, 0x08 /* Private */,
+      17,    0,  175,    2, 0x08 /* Private */,
+      18,    0,  176,    2, 0x08 /* Private */,
+      19,    0,  177,    2, 0x08 /* Private */,
+      20,    0,  178,    2, 0x08 /* Private */,
+      21,    0,  179,    2, 0x08 /* Private */,
+      22,    0,  180,    2, 0x08 /* Private */,
+      23,    1,  181,    2, 0x08 /* Private */,
+      25,    1,  184,    2, 0x08 /* Private */,
+      26,    0,  187,    2, 0x08 /* Private */,
+      27,    0,  188,    2, 0x08 /* Private */,
+      28,    1,  189,    2, 0x08 /* Private */,
+      29,    0,  192,    2, 0x08 /* Private */,
+      30,    0,  193,    2, 0x08 /* Private */,
+      31,    1,  194,    2, 0x08 /* Private */,
+      34,    0,  197,    2, 0x08 /* Private */,
+      35,    0,  198,    2, 0x08 /* Private */,
+      36,    0,  199,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
@@ -145,14 +154,17 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   23,
-    QMetaType::Void, QMetaType::Bool,   23,
+    QMetaType::Void,
+    QMetaType::Void, QMetaType::Bool,   24,
+    QMetaType::Void, QMetaType::Bool,   24,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   23,
+    QMetaType::Void, QMetaType::Bool,   24,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 31,   32,
+    QMetaType::Void, 0x80000000 | 32,   33,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -177,18 +189,21 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 10: _t->clearTables(); break;
         case 11: _t->updateTables(); break;
         case 12: _t->updateStatistics(); break;
-        case 13: _t->on_pushButtonBTdiscoverDevices_clicked(); break;
-        case 14: _t->on_pushButtonBTconnect_clicked(); break;
-        case 15: _t->on_pushButtonATSend_clicked(); break;
-        case 16: _t->on_radioButtonWiFi_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 17: _t->on_radioButtonBT_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 18: _t->on_pushButtonWiFiConnect_clicked(); break;
-        case 19: _t->on_pushButtonWiFiDisconnect_clicked(); break;
-        case 20: _t->on_checkBoxConfigAntialias_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->on_pushButtonBTdisconnect_clicked(); break;
-        case 22: _t->on_pushButtonMeas_clicked(); break;
-        case 23: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
-        case 24: _t->on_pushButtonGenerateCalibration_clicked(); break;
+        case 13: _t->saveCalibrationXml(); break;
+        case 14: _t->on_pushButtonBTdiscoverDevices_clicked(); break;
+        case 15: _t->on_pushButtonBTconnect_clicked(); break;
+        case 16: _t->on_pushButtonATSend_clicked(); break;
+        case 17: _t->on_radioButtonWiFi_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 18: _t->on_radioButtonBT_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: _t->on_pushButtonWiFiConnect_clicked(); break;
+        case 20: _t->on_pushButtonWiFiDisconnect_clicked(); break;
+        case 21: _t->on_checkBoxConfigAntialias_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 22: _t->on_pushButtonBTdisconnect_clicked(); break;
+        case 23: _t->on_pushButtonMeas_clicked(); break;
+        case 24: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
+        case 25: _t->on_pushButtonGenerateCalibration_clicked(); break;
+        case 26: _t->on_pushButtonOpenCalFile_clicked(); break;
+        case 27: _t->on_pushButtonSaveCalFile_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
@@ -234,13 +249,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 25)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 25;
+        _id -= 28;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 25)
+        if (_id < 28)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 25;
+        _id -= 28;
     }
     return _id;
 }

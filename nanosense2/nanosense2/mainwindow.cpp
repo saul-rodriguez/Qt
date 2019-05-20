@@ -3,7 +3,9 @@
 
 #include <QtCharts/QChartView>
 
+#include <QFileDialog>
 #include <QMessageBox>
+#include <QXmlStreamWriter>
 #include <QtMath>
 
 
@@ -91,8 +93,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Tables
     setUpTables();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -193,7 +193,6 @@ void MainWindow::WiFiRead()
         PlotRx(m_data);
         m_data.clear();
     }
-
 
 }
 
@@ -544,6 +543,12 @@ void MainWindow::updateStatistics()
 
 }
 
+void MainWindow::saveCalibrationXml()
+{
+
+
+}
+
 void MainWindow::setUpTables()
 {
     modelMag = new QStandardItemModel(10,11,this);
@@ -788,26 +793,89 @@ void MainWindow::on_pushButtonGenerateCalibration_clicked()
         index = modelCal->index(1,i,QModelIndex());
         modelCal->setData(index,QString::number(m_phaseCalFactor[i],'g',4));
     }
-
-
-
-
 }
 
+void MainWindow::on_pushButtonOpenCalFile_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Xml"), ".",
+                                                    tr("Xml files (*.xml)"));
+    QFile file(filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug()<<"calibration file not opened!";
+        return;
+    }
 
+    xmlRead.setDevice(&file);
+    xmlRead.readNextStartElement();
+    QStringRef aux = xmlRead.name();
 
+    while(!xmlRead.atEnd()){
+        if (xmlRead.isStartElement()){
+            QStringRef aux = xmlRead.name();
+            if(xmlRead.name() == "CALIBRATION") {
+                xmlRead.readNext(); //enter next level
+            } else if (xmlRead.name() == "MAGNITUDE") {
+                for (int i = 0; i < 11; i ++) {
+                    xmlRead.readNextStartElement();
+                    m_gainCalFactor[i] = xmlRead.readElementText().toDouble();
+                }
+            } else if (xmlRead.name() == "PHASE") {
+                for (int i = 0; i < 11; i ++) {
+                    xmlRead.readNextStartElement();
+                    m_phaseCalFactor[i] = xmlRead.readElementText().toDouble();
+                }
+            }
+        } else {
+            xmlRead.readNext();
+        }
+    }
 
+    file.close();
 
+    //Update table
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelCal->index(0,i,QModelIndex());
+        modelCal->setData(index,QString::number(m_gainCalFactor[i],'g',4));
 
+        index = modelCal->index(1,i,QModelIndex());
+        modelCal->setData(index,QString::number(m_phaseCalFactor[i],'g',4));
+    }
+}
 
+void MainWindow::on_pushButtonSaveCalFile_clicked()
+{
+    QString filename = QFileDialog::getSaveFileName(this,
+                                                    tr("Save Xml"), ".",
+                                                    tr("Xml files (*.xml)"));
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly);
 
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
 
+    xmlWriter.writeStartElement("CALIBRATION");
 
+    xmlWriter.writeStartElement("MAGNITUDE");
+    for (int i = 0; i < 11; i++) {
+        QString aux = "f" + QString::number(i);
+        //QString aux = QString::number(i);
+        xmlWriter.writeTextElement(aux,QString::number(m_gainCalFactor[i],'g',4));
+    }
+    xmlWriter.writeEndElement();
 
+    xmlWriter.writeStartElement("PHASE");
+    for (int i = 0; i < 11; i++) {
+        QString aux = "f" + QString::number(i);
+        //QString aux = QString::number(i);
+        xmlWriter.writeTextElement(aux,QString::number(m_phaseCalFactor[i],'g',4));
+    }
+    xmlWriter.writeEndElement();
 
+    xmlWriter.writeEndElement(); //close CALIBRATION FACTORS
 
+    xmlWriter.writeEndDocument();
+    file.close();
 
-
-
-
-
+}

@@ -96,7 +96,10 @@ public:
     QVBoxLayout *verticalLayout_5;
     QCheckBox *checkBoxGainCalibration;
     QLabel *label_6;
+    QHBoxLayout *horizontalLayout_5;
     QPushButton *pushButtonGenerateCalibration;
+    QPushButton *pushButtonOpenCalFile;
+    QPushButton *pushButtonSaveCalFile;
     QTableView *tableViewCalibration;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -377,18 +380,34 @@ public:
 
         verticalLayout_5->addWidget(label_6);
 
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         pushButtonGenerateCalibration = new QPushButton(tab_6);
         pushButtonGenerateCalibration->setObjectName(QString::fromUtf8("pushButtonGenerateCalibration"));
 
-        verticalLayout_5->addWidget(pushButtonGenerateCalibration);
+        horizontalLayout_5->addWidget(pushButtonGenerateCalibration);
+
+        pushButtonOpenCalFile = new QPushButton(tab_6);
+        pushButtonOpenCalFile->setObjectName(QString::fromUtf8("pushButtonOpenCalFile"));
+
+        horizontalLayout_5->addWidget(pushButtonOpenCalFile);
+
+        pushButtonSaveCalFile = new QPushButton(tab_6);
+        pushButtonSaveCalFile->setObjectName(QString::fromUtf8("pushButtonSaveCalFile"));
+
+        horizontalLayout_5->addWidget(pushButtonSaveCalFile);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_5);
+
+
+        gridLayout_8->addLayout(verticalLayout_5, 0, 0, 1, 1);
 
         tableViewCalibration = new QTableView(tab_6);
         tableViewCalibration->setObjectName(QString::fromUtf8("tableViewCalibration"));
 
-        verticalLayout_5->addWidget(tableViewCalibration);
-
-
-        gridLayout_8->addLayout(verticalLayout_5, 0, 0, 1, 1);
+        gridLayout_8->addWidget(tableViewCalibration, 1, 0, 1, 1);
 
         tabWidget->addTab(tab_6, QString());
 
@@ -460,6 +479,8 @@ public:
         checkBoxGainCalibration->setText(QApplication::translate("MainWindow", "Enable Gain calibration", nullptr));
         label_6->setText(QApplication::translate("MainWindow", "Calibration table for 1 kOhm reference", nullptr));
         pushButtonGenerateCalibration->setText(QApplication::translate("MainWindow", "Generate Calibration coeff.", nullptr));
+        pushButtonOpenCalFile->setText(QApplication::translate("MainWindow", "Open Cal. File", nullptr));
+        pushButtonSaveCalFile->setText(QApplication::translate("MainWindow", "Save Cal. File", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Cal", nullptr));
     } // retranslateUi
 
