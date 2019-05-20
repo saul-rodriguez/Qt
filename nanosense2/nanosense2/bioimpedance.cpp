@@ -67,6 +67,25 @@ double bioimpedance::getFrequency()
     return m_freq;
 }
 
+int bioimpedance::getFrequencyIndex(freqIndexType ftype)
+{
+    if (ftype == REVERSE) {
+        return (10 - m_freq_ind); //reverse the order of the
+    } else {
+        return m_freq_ind;
+    }
+}
+
+void bioimpedance::calibrateMagnitude(double gainFactor)
+{
+    m_mag *= gainFactor;
+}
+
+void bioimpedance::calibratePhase(double phaseCorrection)
+{
+    m_pha -= phaseCorrection;
+}
+
 void bioimpedance::calculateIQ()
 {
     const char* read_pt = m_rawdata.constData();

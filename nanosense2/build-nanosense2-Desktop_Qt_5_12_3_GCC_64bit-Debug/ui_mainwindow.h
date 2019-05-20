@@ -91,6 +91,13 @@ public:
     QTableView *tableViewPha;
     QTableView *tableViewPhaStat;
     QLabel *label_5;
+    QWidget *tab_6;
+    QGridLayout *gridLayout_8;
+    QVBoxLayout *verticalLayout_5;
+    QCheckBox *checkBoxGainCalibration;
+    QLabel *label_6;
+    QPushButton *pushButtonGenerateCalibration;
+    QTableView *tableViewCalibration;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -351,6 +358,39 @@ public:
         label_5->setObjectName(QString::fromUtf8("label_5"));
         label_5->setGeometry(QRect(10, 370, 279, 17));
         tabWidget->addTab(tab_5, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName(QString::fromUtf8("tab_6"));
+        gridLayout_8 = new QGridLayout(tab_6);
+        gridLayout_8->setSpacing(6);
+        gridLayout_8->setContentsMargins(11, 11, 11, 11);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        checkBoxGainCalibration = new QCheckBox(tab_6);
+        checkBoxGainCalibration->setObjectName(QString::fromUtf8("checkBoxGainCalibration"));
+
+        verticalLayout_5->addWidget(checkBoxGainCalibration);
+
+        label_6 = new QLabel(tab_6);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        verticalLayout_5->addWidget(label_6);
+
+        pushButtonGenerateCalibration = new QPushButton(tab_6);
+        pushButtonGenerateCalibration->setObjectName(QString::fromUtf8("pushButtonGenerateCalibration"));
+
+        verticalLayout_5->addWidget(pushButtonGenerateCalibration);
+
+        tableViewCalibration = new QTableView(tab_6);
+        tableViewCalibration->setObjectName(QString::fromUtf8("tableViewCalibration"));
+
+        verticalLayout_5->addWidget(tableViewCalibration);
+
+
+        gridLayout_8->addLayout(verticalLayout_5, 0, 0, 1, 1);
+
+        tabWidget->addTab(tab_6, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -382,7 +422,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(6);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -417,6 +457,10 @@ public:
         label_4->setText(QApplication::translate("MainWindow", "Phase Measurements", nullptr));
         label_5->setText(QApplication::translate("MainWindow", "Average and Standard deviation (degree)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Pha", nullptr));
+        checkBoxGainCalibration->setText(QApplication::translate("MainWindow", "Enable Gain calibration", nullptr));
+        label_6->setText(QApplication::translate("MainWindow", "Calibration table for 1 kOhm reference", nullptr));
+        pushButtonGenerateCalibration->setText(QApplication::translate("MainWindow", "Generate Calibration coeff.", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Cal", nullptr));
     } // retranslateUi
 
 };

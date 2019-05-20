@@ -61,12 +61,17 @@ private:
     QTimer *m_timerMeas;    //timeout for the measurent
     QTime m_timearrival;    //used to check speed of the measurement (time elapsed)
 
+    double m_gainCalFactor[11];
+    double m_phaseCalFactor[11];
+
     //Tables
     QStandardItemModel *modelMag;
     QStandardItemModel *modelMagStat;
 
     QStandardItemModel *modelPha;
     QStandardItemModel *modelPhaStat;
+
+    QStandardItemModel *modelCal;
 
 
 private slots:
@@ -101,6 +106,7 @@ private slots:
     void on_pushButtonMeas_clicked();
 
     void resizeEvent(QResizeEvent* event);
+    void on_pushButtonGenerateCalibration_clicked();
 };
 
 #endif // MAINWINDOW_H

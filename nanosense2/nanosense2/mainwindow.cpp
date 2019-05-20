@@ -84,6 +84,11 @@ MainWindow::MainWindow(QWidget *parent) :
     m_timerMeas->setSingleShot(true);
     connect(m_timerMeas, SIGNAL(timeout()), this, SLOT(MeasurementTimeout()));
 
+    for (int i=0; i < 11; i++) {
+        m_gainCalFactor[i] = 0;
+        m_phaseCalFactor[i] = 0;
+    }
+
     //Tables
     setUpTables();
 
@@ -116,9 +121,17 @@ void MainWindow::BTrxData(const QByteArray &data)
     m_data.append(data);
     int size = m_data.count();
 
-    if (size == 7) {
+    if (size == 7) { //Check for correct packet size
         p_bioimpedance = new bioimpedance();
         if(p_bioimpedance->setData(m_data)) {
+
+            if (ui->checkBoxGainCalibration->isChecked()) {
+                int ind = p_bioimpedance->getFrequencyIndex(REVERSE);
+                p_bioimpedance->calibrateMagnitude(m_gainCalFactor[ind]);
+                p_bioimpedance->calibratePhase(m_phaseCalFactor[ind]);
+            }
+
+
             m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
             qDebug()<<"arrival time: "<<m_timearrival.elapsed();
 
@@ -385,6 +398,14 @@ void MainWindow::clearTables()
         }
     }
 
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 11; j++) {
+            QModelIndex index = modelCal->index(i,j,QModelIndex());
+            modelMag->setData(index,"");
+        }
+    }
+
+
 
 }
 
@@ -531,11 +552,15 @@ void MainWindow::setUpTables()
     modelPha = new QStandardItemModel(10,11,this);
     modelPhaStat = new QStandardItemModel(2,11,this);
 
+    modelCal = new QStandardItemModel(2,11,this);
+
     ui->tableViewMag->setModel(modelMag);
     ui->tableViewMagStat->setModel(modelMagStat);
 
     ui->tableViewPha->setModel(modelPha);
     ui->tableViewPhaStat->setModel(modelPhaStat);
+
+    ui->tableViewCalibration->setModel(modelCal);
 
     int widthTable = ui->tableViewMag->width()/12;
 
@@ -545,6 +570,10 @@ void MainWindow::setUpTables()
         ui->tableViewPha->setColumnWidth(i,widthTable);
         ui->tableViewPhaStat->setColumnWidth(i,widthTable);
     }
+
+    widthTable = ui->tableViewCalibration->width()/12;
+    for (int i = 0; i < 11; i++)
+        ui->tableViewCalibration->setColumnWidth(i,widthTable);
 
     clearTables();
 
@@ -738,3 +767,47 @@ void MainWindow::resizeEvent(QResizeEvent *event)
     }*/
 
 }
+
+void MainWindow::on_pushButtonGenerateCalibration_clicked()
+{
+    //Calibration requires measurement of a 1 kOhm resistor
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelMagStat->index(0,i,QModelIndex());
+        //modelMagStat->setData(index,rms[i]);
+        //modelMagStat->setData(index,QString::number(rms[i],'g',4));
+        m_gainCalFactor[i] = 1.0e3/modelMagStat->data(index).toDouble();
+
+        index = modelPhaStat->index(0,i,QModelIndex());
+        m_phaseCalFactor[i] = - modelPhaStat->data(index).toDouble();
+    }
+
+    for (int i=0; i < 11; i++) {
+        QModelIndex index = modelCal->index(0,i,QModelIndex());
+        modelCal->setData(index,QString::number(m_gainCalFactor[i],'g',4));
+
+        index = modelCal->index(1,i,QModelIndex());
+        modelCal->setData(index,QString::number(m_phaseCalFactor[i],'g',4));
+    }
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

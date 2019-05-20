@@ -33,6 +33,12 @@ enum gains {
 typedef enum gains gains;
 */
 
+enum freqIndexType {
+    ASIC,
+    REVERSE
+};
+typedef enum freqIndexType freqIndexType;
+
 //Uncomment one of the following lines depending on the ADC resolution
 //#define ADC_10_BITS
 #define ADC_12_BITS
@@ -55,6 +61,9 @@ public:
     double getMagnitude();
     double getPhase();
     double getFrequency();
+    int getFrequencyIndex(freqIndexType ftype);
+    void calibrateMagnitude(double gainFactor);
+    void calibratePhase(double phaseCorrection);
 
 signals:
 
