@@ -57,7 +57,8 @@ SOURCES       = ../nanosense2/bioimpedance.cpp \
 		../nanosense2/mainwindow.cpp \
 		../nanosense2/btclient.cpp \
 		../nanosense2/cplotchart.cpp \
-		../nanosense2/sweep.cpp moc_bioimpedance.cpp \
+		../nanosense2/sweep.cpp qrc_images.cpp \
+		moc_bioimpedance.cpp \
 		moc_mainwindow.cpp \
 		moc_btclient.cpp \
 		moc_sweep.cpp
@@ -67,6 +68,7 @@ OBJECTS       = bioimpedance.o \
 		btclient.o \
 		cplotchart.o \
 		sweep.o \
+		qrc_images.o \
 		moc_bioimpedance.o \
 		moc_mainwindow.o \
 		moc_btclient.o \
@@ -493,6 +495,7 @@ Makefile: ../nanosense2/nanosense2.pro /pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++/q
 		/pkg/Qt/5.12.3/gcc_64/mkspecs/features/yacc.prf \
 		/pkg/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
 		../nanosense2/nanosense2.pro \
+		../nanosense2/images.qrc \
 		/pkg/Qt/5.12.3/gcc_64/lib/libQt5Charts.prl \
 		/pkg/Qt/5.12.3/gcc_64/lib/libQt5Widgets.prl \
 		/pkg/Qt/5.12.3/gcc_64/lib/libQt5Gui.prl \
@@ -694,6 +697,7 @@ Makefile: ../nanosense2/nanosense2.pro /pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++/q
 /pkg/Qt/5.12.3/gcc_64/mkspecs/features/yacc.prf:
 /pkg/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf:
 ../nanosense2/nanosense2.pro:
+../nanosense2/images.qrc:
 /pkg/Qt/5.12.3/gcc_64/lib/libQt5Charts.prl:
 /pkg/Qt/5.12.3/gcc_64/lib/libQt5Widgets.prl:
 /pkg/Qt/5.12.3/gcc_64/lib/libQt5Gui.prl:
@@ -714,6 +718,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../nanosense2/images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /pkg/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../nanosense2/bioimpedance.h ../nanosense2/mainwindow.h ../nanosense2/btclient.h ../nanosense2/cplotchart.h ../nanosense2/sweep.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../nanosense2/bioimpedance.cpp ../nanosense2/main.cpp ../nanosense2/mainwindow.cpp ../nanosense2/btclient.cpp ../nanosense2/cplotchart.cpp ../nanosense2/sweep.cpp $(DISTDIR)/
@@ -741,8 +746,16 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_images.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_images.cpp
+qrc_images.cpp: ../nanosense2/images.qrc \
+		/pkg/Qt/5.12.3/gcc_64/bin/rcc \
+		../nanosense2/images/Clean-icon.png \
+		../nanosense2/images/Save-icon.png \
+		../nanosense2/images/Button-Play-icon.png
+	/pkg/Qt/5.12.3/gcc_64/bin/rcc -name images ../nanosense2/images.qrc -o qrc_images.cpp
+
 compiler_moc_predefs_make_all: moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) moc_predefs.h
@@ -966,6 +979,8 @@ moc_mainwindow.cpp: ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		../nanosense2/sweep.h \
+		../nanosense2/bioimpedance.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -981,6 +996,13 @@ moc_mainwindow.cpp: ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qnetworkinterface.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qhostaddress.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTime \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdatetime.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QStandardItemModel \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QXmlStreamWriter \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qxmlstream.h \
 		moc_predefs.h \
 		/pkg/Qt/5.12.3/gcc_64/bin/moc
 	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nanosense2/build-nanosense2-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nanosense2/nanosense2 -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtCharts -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtBluetooth -I/pkg/Qt/5.12.3/gcc_64/include/QtNetwork -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../nanosense2/mainwindow.h -o moc_mainwindow.cpp
@@ -1137,6 +1159,85 @@ moc_sweep.cpp: ../nanosense2/sweep.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		../nanosense2/bioimpedance.h \
+		../nanosense2/cplotchart.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QLogValueAxis \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlogvalueaxis.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QAbstractAxis \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qabstractaxis.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QChartGlobal \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qchartglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QtGlobal \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QPen \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpen.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qcolor.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qrgb.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qrgba64.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qbrush.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpoint.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvector.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qmatrix.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpolygon.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qrect.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmargins.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsize.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qregion.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdatastream.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiodevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qline.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtransform.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpainterpath.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qimage.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpaintdevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpixelformat.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpixmap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QFont \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qfont.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QVariant \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtextstream.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlocale.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qset.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qvalueaxis.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QChart \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qchart.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QAbstractSeries \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qabstractseries.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QLegend \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlegend.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QGraphicsWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qevent.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qkeysequence.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qurl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qurlquery.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfile.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvector2d.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtouchdevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpalette.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QBrush \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QMargins \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QLineSeries \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
 		moc_predefs.h \
 		/pkg/Qt/5.12.3/gcc_64/bin/moc
 	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nanosense2/build-nanosense2-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nanosense2/nanosense2 -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtCharts -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtBluetooth -I/pkg/Qt/5.12.3/gcc_64/include/QtNetwork -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../nanosense2/sweep.h -o moc_sweep.cpp
@@ -1158,7 +1259,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -1390,6 +1491,8 @@ main.o: ../nanosense2/main.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		../nanosense2/sweep.h \
+		../nanosense2/bioimpedance.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1405,6 +1508,13 @@ main.o: ../nanosense2/main.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qnetworkinterface.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qhostaddress.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTime \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdatetime.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QStandardItemModel \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QXmlStreamWriter \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qxmlstream.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QApplication \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qapplication.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1573,6 +1683,8 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		../nanosense2/sweep.h \
+		../nanosense2/bioimpedance.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1588,7 +1700,17 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qnetworkinterface.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qhostaddress.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTime \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdatetime.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QStandardItemModel \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qstandarditemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QXmlStreamWriter \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qxmlstream.h \
 		ui_mainwindow.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QAction \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qaction.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qactiongroup.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QApplication \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qapplication.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1612,7 +1734,6 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabbar.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qrubberband.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qframe.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QGridLayout \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgridlayout.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlayout.h \
@@ -1621,6 +1742,11 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QGroupBox \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgroupbox.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QHBoxLayout \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QHeaderView \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qheaderview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QLabel \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlabel.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QLineEdit \
@@ -1628,15 +1754,13 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtextcursor.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtextformat.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtextoption.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMenu \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmenu.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMenuBar \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmenubar.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmenu.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qaction.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qactiongroup.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QPlainTextEdit \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qplaintextedit.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtextedit.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtextdocument.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtextlayout.h \
@@ -1651,6 +1775,8 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QStatusBar \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstatusbar.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QTabWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QTableView \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtableview.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QToolBar \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtoolbar.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QVBoxLayout \
@@ -1662,9 +1788,15 @@ mainwindow.o: ../nanosense2/mainwindow.cpp ../nanosense2/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpainter.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qscrollarea.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicsscene.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QFileDialog \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qfiledialog.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdir.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfileinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qdialog.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMessageBox \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmessagebox.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qdialog.h
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QtMath \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../nanosense2/mainwindow.cpp
 
 btclient.o: ../nanosense2/btclient.cpp ../nanosense2/btclient.h \
@@ -1949,8 +2081,91 @@ sweep.o: ../nanosense2/sweep.cpp ../nanosense2/sweep.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		../nanosense2/bioimpedance.h \
+		../nanosense2/cplotchart.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QLogValueAxis \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlogvalueaxis.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QAbstractAxis \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qabstractaxis.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QChartGlobal \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qchartglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QtGlobal \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QPen \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpen.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qcolor.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qrgb.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qrgba64.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qbrush.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpoint.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvector.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qmatrix.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpolygon.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qrect.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmargins.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsize.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qregion.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs_win.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdatastream.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiodevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qline.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtransform.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpainterpath.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qimage.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpaintdevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpixelformat.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpixmap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QFont \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qfont.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QVariant \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtextstream.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlocale.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qset.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qvalueaxis.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QChart \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qchart.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QAbstractSeries \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qabstractseries.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QLegend \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlegend.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QGraphicsWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicswidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicslayoutitem.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qsizepolicy.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qevent.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qkeysequence.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qurl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qurlquery.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfile.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvector2d.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtouchdevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgraphicsitem.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qpalette.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/QBrush \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QMargins \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QLineSeries \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o sweep.o ../nanosense2/sweep.cpp
+
+qrc_images.o: qrc_images.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
 
 moc_bioimpedance.o: moc_bioimpedance.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bioimpedance.o moc_bioimpedance.cpp

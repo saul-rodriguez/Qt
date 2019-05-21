@@ -54,7 +54,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chartMag->setTitles("","Frequency","Magnitude");
   //  m_chart->setXMinXax(0,m_MaxDataPlot);
   //  m_chart->setYMinXax(0,1024);
-    m_chartMag->setXMinXax(100.0,10e6);
+    m_chartMag->setXMinXax(900.0,1.1e6);
     m_chartMag->setYMinXax(10,1e6);
     m_chartMag->initializePlot();
     m_chartViewMag = new QChartView(static_cast<QChart*>(m_chartMag));
@@ -66,7 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chartPha = new CPlotChart();
     m_chartPha->setType(SEMILOGX);
     m_chartPha->setTitles("","Frequency","Phase");
-    m_chartPha->setXMinXax(100.0,10e6);
+    m_chartPha->setXMinXax(900,1.1e6);
     m_chartPha->setYMinXax(0,100);
     m_chartPha->initializePlot();
     m_chartViewPha = new QChartView(static_cast<QChart*>(m_chartPha));
@@ -339,8 +339,8 @@ void MainWindow::MeasurementTimeout()
     m_measurements[m_currentMeasurement].cleanSweep();
 
     //reenable measurement button
-    ui->pushButtonMeas->setEnabled(true);
-
+    //ui->pushButtonMeas->setEnabled(true);
+    ui->action_Run->setEnabled(true);
 }
 
 void MainWindow::PlotMeasurement()
@@ -381,7 +381,7 @@ void MainWindow::clearTables()
             modelMag->setData(index,"");
 
             index = modelPha->index(i,j,QModelIndex());
-            modelMag->setData(index,"");
+            modelPha->setData(index,"");
 
         }
     }
@@ -389,10 +389,10 @@ void MainWindow::clearTables()
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 11; j++) {
             QModelIndex index = modelMagStat->index(i,j,QModelIndex());
-            modelMag->setData(index,"");
+            modelMagStat->setData(index,"");
 
             index = modelPhaStat->index(i,j,QModelIndex());
-            modelMag->setData(index,"");
+            modelPhaStat->setData(index,"");
 
         }
     }
@@ -400,7 +400,7 @@ void MainWindow::clearTables()
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 11; j++) {
             QModelIndex index = modelCal->index(i,j,QModelIndex());
-            modelMag->setData(index,"");
+            modelCal->setData(index,"");
         }
     }
 
@@ -742,6 +742,7 @@ void MainWindow::on_pushButtonClearPlot_clicked()
 }
 */
 
+/*
 void MainWindow::on_pushButtonMeas_clicked()
 {
     //Check if the timer is running
@@ -756,6 +757,7 @@ void MainWindow::on_pushButtonMeas_clicked()
     ui->pushButtonMeas->setEnabled(false);
 
 }
+*/
 
 void MainWindow::resizeEvent(QResizeEvent *event)
 {
@@ -877,5 +879,35 @@ void MainWindow::on_pushButtonSaveCalFile_clicked()
 
     xmlWriter.writeEndDocument();
     file.close();
+
+}
+
+void MainWindow::on_action_Run_triggered()
+{
+    //Check if the timer is running
+    if (m_timerMeas->isActive())
+        return;
+
+    ui->lineEditAT->setText("f");
+    on_pushButtonATSend_clicked();
+    m_timerMeas->start(2000); //sweep must be completed before this timeout!
+    m_timearrival.start(); //This is used to determine the measurement total time
+
+    //ui->pushButtonMeas->setEnabled(false);
+    ui->action_Run->setEnabled(false);
+}
+
+void MainWindow::on_action_Clean_triggered()
+{
+    for (int i = 0; i < 10; i++) {
+        m_measurements[i].cleanSweep();
+    }
+    clearTables();
+
+    m_chartMag->clearTable();
+    m_chartPha->clearTable();
+
+    m_chartMag->updatePlot();
+    m_chartPha->updatePlot();
 
 }

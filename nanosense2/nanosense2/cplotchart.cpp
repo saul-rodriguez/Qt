@@ -148,12 +148,21 @@ void CPlotChart::updatePlot()
 //    removeAxis(axisY);
 
     int size = m_DataTable.count();
+    if (!size) { //Add a dummy point to the plot (otherwise redrawing fails!)
+        DataTrace aux;
+        DataPoint auxp;
+        auxp.first.setX(2e-3);
+        auxp.first.setY(2e-9);
+        auxp.second = "dummy";
+        aux.append(auxp);
+        m_DataTable.append(aux);
+        size = 1;
+    }
 
     QLineSeries *series; //Contains points, colors, etc of a single trace
    // QScatterSeries *series;
 
-    if (size) {
-        for (int i = 0; i < size; i++) {
+   for (int i = 0; i < size; i++) {
               series = new QLineSeries();
  //           series = new QScatterSeries(); //create a new trace
  //           series->setMarkerShape(QScatterSeries::MarkerShapeRectangle);
@@ -173,28 +182,7 @@ void CPlotChart::updatePlot()
             series->setName((m_DataTable[i])[0].second); //
             addSeries(series);
 
-            //createDefaultAxes();
-            //axisX()->setRange(m_minX, m_maxX);
-            //axisY()->setRange(m_minY, m_maxY);
-/*
-            //QValueAxis *axisX = new QValueAxis();
-            axisX->setTitleText(m_xAxisName);
-            axisX->setLabelFormat("%3.2f");
-            axisX->setRange(m_minX, m_maxX);
-            axisX->setTickCount(7);
-            addAxis(axisX, Qt::AlignBottom);
-            series->attachAxis(axisX);
-
-            //QLogValueAxis *axisY = new QLogValueAxis();
-            axisY->setTitleText(m_yAxisName);
-            axisY->setLabelFormat("%3.1e");
-            axisY->setBase(10.0);
-            axisY->setRange(m_minY, m_maxY);
-            axisY->setMinorTickCount(-1);
-            addAxis(axisY, Qt::AlignLeft);
-            series->attachAxis(axisY); */
-
-            switch (m_type) {
+             switch (m_type) {
                 case NORMAL:
                                 axisX->setTitleText(m_xAxisName);
                                 axisX->setLabelFormat("%3.2f");
@@ -247,7 +235,7 @@ void CPlotChart::updatePlot()
                                 break;
             }
 
-        }
+
     }
 
     setTitle(m_title);

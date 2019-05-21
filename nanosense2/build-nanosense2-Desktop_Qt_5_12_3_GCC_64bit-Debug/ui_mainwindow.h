@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
@@ -20,6 +21,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
@@ -37,6 +39,9 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *action_Run;
+    QAction *action_Save;
+    QAction *action_Clean;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -79,8 +84,6 @@ public:
     QGridLayout *gridLayout_6;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
-    QPushButton *pushButtonMeas;
-    QSpacerItem *horizontalSpacer;
     QWidget *tab_4;
     QLabel *label_2;
     QTableView *tableViewMag;
@@ -93,6 +96,7 @@ public:
     QLabel *label_5;
     QWidget *tab_6;
     QGridLayout *gridLayout_8;
+    QTableView *tableViewCalibration;
     QVBoxLayout *verticalLayout_5;
     QCheckBox *checkBoxGainCalibration;
     QLabel *label_6;
@@ -100,8 +104,8 @@ public:
     QPushButton *pushButtonGenerateCalibration;
     QPushButton *pushButtonOpenCalFile;
     QPushButton *pushButtonSaveCalFile;
-    QTableView *tableViewCalibration;
     QMenuBar *menuBar;
+    QMenu *menu_Measurement;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
 
@@ -110,6 +114,21 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(799, 584);
+        action_Run = new QAction(MainWindow);
+        action_Run->setObjectName(QString::fromUtf8("action_Run"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/images/images/Button-Play-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Run->setIcon(icon);
+        action_Save = new QAction(MainWindow);
+        action_Save->setObjectName(QString::fromUtf8("action_Save"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/images/images/Save-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Save->setIcon(icon1);
+        action_Clean = new QAction(MainWindow);
+        action_Clean->setObjectName(QString::fromUtf8("action_Clean"));
+        QIcon icon2;
+        icon2.addFile(QString::fromUtf8(":/images/images/Clean-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Clean->setIcon(icon2);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -309,15 +328,6 @@ public:
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        pushButtonMeas = new QPushButton(tab);
-        pushButtonMeas->setObjectName(QString::fromUtf8("pushButtonMeas"));
-
-        horizontalLayout_2->addWidget(pushButtonMeas);
-
-        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        horizontalLayout_2->addItem(horizontalSpacer);
-
 
         verticalLayout_3->addLayout(horizontalLayout_2);
 
@@ -367,6 +377,11 @@ public:
         gridLayout_8->setSpacing(6);
         gridLayout_8->setContentsMargins(11, 11, 11, 11);
         gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        tableViewCalibration = new QTableView(tab_6);
+        tableViewCalibration->setObjectName(QString::fromUtf8("tableViewCalibration"));
+
+        gridLayout_8->addWidget(tableViewCalibration, 1, 0, 1, 1);
+
         verticalLayout_5 = new QVBoxLayout();
         verticalLayout_5->setSpacing(6);
         verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
@@ -404,11 +419,6 @@ public:
 
         gridLayout_8->addLayout(verticalLayout_5, 0, 0, 1, 1);
 
-        tableViewCalibration = new QTableView(tab_6);
-        tableViewCalibration->setObjectName(QString::fromUtf8("tableViewCalibration"));
-
-        gridLayout_8->addWidget(tableViewCalibration, 1, 0, 1, 1);
-
         tabWidget->addTab(tab_6, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -420,6 +430,8 @@ public:
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 799, 22));
+        menu_Measurement = new QMenu(menuBar);
+        menu_Measurement->setObjectName(QString::fromUtf8("menu_Measurement"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
@@ -439,9 +451,17 @@ public:
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
         QWidget::setTabOrder(pushButtonATSend, plainTextEditAT);
 
+        menuBar->addAction(menu_Measurement->menuAction());
+        menu_Measurement->addAction(action_Run);
+        menu_Measurement->addAction(action_Save);
+        menu_Measurement->addAction(action_Clean);
+        mainToolBar->addAction(action_Run);
+        mainToolBar->addAction(action_Save);
+        mainToolBar->addAction(action_Clean);
+
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(6);
+        tabWidget->setCurrentIndex(3);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -450,6 +470,18 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Nanonets2Sense", nullptr));
+        action_Run->setText(QApplication::translate("MainWindow", "&Run", nullptr));
+#ifndef QT_NO_SHORTCUT
+        action_Run->setShortcut(QApplication::translate("MainWindow", "Ctrl+R", nullptr));
+#endif // QT_NO_SHORTCUT
+        action_Save->setText(QApplication::translate("MainWindow", "&Save ", nullptr));
+#ifndef QT_NO_SHORTCUT
+        action_Save->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", nullptr));
+#endif // QT_NO_SHORTCUT
+        action_Clean->setText(QApplication::translate("MainWindow", "&Clean", nullptr));
+#ifndef QT_NO_SHORTCUT
+        action_Clean->setShortcut(QApplication::translate("MainWindow", "Ctrl+C", nullptr));
+#endif // QT_NO_SHORTCUT
         checkBoxConfigSmoothPlot->setText(QApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QApplication::translate("MainWindow", "Antialias filtering", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
@@ -468,7 +500,6 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(Connect), QApplication::translate("MainWindow", "Connect", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
-        pushButtonMeas->setText(QApplication::translate("MainWindow", "Measure", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
         label_2->setText(QApplication::translate("MainWindow", "Magnitude Measurements", nullptr));
         label_3->setText(QApplication::translate("MainWindow", "Average and Standard deviation (%)", nullptr));
@@ -482,6 +513,7 @@ public:
         pushButtonOpenCalFile->setText(QApplication::translate("MainWindow", "Open Cal. File", nullptr));
         pushButtonSaveCalFile->setText(QApplication::translate("MainWindow", "Save Cal. File", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Cal", nullptr));
+        menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi
 
 };

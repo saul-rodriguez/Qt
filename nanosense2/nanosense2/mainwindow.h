@@ -108,12 +108,14 @@ private slots:
     void on_pushButtonWiFiDisconnect_clicked();       
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();    
-    void on_pushButtonMeas_clicked();
+    //void on_pushButtonMeas_clicked();
 
     void resizeEvent(QResizeEvent* event);
     void on_pushButtonGenerateCalibration_clicked();
     void on_pushButtonOpenCalFile_clicked();
     void on_pushButtonSaveCalFile_clicked();
+    void on_action_Run_triggered();
+    void on_action_Clean_triggered();
 };
 
 #endif // MAINWINDOW_H
