@@ -86,6 +86,26 @@ void bioimpedance::calibratePhase(double phaseCorrection)
     m_pha -= phaseCorrection;
 }
 
+void bioimpedance::setMagnitude(double mag)
+{
+    m_mag = mag;
+}
+
+void bioimpedance::setPhase(double pha)
+{
+    m_pha = pha;
+}
+
+void bioimpedance::setFrequency(double freq)
+{
+    m_freq = freq;
+}
+
+void bioimpedance::setFrequencyIndex(quint8 freq_ind)
+{
+    m_freq_ind = freq_ind;
+}
+
 void bioimpedance::calculateIQ()
 {
     const char* read_pt = m_rawdata.constData();

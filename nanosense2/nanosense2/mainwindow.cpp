@@ -131,8 +131,8 @@ void MainWindow::BTrxData(const QByteArray &data)
                 p_bioimpedance->calibratePhase(m_phaseCalFactor[ind]);
             }
 
-
-            m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
+            //m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
+            m_temp_measurement.addImpedance(p_bioimpedance);
             qDebug()<<"arrival time: "<<m_timearrival.elapsed();
 
         } else {
@@ -148,20 +148,6 @@ void MainWindow::BTrxData(const QByteArray &data)
         qDebug()<<"Packet error, discarding ";
         return;
     }
-
-    /*
-    if (size == 24) {
-        PlotRx(m_data);
-        m_data.clear();
-    } else if (size < 24) {
-        qDebug()<<"Waiting for rest of packet";
-        return; //wait for the next rx
-    } else {
-        qDebug()<<"packet error, discarding";
-        return; //wait for the next rx
-    }
-    */
-
 
 }
 
@@ -317,30 +303,49 @@ void MainWindow::PlotTimeout()
 void MainWindow::MeasurementTimeout()
 {
     //check if the measurement is complete
-    int count = m_measurements[m_currentMeasurement].getCount();
+   int count = m_temp_measurement.getCount();
 
-    qDebug()<<"Sweep: "<<m_currentMeasurement<<" has: "<<count<<" elements";
+    qDebug()<<"Coming Sweep has: "<<count<<" elements";
 
-    if (count != 11) { //failed sweep, removing it!
-        m_measurements[m_currentMeasurement].cleanSweep();
+    if (count != 11) { //failed sweep, removing it!        
+        m_temp_measurement.cleanSweep();
         qDebug()<<"Erasing sweep";
         return;
     }
 
-    m_measurements->printSweep(); //print sweep in debug mode
+    //Copy the coming sweep to the permanent measurements array and clean the temporal sweep.
+    m_measurements[m_currentMeasurement].cleanSweep();
 
-    PlotMeasurement();
+    for (int i = 0; i < 11; i++) {
+        p_bioimpedance = new bioimpedance();
+        p_bioimpedance->setMagnitude(m_temp_measurement.m_measurement[i]->getMagnitude());
+        p_bioimpedance->setPhase(m_temp_measurement.m_measurement[i]->getPhase());
+        p_bioimpedance->setFrequency(m_temp_measurement.m_measurement[i]->getFrequency());
+        p_bioimpedance->setFrequencyIndex(m_temp_measurement.m_measurement[i]->getFrequencyIndex(ASIC));
 
-    //increment index in circular buffer, clean the next sweep object
+        m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
+    }
+    m_temp_measurement.cleanSweep();
+
+
+    m_measurements[m_currentMeasurement].printSweep(); //print sweep in debug mode
+
+    PlotMeasurement();    
+
+    //increment index in circular buffer
     m_currentMeasurement++;
     if (m_currentMeasurement == 10)
         m_currentMeasurement = 0;
 
-    m_measurements[m_currentMeasurement].cleanSweep();
+    ui->tableViewMag->selectRow(m_currentMeasurement);
+    ui->tableViewPha->selectRow(m_currentMeasurement);
+
+    //m_measurements[m_currentMeasurement].cleanSweep();
 
     //reenable measurement button
     //ui->pushButtonMeas->setEnabled(true);
     ui->action_Run->setEnabled(true);
+
 }
 
 void MainWindow::PlotMeasurement()
@@ -370,7 +375,6 @@ void MainWindow::PlotMeasurement()
     //update the tables with the
     updateTables();
 
-
 }
 
 void MainWindow::clearTables()
@@ -397,13 +401,17 @@ void MainWindow::clearTables()
         }
     }
 
+    ui->tableViewMag->selectRow(m_currentMeasurement);
+    ui->tableViewPha->selectRow(m_currentMeasurement);
+
+    /*
     for (int i = 0; i < 2; i++) {
         for (int j = 0; j < 11; j++) {
             QModelIndex index = modelCal->index(i,j,QModelIndex());
             modelCal->setData(index,"");
         }
     }
-
+    */
 
 
 }
@@ -411,6 +419,8 @@ void MainWindow::clearTables()
 void MainWindow::updateTables()
 {
     DataTrace aux_trace;
+
+    clearTables();
 
     for (int i = 0; i < 10; i++) {
 
@@ -452,11 +462,13 @@ void MainWindow::updateStatistics()
 
     //Average Mag
     for (int j = 0; j < 11; j++) {
-        for (count = 0; count < 10; count++) {
-            QModelIndex indexmag = modelMag->index(count,j,QModelIndex());
+        count = 0;
+        for (int i = 0; i < 10; i++) {
+            QModelIndex indexmag = modelMag->index(i,j,QModelIndex());
             aux = modelMag->data(indexmag).toDouble();
-            if (aux == 0) break; //No more valid rows available!
+            if (aux == 0) continue; //empty row detected!
 
+            count++;
             average[j] += (aux);
         }
 
@@ -470,11 +482,13 @@ void MainWindow::updateStatistics()
 
     //RMS Mag
     for (int j = 0; j < 11; j++) {
-        for (count = 0; count < 10; count++) {
-            QModelIndex indexmag = modelMag->index(count,j,QModelIndex());
+        count = 0;
+        for (int i = 0; i < 10; i++) {
+            QModelIndex indexmag = modelMag->index(i,j,QModelIndex());
             aux = modelMag->data(indexmag).toDouble();
-            if (aux == 0) break; //No more valid rows available!
+            if (aux == 0) continue; //empty row detected!
 
+            count++;
             diff = aux - average[j];
             rms[j] += diff*diff;
         }
@@ -500,11 +514,13 @@ void MainWindow::updateStatistics()
 
     //Average Phase
     for (int j = 0; j < 11; j++) {
-        for (count = 0; count < 10; count++) {
-            QModelIndex indexmag = modelPha->index(count,j,QModelIndex());
+        count = 0;
+        for (int i = 0; i < 10; i++) {
+            QModelIndex indexmag = modelPha->index(i,j,QModelIndex());
             aux = modelPha->data(indexmag).toDouble();
-            if (aux == 0) break; //No more valid rows available!
+            if (aux == 0) continue; //empty row detected!
 
+            count++;
             average[j] += (aux);
         }
 
@@ -518,11 +534,13 @@ void MainWindow::updateStatistics()
 
     //Phase Error
     for (int j = 0; j < 11; j++) {
-        for (count = 0; count < 10; count++) {
-            QModelIndex indexmag = modelPha->index(count,j,QModelIndex());
+        count = 0;
+        for (int i = 0; i < 10; i++) {
+            QModelIndex indexmag = modelPha->index(i,j,QModelIndex());
             aux = modelPha->data(indexmag).toDouble();
-            if (aux == 0) break; //No more valid rows available!
+            if (aux == 0) continue; //No more valid rows available!
 
+            count++;
             diff = aux - average[j];
             rms[j] += diff*diff;
         }
@@ -539,13 +557,6 @@ void MainWindow::updateStatistics()
         //modelMagStat->setData(index,rms[i]);
         modelPhaStat->setData(index,QString::number(rms[i],'g',4));
     }
-
-
-}
-
-void MainWindow::saveCalibrationXml()
-{
-
 
 }
 
@@ -581,6 +592,14 @@ void MainWindow::setUpTables()
         ui->tableViewCalibration->setColumnWidth(i,widthTable);
 
     clearTables();
+
+    //clear calibration table
+    for (int i = 0; i < 2; i++) {
+        for (int j = 0; j < 11; j++) {
+            QModelIndex index = modelCal->index(i,j,QModelIndex());
+            modelCal->setData(index,"");
+        }
+    }
 
 }
 
@@ -902,6 +921,8 @@ void MainWindow::on_action_Clean_triggered()
     for (int i = 0; i < 10; i++) {
         m_measurements[i].cleanSweep();
     }
+    m_currentMeasurement = 0;
+
     clearTables();
 
     m_chartMag->clearTable();
@@ -909,5 +930,36 @@ void MainWindow::on_action_Clean_triggered()
 
     m_chartMag->updatePlot();
     m_chartPha->updatePlot();
+
+}
+
+void MainWindow::on_tableViewMag_clicked(const QModelIndex &index)
+{
+    int row = index.row();
+
+    m_currentMeasurement = row;
+
+    ui->tableViewMag->selectRow(m_currentMeasurement);
+    ui->tableViewPha->selectRow(m_currentMeasurement);
+
+}
+
+void MainWindow::on_tableViewPha_clicked(const QModelIndex &index)
+{
+    int row = index.row();
+
+    m_currentMeasurement = row;
+
+    ui->tableViewMag->selectRow(m_currentMeasurement);
+    ui->tableViewPha->selectRow(m_currentMeasurement);
+
+}
+
+void MainWindow::on_action_Delete_sweep_triggered()
+{
+    m_measurements[m_currentMeasurement].cleanSweep();
+
+    PlotMeasurement();
+
 
 }

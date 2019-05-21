@@ -16,6 +16,8 @@ public:
     int getCount();
     DataTrace getTraceMag();
     DataTrace getTracePha();
+    //void setSweep(QList<bioimpedance*> aux);
+    QList<bioimpedance*> m_measurement;
 
 signals:
 
@@ -24,7 +26,7 @@ public slots:
 
 private:
     //bioimpedance* pbioimpedance;
-    QList<bioimpedance*> m_measurement;
+    //QList<bioimpedance*> m_measurement;
 };
 
 #endif // SWEEP_H

@@ -42,6 +42,7 @@ public:
     QAction *action_Run;
     QAction *action_Save;
     QAction *action_Clean;
+    QAction *action_Delete_sweep;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -129,6 +130,11 @@ public:
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/images/images/Clean-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_Clean->setIcon(icon2);
+        action_Delete_sweep = new QAction(MainWindow);
+        action_Delete_sweep->setObjectName(QString::fromUtf8("action_Delete_sweep"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/images/images/Delete-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Delete_sweep->setIcon(icon3);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -455,13 +461,15 @@ public:
         menu_Measurement->addAction(action_Run);
         menu_Measurement->addAction(action_Save);
         menu_Measurement->addAction(action_Clean);
+        menu_Measurement->addAction(action_Delete_sweep);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Clean);
+        mainToolBar->addAction(action_Delete_sweep);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -481,6 +489,10 @@ public:
         action_Clean->setText(QApplication::translate("MainWindow", "&Clean", nullptr));
 #ifndef QT_NO_SHORTCUT
         action_Clean->setShortcut(QApplication::translate("MainWindow", "Ctrl+C", nullptr));
+#endif // QT_NO_SHORTCUT
+        action_Delete_sweep->setText(QApplication::translate("MainWindow", "&Delete sweep", nullptr));
+#ifndef QT_NO_SHORTCUT
+        action_Delete_sweep->setShortcut(QApplication::translate("MainWindow", "Del", nullptr));
 #endif // QT_NO_SHORTCUT
         checkBoxConfigSmoothPlot->setText(QApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QApplication::translate("MainWindow", "Antialias filtering", nullptr));

@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -422,6 +422,7 @@
     <addaction name="action_Run"/>
     <addaction name="action_Save"/>
     <addaction name="action_Clean"/>
+    <addaction name="action_Delete_sweep"/>
    </widget>
    <addaction name="menu_Measurement"/>
   </widget>
@@ -435,6 +436,7 @@
    <addaction name="action_Run"/>
    <addaction name="action_Save"/>
    <addaction name="action_Clean"/>
+   <addaction name="action_Delete_sweep"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Run">
@@ -471,6 +473,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="action_Delete_sweep">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/Delete-icon.png</normaloff>:/images/images/Delete-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>&amp;Delete sweep</string>
+   </property>
+   <property name="shortcut">
+    <string>Del</string>
    </property>
   </action>
  </widget>

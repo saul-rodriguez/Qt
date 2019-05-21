@@ -753,7 +753,8 @@ qrc_images.cpp: ../nanosense2/images.qrc \
 		/pkg/Qt/5.12.3/gcc_64/bin/rcc \
 		../nanosense2/images/Clean-icon.png \
 		../nanosense2/images/Save-icon.png \
-		../nanosense2/images/Button-Play-icon.png
+		../nanosense2/images/Button-Play-icon.png \
+		../nanosense2/images/Delete-icon.png
 	/pkg/Qt/5.12.3/gcc_64/bin/rcc -name images ../nanosense2/images.qrc -o qrc_images.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h

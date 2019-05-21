@@ -57,7 +57,8 @@ private:
 
     //nanosense
     bioimpedance *p_bioimpedance;
-    sweep m_measurements[10];
+    sweep m_measurements[10]; // Stores all valid measurements
+    sweep m_temp_measurement;  // receiving buffer to store coming data
     int m_currentMeasurement;
     QTimer *m_timerMeas;    //timeout for the measurent
     QTime m_timearrival;    //used to check speed of the measurement (time elapsed)
@@ -96,9 +97,6 @@ private slots:
     void updateTables();
     void updateStatistics();
 
-    void saveCalibrationXml();
-
-
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
     void on_pushButtonATSend_clicked();
@@ -116,6 +114,9 @@ private slots:
     void on_pushButtonSaveCalFile_clicked();
     void on_action_Run_triggered();
     void on_action_Clean_triggered();
+    void on_tableViewMag_clicked(const QModelIndex &index);
+    void on_tableViewPha_clicked(const QModelIndex &index);
+    void on_action_Delete_sweep_triggered();
 };
 
 #endif // MAINWINDOW_H

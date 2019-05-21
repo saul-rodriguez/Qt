@@ -65,6 +65,11 @@ public:
     void calibrateMagnitude(double gainFactor);
     void calibratePhase(double phaseCorrection);
 
+    void setMagnitude(double mag);
+    void setPhase(double pha);
+    void setFrequency(double freq);
+    void setFrequencyIndex(quint8 freq_ind);
+
 signals:
 
 public slots:
