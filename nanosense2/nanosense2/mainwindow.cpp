@@ -74,7 +74,6 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chartViewPha->setRenderHint(QPainter::Antialiasing, false); //false or true
     ui->verticalLayout_3->addWidget(m_chartViewPha,1,0);
 
-
     //timer to refresh the plot
     //m_timer = new QTimer(this);
     //connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
@@ -93,6 +92,12 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Tables
     setUpTables();
+
+    //Properties
+    ui->comboBoxTagSelect->addItem("default");
+    QString aux = "Measurement Tag: " + ui->comboBoxTagSelect->currentText();
+    ui->statusBar->showMessage(aux);
+    //ui->comboBoxTagSelect->set
 }
 
 MainWindow::~MainWindow()
@@ -827,6 +832,8 @@ void MainWindow::on_pushButtonOpenCalFile_clicked()
         return;
     }
 
+    QXmlStreamReader xmlRead;
+
     xmlRead.setDevice(&file);
     xmlRead.readNextStartElement();
     QStringRef aux = xmlRead.name();
@@ -894,7 +901,7 @@ void MainWindow::on_pushButtonSaveCalFile_clicked()
     }
     xmlWriter.writeEndElement();
 
-    xmlWriter.writeEndElement(); //close CALIBRATION FACTORS
+    xmlWriter.writeEndElement(); //close CALIBRATION
 
     xmlWriter.writeEndDocument();
     file.close();
@@ -960,6 +967,78 @@ void MainWindow::on_action_Delete_sweep_triggered()
     m_measurements[m_currentMeasurement].cleanSweep();
 
     PlotMeasurement();
+}
 
+void MainWindow::on_pushButtonAddTag_clicked()
+{
+    QString aux;
+    aux = ui->lineEditTagName->text();
+    ui->comboBoxTagSelect->addItem(aux);
+}
 
+void MainWindow::on_comboBoxTagSelect_currentIndexChanged(const QString &arg1)
+{
+    QString aux;
+    aux = "Measurement Tag: " + ui->comboBoxTagSelect->currentText();
+    ui->statusBar->showMessage(aux);
+}
+
+void MainWindow::on_pushButtonSaveTag_clicked()
+{
+    QString filename = QFileDialog::getSaveFileName(this,
+                                                    tr("Save Xml"), ".",
+                                                    tr("Xml files (*.xml)"));
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly);
+
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
+
+    xmlWriter.writeStartElement("TAGLIST");
+        int count = ui->comboBoxTagSelect->count();
+
+        for (int i=1; i < count; i++) { //Note that default is not saved!
+            QString tag = ui->comboBoxTagSelect->itemText(i);
+            QString ele = "t" + QString::number(i);
+            xmlWriter.writeTextElement(ele,tag);
+        }
+
+      xmlWriter.writeEndElement(); //close TAGLIST
+    xmlWriter.writeEndDocument();
+    file.close();
+}
+
+void MainWindow::on_pushButtonLoadTag_clicked()
+{
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("Open Xml"), ".",
+                                                    tr("Xml files (*.xml)"));
+    QFile file(filename);
+    if (!file.open(QFile::ReadOnly | QFile::Text)) {
+        qDebug()<<"calibration file not opened!";
+        return;
+    }
+
+    QXmlStreamReader xmlRead;
+    xmlRead.setDevice(&file);
+
+    xmlRead.readNextStartElement();
+    QStringRef aux = xmlRead.name();
+
+    while(!xmlRead.atEnd()){
+        if (xmlRead.isStartElement()) {
+            if (xmlRead.name()=="TAGLIST") {
+                xmlRead.readNextStartElement();
+            } else if (xmlRead.name().contains("t")) {
+                ui->comboBoxTagSelect->addItem(xmlRead.readElementText());
+                xmlRead.readNextStartElement();
+            }
+
+        } else {
+            xmlRead.readNext();
+        }
+    }
+
+    file.close();
 }

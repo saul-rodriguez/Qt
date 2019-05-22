@@ -50,8 +50,25 @@ public:
     QWidget *tab_3;
     QGridLayout *gridLayout_7;
     QVBoxLayout *verticalLayout_4;
+    QGroupBox *groupBox;
+    QGridLayout *gridLayout_9;
     QCheckBox *checkBoxConfigSmoothPlot;
     QCheckBox *checkBoxConfigAntialias;
+    QGroupBox *groupBox_2;
+    QGridLayout *gridLayout_10;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_7;
+    QLineEdit *lineEditTagName;
+    QPushButton *pushButtonAddTag;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_8;
+    QComboBox *comboBoxTagSelect;
+    QHBoxLayout *horizontalLayout_7;
+    QPushButton *pushButtonSaveTag;
+    QPushButton *pushButtonLoadTag;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_9;
+    QLineEdit *lineEditAdditionalData;
     QSpacerItem *verticalSpacer;
     QWidget *Connect;
     QGridLayout *gridLayout_3;
@@ -155,15 +172,102 @@ public:
         verticalLayout_4 = new QVBoxLayout();
         verticalLayout_4->setSpacing(6);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        checkBoxConfigSmoothPlot = new QCheckBox(tab_3);
+        groupBox = new QGroupBox(tab_3);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        gridLayout_9 = new QGridLayout(groupBox);
+        gridLayout_9->setSpacing(6);
+        gridLayout_9->setContentsMargins(11, 11, 11, 11);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        checkBoxConfigSmoothPlot = new QCheckBox(groupBox);
         checkBoxConfigSmoothPlot->setObjectName(QString::fromUtf8("checkBoxConfigSmoothPlot"));
 
-        verticalLayout_4->addWidget(checkBoxConfigSmoothPlot);
+        gridLayout_9->addWidget(checkBoxConfigSmoothPlot, 0, 0, 1, 1);
 
-        checkBoxConfigAntialias = new QCheckBox(tab_3);
+        checkBoxConfigAntialias = new QCheckBox(groupBox);
         checkBoxConfigAntialias->setObjectName(QString::fromUtf8("checkBoxConfigAntialias"));
 
-        verticalLayout_4->addWidget(checkBoxConfigAntialias);
+        gridLayout_9->addWidget(checkBoxConfigAntialias, 1, 0, 1, 1);
+
+
+        verticalLayout_4->addWidget(groupBox);
+
+        groupBox_2 = new QGroupBox(tab_3);
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
+        gridLayout_10 = new QGridLayout(groupBox_2);
+        gridLayout_10->setSpacing(6);
+        gridLayout_10->setContentsMargins(11, 11, 11, 11);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        label_7 = new QLabel(groupBox_2);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        horizontalLayout_6->addWidget(label_7);
+
+        lineEditTagName = new QLineEdit(groupBox_2);
+        lineEditTagName->setObjectName(QString::fromUtf8("lineEditTagName"));
+
+        horizontalLayout_6->addWidget(lineEditTagName);
+
+        pushButtonAddTag = new QPushButton(groupBox_2);
+        pushButtonAddTag->setObjectName(QString::fromUtf8("pushButtonAddTag"));
+
+        horizontalLayout_6->addWidget(pushButtonAddTag);
+
+
+        gridLayout_10->addLayout(horizontalLayout_6, 0, 0, 1, 1);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
+        label_8 = new QLabel(groupBox_2);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        horizontalLayout_8->addWidget(label_8);
+
+        comboBoxTagSelect = new QComboBox(groupBox_2);
+        comboBoxTagSelect->setObjectName(QString::fromUtf8("comboBoxTagSelect"));
+
+        horizontalLayout_8->addWidget(comboBoxTagSelect);
+
+
+        gridLayout_10->addLayout(horizontalLayout_8, 1, 0, 1, 1);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        pushButtonSaveTag = new QPushButton(groupBox_2);
+        pushButtonSaveTag->setObjectName(QString::fromUtf8("pushButtonSaveTag"));
+
+        horizontalLayout_7->addWidget(pushButtonSaveTag);
+
+        pushButtonLoadTag = new QPushButton(groupBox_2);
+        pushButtonLoadTag->setObjectName(QString::fromUtf8("pushButtonLoadTag"));
+
+        horizontalLayout_7->addWidget(pushButtonLoadTag);
+
+
+        gridLayout_10->addLayout(horizontalLayout_7, 2, 0, 1, 1);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        label_9 = new QLabel(groupBox_2);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        horizontalLayout_10->addWidget(label_9);
+
+        lineEditAdditionalData = new QLineEdit(groupBox_2);
+        lineEditAdditionalData->setObjectName(QString::fromUtf8("lineEditAdditionalData"));
+
+        horizontalLayout_10->addWidget(lineEditAdditionalData);
+
+
+        gridLayout_10->addLayout(horizontalLayout_10, 3, 0, 1, 1);
+
+
+        verticalLayout_4->addWidget(groupBox_2);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -469,7 +573,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -494,8 +598,16 @@ public:
 #ifndef QT_NO_SHORTCUT
         action_Delete_sweep->setShortcut(QApplication::translate("MainWindow", "Del", nullptr));
 #endif // QT_NO_SHORTCUT
+        groupBox->setTitle(QApplication::translate("MainWindow", "Plot Properties", nullptr));
         checkBoxConfigSmoothPlot->setText(QApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QApplication::translate("MainWindow", "Antialias filtering", nullptr));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "Measurement Properties", nullptr));
+        label_7->setText(QApplication::translate("MainWindow", "New Tag name:", nullptr));
+        pushButtonAddTag->setText(QApplication::translate("MainWindow", "Add Tag", nullptr));
+        label_8->setText(QApplication::translate("MainWindow", "Selected Tag", nullptr));
+        pushButtonSaveTag->setText(QApplication::translate("MainWindow", "Save List", nullptr));
+        pushButtonLoadTag->setText(QApplication::translate("MainWindow", "Load List", nullptr));
+        label_9->setText(QApplication::translate("MainWindow", "Additional Data:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));

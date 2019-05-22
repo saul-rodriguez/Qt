@@ -75,7 +75,7 @@ private:
 
     //Calibration
     QStandardItemModel *modelCal;
-    QXmlStreamReader xmlRead;
+    //QXmlStreamReader xmlRead;
 
 
 private slots:
@@ -117,6 +117,10 @@ private slots:
     void on_tableViewMag_clicked(const QModelIndex &index);
     void on_tableViewPha_clicked(const QModelIndex &index);
     void on_action_Delete_sweep_triggered();
+    void on_pushButtonAddTag_clicked();
+    void on_comboBoxTagSelect_currentIndexChanged(const QString &arg1);
+    void on_pushButtonSaveTag_clicked();
+    void on_pushButtonLoadTag_clicked();
 };
 
 #endif // MAINWINDOW_H
