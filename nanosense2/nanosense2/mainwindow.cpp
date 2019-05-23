@@ -925,6 +925,15 @@ void MainWindow::on_action_Run_triggered()
 
 void MainWindow::on_action_Clean_triggered()
 {
+    QMessageBox msgBox;
+    msgBox.setText("Clean Measurements");
+    msgBox.setInformativeText("Do you want to delete all the measurements?");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    int ret = msgBox.exec();
+
+    if (ret == QMessageBox::No) return;
+
     for (int i = 0; i < 10; i++) {
         m_measurements[i].cleanSweep();
     }
@@ -1040,5 +1049,102 @@ void MainWindow::on_pushButtonLoadTag_clicked()
         }
     }
 
+    file.close();
+}
+
+void MainWindow::on_action_Save_triggered()
+{
+    QMessageBox msgBox;
+    msgBox.setText("Save Measurements");
+    msgBox.setInformativeText("Press Yes to save the measurements");
+    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBox.setDefaultButton(QMessageBox::No);
+    int ret = msgBox.exec();
+
+    if (ret == QMessageBox::No) return;
+
+    //QString filename = QFileDialog::getSaveFileName(this,
+      //                                              tr("Save Xml"), ".",
+      //                                              tr("Xml files (*.xml)"));
+
+    //QDateTime meastime = QDateTime::currentDateTime();
+    //QDateTime UTC
+    QDate cd = QDate::currentDate();
+    QTime ct = QTime::currentTime();
+
+    QString date = cd.toString("yyMMdd");
+    //QString time = ct.toString("hh") + "_" + ct.toString("mm") + "_" + ct.toString("ss");
+    int time_sec = (ct.toString("hh")).toInt()*3600 + (ct.toString("mm")).toInt()*60 + (ct.toString("ss")).toInt(); // Time in sec
+
+    QString name = ui->comboBoxTagSelect->currentText();
+
+    QString filename;
+    filename = name + "_" + date + "_" + QString::number(time_sec) + ".xml";
+
+    QFile file(filename);
+    file.open(QIODevice::WriteOnly);
+
+    QXmlStreamWriter xmlWriter(&file);
+    xmlWriter.setAutoFormatting(true);
+    xmlWriter.writeStartDocument();
+
+    xmlWriter.writeStartElement(name);
+        xmlWriter.writeStartElement("D" + date);
+            xmlWriter.writeStartElement("T" + QString::number(time_sec));
+
+                xmlWriter.writeStartElement("frequency");
+                    bioimpedance auxbio;
+                    for (int i = 0; i < 11; i++) {
+                        QString sfreq = QString::number(auxbio.getFrequencies(i));
+                        QString aux = "f" + QString::number(i);
+                        xmlWriter.writeTextElement(aux,sfreq);
+                    }
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("amplitude");
+                    for (int i = 0; i < 11; i++) {
+                        QString aux = "a" + QString::number(i);
+
+                        QModelIndex index = modelMagStat->index(0,i,QModelIndex());
+                        double data = modelMagStat->data(index).toDouble();
+                        xmlWriter.writeTextElement(aux,QString::number(data));
+                    }
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("phase");
+                    for (int i = 0; i < 11; i++) {
+                        QString aux = "p" + QString::number(i);
+
+                        QModelIndex index = modelPhaStat->index(0,i,QModelIndex());
+                        double data = modelPhaStat->data(index).toDouble();
+                        xmlWriter.writeTextElement(aux,QString::number(data));
+                    }
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("amplitude_rms");
+                    for (int i = 0; i < 11; i++) {
+                        QString aux = "ar" + QString::number(i);
+
+                       QModelIndex index = modelMagStat->index(1,i,QModelIndex());
+                       double data = modelMagStat->data(index).toDouble();
+                       xmlWriter.writeTextElement(aux,QString::number(data));
+                    }
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeStartElement("phase_rms");
+                    for (int i = 0; i < 11; i++) {
+                         QString aux = "pr" + QString::number(i);
+
+                         QModelIndex index = modelPhaStat->index(1,i,QModelIndex());
+                         double data = modelPhaStat->data(index).toDouble();
+                         xmlWriter.writeTextElement(aux,QString::number(data));
+                    }
+                xmlWriter.writeEndElement();
+
+                xmlWriter.writeTextElement("additional", ui->lineEditAdditionalData->text());
+
+        xmlWriter.writeEndElement(); //close date
+    xmlWriter.writeEndElement(); //close name
+    xmlWriter.writeEndDocument();
     file.close();
 }

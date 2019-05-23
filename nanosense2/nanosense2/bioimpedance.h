@@ -70,6 +70,8 @@ public:
     void setFrequency(double freq);
     void setFrequencyIndex(quint8 freq_ind);
 
+    double getFrequencies(int reverse_index);
+
 signals:
 
 public slots:

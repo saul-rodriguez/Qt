@@ -121,6 +121,7 @@ private slots:
     void on_comboBoxTagSelect_currentIndexChanged(const QString &arg1);
     void on_pushButtonSaveTag_clicked();
     void on_pushButtonLoadTag_clicked();
+    void on_action_Save_triggered();
 };
 
 #endif // MAINWINDOW_H

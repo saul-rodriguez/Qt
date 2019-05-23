@@ -106,6 +106,11 @@ void bioimpedance::setFrequencyIndex(quint8 freq_ind)
     m_freq_ind = freq_ind;
 }
 
+double bioimpedance::getFrequencies(int reverse_index)
+{
+    return frequencies[10-reverse_index];
+}
+
 void bioimpedance::calculateIQ()
 {
     const char* read_pt = m_rawdata.constData();
