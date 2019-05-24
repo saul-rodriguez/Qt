@@ -910,6 +910,10 @@ void MainWindow::on_pushButtonSaveCalFile_clicked()
 
 void MainWindow::on_action_Run_triggered()
 {
+    //Ceck if BT is connected
+    if (ui->labelBTstatus->text() != "Connected")
+        return;
+
     //Check if the timer is running
     if (m_timerMeas->isActive())
         return;
@@ -1093,10 +1097,13 @@ void MainWindow::on_action_Save_triggered()
             xmlWriter.writeStartElement("T" + QString::number(time_sec));
 
                 xmlWriter.writeStartElement("frequency");
+                  //xmlWriter.writeStartElement("array");
+                  //xmlWriter.writeAttribute("name","frequency");
                     bioimpedance auxbio;
                     for (int i = 0; i < 11; i++) {
                         QString sfreq = QString::number(auxbio.getFrequencies(i));
                         QString aux = "f" + QString::number(i);
+                        //QString aux = "item";
                         xmlWriter.writeTextElement(aux,sfreq);
                     }
                 xmlWriter.writeEndElement();
