@@ -89,6 +89,7 @@ private slots:
     void PlotRx(const QByteArray &data);
     void PlotTimeout();
 
+    //void measurement_receive(const QByteArray &rxdata);
     void MeasurementTimeout();
     void PlotMeasurement();
 

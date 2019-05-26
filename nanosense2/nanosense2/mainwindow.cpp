@@ -126,6 +126,47 @@ void MainWindow::BTrxData(const QByteArray &data)
     m_data.append(data);
     int size = m_data.count();
 
+    int res_packet = size%7;
+
+    if(!res_packet) {
+        QByteArray rxdata;
+        const char* aux = m_data.constData();
+
+        int count = 0;
+        int num_packet = size/7;
+        for (int i = 0; i < num_packet; i++) {
+            rxdata.clear();
+            for (int j = 0; j < 7; j++) {
+                rxdata.append(aux[count++]);
+            }
+
+            p_bioimpedance = new bioimpedance();
+            if(p_bioimpedance->setData(rxdata)) {
+
+                if (ui->checkBoxGainCalibration->isChecked()) {
+                    int ind = p_bioimpedance->getFrequencyIndex(REVERSE);
+                    p_bioimpedance->calibrateMagnitude(m_gainCalFactor[ind]);
+                    p_bioimpedance->calibratePhase(m_phaseCalFactor[ind]);
+                }
+
+                //m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
+                m_temp_measurement.addImpedance(p_bioimpedance);
+                qDebug()<<"arrival time: "<<m_timearrival.elapsed();
+
+            } else {
+                qDebug("bioimpedance packet corrupted");
+                delete p_bioimpedance;
+            }
+
+        }
+
+        m_data.clear();
+    } else {
+        qDebug()<<"Size: "<< size << " Packet incomplete";
+        return;
+    }
+
+/*
     if (size == 7) { //Check for correct packet size
         p_bioimpedance = new bioimpedance();
         if(p_bioimpedance->setData(m_data)) {
@@ -153,6 +194,8 @@ void MainWindow::BTrxData(const QByteArray &data)
         qDebug()<<"Size: "<< size << " Packet error, discarding ";
         return;
     }
+    */
+
 
 }
 
@@ -304,12 +347,19 @@ void MainWindow::PlotTimeout()
         m_PlotCounter = 0;
     }
 }
+/*
+void MainWindow::measurement_receive(const QByteArray &rxdata)
+{
+
+}*/
 
 void MainWindow::MeasurementTimeout()
 {
-    //reenable measurement button
-    //ui->pushButtonMeas->setEnabled(true);
+    //reenable measurement button    
     ui->action_Run->setEnabled(true);
+
+    //clean the rx buffer
+    m_data.clear();
 
     //check if the measurement is complete
    int count = m_temp_measurement.getCount();
@@ -348,9 +398,6 @@ void MainWindow::MeasurementTimeout()
 
     ui->tableViewMag->selectRow(m_currentMeasurement);
     ui->tableViewPha->selectRow(m_currentMeasurement);
-
-    //m_measurements[m_currentMeasurement].cleanSweep();
-
 
 
 }
@@ -588,15 +635,16 @@ void MainWindow::setUpTables()
     int widthTable = ui->tableViewMag->width()/12;
 
     for (int i = 0; i < 11; i++) {
-        ui->tableViewMag->setColumnWidth(i,widthTable);
-        ui->tableViewMagStat->setColumnWidth(i,widthTable);
-        ui->tableViewPha->setColumnWidth(i,widthTable);
-        ui->tableViewPhaStat->setColumnWidth(i,widthTable);
+        ui->tableViewMag->setColumnWidth(i,20*widthTable);
+        ui->tableViewMagStat->setColumnWidth(i,20*widthTable);
+        ui->tableViewPha->setColumnWidth(i,20*widthTable);
+        ui->tableViewPhaStat->setColumnWidth(i,20*widthTable);
     }
+
 
     widthTable = ui->tableViewCalibration->width()/12;
     for (int i = 0; i < 11; i++)
-        ui->tableViewCalibration->setColumnWidth(i,widthTable);
+        ui->tableViewCalibration->setColumnWidth(i,20*widthTable);
 
     clearTables();
 

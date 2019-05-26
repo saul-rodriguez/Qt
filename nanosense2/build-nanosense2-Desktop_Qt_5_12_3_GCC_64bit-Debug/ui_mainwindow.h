@@ -135,7 +135,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(778, 599);
+        MainWindow->resize(878, 599);
         action_Run = new QAction(MainWindow);
         action_Run->setObjectName(QString::fromUtf8("action_Run"));
         QIcon icon;
@@ -579,7 +579,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 778, 22));
+        menuBar->setGeometry(QRect(0, 0, 878, 22));
         menu_Measurement = new QMenu(menuBar);
         menu_Measurement->setObjectName(QString::fromUtf8("menu_Measurement"));
         MainWindow->setMenuBar(menuBar);
