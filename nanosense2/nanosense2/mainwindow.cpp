@@ -150,7 +150,7 @@ void MainWindow::BTrxData(const QByteArray &data)
         qDebug()<<"Packet imcomplete, waiting for the rest of the packet!";
         return;
     } else {
-        qDebug()<<"Packet error, discarding ";
+        qDebug()<<"Size: "<< size << " Packet error, discarding ";
         return;
     }
 
@@ -307,6 +307,10 @@ void MainWindow::PlotTimeout()
 
 void MainWindow::MeasurementTimeout()
 {
+    //reenable measurement button
+    //ui->pushButtonMeas->setEnabled(true);
+    ui->action_Run->setEnabled(true);
+
     //check if the measurement is complete
    int count = m_temp_measurement.getCount();
 
@@ -347,9 +351,7 @@ void MainWindow::MeasurementTimeout()
 
     //m_measurements[m_currentMeasurement].cleanSweep();
 
-    //reenable measurement button
-    //ui->pushButtonMeas->setEnabled(true);
-    ui->action_Run->setEnabled(true);
+
 
 }
 

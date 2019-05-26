@@ -15,7 +15,7 @@ typedef enum  {
     BT_READY
 } btRxState;
 
-#define RX_TIMEOUT 20
+#define RX_TIMEOUT 30
 
 class BTClient : public QObject
 {

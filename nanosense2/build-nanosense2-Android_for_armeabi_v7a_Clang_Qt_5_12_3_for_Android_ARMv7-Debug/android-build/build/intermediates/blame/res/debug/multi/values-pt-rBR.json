@@ -1,0 +1,83 @@
+[
+    {
+        "outputFile": "/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/incremental/mergeDebugResources/merged.dir/values-pt-rBR/values-pt-rBR.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 103,
+                    "endOffset": 154
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-pt-rBR/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 298,
+                        "endColumn": 103,
+                        "endOffset": 397
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 159,
+                    "endColumn": 113,
+                    "endOffset": 268
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-pt-rBR/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 184,
+                        "endColumn": 113,
+                        "endOffset": 293
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 273,
+                    "endColumn": 128,
+                    "endOffset": 397
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-pt-rBR/strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 128,
+                        "endOffset": 179
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 402,
+                    "endColumn": 95,
+                    "endOffset": 493
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-pt-rBR/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 402,
+                        "endColumn": 95,
+                        "endOffset": 493
+                    }
+                }
+            }
+        ]
+    }
+]

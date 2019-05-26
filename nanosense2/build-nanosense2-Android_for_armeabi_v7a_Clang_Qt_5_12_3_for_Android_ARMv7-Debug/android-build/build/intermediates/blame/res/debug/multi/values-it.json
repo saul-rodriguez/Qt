@@ -1,0 +1,83 @@
+[
+    {
+        "outputFile": "/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/incremental/mergeDebugResources/merged.dir/values-it/values-it.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 112,
+                    "endOffset": 163
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-it/strings.xml",
+                    "position": {
+                        "startLine": 4,
+                        "startColumn": 4,
+                        "startOffset": 288,
+                        "endColumn": 112,
+                        "endOffset": 396
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 168,
+                    "endColumn": 110,
+                    "endOffset": 274
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-it/strings.xml",
+                    "position": {
+                        "startLine": 3,
+                        "startColumn": 4,
+                        "startOffset": 177,
+                        "endColumn": 110,
+                        "endOffset": 283
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 279,
+                    "endColumn": 121,
+                    "endOffset": 396
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-it/strings.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 121,
+                        "endOffset": 172
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 5,
+                    "startColumn": 4,
+                    "startOffset": 401,
+                    "endColumn": 100,
+                    "endOffset": 497
+                },
+                "from": {
+                    "file": "/pkg/Qt/5.12.3/android_armv7/src/android/java/res/values-it/strings.xml",
+                    "position": {
+                        "startLine": 5,
+                        "startColumn": 4,
+                        "startOffset": 401,
+                        "endColumn": 100,
+                        "endOffset": 497
+                    }
+                }
+            }
+        ]
+    }
+]

@@ -1,0 +1,4 @@
+#Sun May 26 23:38:53 CEST 2019
+base.0=/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/transforms/dex/debug/folders/1000/1f/main
+renamed.0=classes.dex
+file.0=/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/transforms/dex/debug/folders/1000/1f/main/classes.dex

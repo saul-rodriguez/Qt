@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>799</width>
-    <height>584</height>
+    <width>778</width>
+    <height>599</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,131 +20,8 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>5</number>
         </property>
-        <widget class="QWidget" name="tab_3">
-         <attribute name="title">
-          <string>Config</string>
-         </attribute>
-         <layout class="QGridLayout" name="gridLayout_7">
-          <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_4">
-            <item>
-             <widget class="QGroupBox" name="groupBox">
-              <property name="title">
-               <string>Plot Properties</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_9">
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="checkBoxConfigSmoothPlot">
-                 <property name="text">
-                  <string>Smooth Plot</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="checkBoxConfigAntialias">
-                 <property name="text">
-                  <string>Antialias filtering</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_2">
-              <property name="title">
-               <string>Measurement Properties</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_10">
-               <item row="0" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_6">
-                 <item>
-                  <widget class="QLabel" name="label_7">
-                   <property name="text">
-                    <string>New Tag name:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditTagName"/>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonAddTag">
-                   <property name="text">
-                    <string>Add Tag</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_8">
-                 <item>
-                  <widget class="QLabel" name="label_8">
-                   <property name="text">
-                    <string>Selected Tag</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBoxTagSelect"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="2" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QPushButton" name="pushButtonSaveTag">
-                   <property name="text">
-                    <string>Save List</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonLoadTag">
-                   <property name="text">
-                    <string>Load List</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="3" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_10">
-                 <item>
-                  <widget class="QLabel" name="label_9">
-                   <property name="text">
-                    <string>Additional Data:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditAdditionalData"/>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <spacer name="verticalSpacer">
-              <property name="orientation">
-               <enum>Qt::Vertical</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>20</width>
-                <height>40</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-           </layout>
-          </item>
-         </layout>
-        </widget>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
           <string>Connect</string>
@@ -276,6 +153,129 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_3">
+         <attribute name="title">
+          <string>Config</string>
+         </attribute>
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_4">
+            <item>
+             <widget class="QGroupBox" name="groupBox">
+              <property name="title">
+               <string>Plot Properties</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_9">
+               <item row="0" column="0">
+                <widget class="QCheckBox" name="checkBoxConfigSmoothPlot">
+                 <property name="text">
+                  <string>Smooth Plot</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0">
+                <widget class="QCheckBox" name="checkBoxConfigAntialias">
+                 <property name="text">
+                  <string>Antialias filtering</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QGroupBox" name="groupBox_2">
+              <property name="title">
+               <string>Measurement Properties</string>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_10">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_6">
+                 <item>
+                  <widget class="QLabel" name="label_7">
+                   <property name="text">
+                    <string>New Tag name:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEditTagName"/>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonAddTag">
+                   <property name="text">
+                    <string>Add Tag</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="1" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_8">
+                 <item>
+                  <widget class="QLabel" name="label_8">
+                   <property name="text">
+                    <string>Selected Tag</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxTagSelect"/>
+                 </item>
+                </layout>
+               </item>
+               <item row="2" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_7">
+                 <item>
+                  <widget class="QPushButton" name="pushButtonSaveTag">
+                   <property name="text">
+                    <string>Save List</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QPushButton" name="pushButtonLoadTag">
+                   <property name="text">
+                    <string>Load List</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="3" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_10">
+                 <item>
+                  <widget class="QLabel" name="label_9">
+                   <property name="text">
+                    <string>Additional Data:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEditAdditionalData"/>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <spacer name="verticalSpacer">
+              <property name="orientation">
+               <enum>Qt::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
         <widget class="QWidget" name="tab_2">
          <attribute name="title">
           <string>AT</string>
@@ -322,115 +322,76 @@
          <attribute name="title">
           <string>Mag</string>
          </attribute>
-         <widget class="QLabel" name="label_2">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>179</width>
-            <height>17</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Magnitude Measurements</string>
-          </property>
-         </widget>
-         <widget class="QTableView" name="tableViewMag">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>33</y>
-            <width>761</width>
-            <height>331</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_3">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>370</y>
-            <width>243</width>
-            <height>17</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Average and Standard deviation (%)</string>
-          </property>
-         </widget>
-         <widget class="QTableView" name="tableViewMagStat">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>390</y>
-            <width>761</width>
-            <height>81</height>
-           </rect>
-          </property>
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="baseSize">
-           <size>
-            <width>0</width>
-            <height>0</height>
-           </size>
-          </property>
-         </widget>
+         <layout class="QGridLayout" name="gridLayout_11">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_6">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Magnitude Measurements</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableView" name="tableViewMag"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_3">
+              <property name="text">
+               <string>Average and Standard deviation (%)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableView" name="tableViewMagStat">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="baseSize">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="tab_5">
          <attribute name="title">
           <string>Pha</string>
          </attribute>
-         <widget class="QLabel" name="label_4">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>146</width>
-            <height>17</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Phase Measurements</string>
-          </property>
-         </widget>
-         <widget class="QTableView" name="tableViewPha">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>33</y>
-            <width>761</width>
-            <height>331</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QTableView" name="tableViewPhaStat">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>390</y>
-            <width>761</width>
-            <height>81</height>
-           </rect>
-          </property>
-         </widget>
-         <widget class="QLabel" name="label_5">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>370</y>
-            <width>279</width>
-            <height>17</height>
-           </rect>
-          </property>
-          <property name="text">
-           <string>Average and Standard deviation (degree)</string>
-          </property>
-         </widget>
+         <layout class="QGridLayout" name="gridLayout_12">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_7">
+            <item>
+             <widget class="QLabel" name="label_4">
+              <property name="text">
+               <string>Phase Measurements</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableView" name="tableViewPha"/>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Average and Standard deviation (degree)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QTableView" name="tableViewPhaStat"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
         <widget class="QWidget" name="tab_6">
          <attribute name="title">
@@ -496,7 +457,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>799</width>
+     <width>778</width>
      <height>22</height>
     </rect>
    </property>
@@ -575,18 +536,37 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
-  <tabstop>radioButtonBT</tabstop>
-  <tabstop>radioButtonWiFi</tabstop>
-  <tabstop>lineEditWiFiAddress</tabstop>
-  <tabstop>lineEditWiFiPort</tabstop>
-  <tabstop>pushButtonWiFiConnect</tabstop>
-  <tabstop>pushButtonWiFiDisconnect</tabstop>
   <tabstop>pushButtonBTdiscoverDevices</tabstop>
   <tabstop>comboBoxBTdevices</tabstop>
   <tabstop>pushButtonBTconnect</tabstop>
-  <tabstop>lineEditAT</tabstop>
-  <tabstop>pushButtonATSend</tabstop>
+  <tabstop>lineEditTagName</tabstop>
+  <tabstop>pushButtonAddTag</tabstop>
+  <tabstop>pushButtonSaveTag</tabstop>
+  <tabstop>pushButtonLoadTag</tabstop>
+  <tabstop>pushButtonGenerateCalibration</tabstop>
+  <tabstop>pushButtonOpenCalFile</tabstop>
+  <tabstop>pushButtonSaveCalFile</tabstop>
+  <tabstop>checkBoxGainCalibration</tabstop>
   <tabstop>plainTextEditAT</tabstop>
+  <tabstop>tabWidget</tabstop>
+  <tabstop>checkBoxConfigSmoothPlot</tabstop>
+  <tabstop>checkBoxConfigAntialias</tabstop>
+  <tabstop>lineEditWiFiPort</tabstop>
+  <tabstop>pushButtonWiFiConnect</tabstop>
+  <tabstop>comboBoxTagSelect</tabstop>
+  <tabstop>pushButtonWiFiDisconnect</tabstop>
+  <tabstop>radioButtonBT</tabstop>
+  <tabstop>lineEditAdditionalData</tabstop>
+  <tabstop>pushButtonBTdisconnect</tabstop>
+  <tabstop>tableViewMag</tabstop>
+  <tabstop>tableViewMagStat</tabstop>
+  <tabstop>tableViewPha</tabstop>
+  <tabstop>tableViewPhaStat</tabstop>
+  <tabstop>tableViewCalibration</tabstop>
+  <tabstop>pushButtonATSend</tabstop>
+  <tabstop>radioButtonWiFi</tabstop>
+  <tabstop>lineEditWiFiAddress</tabstop>
+  <tabstop>lineEditAT</tabstop>
  </tabstops>
  <resources>
   <include location="images.qrc"/>

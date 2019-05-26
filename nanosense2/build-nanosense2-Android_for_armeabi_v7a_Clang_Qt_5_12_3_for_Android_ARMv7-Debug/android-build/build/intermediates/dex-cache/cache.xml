@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/libs/QtAndroid.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.3"
+        sha1="b678ae16dd77c851b8cce86491444a1cb96d9738">
+        <dex dex="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/pre-dexed/debug/QtAndroid_dee878b3c3c47b8420a0200e46ed1836b0fe949f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/libs/QtAndroidBluetooth.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.3"
+        sha1="46b614418afd6cb6db583c308729d2711bd7c0f1">
+        <dex dex="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/pre-dexed/debug/QtAndroidBluetooth_d877764786db0d4c4333fc06f2720f2e29cc8459.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/libs/QtAndroidExtras.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.3"
+        sha1="4de04d0900904a8384164e8d612deff6e41bafec">
+        <dex dex="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/pre-dexed/debug/QtAndroidExtras_d62d5da959d5305b8e83c54828a80bc16e664cb2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/libs/QtAndroidBearer.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="28.0.3"
+        sha1="bf3a1ca943ecad59871f3d23dd18085b7c34582d">
+        <dex dex="/home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Debug/android-build/build/intermediates/pre-dexed/debug/QtAndroidBearer_2154c7dec9cc371a2302f50916a9788e6d25c3a4.jar" />
+    </item>
+
+</items>
