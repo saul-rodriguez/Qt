@@ -2,23 +2,23 @@
 manifest
 ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:1-87:12
 	package
-		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:11-39
+		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:11-49
 	android:versionName
-		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:99-124
+		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:109-134
 		INJECTED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml
 		INJECTED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml
 	android:versionCode
-		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:125-148
+		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:135-158
 		INJECTED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml
 		INJECTED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml
 	xmlns:android
-		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:40-98
+		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:50-108
 	android:installLocation
-		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:149-179
+		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:2:159-189
 application
 ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:3:5-66:19
 	android:label
-		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:3:117-143
+		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:3:117-142
 	android:hardwareAccelerated
 		ADDED from /home/saul/projects/Qt/nanosense2/build-nanosense2-Android_for_armeabi_v7a_Clang_Qt_5_12_3_for_Android_ARMv7-Release/android-build/AndroidManifest.xml:3:18-52
 	android:name

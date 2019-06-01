@@ -91,6 +91,7 @@ private slots:
 
     //void measurement_receive(const QByteArray &rxdata);
     void MeasurementTimeout();
+    void parseRxSweepData();
     void PlotMeasurement();
 
     void setUpTables();

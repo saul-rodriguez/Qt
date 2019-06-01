@@ -126,75 +126,22 @@ void MainWindow::BTrxData(const QByteArray &data)
     m_data.append(data);
     int size = m_data.count();
 
-    int res_packet = size%7;
+    int res_packet = size%7; //sweep packets are 7 bytes
 
     if(!res_packet) {
-        QByteArray rxdata;
+        parseRxSweepData();
+
+    } else if (res_packet == 1 && size < 15) { //Filter echo (only relevant for implantable reader!)
         const char* aux = m_data.constData();
-
-        int count = 0;
-        int num_packet = size/7;
-        for (int i = 0; i < num_packet; i++) {
-            rxdata.clear();
-            for (int j = 0; j < 7; j++) {
-                rxdata.append(aux[count++]);
-            }
-
-            p_bioimpedance = new bioimpedance();
-            if(p_bioimpedance->setData(rxdata)) {
-
-                if (ui->checkBoxGainCalibration->isChecked()) {
-                    int ind = p_bioimpedance->getFrequencyIndex(REVERSE);
-                    p_bioimpedance->calibrateMagnitude(m_gainCalFactor[ind]);
-                    p_bioimpedance->calibratePhase(m_phaseCalFactor[ind]);
-                }
-
-                //m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
-                m_temp_measurement.addImpedance(p_bioimpedance);
-                qDebug()<<"arrival time: "<<m_timearrival.elapsed();
-
-            } else {
-                qDebug("bioimpedance packet corrupted");
-                delete p_bioimpedance;
-            }
-
+        if (aux[0] == 'f' && aux[1] == 'f') {
+            qDebug()<<"Filtering echo";
+            m_data.remove(0,1);
+            parseRxSweepData();
         }
-
-        m_data.clear();
     } else {
         qDebug()<<"Size: "<< size << " Packet incomplete";
         return;
     }
-
-/*
-    if (size == 7) { //Check for correct packet size
-        p_bioimpedance = new bioimpedance();
-        if(p_bioimpedance->setData(m_data)) {
-
-            if (ui->checkBoxGainCalibration->isChecked()) {
-                int ind = p_bioimpedance->getFrequencyIndex(REVERSE);
-                p_bioimpedance->calibrateMagnitude(m_gainCalFactor[ind]);
-                p_bioimpedance->calibratePhase(m_phaseCalFactor[ind]);
-            }
-
-            //m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
-            m_temp_measurement.addImpedance(p_bioimpedance);
-            qDebug()<<"arrival time: "<<m_timearrival.elapsed();
-
-        } else {
-            qDebug("bioimpedance packet corrupted");
-            delete p_bioimpedance;
-        }
-
-        m_data.clear();
-    } else if (size < 7) {
-        qDebug()<<"Packet imcomplete, waiting for the rest of the packet!";
-        return;
-    } else {
-        qDebug()<<"Size: "<< size << " Packet error, discarding ";
-        return;
-    }
-    */
 
 
 }
@@ -347,11 +294,6 @@ void MainWindow::PlotTimeout()
         m_PlotCounter = 0;
     }
 }
-/*
-void MainWindow::measurement_receive(const QByteArray &rxdata)
-{
-
-}*/
 
 void MainWindow::MeasurementTimeout()
 {
@@ -368,7 +310,7 @@ void MainWindow::MeasurementTimeout()
 
     if (count != 11) { //failed sweep, removing it!        
         m_temp_measurement.cleanSweep();
-        qDebug()<<"Erasing sweep";
+        qDebug()<<"Failed sweep";
         return;
     }
 
@@ -400,6 +342,44 @@ void MainWindow::MeasurementTimeout()
     ui->tableViewPha->selectRow(m_currentMeasurement);
 
 
+}
+
+void MainWindow::parseRxSweepData()
+{
+    QByteArray rxdata;
+    const char* aux = m_data.constData();
+
+    int size = m_data.count();
+
+    int count = 0;
+    int num_packet = size/7;
+    for (int i = 0; i < num_packet; i++) {
+        rxdata.clear();
+        for (int j = 0; j < 7; j++) {
+            rxdata.append(aux[count++]);
+        }
+
+        p_bioimpedance = new bioimpedance();
+        if(p_bioimpedance->setData(rxdata)) {
+
+            if (ui->checkBoxGainCalibration->isChecked()) {
+                int ind = p_bioimpedance->getFrequencyIndex(REVERSE);
+                p_bioimpedance->calibrateMagnitude(m_gainCalFactor[ind]);
+                p_bioimpedance->calibratePhase(m_phaseCalFactor[ind]);
+            }
+
+            //m_measurements[m_currentMeasurement].addImpedance(p_bioimpedance);
+            m_temp_measurement.addImpedance(p_bioimpedance);
+            qDebug()<<"arrival time: "<<m_timearrival.elapsed();
+
+        } else {
+            qDebug("bioimpedance packet corrupted");
+            delete p_bioimpedance;
+        }
+
+    }
+
+    m_data.clear();
 }
 
 void MainWindow::PlotMeasurement()

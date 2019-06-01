@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.rodriguez.saul"
+    package="org.rodriguez.saul.nanosense"
     android:installLocation="auto"
     android:versionCode="1"
     android:versionName="1.0" >
@@ -34,7 +34,7 @@
     <application
         android:name="org.qtproject.qt5.android.bindings.QtApplication"
         android:hardwareAccelerated="true"
-        android:label="KTH Logger" >
+        android:label="Nanosense" >
         <activity
             android:name="org.qtproject.qt5.android.bindings.QtActivity"
             android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation"
