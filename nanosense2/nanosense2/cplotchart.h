@@ -63,6 +63,7 @@ private:
 
     plotType m_type;
     QColor colors[10];
+    int m_linewidth;
 
 };
 

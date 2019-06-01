@@ -34,6 +34,8 @@ CPlotChart::CPlotChart()
     colors[8] = Qt::darkRed;
     colors[9] = Qt::darkYellow;
 
+    m_linewidth = 2;
+
 }
 
 void CPlotChart::initializePlot()
@@ -44,9 +46,13 @@ void CPlotChart::initializePlot()
     //QScatterSeries *series = new QScatterSeries(); //scattered points
    // series->setMarkerShape(QScatterSeries::MarkerShapeRectangle);
     //series->setMarkerSize(10);
-    series->setColor(Qt::blue);
+    //series->setColor(Qt::blue);
     //series->setBorderColor(Qt::red);
     //series->setBrush(Qt::NoPen);
+    QPen pen(Qt::blue);
+    pen.setWidth(m_linewidth);
+    series->setPen(pen);
+
     series->append(2e-3,2e-09);
     series->append(4e-2,2e-8);
 
@@ -168,7 +174,10 @@ void CPlotChart::updatePlot()
  //           series->setMarkerShape(QScatterSeries::MarkerShapeRectangle);
  //           series->setMarkerSize(10);
             //series->setColor(Qt::blue);
-              series->setColor(colors[i%10]);
+             // series->setColor(colors[i%10]);
+             QPen pen(colors[i%10]);
+             pen.setWidth(m_linewidth);
+             series->setPen(pen);
 
             int N = m_DataTable[i].count();
 
