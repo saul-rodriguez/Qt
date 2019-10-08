@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -260,6 +260,36 @@
              </widget>
             </item>
             <item>
+             <widget class="QGroupBox" name="groupBox_3">
+              <property name="title">
+               <string>Reader Configuration</string>
+              </property>
+              <layout class="QFormLayout" name="formLayout">
+               <item row="1" column="1">
+                <layout class="QHBoxLayout" name="horizontalLayout_11">
+                 <item>
+                  <widget class="QLabel" name="label_10">
+                   <property name="text">
+                    <string>VDD PA</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="comboBoxPA_config"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_PA_ID">
+                   <property name="text">
+                    <string>ID = </string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
              <spacer name="verticalSpacer">
               <property name="orientation">
                <enum>Qt::Vertical</enum>
@@ -483,6 +513,7 @@
    <addaction name="action_Save"/>
    <addaction name="action_Clean"/>
    <addaction name="action_Delete_sweep"/>
+   <addaction name="separator"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Run">
@@ -531,6 +562,11 @@
    </property>
    <property name="shortcut">
     <string>Del</string>
+   </property>
+  </action>
+  <action name="action0V90">
+   <property name="text">
+    <string>0V90</string>
    </property>
   </action>
  </widget>

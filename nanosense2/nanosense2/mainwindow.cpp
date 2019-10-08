@@ -98,6 +98,62 @@ MainWindow::MainWindow(QWidget *parent) :
     QString aux = "Measurement Tag: " + ui->comboBoxTagSelect->currentText();
     ui->statusBar->showMessage(aux);
     //ui->comboBoxTagSelect->set
+
+    //Reader config
+    ui->comboBoxPA_config->addItem("CS");
+    ui->comboBoxPA_config->addItem("0V90");
+    ui->comboBoxPA_config->addItem("0V95");
+    ui->comboBoxPA_config->addItem("1V00");
+    ui->comboBoxPA_config->addItem("1V05");
+    ui->comboBoxPA_config->addItem("1V10");
+    ui->comboBoxPA_config->addItem("1V15");
+    ui->comboBoxPA_config->addItem("1V20");
+    ui->comboBoxPA_config->addItem("1V25");
+    ui->comboBoxPA_config->addItem("1V30");
+    ui->comboBoxPA_config->addItem("1V35");
+    ui->comboBoxPA_config->addItem("1V40");
+    ui->comboBoxPA_config->addItem("1V45");
+    ui->comboBoxPA_config->addItem("1V50");
+    ui->comboBoxPA_config->addItem("1V55");
+    ui->comboBoxPA_config->addItem("1V60");
+    ui->comboBoxPA_config->addItem("1V65");
+    ui->comboBoxPA_config->addItem("1V70");
+    ui->comboBoxPA_config->addItem("1V75");
+    ui->comboBoxPA_config->addItem("1V80");
+    ui->comboBoxPA_config->addItem("1V85");
+    ui->comboBoxPA_config->addItem("1V90");
+    ui->comboBoxPA_config->addItem("1V95");
+    ui->comboBoxPA_config->addItem("2V00");
+    ui->comboBoxPA_config->addItem("2V05");
+    ui->comboBoxPA_config->addItem("2V10");
+    ui->comboBoxPA_config->addItem("2V15");
+    ui->comboBoxPA_config->addItem("2V20");
+    ui->comboBoxPA_config->addItem("2V25");
+    ui->comboBoxPA_config->addItem("2V30");
+    ui->comboBoxPA_config->addItem("2V35");
+    ui->comboBoxPA_config->addItem("2V40");
+    ui->comboBoxPA_config->addItem("2V45");
+    ui->comboBoxPA_config->addItem("2V50");
+    ui->comboBoxPA_config->addItem("2V55");
+    ui->comboBoxPA_config->addItem("2V60");
+    ui->comboBoxPA_config->addItem("2V65");
+    ui->comboBoxPA_config->addItem("2V70");
+    ui->comboBoxPA_config->addItem("2V75");
+    ui->comboBoxPA_config->addItem("2V80");
+    ui->comboBoxPA_config->addItem("2V85");
+    ui->comboBoxPA_config->addItem("2V90");
+    ui->comboBoxPA_config->addItem("2V95");
+    ui->comboBoxPA_config->addItem("3V00");
+    ui->comboBoxPA_config->addItem("3V05");
+    ui->comboBoxPA_config->addItem("3V10");
+    ui->comboBoxPA_config->addItem("3V15");
+    ui->comboBoxPA_config->addItem("3V20");
+    ui->comboBoxPA_config->addItem("3V25");
+    ui->comboBoxPA_config->addItem("3V30");
+    ui->comboBoxPA_config->addItem("3V35");
+    ui->comboBoxPA_config->addItem("3V40");
+    ui->comboBoxPA_config->addItem("3V45");
+    ui->comboBoxPA_config->addItem("3V50");
 }
 
 MainWindow::~MainWindow()
@@ -1186,4 +1242,23 @@ void MainWindow::on_action_Save_triggered()
     xmlWriter.writeEndElement(); //close name
     xmlWriter.writeEndDocument();
     file.close();
+}
+
+void MainWindow::on_comboBoxPA_config_currentIndexChanged(const QString &arg1)
+{
+    QString aux;
+    aux =ui->comboBoxPA_config->currentText();
+
+    QByteArray data;
+    data.append(aux);
+
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {    //The communication with the ESP-01 module is always terminated by cr + nl
+        data.append('\r');
+        data.append('\n');
+        m_WiFiTcpSocket->write(data);
+    }
+
 }

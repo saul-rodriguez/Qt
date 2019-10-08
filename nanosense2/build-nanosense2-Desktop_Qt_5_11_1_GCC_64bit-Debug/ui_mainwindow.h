@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -43,6 +44,7 @@ public:
     QAction *action_Save;
     QAction *action_Clean;
     QAction *action_Delete_sweep;
+    QAction *action0V90;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -90,6 +92,12 @@ public:
     QHBoxLayout *horizontalLayout_10;
     QLabel *label_9;
     QLineEdit *lineEditAdditionalData;
+    QGroupBox *groupBox_3;
+    QFormLayout *formLayout;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_10;
+    QComboBox *comboBoxPA_config;
+    QLabel *label_PA_ID;
     QSpacerItem *verticalSpacer;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
@@ -156,6 +164,8 @@ public:
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/images/images/Delete-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_Delete_sweep->setIcon(icon3);
+        action0V90 = new QAction(MainWindow);
+        action0V90->setObjectName(QStringLiteral("action0V90"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -387,6 +397,36 @@ public:
 
 
         verticalLayout_4->addWidget(groupBox_2);
+
+        groupBox_3 = new QGroupBox(tab_3);
+        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        formLayout = new QFormLayout(groupBox_3);
+        formLayout->setSpacing(6);
+        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setObjectName(QStringLiteral("formLayout"));
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setObjectName(QStringLiteral("horizontalLayout_11"));
+        label_10 = new QLabel(groupBox_3);
+        label_10->setObjectName(QStringLiteral("label_10"));
+
+        horizontalLayout_11->addWidget(label_10);
+
+        comboBoxPA_config = new QComboBox(groupBox_3);
+        comboBoxPA_config->setObjectName(QStringLiteral("comboBoxPA_config"));
+
+        horizontalLayout_11->addWidget(comboBoxPA_config);
+
+        label_PA_ID = new QLabel(groupBox_3);
+        label_PA_ID->setObjectName(QStringLiteral("label_PA_ID"));
+
+        horizontalLayout_11->addWidget(label_PA_ID);
+
+
+        formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_11);
+
+
+        verticalLayout_4->addWidget(groupBox_3);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -629,10 +669,11 @@ public:
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Clean);
         mainToolBar->addAction(action_Delete_sweep);
+        mainToolBar->addSeparator();
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -657,6 +698,7 @@ public:
 #ifndef QT_NO_SHORTCUT
         action_Delete_sweep->setShortcut(QApplication::translate("MainWindow", "Del", nullptr));
 #endif // QT_NO_SHORTCUT
+        action0V90->setText(QApplication::translate("MainWindow", "0V90", nullptr));
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
@@ -680,6 +722,9 @@ public:
         pushButtonSaveTag->setText(QApplication::translate("MainWindow", "Save List", nullptr));
         pushButtonLoadTag->setText(QApplication::translate("MainWindow", "Load List", nullptr));
         label_9->setText(QApplication::translate("MainWindow", "Additional Data:", nullptr));
+        groupBox_3->setTitle(QApplication::translate("MainWindow", "Reader Configuration", nullptr));
+        label_10->setText(QApplication::translate("MainWindow", "VDD PA", nullptr));
+        label_PA_ID->setText(QApplication::translate("MainWindow", "ID = ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));

@@ -124,6 +124,7 @@ private slots:
     void on_pushButtonSaveTag_clicked();
     void on_pushButtonLoadTag_clicked();
     void on_action_Save_triggered();
+    void on_comboBoxPA_config_currentIndexChanged(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H
