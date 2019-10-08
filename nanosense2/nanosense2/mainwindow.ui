@@ -278,9 +278,9 @@
                   <widget class="QComboBox" name="comboBoxPA_config"/>
                  </item>
                  <item>
-                  <widget class="QLabel" name="label_PA_ID">
+                  <widget class="QPushButton" name="pushButtonPA_Config">
                    <property name="text">
-                    <string>ID = </string>
+                    <string>Config PA</string>
                    </property>
                   </widget>
                  </item>

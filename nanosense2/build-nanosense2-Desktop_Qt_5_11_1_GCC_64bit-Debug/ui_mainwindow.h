@@ -97,7 +97,7 @@ public:
     QHBoxLayout *horizontalLayout_11;
     QLabel *label_10;
     QComboBox *comboBoxPA_config;
-    QLabel *label_PA_ID;
+    QPushButton *pushButtonPA_Config;
     QSpacerItem *verticalSpacer;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
@@ -417,10 +417,10 @@ public:
 
         horizontalLayout_11->addWidget(comboBoxPA_config);
 
-        label_PA_ID = new QLabel(groupBox_3);
-        label_PA_ID->setObjectName(QStringLiteral("label_PA_ID"));
+        pushButtonPA_Config = new QPushButton(groupBox_3);
+        pushButtonPA_Config->setObjectName(QStringLiteral("pushButtonPA_Config"));
 
-        horizontalLayout_11->addWidget(label_PA_ID);
+        horizontalLayout_11->addWidget(pushButtonPA_Config);
 
 
         formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_11);
@@ -724,7 +724,7 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "Additional Data:", nullptr));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "Reader Configuration", nullptr));
         label_10->setText(QApplication::translate("MainWindow", "VDD PA", nullptr));
-        label_PA_ID->setText(QApplication::translate("MainWindow", "ID = ", nullptr));
+        pushButtonPA_Config->setText(QApplication::translate("MainWindow", "Config PA", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));

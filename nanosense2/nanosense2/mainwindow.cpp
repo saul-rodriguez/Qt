@@ -1246,6 +1246,12 @@ void MainWindow::on_action_Save_triggered()
 
 void MainWindow::on_comboBoxPA_config_currentIndexChanged(const QString &arg1)
 {
+
+
+}
+
+void MainWindow::on_pushButtonPA_Config_clicked()
+{
     QString aux;
     aux =ui->comboBoxPA_config->currentText();
 
@@ -1260,5 +1266,4 @@ void MainWindow::on_comboBoxPA_config_currentIndexChanged(const QString &arg1)
         data.append('\n');
         m_WiFiTcpSocket->write(data);
     }
-
 }
