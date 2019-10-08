@@ -1164,14 +1164,20 @@ void MainWindow::on_action_Save_triggered()
     QDate cd = QDate::currentDate();
     QTime ct = QTime::currentTime();
 
-    QString date = cd.toString("yyMMdd");
-    //QString time = ct.toString("hh") + "_" + ct.toString("mm") + "_" + ct.toString("ss");
+    //QString date = cd.toString("yyMMdd");
+    QString date = cd.toString(Qt::ISODate);
+
+    QString time = "T" + ct.toString("hh") + "-" + ct.toString("mm") + "-" + ct.toString("ss");
     int time_sec = (ct.toString("hh")).toInt()*3600 + (ct.toString("mm")).toInt()*60 + (ct.toString("ss")).toInt(); // Time in sec
 
     QString name = ui->comboBoxTagSelect->currentText();
 
+    QString date_time;
+    date_time =  date + "_" + time;
+
     QString filename;
-    filename = name + "_" + date + "_" + QString::number(time_sec) + ".xml";
+    //filename = name + "_" + date + "_" + QString::number(time_sec) + ".xml";
+    filename = name + "_" + date_time + ".xml";
 
     QFile file(filename);
     file.open(QIODevice::WriteOnly);
@@ -1181,12 +1187,10 @@ void MainWindow::on_action_Save_triggered()
     xmlWriter.writeStartDocument();
 
     xmlWriter.writeStartElement(name);
-        xmlWriter.writeStartElement("D" + date);
-            xmlWriter.writeStartElement("T" + QString::number(time_sec));
+        xmlWriter.writeStartElement("D" + date_time);
+                xmlWriter.writeTextElement("TS", QString::number(time_sec));
 
                 xmlWriter.writeStartElement("frequency");
-                  //xmlWriter.writeStartElement("array");
-                  //xmlWriter.writeAttribute("name","frequency");
                     bioimpedance auxbio;
                     for (int i = 0; i < 11; i++) {
                         QString sfreq = QString::number(auxbio.getFrequencies(i));
@@ -1236,7 +1240,9 @@ void MainWindow::on_action_Save_triggered()
                     }
                 xmlWriter.writeEndElement();
 
-                xmlWriter.writeTextElement("additional", ui->lineEditAdditionalData->text());
+                xmlWriter.writeTextElement("additional1", ui->lineEditAdditionalData1->text());
+
+                xmlWriter.writeTextElement("additional2", ui->lineEditAdditionalData2->text());
 
         xmlWriter.writeEndElement(); //close date
     xmlWriter.writeEndElement(); //close name
