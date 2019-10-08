@@ -948,6 +948,8 @@ void MainWindow::on_action_Run_triggered()
     if (m_timerMeas->isActive())
         return;
 
+    m_data.clear(); //Clear the receiving buffer
+
     ui->lineEditAT->setText("f");
     on_pushButtonATSend_clicked();
     m_timerMeas->start(2000); //sweep must be completed before this timeout!
