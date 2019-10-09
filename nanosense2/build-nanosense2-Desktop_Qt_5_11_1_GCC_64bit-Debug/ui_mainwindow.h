@@ -79,25 +79,29 @@ public:
     QCheckBox *checkBoxConfigAntialias;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_10;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_11;
+    QLineEdit *lineEditAdditionalData2;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_9;
+    QLineEdit *lineEditAdditionalData1;
+    QHBoxLayout *horizontalLayout_8;
+    QLabel *label_8;
+    QComboBox *comboBoxTagSelect;
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_7;
     QLineEdit *lineEditTagName;
     QPushButton *pushButtonAddTag;
-    QHBoxLayout *horizontalLayout_8;
-    QLabel *label_8;
-    QComboBox *comboBoxTagSelect;
     QHBoxLayout *horizontalLayout_7;
     QPushButton *pushButtonSaveTag;
     QPushButton *pushButtonLoadTag;
-    QHBoxLayout *horizontalLayout_10;
-    QLabel *label_9;
-    QLineEdit *lineEditAdditionalData;
     QGroupBox *groupBox_3;
     QFormLayout *formLayout;
     QHBoxLayout *horizontalLayout_11;
     QLabel *label_10;
     QComboBox *comboBoxPA_config;
     QPushButton *pushButtonPA_Config;
+    QLabel *label_PA_Config;
     QSpacerItem *verticalSpacer;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
@@ -326,6 +330,54 @@ public:
         gridLayout_10->setSpacing(6);
         gridLayout_10->setContentsMargins(11, 11, 11, 11);
         gridLayout_10->setObjectName(QStringLiteral("gridLayout_10"));
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QStringLiteral("horizontalLayout_9"));
+        label_11 = new QLabel(groupBox_2);
+        label_11->setObjectName(QStringLiteral("label_11"));
+
+        horizontalLayout_9->addWidget(label_11);
+
+        lineEditAdditionalData2 = new QLineEdit(groupBox_2);
+        lineEditAdditionalData2->setObjectName(QStringLiteral("lineEditAdditionalData2"));
+
+        horizontalLayout_9->addWidget(lineEditAdditionalData2);
+
+
+        gridLayout_10->addLayout(horizontalLayout_9, 9, 0, 1, 1);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
+        label_9 = new QLabel(groupBox_2);
+        label_9->setObjectName(QStringLiteral("label_9"));
+
+        horizontalLayout_10->addWidget(label_9);
+
+        lineEditAdditionalData1 = new QLineEdit(groupBox_2);
+        lineEditAdditionalData1->setObjectName(QStringLiteral("lineEditAdditionalData1"));
+
+        horizontalLayout_10->addWidget(lineEditAdditionalData1);
+
+
+        gridLayout_10->addLayout(horizontalLayout_10, 3, 0, 1, 1);
+
+        horizontalLayout_8 = new QHBoxLayout();
+        horizontalLayout_8->setSpacing(6);
+        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
+        label_8 = new QLabel(groupBox_2);
+        label_8->setObjectName(QStringLiteral("label_8"));
+
+        horizontalLayout_8->addWidget(label_8);
+
+        comboBoxTagSelect = new QComboBox(groupBox_2);
+        comboBoxTagSelect->setObjectName(QStringLiteral("comboBoxTagSelect"));
+
+        horizontalLayout_8->addWidget(comboBoxTagSelect);
+
+
+        gridLayout_10->addLayout(horizontalLayout_8, 1, 0, 1, 1);
+
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QStringLiteral("horizontalLayout_6"));
@@ -347,22 +399,6 @@ public:
 
         gridLayout_10->addLayout(horizontalLayout_6, 0, 0, 1, 1);
 
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setSpacing(6);
-        horizontalLayout_8->setObjectName(QStringLiteral("horizontalLayout_8"));
-        label_8 = new QLabel(groupBox_2);
-        label_8->setObjectName(QStringLiteral("label_8"));
-
-        horizontalLayout_8->addWidget(label_8);
-
-        comboBoxTagSelect = new QComboBox(groupBox_2);
-        comboBoxTagSelect->setObjectName(QStringLiteral("comboBoxTagSelect"));
-
-        horizontalLayout_8->addWidget(comboBoxTagSelect);
-
-
-        gridLayout_10->addLayout(horizontalLayout_8, 1, 0, 1, 1);
-
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QStringLiteral("horizontalLayout_7"));
@@ -378,22 +414,6 @@ public:
 
 
         gridLayout_10->addLayout(horizontalLayout_7, 2, 0, 1, 1);
-
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setSpacing(6);
-        horizontalLayout_10->setObjectName(QStringLiteral("horizontalLayout_10"));
-        label_9 = new QLabel(groupBox_2);
-        label_9->setObjectName(QStringLiteral("label_9"));
-
-        horizontalLayout_10->addWidget(label_9);
-
-        lineEditAdditionalData = new QLineEdit(groupBox_2);
-        lineEditAdditionalData->setObjectName(QStringLiteral("lineEditAdditionalData"));
-
-        horizontalLayout_10->addWidget(lineEditAdditionalData);
-
-
-        gridLayout_10->addLayout(horizontalLayout_10, 3, 0, 1, 1);
 
 
         verticalLayout_4->addWidget(groupBox_2);
@@ -421,6 +441,11 @@ public:
         pushButtonPA_Config->setObjectName(QStringLiteral("pushButtonPA_Config"));
 
         horizontalLayout_11->addWidget(pushButtonPA_Config);
+
+        label_PA_Config = new QLabel(groupBox_3);
+        label_PA_Config->setObjectName(QStringLiteral("label_PA_Config"));
+
+        horizontalLayout_11->addWidget(label_PA_Config);
 
 
         formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_11);
@@ -631,34 +656,37 @@ public:
         MainWindow->setStatusBar(statusBar);
         QWidget::setTabOrder(pushButtonBTdiscoverDevices, comboBoxBTdevices);
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
-        QWidget::setTabOrder(pushButtonBTconnect, lineEditTagName);
+        QWidget::setTabOrder(pushButtonBTconnect, lineEditAdditionalData1);
+        QWidget::setTabOrder(lineEditAdditionalData1, lineEditAdditionalData2);
+        QWidget::setTabOrder(lineEditAdditionalData2, comboBoxPA_config);
+        QWidget::setTabOrder(comboBoxPA_config, pushButtonPA_Config);
+        QWidget::setTabOrder(pushButtonPA_Config, lineEditTagName);
         QWidget::setTabOrder(lineEditTagName, pushButtonAddTag);
-        QWidget::setTabOrder(pushButtonAddTag, pushButtonSaveTag);
-        QWidget::setTabOrder(pushButtonSaveTag, pushButtonLoadTag);
-        QWidget::setTabOrder(pushButtonLoadTag, pushButtonGenerateCalibration);
+        QWidget::setTabOrder(pushButtonAddTag, pushButtonLoadTag);
+        QWidget::setTabOrder(pushButtonLoadTag, comboBoxTagSelect);
+        QWidget::setTabOrder(comboBoxTagSelect, pushButtonSaveTag);
+        QWidget::setTabOrder(pushButtonSaveTag, lineEditAT);
+        QWidget::setTabOrder(lineEditAT, pushButtonATSend);
+        QWidget::setTabOrder(pushButtonATSend, checkBoxGainCalibration);
+        QWidget::setTabOrder(checkBoxGainCalibration, pushButtonGenerateCalibration);
         QWidget::setTabOrder(pushButtonGenerateCalibration, pushButtonOpenCalFile);
         QWidget::setTabOrder(pushButtonOpenCalFile, pushButtonSaveCalFile);
-        QWidget::setTabOrder(pushButtonSaveCalFile, checkBoxGainCalibration);
-        QWidget::setTabOrder(checkBoxGainCalibration, plainTextEditAT);
-        QWidget::setTabOrder(plainTextEditAT, tabWidget);
-        QWidget::setTabOrder(tabWidget, checkBoxConfigSmoothPlot);
-        QWidget::setTabOrder(checkBoxConfigSmoothPlot, checkBoxConfigAntialias);
-        QWidget::setTabOrder(checkBoxConfigAntialias, lineEditWiFiPort);
-        QWidget::setTabOrder(lineEditWiFiPort, pushButtonWiFiConnect);
-        QWidget::setTabOrder(pushButtonWiFiConnect, comboBoxTagSelect);
-        QWidget::setTabOrder(comboBoxTagSelect, pushButtonWiFiDisconnect);
-        QWidget::setTabOrder(pushButtonWiFiDisconnect, radioButtonBT);
-        QWidget::setTabOrder(radioButtonBT, lineEditAdditionalData);
-        QWidget::setTabOrder(lineEditAdditionalData, pushButtonBTdisconnect);
+        QWidget::setTabOrder(pushButtonSaveCalFile, tableViewCalibration);
+        QWidget::setTabOrder(tableViewCalibration, radioButtonBT);
+        QWidget::setTabOrder(radioButtonBT, lineEditWiFiPort);
+        QWidget::setTabOrder(lineEditWiFiPort, pushButtonBTdisconnect);
         QWidget::setTabOrder(pushButtonBTdisconnect, tableViewMag);
         QWidget::setTabOrder(tableViewMag, tableViewMagStat);
         QWidget::setTabOrder(tableViewMagStat, tableViewPha);
         QWidget::setTabOrder(tableViewPha, tableViewPhaStat);
-        QWidget::setTabOrder(tableViewPhaStat, tableViewCalibration);
-        QWidget::setTabOrder(tableViewCalibration, pushButtonATSend);
-        QWidget::setTabOrder(pushButtonATSend, radioButtonWiFi);
+        QWidget::setTabOrder(tableViewPhaStat, pushButtonWiFiDisconnect);
+        QWidget::setTabOrder(pushButtonWiFiDisconnect, checkBoxConfigSmoothPlot);
+        QWidget::setTabOrder(checkBoxConfigSmoothPlot, radioButtonWiFi);
         QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
-        QWidget::setTabOrder(lineEditWiFiAddress, lineEditAT);
+        QWidget::setTabOrder(lineEditWiFiAddress, tabWidget);
+        QWidget::setTabOrder(tabWidget, plainTextEditAT);
+        QWidget::setTabOrder(plainTextEditAT, checkBoxConfigAntialias);
+        QWidget::setTabOrder(checkBoxConfigAntialias, pushButtonWiFiConnect);
 
         menuBar->addAction(menu_Measurement->menuAction());
         menu_Measurement->addAction(action_Run);
@@ -673,7 +701,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -716,15 +744,17 @@ public:
         checkBoxConfigSmoothPlot->setText(QApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QApplication::translate("MainWindow", "Antialias filtering", nullptr));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "Measurement Properties", nullptr));
+        label_11->setText(QApplication::translate("MainWindow", "Additional Data 2:", nullptr));
+        label_9->setText(QApplication::translate("MainWindow", "Additional Data 1:", nullptr));
+        label_8->setText(QApplication::translate("MainWindow", "Selected Tag", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "New Tag name:", nullptr));
         pushButtonAddTag->setText(QApplication::translate("MainWindow", "Add Tag", nullptr));
-        label_8->setText(QApplication::translate("MainWindow", "Selected Tag", nullptr));
         pushButtonSaveTag->setText(QApplication::translate("MainWindow", "Save List", nullptr));
         pushButtonLoadTag->setText(QApplication::translate("MainWindow", "Load List", nullptr));
-        label_9->setText(QApplication::translate("MainWindow", "Additional Data:", nullptr));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "Reader Configuration", nullptr));
         label_10->setText(QApplication::translate("MainWindow", "VDD PA", nullptr));
         pushButtonPA_Config->setText(QApplication::translate("MainWindow", "Config PA", nullptr));
+        label_PA_Config->setText(QApplication::translate("MainWindow", "Answer: ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));

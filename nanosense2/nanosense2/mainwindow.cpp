@@ -177,7 +177,19 @@ void MainWindow::BTConnected(QString name)
 
 void MainWindow::BTrxData(const QByteArray &data)
 {
+    //Update AT
     ui->plainTextEditAT->appendPlainText(QString::fromStdString(data.toStdString()));
+
+    int num_lines = ui->plainTextEditAT->document()->blockCount();
+
+    if (num_lines == 200) {
+        ui->plainTextEditAT->clear();
+    }
+
+    //Update PA label
+    QString aux;
+    aux = "Answer: " + QString::fromStdString(data.toStdString());
+    ui->label_PA_Config->setText(aux);
 
     m_data.append(data);
     int size = m_data.count();
