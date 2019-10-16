@@ -91,6 +91,8 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_7;
     QLineEdit *lineEditTagName;
+    QLabel *label_12;
+    QLineEdit *lineEditSerialNumber;
     QPushButton *pushButtonAddTag;
     QHBoxLayout *horizontalLayout_7;
     QPushButton *pushButtonSaveTag;
@@ -390,6 +392,16 @@ public:
         lineEditTagName->setObjectName(QStringLiteral("lineEditTagName"));
 
         horizontalLayout_6->addWidget(lineEditTagName);
+
+        label_12 = new QLabel(groupBox_2);
+        label_12->setObjectName(QStringLiteral("label_12"));
+
+        horizontalLayout_6->addWidget(label_12);
+
+        lineEditSerialNumber = new QLineEdit(groupBox_2);
+        lineEditSerialNumber->setObjectName(QStringLiteral("lineEditSerialNumber"));
+
+        horizontalLayout_6->addWidget(lineEditSerialNumber);
 
         pushButtonAddTag = new QPushButton(groupBox_2);
         pushButtonAddTag->setObjectName(QStringLiteral("pushButtonAddTag"));
@@ -701,7 +713,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -748,6 +760,7 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "Additional Data 1:", nullptr));
         label_8->setText(QApplication::translate("MainWindow", "Selected Tag", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "New Tag name:", nullptr));
+        label_12->setText(QApplication::translate("MainWindow", "Serial Number:", nullptr));
         pushButtonAddTag->setText(QApplication::translate("MainWindow", "Add Tag", nullptr));
         pushButtonSaveTag->setText(QApplication::translate("MainWindow", "Save List", nullptr));
         pushButtonLoadTag->setText(QApplication::translate("MainWindow", "Load List", nullptr));

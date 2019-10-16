@@ -1084,8 +1084,17 @@ void MainWindow::on_action_Delete_sweep_triggered()
 
 void MainWindow::on_pushButtonAddTag_clicked()
 {
+    QString tag;
+    tag = ui->lineEditTagName->text();
+    m_tags << tag;
+
+    QString serial;
+    serial = ui->lineEditSerialNumber->text();
+    m_serialnumbers << serial;
+
     QString aux;
-    aux = ui->lineEditTagName->text();
+    aux = tag + "," + serial;
+
     ui->comboBoxTagSelect->addItem(aux);
 }
 
@@ -1108,16 +1117,29 @@ void MainWindow::on_pushButtonSaveTag_clicked()
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
 
+    int count = ui->comboBoxTagSelect->count();
+    // TAGLIST
     xmlWriter.writeStartElement("TAGLIST");
-        int count = ui->comboBoxTagSelect->count();
 
-        for (int i=1; i < count; i++) { //Note that default is not saved!
-            QString tag = ui->comboBoxTagSelect->itemText(i);
+        for (int i=0; i < (count-1); i++) { //Note that default is not saved!
+            //QString tag = ui->comboBoxTagSelect->itemText(i);
             QString ele = "t" + QString::number(i);
-            xmlWriter.writeTextElement(ele,tag);
+            xmlWriter.writeTextElement(ele,m_tags.at(i));
         }
 
-      xmlWriter.writeEndElement(); //close TAGLIST
+    xmlWriter.writeEndElement(); //close TAGLIST
+
+     // SERIAL NUMBER
+    xmlWriter.writeStartElement("SERIAL");
+
+          for (int i=0; i < (count-1); i++) { //Note that default is not saved!
+              //QString tag = ui->comboBoxTagSelect->itemText(i);
+              QString ele = "s" + QString::number(i);
+              xmlWriter.writeTextElement(ele,m_serialnumbers.at(i));
+          }
+
+    xmlWriter.writeEndElement(); //close TAGLIST
+
     xmlWriter.writeEndDocument();
     file.close();
 }
@@ -1132,26 +1154,54 @@ void MainWindow::on_pushButtonLoadTag_clicked()
         qDebug()<<"calibration file not opened!";
         return;
     }
+    m_tags.clear();
+    m_serialnumbers.clear();
 
     QXmlStreamReader xmlRead;
     xmlRead.setDevice(&file);
 
     xmlRead.readNextStartElement();
     QStringRef aux = xmlRead.name();
-
+    int ret;
     while(!xmlRead.atEnd()){
         if (xmlRead.isStartElement()) {
             if (xmlRead.name()=="TAGLIST") {
-                xmlRead.readNextStartElement();
+                ret = xmlRead.readNextStartElement();
             } else if (xmlRead.name().contains("t")) {
-                ui->comboBoxTagSelect->addItem(xmlRead.readElementText());
-                xmlRead.readNextStartElement();
+                m_tags << xmlRead.readElementText();
+                 ret = xmlRead.readNextStartElement();
+               //  if (!ret) xmlRead.readNext();
+            } else if (xmlRead.name().contains("s")) {
+                m_serialnumbers << xmlRead.readElementText();
+                ret = xmlRead.readNextStartElement();
             }
 
         } else {
             xmlRead.readNext();
         }
     }
+
+    file.seek(0);
+    xmlRead.setDevice(&file);
+
+    QStringRef rets;
+    while(!xmlRead.atEnd()){
+        if (xmlRead.isStartElement()) {
+            rets = xmlRead.name();
+            if (rets == "SERIAL") {
+                ret = xmlRead.readNextStartElement();
+            } else if (xmlRead.name().contains("s")) {
+                m_serialnumbers << xmlRead.readElementText();
+                ret = xmlRead.readNextStartElement();
+            } else {
+                xmlRead.readNext();
+            }
+        } else {
+                xmlRead.readNext();
+        }
+    }
+
+
 
     file.close();
 }
@@ -1167,12 +1217,6 @@ void MainWindow::on_action_Save_triggered()
 
     if (ret == QMessageBox::No) return;
 
-    //QString filename = QFileDialog::getSaveFileName(this,
-      //                                              tr("Save Xml"), ".",
-      //                                              tr("Xml files (*.xml)"));
-
-    //QDateTime meastime = QDateTime::currentDateTime();
-    //QDateTime UTC
     QDate cd = QDate::currentDate();
     QTime ct = QTime::currentTime();
 
@@ -1180,12 +1224,25 @@ void MainWindow::on_action_Save_triggered()
     QString date = cd.toString(Qt::ISODate);
 
     QString time = "T" + ct.toString("hh") + "-" + ct.toString("mm") + "-" + ct.toString("ss");
+
+    QString time2 = "T" + ct.toString("hh") + ":" + ct.toString("mm") + ":" + ct.toString("ss");
+
     int time_sec = (ct.toString("hh")).toInt()*3600 + (ct.toString("mm")).toInt()*60 + (ct.toString("ss")).toInt(); // Time in sec
 
-    QString name = ui->comboBoxTagSelect->currentText();
+    //QString name = ui->comboBoxTagSelect->currentText();
+    int ind = ui->comboBoxTagSelect->currentIndex();
+    QString name;
+    if (ind == 0) {
+        name = "default";
+    } else {
+        name = m_tags.at(ind-1);
+    }
 
     QString date_time;
     date_time =  date + "_" + time;
+
+    QString date_time2;
+    date_time2 =  date + "_" + time2;
 
     QString filename;
     //filename = name + "_" + date + "_" + QString::number(time_sec) + ".xml";
@@ -1200,6 +1257,13 @@ void MainWindow::on_action_Save_triggered()
 
     xmlWriter.writeStartElement(name);
         xmlWriter.writeStartElement("D" + date_time);
+
+                //write <datetime>
+                xmlWriter.writeTextElement("datetime", date_time2);
+
+                //wire <serialnumber>
+                xmlWriter.writeTextElement("serialnumber", date_time2);
+
                 xmlWriter.writeTextElement("TS", QString::number(time_sec));
 
                 xmlWriter.writeStartElement("frequency");

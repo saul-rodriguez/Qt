@@ -77,6 +77,11 @@ private:
     QStandardItemModel *modelCal;
     //QXmlStreamReader xmlRead;
 
+    //XML data
+    QStringList m_tags;
+    QStringList m_serialnumbers;
+
+
 
 private slots:
     void BTgetDevice(QString name);

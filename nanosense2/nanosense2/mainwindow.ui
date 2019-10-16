@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -242,6 +242,16 @@
                  </item>
                  <item>
                   <widget class="QLineEdit" name="lineEditTagName"/>
+                 </item>
+                 <item>
+                  <widget class="QLabel" name="label_12">
+                   <property name="text">
+                    <string>Serial Number:</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="lineEditSerialNumber"/>
                  </item>
                  <item>
                   <widget class="QPushButton" name="pushButtonAddTag">
