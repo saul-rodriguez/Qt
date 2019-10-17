@@ -1117,28 +1117,21 @@ void MainWindow::on_pushButtonSaveTag_clicked()
     xmlWriter.setAutoFormatting(true);
     xmlWriter.writeStartDocument();
 
-    int count = ui->comboBoxTagSelect->count();
+    //int count = ui->comboBoxTagSelect->count();
+    int count = m_tags.count();
     // TAGLIST
-    xmlWriter.writeStartElement("TAGLIST");
 
-        for (int i=0; i < (count-1); i++) { //Note that default is not saved!
+    xmlWriter.writeStartElement("TAGLIST");
+    QString aux;
+        for (int i=0; i < (count); i++) {
             //QString tag = ui->comboBoxTagSelect->itemText(i);
             QString ele = "t" + QString::number(i);
-            xmlWriter.writeTextElement(ele,m_tags.at(i));
+            aux = m_tags.at(i) + "," + m_serialnumbers.at(i);
+
+            xmlWriter.writeTextElement(ele,aux);
         }
 
-    xmlWriter.writeEndElement(); //close TAGLIST
-
-     // SERIAL NUMBER
-    xmlWriter.writeStartElement("SERIAL");
-
-          for (int i=0; i < (count-1); i++) { //Note that default is not saved!
-              //QString tag = ui->comboBoxTagSelect->itemText(i);
-              QString ele = "s" + QString::number(i);
-              xmlWriter.writeTextElement(ele,m_serialnumbers.at(i));
-          }
-
-    xmlWriter.writeEndElement(); //close TAGLIST
+    xmlWriter.writeEndElement(); //close TAGLIST 
 
     xmlWriter.writeEndDocument();
     file.close();
@@ -1156,23 +1149,35 @@ void MainWindow::on_pushButtonLoadTag_clicked()
     }
     m_tags.clear();
     m_serialnumbers.clear();
+    ui->comboBoxTagSelect->clear();
+    ui->comboBoxTagSelect->addItem("default");
 
     QXmlStreamReader xmlRead;
     xmlRead.setDevice(&file);
 
     xmlRead.readNextStartElement();
-    QStringRef aux = xmlRead.name();
+
+    QString aux;
+
     int ret;
     while(!xmlRead.atEnd()){
         if (xmlRead.isStartElement()) {
             if (xmlRead.name()=="TAGLIST") {
                 ret = xmlRead.readNextStartElement();
             } else if (xmlRead.name().contains("t")) {
-                m_tags << xmlRead.readElementText();
-                 ret = xmlRead.readNextStartElement();
-               //  if (!ret) xmlRead.readNext();
-            } else if (xmlRead.name().contains("s")) {
-                m_serialnumbers << xmlRead.readElementText();
+                aux = xmlRead.readElementText();
+                QStringList data = aux.split(",", QString::SkipEmptyParts);
+
+                if (data.count() != 2) {
+                    QMessageBox msgBox;
+                    msgBox.setText("Invalid Tag file");
+                    msgBox.exec();
+                    return;
+                }
+
+                m_tags << data.at(0);
+                m_serialnumbers << data.at(1);
+                ui->comboBoxTagSelect->addItem(aux);
                 ret = xmlRead.readNextStartElement();
             }
 
@@ -1180,28 +1185,6 @@ void MainWindow::on_pushButtonLoadTag_clicked()
             xmlRead.readNext();
         }
     }
-
-    file.seek(0);
-    xmlRead.setDevice(&file);
-
-    QStringRef rets;
-    while(!xmlRead.atEnd()){
-        if (xmlRead.isStartElement()) {
-            rets = xmlRead.name();
-            if (rets == "SERIAL") {
-                ret = xmlRead.readNextStartElement();
-            } else if (xmlRead.name().contains("s")) {
-                m_serialnumbers << xmlRead.readElementText();
-                ret = xmlRead.readNextStartElement();
-            } else {
-                xmlRead.readNext();
-            }
-        } else {
-                xmlRead.readNext();
-        }
-    }
-
-
 
     file.close();
 }
@@ -1231,18 +1214,20 @@ void MainWindow::on_action_Save_triggered()
 
     //QString name = ui->comboBoxTagSelect->currentText();
     int ind = ui->comboBoxTagSelect->currentIndex();
-    QString name;
+    QString name, snumber;
     if (ind == 0) {
         name = "default";
+        snumber = "0";
     } else {
         name = m_tags.at(ind-1);
+        snumber = m_serialnumbers.at(ind-1);
     }
 
     QString date_time;
     date_time =  date + "_" + time;
 
     QString date_time2;
-    date_time2 =  date + "_" + time2;
+    date_time2 =  date + "" + time2;
 
     QString filename;
     //filename = name + "_" + date + "_" + QString::number(time_sec) + ".xml";
@@ -1262,7 +1247,7 @@ void MainWindow::on_action_Save_triggered()
                 xmlWriter.writeTextElement("datetime", date_time2);
 
                 //wire <serialnumber>
-                xmlWriter.writeTextElement("serialnumber", date_time2);
+                xmlWriter.writeTextElement("serialnumber", snumber);
 
                 xmlWriter.writeTextElement("TS", QString::number(time_sec));
 
