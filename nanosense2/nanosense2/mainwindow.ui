@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -530,6 +530,7 @@
     <addaction name="action_Save"/>
     <addaction name="action_Clean"/>
     <addaction name="action_Delete_sweep"/>
+    <addaction name="actionRun_Timer"/>
    </widget>
    <addaction name="menu_Measurement"/>
   </widget>
@@ -598,6 +599,14 @@
   <action name="action0V90">
    <property name="text">
     <string>0V90</string>
+   </property>
+  </action>
+  <action name="actionRun_Timer">
+   <property name="text">
+    <string>Run &amp;Timer</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
    </property>
   </action>
  </widget>

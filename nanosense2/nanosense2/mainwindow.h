@@ -81,6 +81,9 @@ private:
     QStringList m_tags;
     QStringList m_serialnumbers;
 
+    //Timer for delayed measurement
+    QTimer *m_timerDelay;
+    int m_measDelaytime;
 
 
 private slots:
@@ -103,6 +106,8 @@ private slots:
     void clearTables();
     void updateTables();
     void updateStatistics();
+
+    void MeasurementDelayedTimeout();
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
@@ -131,6 +136,7 @@ private slots:
     void on_action_Save_triggered();
     void on_comboBoxPA_config_currentIndexChanged(const QString &arg1);
     void on_pushButtonPA_Config_clicked();
+    void on_actionRun_Timer_triggered();
 };
 
 #endif // MAINWINDOW_H

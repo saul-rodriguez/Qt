@@ -154,6 +154,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBoxPA_config->addItem("3V40");
     ui->comboBoxPA_config->addItem("3V45");
     ui->comboBoxPA_config->addItem("3V50");
+
+    //Measurement with time delay
+    m_measDelaytime = 0;
+    m_timerDelay = new QTimer(this);
+    m_timerDelay->setSingleShot(true);
+    connect(m_timerDelay, SIGNAL(timeout()), this, SLOT(MeasurementDelayedTimeout()));
 }
 
 MainWindow::~MainWindow()
@@ -662,6 +668,19 @@ void MainWindow::updateStatistics()
 
 }
 
+void MainWindow::MeasurementDelayedTimeout()
+{
+    m_measDelaytime++;
+    qDebug() << "Time: " << m_measDelaytime;
+    if (m_measDelaytime == 3) {
+        on_action_Run_triggered();
+        m_measDelaytime = 0;
+    } else {                
+        m_timerDelay->start(1000);
+    }
+
+}
+
 void MainWindow::setUpTables()
 {
     modelMag = new QStandardItemModel(10,11,this);
@@ -709,6 +728,7 @@ void MainWindow::setUpTables()
 
 void MainWindow::on_pushButtonBTdiscoverDevices_clicked()
 {
+    ui->comboBoxBTdevices->clear();
     m_bt->BTfindDevices();
 }
 
@@ -1333,4 +1353,9 @@ void MainWindow::on_pushButtonPA_Config_clicked()
         data.append('\n');
         m_WiFiTcpSocket->write(data);
     }
+}
+
+void MainWindow::on_actionRun_Timer_triggered()
+{
+    m_timerDelay->start(1000);
 }

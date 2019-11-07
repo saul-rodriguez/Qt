@@ -61,7 +61,21 @@ OBJECTS       = main.o \
 		cplotchart.o \
 		moc_mainwindow.o \
 		moc_btclient.o
-DIST          = /pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = ../logger/android/AndroidManifest.xml \
+		../logger/android/gradle/wrapper/gradle-wrapper.jar \
+		../logger/android/gradlew \
+		../logger/android/res/values/libs.xml \
+		../logger/android/build.gradle \
+		../logger/android/gradle/wrapper/gradle-wrapper.properties \
+		../logger/android/gradlew.bat \
+		../logger/android/AndroidManifest.xml \
+		../logger/android/gradle/wrapper/gradle-wrapper.jar \
+		../logger/android/gradlew \
+		../logger/android/res/values/libs.xml \
+		../logger/android/build.gradle \
+		../logger/android/gradle/wrapper/gradle-wrapper.properties \
+		../logger/android/gradlew.bat \
+		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/common/unix.conf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/common/linux.conf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/common/sanitize.conf \
@@ -230,6 +244,7 @@ DIST          = /pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_pre.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
+		../logger/.qmake.stash \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -435,6 +450,7 @@ Makefile: ../logger/logger.pro /pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.con
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf \
 		/pkg/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf \
@@ -631,6 +647,7 @@ Makefile: ../logger/logger.pro /pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.con
 /pkg/Qt/5.11.1/gcc_64/mkspecs/features/qt_config.prf:
 /pkg/Qt/5.11.1/gcc_64/mkspecs/linux-g++/qmake.conf:
 /pkg/Qt/5.11.1/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /pkg/Qt/5.11.1/gcc_64/mkspecs/features/exclusive_builds.prf:
 /pkg/Qt/5.11.1/gcc_64/mkspecs/features/toolchain.prf:
 /pkg/Qt/5.11.1/gcc_64/mkspecs/features/default_pre.prf:
@@ -1363,15 +1380,78 @@ mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qhostaddress.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtNetwork/qnetworkconfiguration.h \
 		ui_mainwindow.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QApplication \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qapplication.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qcoreapplication.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qeventloop.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qguiapplication.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qinputmethod.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QCheckBox \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qcheckbox.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractbutton.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QComboBox \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qcombobox.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qstyleoption.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qvalidator.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qregularexpression.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qslider.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractslider.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qstyle.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtabbar.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qrubberband.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qframe.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGridLayout \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgridlayout.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlayout.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qboxlayout.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGroupBox \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgroupbox.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QHBoxLayout \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QLabel \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlabel.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QLineEdit \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qlineedit.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextcursor.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextformat.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextoption.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMenuBar \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmenubar.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmenu.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qaction.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qactiongroup.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QPlainTextEdit \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qplaintextedit.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtextedit.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextdocument.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextlayout.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qglyphrun.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qrawfont.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qfontdatabase.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QPushButton \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qpushbutton.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QRadioButton \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qradiobutton.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QSpacerItem \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QStatusBar \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qstatusbar.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QTabWidget \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QToolBar \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qtoolbar.h \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QVBoxLayout \
+		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QWidget \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/QChartView \
 		/pkg/Qt/5.11.1/gcc_64/include/QtCharts/qchartview.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QGraphicsView \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsview.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qpainter.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtGui/qtextoption.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qscrollarea.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qframe.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qgraphicsscene.h \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/QMessageBox \
 		/pkg/Qt/5.11.1/gcc_64/include/QtWidgets/qmessagebox.h \
