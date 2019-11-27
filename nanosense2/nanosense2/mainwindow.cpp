@@ -1038,6 +1038,8 @@ void MainWindow::on_action_Run_triggered()
 
     m_data.clear(); //Clear the receiving buffer
 
+    m_temp_measurement.cleanSweep(); //Clear the temporal measurement
+
     ui->lineEditAT->setText("f");
     on_pushButtonATSend_clicked();
     m_timerMeas->start(2000); //sweep must be completed before this timeout!
@@ -1070,6 +1072,8 @@ void MainWindow::on_action_Clean_triggered()
 
     m_chartMag->updatePlot();
     m_chartPha->updatePlot();
+
+    m_temp_measurement.cleanSweep();
 
 }
 
