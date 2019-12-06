@@ -45,6 +45,7 @@ public:
     QAction *action_Clean;
     QAction *action_Delete_sweep;
     QAction *action0V90;
+    QAction *actionRun_Timer;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -91,6 +92,8 @@ public:
     QHBoxLayout *horizontalLayout_6;
     QLabel *label_7;
     QLineEdit *lineEditTagName;
+    QLabel *label_12;
+    QLineEdit *lineEditSerialNumber;
     QPushButton *pushButtonAddTag;
     QHBoxLayout *horizontalLayout_7;
     QPushButton *pushButtonSaveTag;
@@ -101,6 +104,7 @@ public:
     QLabel *label_10;
     QComboBox *comboBoxPA_config;
     QPushButton *pushButtonPA_Config;
+    QLabel *label_PA_Config;
     QSpacerItem *verticalSpacer;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
@@ -169,6 +173,8 @@ public:
         action_Delete_sweep->setIcon(icon3);
         action0V90 = new QAction(MainWindow);
         action0V90->setObjectName(QString::fromUtf8("action0V90"));
+        actionRun_Timer = new QAction(MainWindow);
+        actionRun_Timer->setObjectName(QString::fromUtf8("actionRun_Timer"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -390,6 +396,16 @@ public:
 
         horizontalLayout_6->addWidget(lineEditTagName);
 
+        label_12 = new QLabel(groupBox_2);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
+
+        horizontalLayout_6->addWidget(label_12);
+
+        lineEditSerialNumber = new QLineEdit(groupBox_2);
+        lineEditSerialNumber->setObjectName(QString::fromUtf8("lineEditSerialNumber"));
+
+        horizontalLayout_6->addWidget(lineEditSerialNumber);
+
         pushButtonAddTag = new QPushButton(groupBox_2);
         pushButtonAddTag->setObjectName(QString::fromUtf8("pushButtonAddTag"));
 
@@ -440,6 +456,11 @@ public:
         pushButtonPA_Config->setObjectName(QString::fromUtf8("pushButtonPA_Config"));
 
         horizontalLayout_11->addWidget(pushButtonPA_Config);
+
+        label_PA_Config = new QLabel(groupBox_3);
+        label_PA_Config->setObjectName(QString::fromUtf8("label_PA_Config"));
+
+        horizontalLayout_11->addWidget(label_PA_Config);
 
 
         formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_11);
@@ -687,6 +708,7 @@ public:
         menu_Measurement->addAction(action_Save);
         menu_Measurement->addAction(action_Clean);
         menu_Measurement->addAction(action_Delete_sweep);
+        menu_Measurement->addAction(actionRun_Timer);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Clean);
@@ -721,6 +743,10 @@ public:
         action_Delete_sweep->setShortcut(QApplication::translate("MainWindow", "Del", nullptr));
 #endif // QT_NO_SHORTCUT
         action0V90->setText(QApplication::translate("MainWindow", "0V90", nullptr));
+        actionRun_Timer->setText(QApplication::translate("MainWindow", "Run &Timer", nullptr));
+#ifndef QT_NO_SHORTCUT
+        actionRun_Timer->setShortcut(QApplication::translate("MainWindow", "Ctrl+T", nullptr));
+#endif // QT_NO_SHORTCUT
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
@@ -742,12 +768,14 @@ public:
         label_9->setText(QApplication::translate("MainWindow", "Additional Data 1:", nullptr));
         label_8->setText(QApplication::translate("MainWindow", "Selected Tag", nullptr));
         label_7->setText(QApplication::translate("MainWindow", "New Tag name:", nullptr));
+        label_12->setText(QApplication::translate("MainWindow", "Serial Number:", nullptr));
         pushButtonAddTag->setText(QApplication::translate("MainWindow", "Add Tag", nullptr));
         pushButtonSaveTag->setText(QApplication::translate("MainWindow", "Save List", nullptr));
         pushButtonLoadTag->setText(QApplication::translate("MainWindow", "Load List", nullptr));
         groupBox_3->setTitle(QApplication::translate("MainWindow", "Reader Configuration", nullptr));
         label_10->setText(QApplication::translate("MainWindow", "VDD PA", nullptr));
         pushButtonPA_Config->setText(QApplication::translate("MainWindow", "Config PA", nullptr));
+        label_PA_Config->setText(QApplication::translate("MainWindow", "Answer: ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
