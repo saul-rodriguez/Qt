@@ -45,6 +45,7 @@ public:
     QAction *action_Clean;
     QAction *action_Delete_sweep;
     QAction *action0V90;
+    QAction *actionRun_Timer;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -172,6 +173,8 @@ public:
         action_Delete_sweep->setIcon(icon3);
         action0V90 = new QAction(MainWindow);
         action0V90->setObjectName(QStringLiteral("action0V90"));
+        actionRun_Timer = new QAction(MainWindow);
+        actionRun_Timer->setObjectName(QStringLiteral("actionRun_Timer"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -705,6 +708,7 @@ public:
         menu_Measurement->addAction(action_Save);
         menu_Measurement->addAction(action_Clean);
         menu_Measurement->addAction(action_Delete_sweep);
+        menu_Measurement->addAction(actionRun_Timer);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Clean);
@@ -713,7 +717,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -739,6 +743,10 @@ public:
         action_Delete_sweep->setShortcut(QApplication::translate("MainWindow", "Del", nullptr));
 #endif // QT_NO_SHORTCUT
         action0V90->setText(QApplication::translate("MainWindow", "0V90", nullptr));
+        actionRun_Timer->setText(QApplication::translate("MainWindow", "Run &Timer", nullptr));
+#ifndef QT_NO_SHORTCUT
+        actionRun_Timer->setShortcut(QApplication::translate("MainWindow", "Ctrl+T", nullptr));
+#endif // QT_NO_SHORTCUT
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
