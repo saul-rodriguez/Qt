@@ -48,10 +48,14 @@ void ihex2all::readFile()
            aux[1] += bas[j+2];
            aux[1] += bas[j+3];
 
+           if (j+4 < end_line) {
            aux[2] += bas[j+4];
            aux[2] += bas[j+5];
            aux[3] += bas[j+6];
            aux[3] += bas[j+7];
+           } else {
+               aux[2] = aux[3] = "00";
+           }
 
            hex4line = aux[3] + aux[2] + aux[1] + aux[0];
 
@@ -80,7 +84,7 @@ void ihex2all::savehex4()
     QFile outfile(filenameOut);
     outfile.open(QIODevice::ReadWrite | QIODevice::Text);
     QTextStream stream(&outfile);
-
+  //  stream.setCodec("UTF-8");
     int size = HEXdata4.size();
 
     for (int i = 0; i < size; i++) {
