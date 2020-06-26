@@ -33,12 +33,13 @@ void ihex2all::readFile()
     QString hex4line;
     HEXdata4.clear();
 
-
+    int total_lines = 0;
     for (int i = 0; i < num_lines; i++) {
 
         end_line = lines[i].count()-2; //the last 2 characters are checksum
         ba = lines[i].toLocal8Bit();
         const char *bas = ba.data();
+
 
         for (int j = ind_start; j < end_line; j+=8) {
            aux[0] = aux[1] = aux[2] = aux[3] = "";
@@ -62,8 +63,14 @@ void ihex2all::readFile()
            HEXdata4 << hex4line;
            qDebug()<< hex4line;
 
+           total_lines++;
+
         }
+
     }
+
+    qDebug()<<"Total words: "<<total_lines;
+
 
 }
 
