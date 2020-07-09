@@ -40,6 +40,12 @@ void ihex2all::readFile()
         ba = lines[i].toLocal8Bit();
         const char *bas = ba.data();
 
+        // Check if the first line consist of an address offset, and filter it if affirmative
+        if (i == 0) {
+            if (bas[1] != '1' || bas[2] != '0') // Data always starts with ":10"
+                continue;
+        }
+
 
         for (int j = ind_start; j < end_line; j+=8) {
            aux[0] = aux[1] = aux[2] = aux[3] = "";
@@ -69,7 +75,7 @@ void ihex2all::readFile()
 
     }
 
-    qDebug()<<"Total words: "<<total_lines;
+    //qDebug()<<"Total words: "<<total_lines<< " writen to: " << ;
 
 
 }
@@ -99,4 +105,6 @@ void ihex2all::savehex4()
     }
 
     outfile.close();
+
+    qDebug()<<"Total words: "<<size<< " written to: " <<filenameOut ;
 }
