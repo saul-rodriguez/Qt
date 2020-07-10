@@ -67,7 +67,7 @@ void ihex2all::readFile()
            hex4line = aux[3] + aux[2] + aux[1] + aux[0];
 
            HEXdata4 << hex4line;
-           qDebug()<< hex4line;
+           //qDebug()<< hex4line;
 
            total_lines++;
 
@@ -106,5 +106,5 @@ void ihex2all::savehex4()
 
     outfile.close();
 
-    qDebug()<<"Total words: "<<size<< " written to: " <<filenameOut ;
+    qDebug()<< "ihex2all: "<< size<< " words written to: " <<filenameOut ;
 }
