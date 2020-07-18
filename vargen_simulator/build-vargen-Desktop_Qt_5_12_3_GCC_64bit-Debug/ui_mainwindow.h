@@ -13,11 +13,9 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
-#include <QtWidgets/QSplitter>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QWidget>
@@ -31,12 +29,12 @@ public:
     QAction *action_Go;
     QAction *action_Stop;
     QAction *action_Reset;
-    QAction *actionS_tep;
+    QAction *action_Clk_step;
+    QAction *action_Next_inst;
+    QAction *actionOpen_C_source;
+    QAction *actionOpen_Hex;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
-    QSplitter *splitter;
-    QListWidget *ProgramlistWidget;
-    QListWidget *ReglistWidget;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuRun;
@@ -56,24 +54,18 @@ public:
         action_Stop->setObjectName(QString::fromUtf8("action_Stop"));
         action_Reset = new QAction(MainWindow);
         action_Reset->setObjectName(QString::fromUtf8("action_Reset"));
-        actionS_tep = new QAction(MainWindow);
-        actionS_tep->setObjectName(QString::fromUtf8("actionS_tep"));
+        action_Clk_step = new QAction(MainWindow);
+        action_Clk_step->setObjectName(QString::fromUtf8("action_Clk_step"));
+        action_Next_inst = new QAction(MainWindow);
+        action_Next_inst->setObjectName(QString::fromUtf8("action_Next_inst"));
+        actionOpen_C_source = new QAction(MainWindow);
+        actionOpen_C_source->setObjectName(QString::fromUtf8("actionOpen_C_source"));
+        actionOpen_Hex = new QAction(MainWindow);
+        actionOpen_Hex->setObjectName(QString::fromUtf8("actionOpen_Hex"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
         horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        splitter = new QSplitter(centralwidget);
-        splitter->setObjectName(QString::fromUtf8("splitter"));
-        splitter->setOrientation(Qt::Horizontal);
-        ProgramlistWidget = new QListWidget(splitter);
-        ProgramlistWidget->setObjectName(QString::fromUtf8("ProgramlistWidget"));
-        splitter->addWidget(ProgramlistWidget);
-        ReglistWidget = new QListWidget(splitter);
-        ReglistWidget->setObjectName(QString::fromUtf8("ReglistWidget"));
-        splitter->addWidget(ReglistWidget);
-
-        horizontalLayout->addWidget(splitter);
-
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -93,14 +85,18 @@ public:
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuRun->menuAction());
         menuFile->addAction(actionOpen);
+        menuFile->addAction(actionOpen_C_source);
+        menuFile->addAction(actionOpen_Hex);
         menuRun->addAction(action_Go);
         menuRun->addAction(action_Stop);
         menuRun->addAction(action_Reset);
-        menuRun->addAction(actionS_tep);
+        menuRun->addAction(action_Clk_step);
+        menuRun->addAction(action_Next_inst);
         toolBar->addAction(action_Reset);
         toolBar->addAction(action_Go);
         toolBar->addAction(action_Stop);
-        toolBar->addAction(actionS_tep);
+        toolBar->addAction(action_Clk_step);
+        toolBar->addAction(action_Next_inst);
 
         retranslateUi(MainWindow);
 
@@ -110,7 +106,7 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", nullptr));
-        actionOpen->setText(QApplication::translate("MainWindow", "&Open", nullptr));
+        actionOpen->setText(QApplication::translate("MainWindow", "&Open Assembler", nullptr));
         action_Go->setText(QApplication::translate("MainWindow", "&Go", nullptr));
 #ifndef QT_NO_SHORTCUT
         action_Go->setShortcut(QApplication::translate("MainWindow", "F5", nullptr));
@@ -123,10 +119,10 @@ public:
 #ifndef QT_NO_SHORTCUT
         action_Reset->setShortcut(QApplication::translate("MainWindow", "F6", nullptr));
 #endif // QT_NO_SHORTCUT
-        actionS_tep->setText(QApplication::translate("MainWindow", "S&tep", nullptr));
-#ifndef QT_NO_SHORTCUT
-        actionS_tep->setShortcut(QApplication::translate("MainWindow", "F10", nullptr));
-#endif // QT_NO_SHORTCUT
+        action_Clk_step->setText(QApplication::translate("MainWindow", "&Clk step", nullptr));
+        action_Next_inst->setText(QApplication::translate("MainWindow", "&Next inst", nullptr));
+        actionOpen_C_source->setText(QApplication::translate("MainWindow", "Open &C source ", nullptr));
+        actionOpen_Hex->setText(QApplication::translate("MainWindow", "Open &Hex", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", nullptr));
         menuRun->setTitle(QApplication::translate("MainWindow", "&Run", nullptr));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", nullptr));

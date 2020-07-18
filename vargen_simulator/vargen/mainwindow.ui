@@ -14,17 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
-    <item>
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <widget class="QListWidget" name="ProgramlistWidget"/>
-      <widget class="QListWidget" name="ReglistWidget"/>
-     </widget>
-    </item>
-   </layout>
+   <layout class="QHBoxLayout" name="horizontalLayout"/>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -40,6 +30,8 @@
      <string>&amp;File</string>
     </property>
     <addaction name="actionOpen"/>
+    <addaction name="actionOpen_C_source"/>
+    <addaction name="actionOpen_Hex"/>
    </widget>
    <widget class="QMenu" name="menuRun">
     <property name="title">
@@ -48,7 +40,8 @@
     <addaction name="action_Go"/>
     <addaction name="action_Stop"/>
     <addaction name="action_Reset"/>
-    <addaction name="actionS_tep"/>
+    <addaction name="action_Clk_step"/>
+    <addaction name="action_Next_inst"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuRun"/>
@@ -67,11 +60,12 @@
    <addaction name="action_Reset"/>
    <addaction name="action_Go"/>
    <addaction name="action_Stop"/>
-   <addaction name="actionS_tep"/>
+   <addaction name="action_Clk_step"/>
+   <addaction name="action_Next_inst"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
-    <string>&amp;Open</string>
+    <string>&amp;Open Assembler</string>
    </property>
   </action>
   <action name="action_Go">
@@ -98,12 +92,24 @@
     <string>F6</string>
    </property>
   </action>
-  <action name="actionS_tep">
+  <action name="action_Clk_step">
    <property name="text">
-    <string>S&amp;tep</string>
+    <string>&amp;Clk step</string>
    </property>
-   <property name="shortcut">
-    <string>F10</string>
+  </action>
+  <action name="action_Next_inst">
+   <property name="text">
+    <string>&amp;Next inst</string>
+   </property>
+  </action>
+  <action name="actionOpen_C_source">
+   <property name="text">
+    <string>Open &amp;C source </string>
+   </property>
+  </action>
+  <action name="actionOpen_Hex">
+   <property name="text">
+    <string>Open &amp;Hex</string>
    </property>
   </action>
  </widget>

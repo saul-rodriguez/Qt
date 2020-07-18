@@ -17,12 +17,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     cinternalreg.cpp \
+    crom.cpp \
     cvargen.cpp \
     main.cpp \
     mainwindow.cpp
 
 HEADERS += \
     cinternalreg.h \
+    crom.h \
     cvargen.h \
     mainwindow.h
 

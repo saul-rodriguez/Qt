@@ -53,14 +53,16 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../vargen/cinternalreg.cpp \
+		../vargen/crom.cpp \
 		../vargen/cvargen.cpp \
 		../vargen/main.cpp \
 		../vargen/mainwindow.cpp moc_cvargen.cpp \
 		moc_mainwindow.cpp
-OBJECTS       = ../../../verilator/vargen/obj_dir/verilated.o \
-		../../../verilator/vargen/obj_dir/Vvargen__ALLcls.o \
-		../../../verilator/vargen/obj_dir/Vvargen__ALLsup.o \
+OBJECTS       = /home/saul/projects/verilator/vargen/obj_dir/verilated.o \
+		/home/saul/projects/verilator/vargen/obj_dir/Vvargen__ALLcls.o \
+		/home/saul/projects/verilator/vargen/obj_dir/Vvargen__ALLsup.o \
 		cinternalreg.o \
+		crom.o \
 		cvargen.o \
 		main.o \
 		mainwindow.o \
@@ -260,8 +262,10 @@ DIST          = /pkg/Qt/5.12.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/pkg/Qt/5.12.3/gcc_64/mkspecs/features/yacc.prf \
 		/pkg/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
 		../vargen/vargen.pro ../vargen/cinternalreg.h \
+		../vargen/crom.h \
 		../vargen/cvargen.h \
 		../vargen/mainwindow.h ../vargen/cinternalreg.cpp \
+		../vargen/crom.cpp \
 		../vargen/cvargen.cpp \
 		../vargen/main.cpp \
 		../vargen/mainwindow.cpp
@@ -686,8 +690,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /pkg/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../vargen/cinternalreg.h ../vargen/cvargen.h ../vargen/mainwindow.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../vargen/cinternalreg.cpp ../vargen/cvargen.cpp ../vargen/main.cpp ../vargen/mainwindow.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../vargen/cinternalreg.h ../vargen/crom.h ../vargen/cvargen.h ../vargen/mainwindow.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../vargen/cinternalreg.cpp ../vargen/crom.cpp ../vargen/cvargen.cpp ../vargen/main.cpp ../vargen/mainwindow.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../vargen/mainwindow.ui $(DISTDIR)/
 
 
@@ -784,8 +788,8 @@ moc_cvargen.cpp: ../vargen/cvargen.h \
 	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/vargen_simulator/build-vargen-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/vargen_simulator/vargen -I/home/saul/projects/verilator/vargen/obj_dir -I/usr/share/verilator/include -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../vargen/cvargen.h -o moc_cvargen.cpp
 
 moc_mainwindow.cpp: ../vargen/mainwindow.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QListWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
@@ -811,6 +815,10 @@ moc_mainwindow.cpp: ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qframe.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
@@ -888,8 +896,30 @@ moc_mainwindow.cpp: ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvector2d.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtouchdevice.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstyleoption.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvalidator.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qregularexpression.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qicon.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qslider.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractslider.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstyle.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabbar.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qrubberband.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		../vargen/cvargen.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
+		/usr/share/verilator/include/verilated.h \
+		/usr/share/verilator/include/verilated_config.h \
+		/usr/share/verilator/include/verilatedos.h \
+		../../../verilator/vargen/obj_dir/Vvargen.h \
+		../vargen/cinternalreg.h \
+		../vargen/crom.h \
 		moc_predefs.h \
 		/pkg/Qt/5.12.3/gcc_64/bin/moc
 	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/vargen_simulator/build-vargen-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/vargen_simulator/vargen -I/home/saul/projects/verilator/vargen/obj_dir -I/usr/share/verilator/include -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../vargen/mainwindow.h -o moc_mainwindow.cpp
@@ -968,6 +998,81 @@ cinternalreg.o: ../vargen/cinternalreg.cpp ../vargen/cinternalreg.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cinternalreg.o ../vargen/cinternalreg.cpp
 
+crom.o: ../vargen/crom.cpp ../vargen/crom.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qnamespace.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qconfig.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtcore-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsysinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlogging.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qflags.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmutex.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qnumeric.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstring.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qchar.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbytearray.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qrefcount.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qarraydata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringliteral.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiterator.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpair.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringlist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qregexp.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreevent.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		../../../verilator/vargen/obj_dir/Vvargen.h \
+		/usr/share/verilator/include/verilated.h \
+		/usr/share/verilator/include/verilated_config.h \
+		/usr/share/verilator/include/verilatedos.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QFile \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfile.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiodevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTextStream \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtextstream.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlocale.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvector.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpoint.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qset.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o crom.o ../vargen/crom.cpp
+
 cvargen.o: ../vargen/cvargen.cpp ../vargen/cvargen.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject.h \
@@ -1023,12 +1128,27 @@ cvargen.o: ../vargen/cvargen.cpp ../vargen/cvargen.h \
 		/usr/share/verilator/include/verilated_config.h \
 		/usr/share/verilator/include/verilatedos.h \
 		../../../verilator/vargen/obj_dir/Vvargen.h \
-		../vargen/cinternalreg.h
+		../vargen/cinternalreg.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QDebug \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdebug.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhash.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtextstream.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiodevice.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlocale.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvariant.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvector.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpoint.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qset.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cvargen.o ../vargen/cvargen.cpp
 
 main.o: ../vargen/main.cpp ../vargen/mainwindow.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QListWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
@@ -1054,6 +1174,10 @@ main.o: ../vargen/main.cpp ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qframe.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
@@ -1131,8 +1255,30 @@ main.o: ../vargen/main.cpp ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvector2d.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtouchdevice.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstyleoption.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvalidator.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qregularexpression.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qicon.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qslider.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractslider.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstyle.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabbar.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabwidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qrubberband.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		../vargen/cvargen.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
+		/usr/share/verilator/include/verilated.h \
+		/usr/share/verilator/include/verilated_config.h \
+		/usr/share/verilator/include/verilatedos.h \
+		../../../verilator/vargen/obj_dir/Vvargen.h \
+		../vargen/cinternalreg.h \
+		../vargen/crom.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QApplication \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qapplication.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1143,8 +1289,8 @@ main.o: ../vargen/main.cpp ../vargen/mainwindow.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../vargen/main.cpp
 
 mainwindow.o: ../vargen/mainwindow.cpp ../vargen/mainwindow.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QListWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtguiglobal.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
@@ -1170,6 +1316,10 @@ mainwindow.o: ../vargen/mainwindow.cpp ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtgui-config.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtwidgets-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qframe.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qwindowdefs.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
@@ -1247,31 +1397,6 @@ mainwindow.o: ../vargen/mainwindow.cpp ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfiledevice.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvector2d.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qtouchdevice.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabwidget.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QVariant \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QAction \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qaction.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qactiongroup.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QApplication \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qapplication.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreapplication.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qeventloop.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qguiapplication.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qinputmethod.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QHBoxLayout \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qboxlayout.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlayout.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgridlayout.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QListWidget \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistwidget.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlistview.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemview.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qframe.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qabstractitemmodel.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qitemselectionmodel.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
@@ -1279,22 +1404,35 @@ mainwindow.o: ../vargen/mainwindow.cpp ../vargen/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractspinbox.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qvalidator.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qregularexpression.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtGui/qicon.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qslider.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qabstractslider.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstyle.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabbar.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtabwidget.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qrubberband.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMenu \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmenu.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMenuBar \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmenubar.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QSplitter \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qsplitter.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QStatusBar \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qstatusbar.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QToolBar \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qtoolbar.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QWidget
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
+		../vargen/cvargen.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
+		/usr/share/verilator/include/verilated.h \
+		/usr/share/verilator/include/verilated_config.h \
+		/usr/share/verilator/include/verilatedos.h \
+		../../../verilator/vargen/obj_dir/Vvargen.h \
+		../vargen/cinternalreg.h \
+		../vargen/crom.h \
+		ui_mainwindow.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QDebug \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QDockWidget \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qdockwidget.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QFileDialog \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qfiledialog.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qdir.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qfileinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qdialog.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTimer \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtimer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../vargen/mainwindow.cpp
 
 moc_cvargen.o: moc_cvargen.cpp 

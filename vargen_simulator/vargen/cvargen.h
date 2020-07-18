@@ -7,6 +7,7 @@
 #include "Vvargen.h"
 #include "cinternalreg.h"
 
+// Size are words of 4 bytes
 #define RAM_SIZE 256
 #define ROM_SIZE 512
 
@@ -16,6 +17,8 @@ class CVargen : public QObject
 public:
     Vvargen *top;
     uint64_t time;
+
+    uint32_t ram_size;
 
     //picorv32
     CInternalReg reg[32];
@@ -37,6 +40,8 @@ public:
     void resetn();
     void advanceClk();
     void updateState();
+    uint32_t getRAMSize();
+    Vvargen* getPico();
 
 signals:
 

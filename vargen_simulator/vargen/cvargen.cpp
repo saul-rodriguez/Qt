@@ -39,6 +39,8 @@ CVargen::CVargen(QObject *parent) : QObject(parent)
              << "t5"
              << "t6";
 
+    ram_size = RAM_SIZE;
+
 }
 
 void CVargen::initVargen()
@@ -92,18 +94,32 @@ void CVargen::updateState()
         reg[i].update(top->vargen__DOT__cpu__DOT__cpuregs__DOT__regs[i]);
     }
 
+    if (top->vargen__DOT__cpu__DOT__cpuregs__DOT__regs[0] != 0) {
+        qDebug()<<"zero reg mismatch!";
+    }
     //ram memory
     for (int i = 0; i < RAM_SIZE; i++) {
         ram[i].update(top->vargen__DOT__memory__DOT__mem[i]);
     }
 
     //rom memory
+    /*
     for (int i = 0; i < ROM_SIZE; i++) {
         rom[i].update(top->vargen__DOT__pico_rom__DOT__mem[i]);
     }
-
+*/
     /* memory mapped ports */
 
-    porta.update(top->porta_out);
+    porta.update(top->porta_out);    
 
+}
+
+uint32_t CVargen::getRAMSize()
+{
+    return ram_size;
+}
+
+Vvargen *CVargen::getPico()
+{
+    return top;
 }
