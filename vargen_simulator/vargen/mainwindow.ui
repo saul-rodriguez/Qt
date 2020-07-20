@@ -42,6 +42,7 @@
     <addaction name="action_Reset"/>
     <addaction name="action_Clk_step"/>
     <addaction name="action_Next_inst"/>
+    <addaction name="action_Clear_Color_Markers"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuRun"/>
@@ -62,6 +63,7 @@
    <addaction name="action_Stop"/>
    <addaction name="action_Clk_step"/>
    <addaction name="action_Next_inst"/>
+   <addaction name="action_Clear_Color_Markers"/>
   </widget>
   <action name="actionOpen">
    <property name="text">
@@ -110,6 +112,14 @@
   <action name="actionOpen_Hex">
    <property name="text">
     <string>Open &amp;Hex</string>
+   </property>
+  </action>
+  <action name="action_Clear_Color_Markers">
+   <property name="text">
+    <string>&amp;Clear Color Markers</string>
+   </property>
+   <property name="toolTip">
+    <string>Clear Mrk.</string>
    </property>
   </action>
  </widget>

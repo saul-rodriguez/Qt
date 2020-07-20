@@ -100,6 +100,9 @@ void CVargen::updateState()
     //ram memory
     for (int i = 0; i < RAM_SIZE; i++) {
         ram[i].update(top->vargen__DOT__memory__DOT__mem[i]);
+        if (ram[i].flag) {
+            qDebug()<<"RAM changed: "<<i;
+        }
     }
 
     //rom memory

@@ -33,6 +33,7 @@ public:
     QAction *action_Next_inst;
     QAction *actionOpen_C_source;
     QAction *actionOpen_Hex;
+    QAction *action_Clear_Color_Markers;
     QWidget *centralwidget;
     QHBoxLayout *horizontalLayout;
     QMenuBar *menubar;
@@ -62,6 +63,8 @@ public:
         actionOpen_C_source->setObjectName(QString::fromUtf8("actionOpen_C_source"));
         actionOpen_Hex = new QAction(MainWindow);
         actionOpen_Hex->setObjectName(QString::fromUtf8("actionOpen_Hex"));
+        action_Clear_Color_Markers = new QAction(MainWindow);
+        action_Clear_Color_Markers->setObjectName(QString::fromUtf8("action_Clear_Color_Markers"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         horizontalLayout = new QHBoxLayout(centralwidget);
@@ -92,11 +95,13 @@ public:
         menuRun->addAction(action_Reset);
         menuRun->addAction(action_Clk_step);
         menuRun->addAction(action_Next_inst);
+        menuRun->addAction(action_Clear_Color_Markers);
         toolBar->addAction(action_Reset);
         toolBar->addAction(action_Go);
         toolBar->addAction(action_Stop);
         toolBar->addAction(action_Clk_step);
         toolBar->addAction(action_Next_inst);
+        toolBar->addAction(action_Clear_Color_Markers);
 
         retranslateUi(MainWindow);
 
@@ -123,6 +128,10 @@ public:
         action_Next_inst->setText(QApplication::translate("MainWindow", "&Next inst", nullptr));
         actionOpen_C_source->setText(QApplication::translate("MainWindow", "Open &C source ", nullptr));
         actionOpen_Hex->setText(QApplication::translate("MainWindow", "Open &Hex", nullptr));
+        action_Clear_Color_Markers->setText(QApplication::translate("MainWindow", "&Clear Color Markers", nullptr));
+#ifndef QT_NO_TOOLTIP
+        action_Clear_Color_Markers->setToolTip(QApplication::translate("MainWindow", "Clear Mrk.", nullptr));
+#endif // QT_NO_TOOLTIP
         menuFile->setTitle(QApplication::translate("MainWindow", "&File", nullptr));
         menuRun->setTitle(QApplication::translate("MainWindow", "&Run", nullptr));
         toolBar->setWindowTitle(QApplication::translate("MainWindow", "toolBar", nullptr));

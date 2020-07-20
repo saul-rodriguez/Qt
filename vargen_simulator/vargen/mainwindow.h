@@ -3,6 +3,7 @@
 
 #include <QListWidget>
 #include <QMainWindow>
+#include <QTableWidget>
 #include "cvargen.h"
 #include "crom.h"
 
@@ -21,12 +22,18 @@ public:
 public slots:
     void clkTimeout();
 
+    void openCfile(QString filename);
+    void openAsmFile(QString filename);
+    void openHexFile(QString filename);
+    void setArguments(int argc, char *argv[]);
+
+
 private slots:
     void on_action_Go_triggered();
 
     void on_action_Reset_triggered();
 
-    void on_actionS_tep_triggered();
+    //void on_actionS_tep_triggered();
 
     void on_actionOpen_triggered();
 
@@ -40,8 +47,11 @@ private slots:
 
     void on_actionOpen_Hex_triggered();
 
+    void on_action_Clear_Color_Markers_triggered();
+
 private:
     void updateCdebug();
+    void updateSim();
 
 private:
     Ui::MainWindow *ui;
@@ -54,16 +64,16 @@ private:
     QString currentFunctionName;
     uint32_t currentFunctionAddress;
 
-
     QListWidget *ReglistWidget;
     QListWidget *ProgramlistWidget;
     QListWidget *CProgramlistWidget;
+    QTableWidget *RamTableWidget;
 
     QTimer *clk;
 
     CRom ROM;
 
-    void updateSim();
+
 
 };
 #endif // MAINWINDOW_H

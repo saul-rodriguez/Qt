@@ -1070,7 +1070,8 @@ crom.o: ../vargen/crom.cpp ../vargen/crom.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontiguouscache.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qshareddata.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QDebug
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o crom.o ../vargen/crom.cpp
 
 cvargen.o: ../vargen/cvargen.cpp ../vargen/cvargen.h \
