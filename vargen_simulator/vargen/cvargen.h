@@ -40,6 +40,12 @@ public:
     void resetn();
     void advanceClk();
     void updateState();
+    void writePortB(uint32_t word);
+    void changeIRQ5(bool value);
+    void changeIRQ6(bool value);
+    void changeIRQ7(bool value);
+
+
     uint32_t getRAMSize();
     Vvargen* getPico();
 

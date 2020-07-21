@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QCheckBox>
 #include <QListWidget>
 #include <QMainWindow>
 #include <QTableWidget>
@@ -26,6 +27,9 @@ public slots:
     void openAsmFile(QString filename);
     void openHexFile(QString filename);
     void setArguments(int argc, char *argv[]);
+
+    void on_updatePortB();
+    void on_updateIRQs();
 
 
 private slots:
@@ -72,6 +76,12 @@ private:
     QTimer *clk;
 
     CRom ROM;
+
+    QLineEdit* portaLineEdit;
+    QLineEdit* portbLineEdit;
+    QCheckBox* irq5CheckBox;
+    QCheckBox* irq6CheckBox;
+    QCheckBox* irq7CheckBox;
 
 
 

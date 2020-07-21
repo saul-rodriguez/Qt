@@ -1,8 +1,13 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QCheckBox>
 #include <QDebug>
 #include <QDockWidget>
 #include <QFileDialog>
+#include <QFormLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QPushButton>
 #include <QTableWidget>
 #include <QTimer>
 
@@ -20,13 +25,21 @@ MainWindow::MainWindow(QWidget *parent)
     //***** Initialize vargen *****
     pico.initVargen();
 
+    //*************************************
     //***** Create dockable widgets *******
+    //*************************************
+
+    /* Registers and Assembly Code */
+
     QDockWidget *dock1 = new QDockWidget(tr("Registers"), this);
  //   dock1->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     ReglistWidget = new QListWidget(dock1);
 
     QDockWidget *dock2 = new QDockWidget(tr("Assembly"), this);
     ProgramlistWidget = new QListWidget(dock2);
+
+
+    /* RAM */
 
     QDockWidget *dock3 = new QDockWidget(tr("RAM"), this);
     RamTableWidget = new QTableWidget(dock3);
@@ -58,7 +71,62 @@ MainWindow::MainWindow(QWidget *parent)
         }
     }
 
+    /* I/O and Interrupts */
+
+    QDockWidget *dock4 = new QDockWidget(tr("I/O"), this);
+    QWidget* multiWidget = new QWidget();
+    QVBoxLayout* layoutMain = new QVBoxLayout();
+    QHBoxLayout *layout1 = new QHBoxLayout();
+    QHBoxLayout *layout2 = new QHBoxLayout();
+    QHBoxLayout *layout3 = new QHBoxLayout();
+    QHBoxLayout *layout4 = new QHBoxLayout();
+    QHBoxLayout *layout5 = new QHBoxLayout();
+
+    QPushButton* portbButton = new QPushButton(QLatin1String("Update"));
+    QLabel* labelPortA = new QLabel(QLatin1String("Port A:"));
+    QLabel* labelPortB = new QLabel(QLatin1String("Port B:"));
+    QLabel* labelIRQ1 = new QLabel(QLatin1String("IRQ5:"));
+    QLabel* labelIRQ2 = new QLabel(QLatin1String("IRQ6:"));
+    QLabel* labelIRQ3 = new QLabel(QLatin1String("IRQ7:"));
+    portaLineEdit = new QLineEdit;
+    portbLineEdit = new QLineEdit;
+    irq5CheckBox = new QCheckBox(QLatin1String("IRQ 5"));
+    irq6CheckBox = new QCheckBox(QLatin1String("IRQ 6"));
+    irq7CheckBox = new QCheckBox(QLatin1String("IRQ 7"));
+    QSpacerItem *spacer1 = new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Minimum);
+    QSpacerItem *spacer2 = new QSpacerItem(1,1,QSizePolicy::Expanding,QSizePolicy::Minimum);
+
+    layout1->addWidget(labelPortA);
+    layout1->addWidget(portaLineEdit);
+    layout1->addSpacerItem(spacer1);
+    //layout1->addWidget();
+
+    layout2->addWidget(labelPortB);
+    layout2->addWidget(portbLineEdit);
+    layout2->addWidget(portbButton);
+    layout2->addSpacerItem(spacer2);
+
+    //layout3->addWidget(labelIRQ1);
+    layout3->addWidget(irq5CheckBox);
+
+    //layout4->addWidget(labelIRQ2);
+    layout4->addWidget(irq6CheckBox);
+
+    //layout5->addWidget(labelIRQ3);
+    layout5->addWidget(irq7CheckBox);
+
+    layoutMain->addLayout(layout1);
+    layoutMain->addLayout(layout2);
+    layoutMain->addLayout(layout3);
+    layoutMain->addLayout(layout4);
+    layoutMain->addLayout(layout5);
+
+    multiWidget->setLayout(layoutMain);
+
+    /*retrieve initial data from verilator*/
     updateSim();
+
+    /*assign the dockwidgets and connect signals*/
 
     dock1->setWidget(ReglistWidget);
     addDockWidget(Qt::RightDockWidgetArea, dock1);
@@ -67,12 +135,19 @@ MainWindow::MainWindow(QWidget *parent)
     addDockWidget(Qt::LeftDockWidgetArea, dock2);
 
     dock3->setWidget(RamTableWidget);
-    addDockWidget((Qt::BottomDockWidgetArea),dock3);
+    addDockWidget(Qt::BottomDockWidgetArea,dock3);
+
+    dock4->setWidget(multiWidget);
+    addDockWidget(Qt::BottomDockWidgetArea,dock4);
+
+    connect(portbButton,SIGNAL(clicked()),this,SLOT(on_updatePortB()));
+    connect(irq5CheckBox,SIGNAL(stateChanged(int)),this,SLOT(on_updateIRQs()));
+    connect(irq6CheckBox,SIGNAL(stateChanged(int)),this,SLOT(on_updateIRQs()));
+    connect(irq7CheckBox,SIGNAL(stateChanged(int)),this,SLOT(on_updateIRQs()));
 
     //****** Create a timer ******
     clk = new QTimer(this);
     connect(clk,SIGNAL(timeout()),this,SLOT(clkTimeout()));
-
 }
 
 MainWindow::~MainWindow()
@@ -170,6 +245,31 @@ void MainWindow::setArguments(int argc, char *argv[])
         }
 
     }
+}
+
+void MainWindow::on_updatePortB()
+{
+    qDebug()<<"portB update clicked";
+    QString aux = portbLineEdit->text();
+    bool ok;
+    uint32_t val = aux.toUInt(&ok,16);
+
+    if (ok == true) {
+        pico.writePortB(val);
+    } else {
+        qDebug()<<"invalid value";
+       // qMessageBox aux()
+    }
+}
+
+void MainWindow::on_updateIRQs()
+{
+    qDebug()<<"IRQ called";
+
+    pico.changeIRQ5(irq5CheckBox->isChecked());
+    pico.changeIRQ6(irq6CheckBox->isChecked());
+    pico.changeIRQ7(irq7CheckBox->isChecked());
+
 }
 
 void MainWindow::on_action_Go_triggered()
@@ -280,6 +380,13 @@ void MainWindow::updateSim()
             index++;
         }
     }
+
+    // ****** Update ports *******
+    uint32_t porta_val = pico.porta.current;
+
+    QString porta_S = QString::number(porta_val,16).rightJustified(8,'0');
+    portaLineEdit->setText(porta_S);
+
 }
 
 void MainWindow::on_actionOpen_triggered()

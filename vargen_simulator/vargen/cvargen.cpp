@@ -117,6 +117,41 @@ void CVargen::updateState()
 
 }
 
+void CVargen::writePortB(uint32_t word)
+{
+    uint8_t aux;
+    aux = (uint8_t)word;
+
+    top->portb_in = aux;
+
+}
+
+void CVargen::changeIRQ5(bool value)
+{
+    uint8_t aux;
+    aux = value;
+
+    top->irq_5 = aux;
+
+}
+
+void CVargen::changeIRQ6(bool value)
+{
+    uint8_t aux;
+    aux = value;
+
+    top->irq_6 = aux;
+
+}
+
+void CVargen::changeIRQ7(bool value)
+{
+    uint8_t aux;
+    aux = value;
+
+    top->irq_7 = aux;
+}
+
 uint32_t CVargen::getRAMSize()
 {
     return ram_size;
