@@ -237,6 +237,12 @@ void MainWindow::setArguments(int argc, char *argv[])
         openAsmFile(asm_file);
         openCfile(C_file);
 
+    } else if (argc == 3) {
+        QString hex_file = QString::fromUtf8(argv[1]);
+        QString asm_file = QString::fromUtf8(argv[2]);
+        openHexFile(hex_file);
+        openAsmFile(asm_file);
+
     } else if (argc == 2) {
         QString aux = QString::fromUtf8(argv[1]);
         if (aux == "--help") {
