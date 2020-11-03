@@ -546,6 +546,7 @@
    <addaction name="action_Clean"/>
    <addaction name="action_Delete_sweep"/>
    <addaction name="separator"/>
+   <addaction name="actionAM"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Run">
@@ -607,6 +608,17 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionAM">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>AM</string>
+   </property>
+   <property name="toolTip">
+    <string>AM</string>
    </property>
   </action>
  </widget>

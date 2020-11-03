@@ -85,6 +85,9 @@ private:
     QTimer *m_timerDelay;
     int m_measDelaytime;
 
+    //Automatic Mode
+    bool m_am;
+
 
 private slots:
     void BTgetDevice(QString name);
@@ -137,6 +140,7 @@ private slots:
     void on_comboBoxPA_config_currentIndexChanged(const QString &arg1);
     void on_pushButtonPA_Config_clicked();
     void on_actionRun_Timer_triggered();
+    void on_actionAM_toggled(bool arg1);
 };
 
 #endif // MAINWINDOW_H

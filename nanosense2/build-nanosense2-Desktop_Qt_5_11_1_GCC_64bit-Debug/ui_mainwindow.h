@@ -46,6 +46,7 @@ public:
     QAction *action_Delete_sweep;
     QAction *action0V90;
     QAction *actionRun_Timer;
+    QAction *actionAM;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -175,6 +176,9 @@ public:
         action0V90->setObjectName(QStringLiteral("action0V90"));
         actionRun_Timer = new QAction(MainWindow);
         actionRun_Timer->setObjectName(QStringLiteral("actionRun_Timer"));
+        actionAM = new QAction(MainWindow);
+        actionAM->setObjectName(QStringLiteral("actionAM"));
+        actionAM->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -714,6 +718,7 @@ public:
         mainToolBar->addAction(action_Clean);
         mainToolBar->addAction(action_Delete_sweep);
         mainToolBar->addSeparator();
+        mainToolBar->addAction(actionAM);
 
         retranslateUi(MainWindow);
 
@@ -747,6 +752,10 @@ public:
 #ifndef QT_NO_SHORTCUT
         actionRun_Timer->setShortcut(QApplication::translate("MainWindow", "Ctrl+T", nullptr));
 #endif // QT_NO_SHORTCUT
+        actionAM->setText(QApplication::translate("MainWindow", "AM", nullptr));
+#ifndef QT_NO_TOOLTIP
+        actionAM->setToolTip(QApplication::translate("MainWindow", "AM", nullptr));
+#endif // QT_NO_TOOLTIP
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));

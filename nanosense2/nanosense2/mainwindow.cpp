@@ -160,6 +160,9 @@ MainWindow::MainWindow(QWidget *parent) :
     m_timerDelay = new QTimer(this);
     m_timerDelay->setSingleShot(true);
     connect(m_timerDelay, SIGNAL(timeout()), this, SLOT(MeasurementDelayedTimeout()));
+
+    //Automatic Mode
+    m_am = 0;
 }
 
 MainWindow::~MainWindow()
@@ -415,7 +418,10 @@ void MainWindow::MeasurementTimeout()
     ui->tableViewMag->selectRow(m_currentMeasurement);
     ui->tableViewPha->selectRow(m_currentMeasurement);
 
-
+    //Repeat measurement if automode is active
+    if(m_am) {
+        on_action_Run_triggered();
+    }
 }
 
 void MainWindow::parseRxSweepData()
@@ -1362,4 +1368,14 @@ void MainWindow::on_pushButtonPA_Config_clicked()
 void MainWindow::on_actionRun_Timer_triggered()
 {
     m_timerDelay->start(1000);
+}
+
+void MainWindow::on_actionAM_toggled(bool arg1)
+{
+    if (arg1) {
+        m_am = true;
+    } else {
+        m_am = false;
+    }
+
 }
