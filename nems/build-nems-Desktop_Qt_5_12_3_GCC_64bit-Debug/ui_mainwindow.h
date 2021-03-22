@@ -43,10 +43,6 @@ public:
     QAction *action_Run;
     QAction *action_Save;
     QAction *action_Clean;
-    QAction *action_Delete_sweep;
-    QAction *action0V90;
-    QAction *actionRun_Timer;
-    QAction *actionAM;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -167,18 +163,6 @@ public:
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/images/images/Clean-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_Clean->setIcon(icon2);
-        action_Delete_sweep = new QAction(MainWindow);
-        action_Delete_sweep->setObjectName(QString::fromUtf8("action_Delete_sweep"));
-        QIcon icon3;
-        icon3.addFile(QString::fromUtf8(":/images/images/Delete-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        action_Delete_sweep->setIcon(icon3);
-        action0V90 = new QAction(MainWindow);
-        action0V90->setObjectName(QString::fromUtf8("action0V90"));
-        actionRun_Timer = new QAction(MainWindow);
-        actionRun_Timer->setObjectName(QString::fromUtf8("actionRun_Timer"));
-        actionAM = new QAction(MainWindow);
-        actionAM->setObjectName(QString::fromUtf8("actionAM"));
-        actionAM->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -711,14 +695,10 @@ public:
         menu_Measurement->addAction(action_Run);
         menu_Measurement->addAction(action_Save);
         menu_Measurement->addAction(action_Clean);
-        menu_Measurement->addAction(action_Delete_sweep);
-        menu_Measurement->addAction(actionRun_Timer);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Clean);
-        mainToolBar->addAction(action_Delete_sweep);
         mainToolBar->addSeparator();
-        mainToolBar->addAction(actionAM);
 
         retranslateUi(MainWindow);
 
@@ -730,7 +710,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Nanonets2Sense", nullptr));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "NMES V0.1", nullptr));
         action_Run->setText(QApplication::translate("MainWindow", "&Run", nullptr));
 #ifndef QT_NO_SHORTCUT
         action_Run->setShortcut(QApplication::translate("MainWindow", "Ctrl+R", nullptr));
@@ -743,19 +723,6 @@ public:
 #ifndef QT_NO_SHORTCUT
         action_Clean->setShortcut(QApplication::translate("MainWindow", "Ctrl+C", nullptr));
 #endif // QT_NO_SHORTCUT
-        action_Delete_sweep->setText(QApplication::translate("MainWindow", "&Delete sweep", nullptr));
-#ifndef QT_NO_SHORTCUT
-        action_Delete_sweep->setShortcut(QApplication::translate("MainWindow", "Del", nullptr));
-#endif // QT_NO_SHORTCUT
-        action0V90->setText(QApplication::translate("MainWindow", "0V90", nullptr));
-        actionRun_Timer->setText(QApplication::translate("MainWindow", "Run &Timer", nullptr));
-#ifndef QT_NO_SHORTCUT
-        actionRun_Timer->setShortcut(QApplication::translate("MainWindow", "Ctrl+T", nullptr));
-#endif // QT_NO_SHORTCUT
-        actionAM->setText(QApplication::translate("MainWindow", "AM", nullptr));
-#ifndef QT_NO_TOOLTIP
-        actionAM->setToolTip(QApplication::translate("MainWindow", "AM", nullptr));
-#endif // QT_NO_TOOLTIP
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
