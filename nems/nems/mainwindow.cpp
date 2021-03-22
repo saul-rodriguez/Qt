@@ -50,12 +50,12 @@ MainWindow::MainWindow(QWidget *parent) :
     //Plot
     // plot Magnitude
     m_chartMag = new CPlotChart();
-    m_chartMag->setType(LOGLOG);
-    m_chartMag->setTitles("","Frequency","Magnitude");
+    m_chartMag->setType(NORMAL);
+    m_chartMag->setTitles("","Time","Sensor 1");
   //  m_chart->setXMinXax(0,m_MaxDataPlot);
   //  m_chart->setYMinXax(0,1024);
-    m_chartMag->setXMinXax(900.0,1.1e6);
-    m_chartMag->setYMinXax(10,1e6);
+    m_chartMag->setXMinXax(0,1000);
+    m_chartMag->setYMinXax(0,1024);
     m_chartMag->initializePlot();
     m_chartViewMag = new QChartView(static_cast<QChart*>(m_chartMag));
     //Set antialising properties and the chartview object to a place in layout
@@ -64,10 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //plot Phase
     m_chartPha = new CPlotChart();
-    m_chartPha->setType(SEMILOGX);
-    m_chartPha->setTitles("","Frequency","Phase");
-    m_chartPha->setXMinXax(900,1.1e6);
-    m_chartPha->setYMinXax(0,100);
+    m_chartPha->setType(NORMAL);
+    m_chartPha->setTitles("","Time","Sensor 2");
+    m_chartPha->setXMinXax(0,1000);
+    m_chartPha->setYMinXax(0,1024);
     m_chartPha->initializePlot();
     m_chartViewPha = new QChartView(static_cast<QChart*>(m_chartPha));
     //Set antialising properties and the chartview object to a place in layout
@@ -93,67 +93,6 @@ MainWindow::MainWindow(QWidget *parent) :
     //Tables
     //setUpTables();
 
-    //Properties
-    ui->comboBoxTagSelect->addItem("default");
-    QString aux = "Measurement Tag: " + ui->comboBoxTagSelect->currentText();
-    ui->statusBar->showMessage(aux);
-    //ui->comboBoxTagSelect->set
-
-    //Reader config
-    ui->comboBoxPA_config->addItem("CS");
-    ui->comboBoxPA_config->addItem("0V90");
-    ui->comboBoxPA_config->addItem("0V95");
-    ui->comboBoxPA_config->addItem("1V00");
-    ui->comboBoxPA_config->addItem("1V05");
-    ui->comboBoxPA_config->addItem("1V10");
-    ui->comboBoxPA_config->addItem("1V15");
-    ui->comboBoxPA_config->addItem("1V20");
-    ui->comboBoxPA_config->addItem("1V25");
-    ui->comboBoxPA_config->addItem("1V30");
-    ui->comboBoxPA_config->addItem("1V35");
-    ui->comboBoxPA_config->addItem("1V40");
-    ui->comboBoxPA_config->addItem("1V45");
-    ui->comboBoxPA_config->addItem("1V50");
-    ui->comboBoxPA_config->addItem("1V55");
-    ui->comboBoxPA_config->addItem("1V60");
-    ui->comboBoxPA_config->addItem("1V65");
-    ui->comboBoxPA_config->addItem("1V70");
-    ui->comboBoxPA_config->addItem("1V75");
-    ui->comboBoxPA_config->addItem("1V80");
-    ui->comboBoxPA_config->addItem("1V85");
-    ui->comboBoxPA_config->addItem("1V90");
-    ui->comboBoxPA_config->addItem("1V95");
-    ui->comboBoxPA_config->addItem("2V00");
-    ui->comboBoxPA_config->addItem("2V05");
-    ui->comboBoxPA_config->addItem("2V10");
-    ui->comboBoxPA_config->addItem("2V15");
-    ui->comboBoxPA_config->addItem("2V20");
-    ui->comboBoxPA_config->addItem("2V25");
-    ui->comboBoxPA_config->addItem("2V30");
-    ui->comboBoxPA_config->addItem("2V35");
-    ui->comboBoxPA_config->addItem("2V40");
-    ui->comboBoxPA_config->addItem("2V45");
-    ui->comboBoxPA_config->addItem("2V50");
-    ui->comboBoxPA_config->addItem("2V55");
-    ui->comboBoxPA_config->addItem("2V60");
-    ui->comboBoxPA_config->addItem("2V65");
-    ui->comboBoxPA_config->addItem("2V70");
-    ui->comboBoxPA_config->addItem("2V75");
-    ui->comboBoxPA_config->addItem("2V80");
-    ui->comboBoxPA_config->addItem("2V85");
-    ui->comboBoxPA_config->addItem("2V90");
-    ui->comboBoxPA_config->addItem("2V95");
-    ui->comboBoxPA_config->addItem("3V00");
-    ui->comboBoxPA_config->addItem("3V05");
-    ui->comboBoxPA_config->addItem("3V10");
-    ui->comboBoxPA_config->addItem("3V15");
-    ui->comboBoxPA_config->addItem("3V20");
-    ui->comboBoxPA_config->addItem("3V25");
-    ui->comboBoxPA_config->addItem("3V30");
-    ui->comboBoxPA_config->addItem("3V35");
-    ui->comboBoxPA_config->addItem("3V40");
-    ui->comboBoxPA_config->addItem("3V45");
-    ui->comboBoxPA_config->addItem("3V50");
 
     //Measurement with time delay
     //m_measDelaytime = 0;
@@ -335,7 +274,7 @@ void MainWindow::PlotTimeout()
 
     //Uncomment the next line in order to update the plot with all the new data at once
     //head = m_DataCounter;
-
+/*
     if (ui->checkBoxConfigSmoothPlot->isChecked()) { //Only add M_PlotNumUpdate samples to the plot
         head = m_PlotCounter + m_PlotNumUpdate;
         if (head > m_DataCounter) {
@@ -344,7 +283,7 @@ void MainWindow::PlotTimeout()
     } else {    //Add all new samples to the plot
         head = m_DataCounter;
     }
-
+*/
     for (int i = m_PlotCounter; i < head; i++) {
         plot_index = m_PlotCounter%m_MaxDataPlot; //create a index between 0 - m_MaxDataPot
         if (plot_index == 0) {  //clear the plot trace

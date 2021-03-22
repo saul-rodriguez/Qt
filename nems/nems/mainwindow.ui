@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -165,159 +165,7 @@
               <property name="title">
                <string>Plot Properties</string>
               </property>
-              <layout class="QGridLayout" name="gridLayout_9">
-               <item row="0" column="0">
-                <widget class="QCheckBox" name="checkBoxConfigSmoothPlot">
-                 <property name="text">
-                  <string>Smooth Plot</string>
-                 </property>
-                </widget>
-               </item>
-               <item row="1" column="0">
-                <widget class="QCheckBox" name="checkBoxConfigAntialias">
-                 <property name="text">
-                  <string>Antialias filtering</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_2">
-              <property name="title">
-               <string>Measurement Properties</string>
-              </property>
-              <layout class="QGridLayout" name="gridLayout_10">
-               <item row="9" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_9">
-                 <item>
-                  <widget class="QLabel" name="label_11">
-                   <property name="text">
-                    <string>Additional Data 2:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditAdditionalData2"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="3" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_10">
-                 <item>
-                  <widget class="QLabel" name="label_9">
-                   <property name="text">
-                    <string>Additional Data 1:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditAdditionalData1"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="1" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_8">
-                 <item>
-                  <widget class="QLabel" name="label_8">
-                   <property name="text">
-                    <string>Selected Tag</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBoxTagSelect"/>
-                 </item>
-                </layout>
-               </item>
-               <item row="0" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_6">
-                 <item>
-                  <widget class="QLabel" name="label_7">
-                   <property name="text">
-                    <string>New Tag name:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditTagName"/>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_12">
-                   <property name="text">
-                    <string>Serial Number:</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLineEdit" name="lineEditSerialNumber"/>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonAddTag">
-                   <property name="text">
-                    <string>Add Tag</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-               <item row="2" column="0">
-                <layout class="QHBoxLayout" name="horizontalLayout_7">
-                 <item>
-                  <widget class="QPushButton" name="pushButtonSaveTag">
-                   <property name="text">
-                    <string>Save List</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonLoadTag">
-                   <property name="text">
-                    <string>Load List</string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
-             </widget>
-            </item>
-            <item>
-             <widget class="QGroupBox" name="groupBox_3">
-              <property name="title">
-               <string>Reader Configuration</string>
-              </property>
-              <layout class="QFormLayout" name="formLayout">
-               <item row="1" column="1">
-                <layout class="QHBoxLayout" name="horizontalLayout_11">
-                 <item>
-                  <widget class="QLabel" name="label_10">
-                   <property name="text">
-                    <string>VDD PA</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QComboBox" name="comboBoxPA_config"/>
-                 </item>
-                 <item>
-                  <widget class="QPushButton" name="pushButtonPA_Config">
-                   <property name="text">
-                    <string>Config PA</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item>
-                  <widget class="QLabel" name="label_PA_Config">
-                   <property name="text">
-                    <string>Answer: </string>
-                   </property>
-                  </widget>
-                 </item>
-                </layout>
-               </item>
-              </layout>
+              <layout class="QGridLayout" name="gridLayout_9"/>
              </widget>
             </item>
             <item>
@@ -587,15 +435,6 @@
   <tabstop>pushButtonBTdiscoverDevices</tabstop>
   <tabstop>comboBoxBTdevices</tabstop>
   <tabstop>pushButtonBTconnect</tabstop>
-  <tabstop>lineEditAdditionalData1</tabstop>
-  <tabstop>lineEditAdditionalData2</tabstop>
-  <tabstop>comboBoxPA_config</tabstop>
-  <tabstop>pushButtonPA_Config</tabstop>
-  <tabstop>lineEditTagName</tabstop>
-  <tabstop>pushButtonAddTag</tabstop>
-  <tabstop>pushButtonLoadTag</tabstop>
-  <tabstop>comboBoxTagSelect</tabstop>
-  <tabstop>pushButtonSaveTag</tabstop>
   <tabstop>lineEditAT</tabstop>
   <tabstop>pushButtonATSend</tabstop>
   <tabstop>checkBoxGainCalibration</tabstop>
@@ -611,12 +450,10 @@
   <tabstop>tableViewPha</tabstop>
   <tabstop>tableViewPhaStat</tabstop>
   <tabstop>pushButtonWiFiDisconnect</tabstop>
-  <tabstop>checkBoxConfigSmoothPlot</tabstop>
   <tabstop>radioButtonWiFi</tabstop>
   <tabstop>lineEditWiFiAddress</tabstop>
   <tabstop>tabWidget</tabstop>
   <tabstop>plainTextEditAT</tabstop>
-  <tabstop>checkBoxConfigAntialias</tabstop>
   <tabstop>pushButtonWiFiConnect</tabstop>
  </tabstops>
  <resources>
