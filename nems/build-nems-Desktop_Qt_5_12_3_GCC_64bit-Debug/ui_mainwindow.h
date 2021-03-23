@@ -12,12 +12,10 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
-#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -29,7 +27,6 @@
 #include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
-#include <QtWidgets/QTableView>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -68,10 +65,48 @@ public:
     QPushButton *pushButtonWiFiDisconnect;
     QPushButton *pushButtonBTdisconnect;
     QWidget *tab_3;
-    QGridLayout *gridLayout_7;
+    QWidget *widget;
     QVBoxLayout *verticalLayout_4;
-    QGroupBox *groupBox;
-    QGridLayout *gridLayout_9;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_2;
+    QLineEdit *lineEditAmplitude;
+    QPushButton *pushButtonAmplitude;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_3;
+    QLineEdit *lineEditFrequency;
+    QPushButton *pushButtonFrequency;
+    QHBoxLayout *horizontalLayout_7;
+    QLabel *label_4;
+    QLineEdit *lineEditPhase;
+    QPushButton *pushButtonPhase;
+    QHBoxLayout *horizontalLayout_9;
+    QLabel *label_5;
+    QLineEdit *lineEditSymetry;
+    QPushButton *pushButtonSymetry;
+    QHBoxLayout *horizontalLayout_10;
+    QLabel *label_6;
+    QLineEdit *lineEditON;
+    QPushButton *pushButtonOnTime;
+    QHBoxLayout *horizontalLayout_11;
+    QLabel *label_7;
+    QLineEdit *lineEditOFF;
+    QPushButton *pushButtonOFF;
+    QHBoxLayout *horizontalLayout_12;
+    QLabel *label_8;
+    QLineEdit *lineEditRampUp;
+    QPushButton *pushButtonRampUp;
+    QHBoxLayout *horizontalLayout_13;
+    QLabel *label_9;
+    QLineEdit *lineEditRampDown;
+    QPushButton *pushButtonRampDown;
+    QHBoxLayout *horizontalLayout_14;
+    QLabel *label_10;
+    QLineEdit *lineEditContractions;
+    QPushButton *pushButtonContractions;
+    QHBoxLayout *horizontalLayout_15;
+    QLabel *label_11;
+    QLineEdit *lineEditChannel1;
+    QPushButton *pushButtonChannel1;
     QSpacerItem *verticalSpacer;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
@@ -84,30 +119,6 @@ public:
     QGridLayout *gridLayout_6;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
-    QWidget *tab_4;
-    QGridLayout *gridLayout_11;
-    QVBoxLayout *verticalLayout_6;
-    QLabel *label_2;
-    QTableView *tableViewMag;
-    QLabel *label_3;
-    QTableView *tableViewMagStat;
-    QWidget *tab_5;
-    QGridLayout *gridLayout_12;
-    QVBoxLayout *verticalLayout_7;
-    QLabel *label_4;
-    QTableView *tableViewPha;
-    QLabel *label_5;
-    QTableView *tableViewPhaStat;
-    QWidget *tab_6;
-    QGridLayout *gridLayout_8;
-    QTableView *tableViewCalibration;
-    QVBoxLayout *verticalLayout_5;
-    QCheckBox *checkBoxGainCalibration;
-    QLabel *label_6;
-    QHBoxLayout *horizontalLayout_5;
-    QPushButton *pushButtonGenerateCalibration;
-    QPushButton *pushButtonOpenCalFile;
-    QPushButton *pushButtonSaveCalFile;
     QMenuBar *menuBar;
     QMenu *menu_Measurement;
     QToolBar *mainToolBar;
@@ -261,28 +272,246 @@ public:
         tabWidget->addTab(Connect, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
-        gridLayout_7 = new QGridLayout(tab_3);
-        gridLayout_7->setSpacing(6);
-        gridLayout_7->setContentsMargins(11, 11, 11, 11);
-        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
-        verticalLayout_4 = new QVBoxLayout();
+        widget = new QWidget(tab_3);
+        widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setGeometry(QRect(10, 10, 455, 411));
+        verticalLayout_4 = new QVBoxLayout(widget);
         verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
         verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        groupBox = new QGroupBox(tab_3);
-        groupBox->setObjectName(QString::fromUtf8("groupBox"));
-        gridLayout_9 = new QGridLayout(groupBox);
-        gridLayout_9->setSpacing(6);
-        gridLayout_9->setContentsMargins(11, 11, 11, 11);
-        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
+        label_2 = new QLabel(widget);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
 
-        verticalLayout_4->addWidget(groupBox);
+        horizontalLayout_5->addWidget(label_2);
+
+        lineEditAmplitude = new QLineEdit(widget);
+        lineEditAmplitude->setObjectName(QString::fromUtf8("lineEditAmplitude"));
+        sizePolicy1.setHeightForWidth(lineEditAmplitude->sizePolicy().hasHeightForWidth());
+        lineEditAmplitude->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_5->addWidget(lineEditAmplitude);
+
+        pushButtonAmplitude = new QPushButton(widget);
+        pushButtonAmplitude->setObjectName(QString::fromUtf8("pushButtonAmplitude"));
+
+        horizontalLayout_5->addWidget(pushButtonAmplitude);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_5);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
+        label_3 = new QLabel(widget);
+        label_3->setObjectName(QString::fromUtf8("label_3"));
+
+        horizontalLayout_6->addWidget(label_3);
+
+        lineEditFrequency = new QLineEdit(widget);
+        lineEditFrequency->setObjectName(QString::fromUtf8("lineEditFrequency"));
+        sizePolicy1.setHeightForWidth(lineEditFrequency->sizePolicy().hasHeightForWidth());
+        lineEditFrequency->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_6->addWidget(lineEditFrequency);
+
+        pushButtonFrequency = new QPushButton(widget);
+        pushButtonFrequency->setObjectName(QString::fromUtf8("pushButtonFrequency"));
+
+        horizontalLayout_6->addWidget(pushButtonFrequency);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_6);
+
+        horizontalLayout_7 = new QHBoxLayout();
+        horizontalLayout_7->setSpacing(6);
+        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
+        label_4 = new QLabel(widget);
+        label_4->setObjectName(QString::fromUtf8("label_4"));
+
+        horizontalLayout_7->addWidget(label_4);
+
+        lineEditPhase = new QLineEdit(widget);
+        lineEditPhase->setObjectName(QString::fromUtf8("lineEditPhase"));
+        sizePolicy1.setHeightForWidth(lineEditPhase->sizePolicy().hasHeightForWidth());
+        lineEditPhase->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_7->addWidget(lineEditPhase);
+
+        pushButtonPhase = new QPushButton(widget);
+        pushButtonPhase->setObjectName(QString::fromUtf8("pushButtonPhase"));
+
+        horizontalLayout_7->addWidget(pushButtonPhase);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_7);
+
+        horizontalLayout_9 = new QHBoxLayout();
+        horizontalLayout_9->setSpacing(6);
+        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
+        label_5 = new QLabel(widget);
+        label_5->setObjectName(QString::fromUtf8("label_5"));
+
+        horizontalLayout_9->addWidget(label_5);
+
+        lineEditSymetry = new QLineEdit(widget);
+        lineEditSymetry->setObjectName(QString::fromUtf8("lineEditSymetry"));
+        sizePolicy1.setHeightForWidth(lineEditSymetry->sizePolicy().hasHeightForWidth());
+        lineEditSymetry->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_9->addWidget(lineEditSymetry);
+
+        pushButtonSymetry = new QPushButton(widget);
+        pushButtonSymetry->setObjectName(QString::fromUtf8("pushButtonSymetry"));
+
+        horizontalLayout_9->addWidget(pushButtonSymetry);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_9);
+
+        horizontalLayout_10 = new QHBoxLayout();
+        horizontalLayout_10->setSpacing(6);
+        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
+        label_6 = new QLabel(widget);
+        label_6->setObjectName(QString::fromUtf8("label_6"));
+
+        horizontalLayout_10->addWidget(label_6);
+
+        lineEditON = new QLineEdit(widget);
+        lineEditON->setObjectName(QString::fromUtf8("lineEditON"));
+        sizePolicy1.setHeightForWidth(lineEditON->sizePolicy().hasHeightForWidth());
+        lineEditON->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_10->addWidget(lineEditON);
+
+        pushButtonOnTime = new QPushButton(widget);
+        pushButtonOnTime->setObjectName(QString::fromUtf8("pushButtonOnTime"));
+
+        horizontalLayout_10->addWidget(pushButtonOnTime);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_10);
+
+        horizontalLayout_11 = new QHBoxLayout();
+        horizontalLayout_11->setSpacing(6);
+        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
+        label_7 = new QLabel(widget);
+        label_7->setObjectName(QString::fromUtf8("label_7"));
+
+        horizontalLayout_11->addWidget(label_7);
+
+        lineEditOFF = new QLineEdit(widget);
+        lineEditOFF->setObjectName(QString::fromUtf8("lineEditOFF"));
+        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(lineEditOFF->sizePolicy().hasHeightForWidth());
+        lineEditOFF->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_11->addWidget(lineEditOFF);
+
+        pushButtonOFF = new QPushButton(widget);
+        pushButtonOFF->setObjectName(QString::fromUtf8("pushButtonOFF"));
+
+        horizontalLayout_11->addWidget(pushButtonOFF);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_11);
+
+        horizontalLayout_12 = new QHBoxLayout();
+        horizontalLayout_12->setSpacing(6);
+        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
+        label_8 = new QLabel(widget);
+        label_8->setObjectName(QString::fromUtf8("label_8"));
+
+        horizontalLayout_12->addWidget(label_8);
+
+        lineEditRampUp = new QLineEdit(widget);
+        lineEditRampUp->setObjectName(QString::fromUtf8("lineEditRampUp"));
+        sizePolicy2.setHeightForWidth(lineEditRampUp->sizePolicy().hasHeightForWidth());
+        lineEditRampUp->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_12->addWidget(lineEditRampUp);
+
+        pushButtonRampUp = new QPushButton(widget);
+        pushButtonRampUp->setObjectName(QString::fromUtf8("pushButtonRampUp"));
+
+        horizontalLayout_12->addWidget(pushButtonRampUp);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_12);
+
+        horizontalLayout_13 = new QHBoxLayout();
+        horizontalLayout_13->setSpacing(6);
+        horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
+        label_9 = new QLabel(widget);
+        label_9->setObjectName(QString::fromUtf8("label_9"));
+
+        horizontalLayout_13->addWidget(label_9);
+
+        lineEditRampDown = new QLineEdit(widget);
+        lineEditRampDown->setObjectName(QString::fromUtf8("lineEditRampDown"));
+
+        horizontalLayout_13->addWidget(lineEditRampDown);
+
+        pushButtonRampDown = new QPushButton(widget);
+        pushButtonRampDown->setObjectName(QString::fromUtf8("pushButtonRampDown"));
+
+        horizontalLayout_13->addWidget(pushButtonRampDown);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_13);
+
+        horizontalLayout_14 = new QHBoxLayout();
+        horizontalLayout_14->setSpacing(6);
+        horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
+        label_10 = new QLabel(widget);
+        label_10->setObjectName(QString::fromUtf8("label_10"));
+
+        horizontalLayout_14->addWidget(label_10);
+
+        lineEditContractions = new QLineEdit(widget);
+        lineEditContractions->setObjectName(QString::fromUtf8("lineEditContractions"));
+
+        horizontalLayout_14->addWidget(lineEditContractions);
+
+        pushButtonContractions = new QPushButton(widget);
+        pushButtonContractions->setObjectName(QString::fromUtf8("pushButtonContractions"));
+
+        horizontalLayout_14->addWidget(pushButtonContractions);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_14);
+
+        horizontalLayout_15 = new QHBoxLayout();
+        horizontalLayout_15->setSpacing(6);
+        horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
+        label_11 = new QLabel(widget);
+        label_11->setObjectName(QString::fromUtf8("label_11"));
+
+        horizontalLayout_15->addWidget(label_11);
+
+        lineEditChannel1 = new QLineEdit(widget);
+        lineEditChannel1->setObjectName(QString::fromUtf8("lineEditChannel1"));
+        sizePolicy2.setHeightForWidth(lineEditChannel1->sizePolicy().hasHeightForWidth());
+        lineEditChannel1->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_15->addWidget(lineEditChannel1);
+
+        pushButtonChannel1 = new QPushButton(widget);
+        pushButtonChannel1->setObjectName(QString::fromUtf8("pushButtonChannel1"));
+
+        horizontalLayout_15->addWidget(pushButtonChannel1);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_15);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
         verticalLayout_4->addItem(verticalSpacer);
-
-
-        gridLayout_7->addLayout(verticalLayout_4, 0, 0, 1, 1);
 
         tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
@@ -338,127 +567,6 @@ public:
         gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
         tabWidget->addTab(tab, QString());
-        tab_4 = new QWidget();
-        tab_4->setObjectName(QString::fromUtf8("tab_4"));
-        gridLayout_11 = new QGridLayout(tab_4);
-        gridLayout_11->setSpacing(6);
-        gridLayout_11->setContentsMargins(11, 11, 11, 11);
-        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
-        verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setSpacing(6);
-        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
-        label_2 = new QLabel(tab_4);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-
-        verticalLayout_6->addWidget(label_2);
-
-        tableViewMag = new QTableView(tab_4);
-        tableViewMag->setObjectName(QString::fromUtf8("tableViewMag"));
-
-        verticalLayout_6->addWidget(tableViewMag);
-
-        label_3 = new QLabel(tab_4);
-        label_3->setObjectName(QString::fromUtf8("label_3"));
-
-        verticalLayout_6->addWidget(label_3);
-
-        tableViewMagStat = new QTableView(tab_4);
-        tableViewMagStat->setObjectName(QString::fromUtf8("tableViewMagStat"));
-        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Expanding);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(tableViewMagStat->sizePolicy().hasHeightForWidth());
-        tableViewMagStat->setSizePolicy(sizePolicy2);
-        tableViewMagStat->setBaseSize(QSize(0, 0));
-
-        verticalLayout_6->addWidget(tableViewMagStat);
-
-
-        gridLayout_11->addLayout(verticalLayout_6, 0, 0, 1, 1);
-
-        tabWidget->addTab(tab_4, QString());
-        tab_5 = new QWidget();
-        tab_5->setObjectName(QString::fromUtf8("tab_5"));
-        gridLayout_12 = new QGridLayout(tab_5);
-        gridLayout_12->setSpacing(6);
-        gridLayout_12->setContentsMargins(11, 11, 11, 11);
-        gridLayout_12->setObjectName(QString::fromUtf8("gridLayout_12"));
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setSpacing(6);
-        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
-        label_4 = new QLabel(tab_5);
-        label_4->setObjectName(QString::fromUtf8("label_4"));
-
-        verticalLayout_7->addWidget(label_4);
-
-        tableViewPha = new QTableView(tab_5);
-        tableViewPha->setObjectName(QString::fromUtf8("tableViewPha"));
-
-        verticalLayout_7->addWidget(tableViewPha);
-
-        label_5 = new QLabel(tab_5);
-        label_5->setObjectName(QString::fromUtf8("label_5"));
-
-        verticalLayout_7->addWidget(label_5);
-
-        tableViewPhaStat = new QTableView(tab_5);
-        tableViewPhaStat->setObjectName(QString::fromUtf8("tableViewPhaStat"));
-
-        verticalLayout_7->addWidget(tableViewPhaStat);
-
-
-        gridLayout_12->addLayout(verticalLayout_7, 0, 0, 1, 1);
-
-        tabWidget->addTab(tab_5, QString());
-        tab_6 = new QWidget();
-        tab_6->setObjectName(QString::fromUtf8("tab_6"));
-        gridLayout_8 = new QGridLayout(tab_6);
-        gridLayout_8->setSpacing(6);
-        gridLayout_8->setContentsMargins(11, 11, 11, 11);
-        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
-        tableViewCalibration = new QTableView(tab_6);
-        tableViewCalibration->setObjectName(QString::fromUtf8("tableViewCalibration"));
-
-        gridLayout_8->addWidget(tableViewCalibration, 1, 0, 1, 1);
-
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setSpacing(6);
-        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
-        checkBoxGainCalibration = new QCheckBox(tab_6);
-        checkBoxGainCalibration->setObjectName(QString::fromUtf8("checkBoxGainCalibration"));
-
-        verticalLayout_5->addWidget(checkBoxGainCalibration);
-
-        label_6 = new QLabel(tab_6);
-        label_6->setObjectName(QString::fromUtf8("label_6"));
-
-        verticalLayout_5->addWidget(label_6);
-
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setSpacing(6);
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        pushButtonGenerateCalibration = new QPushButton(tab_6);
-        pushButtonGenerateCalibration->setObjectName(QString::fromUtf8("pushButtonGenerateCalibration"));
-
-        horizontalLayout_5->addWidget(pushButtonGenerateCalibration);
-
-        pushButtonOpenCalFile = new QPushButton(tab_6);
-        pushButtonOpenCalFile->setObjectName(QString::fromUtf8("pushButtonOpenCalFile"));
-
-        horizontalLayout_5->addWidget(pushButtonOpenCalFile);
-
-        pushButtonSaveCalFile = new QPushButton(tab_6);
-        pushButtonSaveCalFile->setObjectName(QString::fromUtf8("pushButtonSaveCalFile"));
-
-        horizontalLayout_5->addWidget(pushButtonSaveCalFile);
-
-
-        verticalLayout_5->addLayout(horizontalLayout_5);
-
-
-        gridLayout_8->addLayout(verticalLayout_5, 0, 0, 1, 1);
-
-        tabWidget->addTab(tab_6, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -482,23 +590,13 @@ public:
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
         QWidget::setTabOrder(pushButtonBTconnect, lineEditAT);
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
-        QWidget::setTabOrder(pushButtonATSend, checkBoxGainCalibration);
-        QWidget::setTabOrder(checkBoxGainCalibration, pushButtonGenerateCalibration);
-        QWidget::setTabOrder(pushButtonGenerateCalibration, pushButtonOpenCalFile);
-        QWidget::setTabOrder(pushButtonOpenCalFile, pushButtonSaveCalFile);
-        QWidget::setTabOrder(pushButtonSaveCalFile, tableViewCalibration);
-        QWidget::setTabOrder(tableViewCalibration, radioButtonBT);
+        QWidget::setTabOrder(pushButtonATSend, radioButtonBT);
         QWidget::setTabOrder(radioButtonBT, lineEditWiFiPort);
         QWidget::setTabOrder(lineEditWiFiPort, pushButtonBTdisconnect);
-        QWidget::setTabOrder(pushButtonBTdisconnect, tableViewMag);
-        QWidget::setTabOrder(tableViewMag, tableViewMagStat);
-        QWidget::setTabOrder(tableViewMagStat, tableViewPha);
-        QWidget::setTabOrder(tableViewPha, tableViewPhaStat);
-        QWidget::setTabOrder(tableViewPhaStat, pushButtonWiFiDisconnect);
+        QWidget::setTabOrder(pushButtonBTdisconnect, pushButtonWiFiDisconnect);
         QWidget::setTabOrder(pushButtonWiFiDisconnect, radioButtonWiFi);
         QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
-        QWidget::setTabOrder(lineEditWiFiAddress, tabWidget);
-        QWidget::setTabOrder(tabWidget, plainTextEditAT);
+        QWidget::setTabOrder(lineEditWiFiAddress, plainTextEditAT);
         QWidget::setTabOrder(plainTextEditAT, pushButtonWiFiConnect);
 
         menuBar->addAction(menu_Measurement->menuAction());
@@ -546,23 +644,30 @@ public:
         pushButtonWiFiDisconnect->setText(QApplication::translate("MainWindow", "Disconnect WiFi", nullptr));
         pushButtonBTdisconnect->setText(QApplication::translate("MainWindow", "Disconnect BT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Connect), QApplication::translate("MainWindow", "Connect", nullptr));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Plot Properties", nullptr));
+        label_2->setText(QApplication::translate("MainWindow", "Amplitude 0-31mA", nullptr));
+        pushButtonAmplitude->setText(QApplication::translate("MainWindow", "Update Amplitude", nullptr));
+        label_3->setText(QApplication::translate("MainWindow", "Frequency Hz", nullptr));
+        pushButtonFrequency->setText(QApplication::translate("MainWindow", "Update Frequency", nullptr));
+        label_4->setText(QApplication::translate("MainWindow", "Phase Duration (us/50)", nullptr));
+        pushButtonPhase->setText(QApplication::translate("MainWindow", "Update Pulse width", nullptr));
+        label_5->setText(QApplication::translate("MainWindow", "Symmetry Factor", nullptr));
+        pushButtonSymetry->setText(QApplication::translate("MainWindow", "Update Symmetry", nullptr));
+        label_6->setText(QApplication::translate("MainWindow", "On time (s)", nullptr));
+        pushButtonOnTime->setText(QApplication::translate("MainWindow", "Update ON time", nullptr));
+        label_7->setText(QApplication::translate("MainWindow", "Off time (s)", nullptr));
+        pushButtonOFF->setText(QApplication::translate("MainWindow", "Update OFF time", nullptr));
+        label_8->setText(QApplication::translate("MainWindow", "Ramp up time (ds)", nullptr));
+        pushButtonRampUp->setText(QApplication::translate("MainWindow", "Update Ramp up", nullptr));
+        label_9->setText(QApplication::translate("MainWindow", "Ramp down time (ds)", nullptr));
+        pushButtonRampDown->setText(QApplication::translate("MainWindow", "Update Ramp down", nullptr));
+        label_10->setText(QApplication::translate("MainWindow", "Number Contractions", nullptr));
+        pushButtonContractions->setText(QApplication::translate("MainWindow", "Update Contractions", nullptr));
+        label_11->setText(QApplication::translate("MainWindow", "Channel 1:", nullptr));
+        pushButtonChannel1->setText(QApplication::translate("MainWindow", "Update Channel 1", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
-        label_2->setText(QApplication::translate("MainWindow", "Magnitude Measurements", nullptr));
-        label_3->setText(QApplication::translate("MainWindow", "Average and Standard deviation (%)", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Mag", nullptr));
-        label_4->setText(QApplication::translate("MainWindow", "Phase Measurements", nullptr));
-        label_5->setText(QApplication::translate("MainWindow", "Average and Standard deviation (degree)", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Pha", nullptr));
-        checkBoxGainCalibration->setText(QApplication::translate("MainWindow", "Enable Gain calibration", nullptr));
-        label_6->setText(QApplication::translate("MainWindow", "Calibration table for 1 kOhm reference", nullptr));
-        pushButtonGenerateCalibration->setText(QApplication::translate("MainWindow", "Generate Calibration coeff.", nullptr));
-        pushButtonOpenCalFile->setText(QApplication::translate("MainWindow", "Open Cal. File", nullptr));
-        pushButtonSaveCalFile->setText(QApplication::translate("MainWindow", "Save Cal. File", nullptr));
-        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "Cal", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi
 
