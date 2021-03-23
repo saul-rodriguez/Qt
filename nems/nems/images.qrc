@@ -4,5 +4,8 @@
         <file>images/Save-icon.png</file>
         <file>images/Clean-icon.png</file>
         <file>images/Delete-icon.png</file>
+        <file>images/Stop-icon.png</file>
+        <file>images/Open_icon.png</file>
+        <file>images/Read_icon.png</file>
     </qresource>
 </RCC>

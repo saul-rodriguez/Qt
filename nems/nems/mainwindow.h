@@ -75,6 +75,7 @@ private slots:
     void PlotRx(const QByteArray &data);
     void PlotTimeout();
 
+    void send(QByteArray data);
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
@@ -94,6 +95,20 @@ private slots:
     void on_action_Delete_sweep_triggered();   
     void on_action_Save_triggered();
 
+    void on_pushButtonAmplitude_clicked();
+    void on_pushButtonFrequency_clicked();
+    void on_pushButtonPhase_clicked();
+    void on_pushButtonSymetry_clicked();
+    void on_pushButtonOnTime_clicked();
+    void on_pushButtonOFF_clicked();
+    void on_pushButtonRampUp_clicked();
+    void on_pushButtonRampDown_clicked();
+    void on_pushButtonContractions_clicked();
+    void on_pushButtonChannel1_clicked();
+    void on_pushButtonChannel2_clicked();
+    void on_actionStop_triggered();
+    void on_action_Open_triggered();
+    void on_action_Display_program_triggered();
 };
 
 #endif // MAINWINDOW_H

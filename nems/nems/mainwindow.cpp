@@ -292,6 +292,18 @@ void MainWindow::PlotTimeout()
     }
 }
 
+void MainWindow::send(QByteArray data)
+{
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {    //The communication with the ESP-01 module is always terminated by cr + nl
+        data.append('\r');
+        data.append('\n');
+        m_WiFiTcpSocket->write(data);
+    }
+
+}
+
 
 
 void MainWindow::on_pushButtonBTdiscoverDevices_clicked()
@@ -446,19 +458,9 @@ void MainWindow::on_action_Run_triggered()
     if (ui->labelBTstatus->text() != "Connected")
         return;
 
-    //Check if the timer is running
-//    if (m_timerMeas->isActive())
-//        return;
-
-    /*
-    ui->lineEditAT->setText("f");
-    on_pushButtonATSend_clicked();
-    m_timerMeas->start(2000); //sweep must be completed before this timeout!
-    m_timearrival.start(); //This is used to determine the measurement total time
-
-    //ui->pushButtonMeas->setEnabled(false);
-    ui->action_Run->setEnabled(false);
-    */
+    QByteArray data;
+    data.append('n');
+    send(data);
 }
 
 void MainWindow::on_action_Clean_triggered()
@@ -471,22 +473,7 @@ void MainWindow::on_action_Clean_triggered()
     int ret = msgBox.exec();
 
     if (ret == QMessageBox::No) return;
-/*
-    for (int i = 0; i < 10; i++) {
-        m_measurements[i].cleanSweep();
-    }
-    m_currentMeasurement = 0;
 
-    clearTables();
-
-    m_chartMag->clearTable();
-    m_chartPha->clearTable();
-
-    m_chartMag->updatePlot();
-    m_chartPha->updatePlot();
-
-    m_temp_measurement.cleanSweep();
-*/
 }
 
 void MainWindow::on_action_Delete_sweep_triggered()
@@ -499,14 +486,222 @@ void MainWindow::on_action_Delete_sweep_triggered()
 void MainWindow::on_action_Save_triggered()
 {
     QMessageBox msgBox;
-    msgBox.setText("Save Measurements");
-    msgBox.setInformativeText("Press Yes to save the measurements");
+    msgBox.setText("Save Program in EEPROM");
+    msgBox.setInformativeText("Press Yes to save program");
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     msgBox.setDefaultButton(QMessageBox::No);
     int ret = msgBox.exec();
 
     if (ret == QMessageBox::No) return;
 
+    QByteArray data;
+    data.append('s');
+    send(data);
+
 
 }
 
+
+void MainWindow::on_pushButtonAmplitude_clicked()
+{
+    QString aux = ui->lineEditAmplitude->text();
+
+    QByteArray data;
+
+    data.append('a');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+
+
+
+}
+
+void MainWindow::on_pushButtonFrequency_clicked()
+{
+    QString aux = ui->lineEditFrequency->text();
+
+    QByteArray data;
+
+    data.append('f');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonPhase_clicked()
+{
+    QString aux = ui->lineEditPhase->text();
+
+    QByteArray data;
+
+    data.append('d');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonSymetry_clicked()
+{
+    QString aux = ui->lineEditSymetry->text();
+
+    QByteArray data;
+
+    data.append('k');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonOnTime_clicked()
+{
+    QString aux = ui->lineEditON->text();
+
+    QByteArray data;
+
+    data.append('o');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonOFF_clicked()
+{
+    QString aux = ui->lineEditOFF->text();
+
+    QByteArray data;
+
+    data.append('O');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonRampUp_clicked()
+{
+    QString aux = ui->lineEditRampUp->text();
+
+    QByteArray data;
+
+    data.append('r');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonRampDown_clicked()
+{
+    QString aux = ui->lineEditRampDown->text();
+
+    QByteArray data;
+
+    data.append('R');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonContractions_clicked()
+{
+    QString aux = ui->lineEditContractions->text();
+
+    QByteArray data;
+
+    data.append('c');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonChannel1_clicked()
+{
+    QString aux = ui->lineEditChannel1->text();
+
+    QByteArray data;
+
+    data.append('M');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonChannel2_clicked()
+{
+    QString aux = ui->lineEditChannel2->text();
+
+    QByteArray data;
+
+    data.append('m');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_actionStop_triggered()
+{
+    //Ceck if BT is connected
+    if (ui->labelBTstatus->text() != "Connected")
+        return;
+
+    QByteArray data;
+    data.append('N');
+    send(data);
+
+
+
+}
+
+void MainWindow::on_action_Open_triggered()
+{
+    //Ceck if BT is connected
+    if (ui->labelBTstatus->text() != "Connected")
+        return;
+
+    QByteArray data;
+    data.append('l');
+    send(data);
+}
+
+void MainWindow::on_action_Display_program_triggered()
+{
+    //Ceck if BT is connected
+    if (ui->labelBTstatus->text() != "Connected")
+        return;
+
+    QByteArray data;
+    data.append('p');
+    send(data);
+}

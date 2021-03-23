@@ -24,7 +24,6 @@
 #include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
@@ -39,6 +38,9 @@ public:
     QAction *action_Run;
     QAction *action_Save;
     QAction *action_Clean;
+    QAction *actionStop;
+    QAction *action_Open;
+    QAction *action_Display_program;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -65,8 +67,7 @@ public:
     QPushButton *pushButtonWiFiDisconnect;
     QPushButton *pushButtonBTdisconnect;
     QWidget *tab_3;
-    QWidget *widget;
-    QVBoxLayout *verticalLayout_4;
+    QGridLayout *gridLayout_7;
     QHBoxLayout *horizontalLayout_5;
     QLabel *label_2;
     QLineEdit *lineEditAmplitude;
@@ -107,7 +108,10 @@ public:
     QLabel *label_11;
     QLineEdit *lineEditChannel1;
     QPushButton *pushButtonChannel1;
-    QSpacerItem *verticalSpacer;
+    QHBoxLayout *horizontalLayout_16;
+    QLabel *label_12;
+    QLineEdit *lineEditChannel2;
+    QPushButton *pushButtonChannel2;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
     QVBoxLayout *verticalLayout_2;
@@ -144,6 +148,21 @@ public:
         QIcon icon2;
         icon2.addFile(QString::fromUtf8(":/images/images/Clean-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_Clean->setIcon(icon2);
+        actionStop = new QAction(MainWindow);
+        actionStop->setObjectName(QString::fromUtf8("actionStop"));
+        QIcon icon3;
+        icon3.addFile(QString::fromUtf8(":/images/images/Stop-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionStop->setIcon(icon3);
+        action_Open = new QAction(MainWindow);
+        action_Open->setObjectName(QString::fromUtf8("action_Open"));
+        QIcon icon4;
+        icon4.addFile(QString::fromUtf8(":/images/images/Open_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Open->setIcon(icon4);
+        action_Display_program = new QAction(MainWindow);
+        action_Display_program->setObjectName(QString::fromUtf8("action_Display_program"));
+        QIcon icon5;
+        icon5.addFile(QString::fromUtf8(":/images/images/Read_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        action_Display_program->setIcon(icon5);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -272,246 +291,284 @@ public:
         tabWidget->addTab(Connect, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QString::fromUtf8("tab_3"));
-        widget = new QWidget(tab_3);
-        widget->setObjectName(QString::fromUtf8("widget"));
-        widget->setGeometry(QRect(10, 10, 455, 411));
-        verticalLayout_4 = new QVBoxLayout(widget);
-        verticalLayout_4->setSpacing(6);
-        verticalLayout_4->setContentsMargins(11, 11, 11, 11);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
-        verticalLayout_4->setContentsMargins(0, 0, 0, 0);
+        gridLayout_7 = new QGridLayout(tab_3);
+        gridLayout_7->setSpacing(6);
+        gridLayout_7->setContentsMargins(11, 11, 11, 11);
+        gridLayout_7->setObjectName(QString::fromUtf8("gridLayout_7"));
         horizontalLayout_5 = new QHBoxLayout();
         horizontalLayout_5->setSpacing(6);
         horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        label_2 = new QLabel(widget);
+        horizontalLayout_5->setContentsMargins(-1, -1, 0, -1);
+        label_2 = new QLabel(tab_3);
         label_2->setObjectName(QString::fromUtf8("label_2"));
 
         horizontalLayout_5->addWidget(label_2);
 
-        lineEditAmplitude = new QLineEdit(widget);
+        lineEditAmplitude = new QLineEdit(tab_3);
         lineEditAmplitude->setObjectName(QString::fromUtf8("lineEditAmplitude"));
-        sizePolicy1.setHeightForWidth(lineEditAmplitude->sizePolicy().hasHeightForWidth());
-        lineEditAmplitude->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(lineEditAmplitude->sizePolicy().hasHeightForWidth());
+        lineEditAmplitude->setSizePolicy(sizePolicy2);
 
         horizontalLayout_5->addWidget(lineEditAmplitude);
 
-        pushButtonAmplitude = new QPushButton(widget);
+        pushButtonAmplitude = new QPushButton(tab_3);
         pushButtonAmplitude->setObjectName(QString::fromUtf8("pushButtonAmplitude"));
+        sizePolicy2.setHeightForWidth(pushButtonAmplitude->sizePolicy().hasHeightForWidth());
+        pushButtonAmplitude->setSizePolicy(sizePolicy2);
 
         horizontalLayout_5->addWidget(pushButtonAmplitude);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_5);
+        gridLayout_7->addLayout(horizontalLayout_5, 0, 0, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
         horizontalLayout_6->setSpacing(6);
         horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        label_3 = new QLabel(widget);
+        label_3 = new QLabel(tab_3);
         label_3->setObjectName(QString::fromUtf8("label_3"));
 
         horizontalLayout_6->addWidget(label_3);
 
-        lineEditFrequency = new QLineEdit(widget);
+        lineEditFrequency = new QLineEdit(tab_3);
         lineEditFrequency->setObjectName(QString::fromUtf8("lineEditFrequency"));
-        sizePolicy1.setHeightForWidth(lineEditFrequency->sizePolicy().hasHeightForWidth());
-        lineEditFrequency->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(lineEditFrequency->sizePolicy().hasHeightForWidth());
+        lineEditFrequency->setSizePolicy(sizePolicy2);
 
         horizontalLayout_6->addWidget(lineEditFrequency);
 
-        pushButtonFrequency = new QPushButton(widget);
+        pushButtonFrequency = new QPushButton(tab_3);
         pushButtonFrequency->setObjectName(QString::fromUtf8("pushButtonFrequency"));
+        sizePolicy2.setHeightForWidth(pushButtonFrequency->sizePolicy().hasHeightForWidth());
+        pushButtonFrequency->setSizePolicy(sizePolicy2);
 
         horizontalLayout_6->addWidget(pushButtonFrequency);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_6);
+        gridLayout_7->addLayout(horizontalLayout_6, 1, 0, 1, 1);
 
         horizontalLayout_7 = new QHBoxLayout();
         horizontalLayout_7->setSpacing(6);
         horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        label_4 = new QLabel(widget);
+        label_4 = new QLabel(tab_3);
         label_4->setObjectName(QString::fromUtf8("label_4"));
 
         horizontalLayout_7->addWidget(label_4);
 
-        lineEditPhase = new QLineEdit(widget);
+        lineEditPhase = new QLineEdit(tab_3);
         lineEditPhase->setObjectName(QString::fromUtf8("lineEditPhase"));
-        sizePolicy1.setHeightForWidth(lineEditPhase->sizePolicy().hasHeightForWidth());
-        lineEditPhase->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(lineEditPhase->sizePolicy().hasHeightForWidth());
+        lineEditPhase->setSizePolicy(sizePolicy2);
 
         horizontalLayout_7->addWidget(lineEditPhase);
 
-        pushButtonPhase = new QPushButton(widget);
+        pushButtonPhase = new QPushButton(tab_3);
         pushButtonPhase->setObjectName(QString::fromUtf8("pushButtonPhase"));
+        sizePolicy2.setHeightForWidth(pushButtonPhase->sizePolicy().hasHeightForWidth());
+        pushButtonPhase->setSizePolicy(sizePolicy2);
 
         horizontalLayout_7->addWidget(pushButtonPhase);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_7);
+        gridLayout_7->addLayout(horizontalLayout_7, 2, 0, 1, 1);
 
         horizontalLayout_9 = new QHBoxLayout();
         horizontalLayout_9->setSpacing(6);
         horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        label_5 = new QLabel(widget);
+        label_5 = new QLabel(tab_3);
         label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout_9->addWidget(label_5);
 
-        lineEditSymetry = new QLineEdit(widget);
+        lineEditSymetry = new QLineEdit(tab_3);
         lineEditSymetry->setObjectName(QString::fromUtf8("lineEditSymetry"));
-        sizePolicy1.setHeightForWidth(lineEditSymetry->sizePolicy().hasHeightForWidth());
-        lineEditSymetry->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(lineEditSymetry->sizePolicy().hasHeightForWidth());
+        lineEditSymetry->setSizePolicy(sizePolicy2);
 
         horizontalLayout_9->addWidget(lineEditSymetry);
 
-        pushButtonSymetry = new QPushButton(widget);
+        pushButtonSymetry = new QPushButton(tab_3);
         pushButtonSymetry->setObjectName(QString::fromUtf8("pushButtonSymetry"));
+        sizePolicy2.setHeightForWidth(pushButtonSymetry->sizePolicy().hasHeightForWidth());
+        pushButtonSymetry->setSizePolicy(sizePolicy2);
 
         horizontalLayout_9->addWidget(pushButtonSymetry);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_9);
+        gridLayout_7->addLayout(horizontalLayout_9, 3, 0, 1, 1);
 
         horizontalLayout_10 = new QHBoxLayout();
         horizontalLayout_10->setSpacing(6);
         horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        label_6 = new QLabel(widget);
+        label_6 = new QLabel(tab_3);
         label_6->setObjectName(QString::fromUtf8("label_6"));
 
         horizontalLayout_10->addWidget(label_6);
 
-        lineEditON = new QLineEdit(widget);
+        lineEditON = new QLineEdit(tab_3);
         lineEditON->setObjectName(QString::fromUtf8("lineEditON"));
-        sizePolicy1.setHeightForWidth(lineEditON->sizePolicy().hasHeightForWidth());
-        lineEditON->setSizePolicy(sizePolicy1);
+        sizePolicy2.setHeightForWidth(lineEditON->sizePolicy().hasHeightForWidth());
+        lineEditON->setSizePolicy(sizePolicy2);
 
         horizontalLayout_10->addWidget(lineEditON);
 
-        pushButtonOnTime = new QPushButton(widget);
+        pushButtonOnTime = new QPushButton(tab_3);
         pushButtonOnTime->setObjectName(QString::fromUtf8("pushButtonOnTime"));
+        sizePolicy2.setHeightForWidth(pushButtonOnTime->sizePolicy().hasHeightForWidth());
+        pushButtonOnTime->setSizePolicy(sizePolicy2);
 
         horizontalLayout_10->addWidget(pushButtonOnTime);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_10);
+        gridLayout_7->addLayout(horizontalLayout_10, 4, 0, 1, 1);
 
         horizontalLayout_11 = new QHBoxLayout();
         horizontalLayout_11->setSpacing(6);
         horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        label_7 = new QLabel(widget);
+        label_7 = new QLabel(tab_3);
         label_7->setObjectName(QString::fromUtf8("label_7"));
 
         horizontalLayout_11->addWidget(label_7);
 
-        lineEditOFF = new QLineEdit(widget);
+        lineEditOFF = new QLineEdit(tab_3);
         lineEditOFF->setObjectName(QString::fromUtf8("lineEditOFF"));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
         sizePolicy2.setHeightForWidth(lineEditOFF->sizePolicy().hasHeightForWidth());
         lineEditOFF->setSizePolicy(sizePolicy2);
 
         horizontalLayout_11->addWidget(lineEditOFF);
 
-        pushButtonOFF = new QPushButton(widget);
+        pushButtonOFF = new QPushButton(tab_3);
         pushButtonOFF->setObjectName(QString::fromUtf8("pushButtonOFF"));
+        sizePolicy2.setHeightForWidth(pushButtonOFF->sizePolicy().hasHeightForWidth());
+        pushButtonOFF->setSizePolicy(sizePolicy2);
 
         horizontalLayout_11->addWidget(pushButtonOFF);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_11);
+        gridLayout_7->addLayout(horizontalLayout_11, 5, 0, 1, 1);
 
         horizontalLayout_12 = new QHBoxLayout();
         horizontalLayout_12->setSpacing(6);
         horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        label_8 = new QLabel(widget);
+        label_8 = new QLabel(tab_3);
         label_8->setObjectName(QString::fromUtf8("label_8"));
 
         horizontalLayout_12->addWidget(label_8);
 
-        lineEditRampUp = new QLineEdit(widget);
+        lineEditRampUp = new QLineEdit(tab_3);
         lineEditRampUp->setObjectName(QString::fromUtf8("lineEditRampUp"));
         sizePolicy2.setHeightForWidth(lineEditRampUp->sizePolicy().hasHeightForWidth());
         lineEditRampUp->setSizePolicy(sizePolicy2);
 
         horizontalLayout_12->addWidget(lineEditRampUp);
 
-        pushButtonRampUp = new QPushButton(widget);
+        pushButtonRampUp = new QPushButton(tab_3);
         pushButtonRampUp->setObjectName(QString::fromUtf8("pushButtonRampUp"));
+        sizePolicy2.setHeightForWidth(pushButtonRampUp->sizePolicy().hasHeightForWidth());
+        pushButtonRampUp->setSizePolicy(sizePolicy2);
 
         horizontalLayout_12->addWidget(pushButtonRampUp);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_12);
+        gridLayout_7->addLayout(horizontalLayout_12, 6, 0, 1, 1);
 
         horizontalLayout_13 = new QHBoxLayout();
         horizontalLayout_13->setSpacing(6);
         horizontalLayout_13->setObjectName(QString::fromUtf8("horizontalLayout_13"));
-        label_9 = new QLabel(widget);
+        label_9 = new QLabel(tab_3);
         label_9->setObjectName(QString::fromUtf8("label_9"));
 
         horizontalLayout_13->addWidget(label_9);
 
-        lineEditRampDown = new QLineEdit(widget);
+        lineEditRampDown = new QLineEdit(tab_3);
         lineEditRampDown->setObjectName(QString::fromUtf8("lineEditRampDown"));
 
         horizontalLayout_13->addWidget(lineEditRampDown);
 
-        pushButtonRampDown = new QPushButton(widget);
+        pushButtonRampDown = new QPushButton(tab_3);
         pushButtonRampDown->setObjectName(QString::fromUtf8("pushButtonRampDown"));
+        sizePolicy2.setHeightForWidth(pushButtonRampDown->sizePolicy().hasHeightForWidth());
+        pushButtonRampDown->setSizePolicy(sizePolicy2);
 
         horizontalLayout_13->addWidget(pushButtonRampDown);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_13);
+        gridLayout_7->addLayout(horizontalLayout_13, 7, 0, 1, 1);
 
         horizontalLayout_14 = new QHBoxLayout();
         horizontalLayout_14->setSpacing(6);
         horizontalLayout_14->setObjectName(QString::fromUtf8("horizontalLayout_14"));
-        label_10 = new QLabel(widget);
+        label_10 = new QLabel(tab_3);
         label_10->setObjectName(QString::fromUtf8("label_10"));
 
         horizontalLayout_14->addWidget(label_10);
 
-        lineEditContractions = new QLineEdit(widget);
+        lineEditContractions = new QLineEdit(tab_3);
         lineEditContractions->setObjectName(QString::fromUtf8("lineEditContractions"));
 
         horizontalLayout_14->addWidget(lineEditContractions);
 
-        pushButtonContractions = new QPushButton(widget);
+        pushButtonContractions = new QPushButton(tab_3);
         pushButtonContractions->setObjectName(QString::fromUtf8("pushButtonContractions"));
+        sizePolicy2.setHeightForWidth(pushButtonContractions->sizePolicy().hasHeightForWidth());
+        pushButtonContractions->setSizePolicy(sizePolicy2);
 
         horizontalLayout_14->addWidget(pushButtonContractions);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_14);
+        gridLayout_7->addLayout(horizontalLayout_14, 8, 0, 1, 1);
 
         horizontalLayout_15 = new QHBoxLayout();
         horizontalLayout_15->setSpacing(6);
         horizontalLayout_15->setObjectName(QString::fromUtf8("horizontalLayout_15"));
-        label_11 = new QLabel(widget);
+        label_11 = new QLabel(tab_3);
         label_11->setObjectName(QString::fromUtf8("label_11"));
 
         horizontalLayout_15->addWidget(label_11);
 
-        lineEditChannel1 = new QLineEdit(widget);
+        lineEditChannel1 = new QLineEdit(tab_3);
         lineEditChannel1->setObjectName(QString::fromUtf8("lineEditChannel1"));
         sizePolicy2.setHeightForWidth(lineEditChannel1->sizePolicy().hasHeightForWidth());
         lineEditChannel1->setSizePolicy(sizePolicy2);
 
         horizontalLayout_15->addWidget(lineEditChannel1);
 
-        pushButtonChannel1 = new QPushButton(widget);
+        pushButtonChannel1 = new QPushButton(tab_3);
         pushButtonChannel1->setObjectName(QString::fromUtf8("pushButtonChannel1"));
+        sizePolicy2.setHeightForWidth(pushButtonChannel1->sizePolicy().hasHeightForWidth());
+        pushButtonChannel1->setSizePolicy(sizePolicy2);
 
         horizontalLayout_15->addWidget(pushButtonChannel1);
 
 
-        verticalLayout_4->addLayout(horizontalLayout_15);
+        gridLayout_7->addLayout(horizontalLayout_15, 9, 0, 1, 1);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        horizontalLayout_16 = new QHBoxLayout();
+        horizontalLayout_16->setSpacing(6);
+        horizontalLayout_16->setObjectName(QString::fromUtf8("horizontalLayout_16"));
+        label_12 = new QLabel(tab_3);
+        label_12->setObjectName(QString::fromUtf8("label_12"));
 
-        verticalLayout_4->addItem(verticalSpacer);
+        horizontalLayout_16->addWidget(label_12);
+
+        lineEditChannel2 = new QLineEdit(tab_3);
+        lineEditChannel2->setObjectName(QString::fromUtf8("lineEditChannel2"));
+        sizePolicy2.setHeightForWidth(lineEditChannel2->sizePolicy().hasHeightForWidth());
+        lineEditChannel2->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_16->addWidget(lineEditChannel2);
+
+        pushButtonChannel2 = new QPushButton(tab_3);
+        pushButtonChannel2->setObjectName(QString::fromUtf8("pushButtonChannel2"));
+        sizePolicy2.setHeightForWidth(pushButtonChannel2->sizePolicy().hasHeightForWidth());
+        pushButtonChannel2->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_16->addWidget(pushButtonChannel2);
+
+
+        gridLayout_7->addLayout(horizontalLayout_16, 10, 0, 1, 1);
 
         tabWidget->addTab(tab_3, QString());
         tab_2 = new QWidget();
@@ -590,21 +647,50 @@ public:
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
         QWidget::setTabOrder(pushButtonBTconnect, lineEditAT);
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
-        QWidget::setTabOrder(pushButtonATSend, radioButtonBT);
-        QWidget::setTabOrder(radioButtonBT, lineEditWiFiPort);
-        QWidget::setTabOrder(lineEditWiFiPort, pushButtonBTdisconnect);
-        QWidget::setTabOrder(pushButtonBTdisconnect, pushButtonWiFiDisconnect);
-        QWidget::setTabOrder(pushButtonWiFiDisconnect, radioButtonWiFi);
+        QWidget::setTabOrder(pushButtonATSend, lineEditAmplitude);
+        QWidget::setTabOrder(lineEditAmplitude, pushButtonAmplitude);
+        QWidget::setTabOrder(pushButtonAmplitude, lineEditFrequency);
+        QWidget::setTabOrder(lineEditFrequency, pushButtonFrequency);
+        QWidget::setTabOrder(pushButtonFrequency, lineEditPhase);
+        QWidget::setTabOrder(lineEditPhase, pushButtonPhase);
+        QWidget::setTabOrder(pushButtonPhase, lineEditSymetry);
+        QWidget::setTabOrder(lineEditSymetry, pushButtonSymetry);
+        QWidget::setTabOrder(pushButtonSymetry, lineEditON);
+        QWidget::setTabOrder(lineEditON, pushButtonOnTime);
+        QWidget::setTabOrder(pushButtonOnTime, lineEditOFF);
+        QWidget::setTabOrder(lineEditOFF, pushButtonOFF);
+        QWidget::setTabOrder(pushButtonOFF, lineEditRampUp);
+        QWidget::setTabOrder(lineEditRampUp, pushButtonRampUp);
+        QWidget::setTabOrder(pushButtonRampUp, lineEditRampDown);
+        QWidget::setTabOrder(lineEditRampDown, pushButtonRampDown);
+        QWidget::setTabOrder(pushButtonRampDown, lineEditContractions);
+        QWidget::setTabOrder(lineEditContractions, pushButtonContractions);
+        QWidget::setTabOrder(pushButtonContractions, lineEditChannel1);
+        QWidget::setTabOrder(lineEditChannel1, pushButtonChannel1);
+        QWidget::setTabOrder(pushButtonChannel1, lineEditChannel2);
+        QWidget::setTabOrder(lineEditChannel2, pushButtonChannel2);
+        QWidget::setTabOrder(pushButtonChannel2, radioButtonWiFi);
         QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
         QWidget::setTabOrder(lineEditWiFiAddress, plainTextEditAT);
         QWidget::setTabOrder(plainTextEditAT, pushButtonWiFiConnect);
+        QWidget::setTabOrder(pushButtonWiFiConnect, tabWidget);
+        QWidget::setTabOrder(tabWidget, radioButtonBT);
+        QWidget::setTabOrder(radioButtonBT, lineEditWiFiPort);
+        QWidget::setTabOrder(lineEditWiFiPort, pushButtonWiFiDisconnect);
+        QWidget::setTabOrder(pushButtonWiFiDisconnect, pushButtonBTdisconnect);
 
         menuBar->addAction(menu_Measurement->menuAction());
         menu_Measurement->addAction(action_Run);
+        menu_Measurement->addAction(actionStop);
+        menu_Measurement->addAction(action_Open);
         menu_Measurement->addAction(action_Save);
         menu_Measurement->addAction(action_Clean);
+        menu_Measurement->addAction(action_Display_program);
         mainToolBar->addAction(action_Run);
+        mainToolBar->addAction(actionStop);
+        mainToolBar->addAction(action_Open);
         mainToolBar->addAction(action_Save);
+        mainToolBar->addAction(action_Display_program);
         mainToolBar->addAction(action_Clean);
         mainToolBar->addSeparator();
 
@@ -630,6 +716,21 @@ public:
         action_Clean->setText(QApplication::translate("MainWindow", "&Clean", nullptr));
 #ifndef QT_NO_SHORTCUT
         action_Clean->setShortcut(QApplication::translate("MainWindow", "Ctrl+C", nullptr));
+#endif // QT_NO_SHORTCUT
+        actionStop->setText(QApplication::translate("MainWindow", "S&top", nullptr));
+#ifndef QT_NO_TOOLTIP
+        actionStop->setToolTip(QApplication::translate("MainWindow", "Stop", nullptr));
+#endif // QT_NO_TOOLTIP
+#ifndef QT_NO_SHORTCUT
+        actionStop->setShortcut(QApplication::translate("MainWindow", "Ctrl+S", nullptr));
+#endif // QT_NO_SHORTCUT
+        action_Open->setText(QApplication::translate("MainWindow", "&Open", nullptr));
+#ifndef QT_NO_SHORTCUT
+        action_Open->setShortcut(QApplication::translate("MainWindow", "Ctrl+O", nullptr));
+#endif // QT_NO_SHORTCUT
+        action_Display_program->setText(QApplication::translate("MainWindow", "&Display program", nullptr));
+#ifndef QT_NO_SHORTCUT
+        action_Display_program->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", nullptr));
 #endif // QT_NO_SHORTCUT
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
@@ -662,8 +763,10 @@ public:
         pushButtonRampDown->setText(QApplication::translate("MainWindow", "Update Ramp down", nullptr));
         label_10->setText(QApplication::translate("MainWindow", "Number Contractions", nullptr));
         pushButtonContractions->setText(QApplication::translate("MainWindow", "Update Contractions", nullptr));
-        label_11->setText(QApplication::translate("MainWindow", "Channel 1:", nullptr));
+        label_11->setText(QApplication::translate("MainWindow", "Channel 1", nullptr));
         pushButtonChannel1->setText(QApplication::translate("MainWindow", "Update Channel 1", nullptr));
+        label_12->setText(QApplication::translate("MainWindow", "Channel 2", nullptr));
+        pushButtonChannel2->setText(QApplication::translate("MainWindow", "Update Channel 2", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QApplication::translate("MainWindow", "Config", nullptr));
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
