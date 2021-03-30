@@ -705,3 +705,33 @@ void MainWindow::on_action_Display_program_triggered()
     data.append('p');
     send(data);
 }
+
+void MainWindow::on_pushButtonChannel3_clicked()
+{
+    QString aux = ui->lineEditChannel3->text();
+
+    QByteArray data;
+
+    data.append('Q');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonChannel4_clicked()
+{
+    QString aux = ui->lineEditChannel4->text();
+
+    QByteArray data;
+
+    data.append('q');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}

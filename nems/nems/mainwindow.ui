@@ -158,72 +158,28 @@
           <string>Config</string>
          </attribute>
          <layout class="QGridLayout" name="gridLayout_7">
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <property name="rightMargin">
-             <number>0</number>
-            </property>
+          <item row="18" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_18">
             <item>
-             <widget class="QLabel" name="label_2">
+             <widget class="QLabel" name="label_14">
               <property name="text">
-               <string>Amplitude 0-31mA</string>
+               <string>Channel 4</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditAmplitude">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
+             <widget class="QLineEdit" name="lineEditChannel4"/>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonAmplitude">
+             <widget class="QPushButton" name="pushButtonChannel4">
               <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Update Amplitude</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_6">
-            <item>
-             <widget class="QLabel" name="label_3">
-              <property name="text">
-               <string>Frequency Hz</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditFrequency">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButtonFrequency">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Update Frequency</string>
+               <string>Update Channel 4</string>
               </property>
              </widget>
             </item>
@@ -263,40 +219,6 @@
             </item>
            </layout>
           </item>
-          <item row="3" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_9">
-            <item>
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Symmetry Factor</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditSymetry">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButtonSymetry">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Update Symmetry</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
           <item row="4" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_10">
             <item>
@@ -326,40 +248,6 @@
               </property>
               <property name="text">
                <string>Update ON time</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="5" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
-            <item>
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Off time (s)</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLineEdit" name="lineEditOFF">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="pushButtonOFF">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="text">
-               <string>Update OFF time</string>
               </property>
              </widget>
             </item>
@@ -399,6 +287,40 @@
             </item>
            </layout>
           </item>
+          <item row="5" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
+            <item>
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Off time (s)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditOFF">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonOFF">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Update OFF time</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item row="7" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
             <item>
@@ -426,6 +348,43 @@
             </item>
            </layout>
           </item>
+          <item row="0" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Amplitude 0-31mA</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditAmplitude">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonAmplitude">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Update Amplitude</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
           <item row="8" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
@@ -448,6 +407,108 @@
               </property>
               <property name="text">
                <string>Update Contractions</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="10" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_16">
+            <item>
+             <widget class="QLabel" name="label_12">
+              <property name="text">
+               <string>Channel 2</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditChannel2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonChannel2">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Update Channel 2</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="11" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>Channel 3</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditChannel3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonChannel3">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Update Channel 3</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="3" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_9">
+            <item>
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>Symmetry Factor</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="lineEditSymetry">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButtonSymetry">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>Update Symmetry</string>
               </property>
              </widget>
             </item>
@@ -487,17 +548,17 @@
             </item>
            </layout>
           </item>
-          <item row="10" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_16">
+          <item row="1" column="0">
+           <layout class="QHBoxLayout" name="horizontalLayout_6">
             <item>
-             <widget class="QLabel" name="label_12">
+             <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Channel 2</string>
+               <string>Frequency Hz</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QLineEdit" name="lineEditChannel2">
+             <widget class="QLineEdit" name="lineEditFrequency">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -507,7 +568,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QPushButton" name="pushButtonChannel2">
+             <widget class="QPushButton" name="pushButtonFrequency">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
                 <horstretch>0</horstretch>
@@ -515,7 +576,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Update Channel 2</string>
+               <string>Update Frequency</string>
               </property>
              </widget>
             </item>
