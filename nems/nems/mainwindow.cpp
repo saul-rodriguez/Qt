@@ -515,9 +515,6 @@ void MainWindow::on_pushButtonAmplitude_clicked()
     data.append(aux);
 
     send(data);
-
-
-
 }
 
 void MainWindow::on_pushButtonFrequency_clicked()
@@ -728,6 +725,21 @@ void MainWindow::on_pushButtonChannel4_clicked()
     QByteArray data;
 
     data.append('q');
+    if (aux.size()==1) {
+        data.append('0');
+    }
+    data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_pushButtonAmplitude2_clicked()
+{
+    QString aux = ui->lineEditAmplitude2->text();
+
+    QByteArray data;
+
+    data.append('A');
     if (aux.size()==1) {
         data.append('0');
     }

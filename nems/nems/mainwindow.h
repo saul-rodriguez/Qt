@@ -111,6 +111,7 @@ private slots:
     void on_action_Display_program_triggered();
     void on_pushButtonChannel3_clicked();
     void on_pushButtonChannel4_clicked();
+    void on_pushButtonAmplitude2_clicked();
 };
 
 #endif // MAINWINDOW_H
