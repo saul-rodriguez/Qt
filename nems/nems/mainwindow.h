@@ -40,15 +40,21 @@ private:
 
     //Data storage
     DataTrace m_trace;
+    DataTrace m_trace2;
+
     int m_DataCounter; //Stores number of received binary samples (same as m_trace.count())
     int m_MaxNumSamples; //Maximum number of samples that are recorder before the m_trace buffer is cleared
 
     //Plot
-    QChartView *m_chartViewMag;
-    CPlotChart *m_chartMag;
-    QChartView *m_chartViewPha;
-    CPlotChart *m_chartPha;
+    QChartView *m_chartViewSen1;
+    CPlotChart *m_chartSen1;
+
+    QChartView *m_chartViewSen2;
+    CPlotChart *m_chartSen2;
+
     DataTrace m_plot_trace;
+    DataTrace m_plot_trace2;
+
     int m_MaxDataPlot; //Max number of samples to plot
     int m_PlotCounter;
     int m_PlotNumUpdate; // Number of additional data points to plot at timeout

@@ -48,38 +48,37 @@ MainWindow::MainWindow(QWidget *parent) :
                this, &MainWindow::WiFiDisplayError);
 
     //Plot
-    // plot Magnitude
-    m_chartMag = new CPlotChart();
-    m_chartMag->setType(NORMAL);
-    m_chartMag->setTitles("","Time","Sensor 1");
+    // plot Sensor1
+    m_chartSen1 = new CPlotChart();
+    m_chartSen1->setType(NORMAL);
+    m_chartSen1->setTitles("","Time","Sensor 1");
   //  m_chart->setXMinXax(0,m_MaxDataPlot);
   //  m_chart->setYMinXax(0,1024);
-    m_chartMag->setXMinXax(0,1000);
-    m_chartMag->setYMinXax(0,1024);
-    m_chartMag->initializePlot();
-    m_chartViewMag = new QChartView(static_cast<QChart*>(m_chartMag));
+    m_chartSen1->setXMinXax(0,m_MaxDataPlot);
+    m_chartSen1->setYMinXax(0,4096);
+    m_chartSen1->initializePlot();
+    m_chartViewSen1 = new QChartView(static_cast<QChart*>(m_chartSen1));
     //Set antialising properties and the chartview object to a place in layout
-    m_chartViewMag->setRenderHint(QPainter::Antialiasing, false); //false or true
-    ui->verticalLayout_3->addWidget(m_chartViewMag,1,0);
+    m_chartViewSen1->setRenderHint(QPainter::Antialiasing, false); //false or true
+    ui->verticalLayout_3->addWidget(m_chartViewSen1,1,0);
 
-    //plot Phase
-    m_chartPha = new CPlotChart();
-    m_chartPha->setType(NORMAL);
-    m_chartPha->setTitles("","Time","Sensor 2");
-    m_chartPha->setXMinXax(0,1000);
-    m_chartPha->setYMinXax(0,1024);
-    m_chartPha->initializePlot();
-    m_chartViewPha = new QChartView(static_cast<QChart*>(m_chartPha));
+    //plot Sensor2
+    m_chartSen2 = new CPlotChart();
+    m_chartSen2->setType(NORMAL);
+    m_chartSen2->setTitles("","Time","Sensor 2");
+    m_chartSen2->setXMinXax(0,m_MaxDataPlot);
+    m_chartSen2->setYMinXax(0,4096);
+    m_chartSen2->initializePlot();
+    m_chartViewSen2 = new QChartView(static_cast<QChart*>(m_chartSen2));
     //Set antialising properties and the chartview object to a place in layout
-    m_chartViewPha->setRenderHint(QPainter::Antialiasing, false); //false or true
-    ui->verticalLayout_3->addWidget(m_chartViewPha,1,0);
+    m_chartViewSen2->setRenderHint(QPainter::Antialiasing, false); //false or true
+    ui->verticalLayout_3->addWidget(m_chartViewSen2,1,0);
 
     //timer to refresh the plot
-    //m_timer = new QTimer(this);
-    //connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
-    //m_timer->start(m_PlotTimeout);
+    m_timer = new QTimer(this);
+    connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
+    m_timer->start(m_PlotTimeout);
 
-    //nanosense
 
 }
 
@@ -113,33 +112,26 @@ void MainWindow::BTrxData(const QByteArray &data)
         ui->plainTextEditAT->clear();
     }
 
-    /*
-    //Update PA label
-    QString aux;
-    aux = "Answer: " + QString::fromStdString(data.toStdString());
-    ui->label_PA_Config->setText(aux);
-
-    m_data.append(data);
-    int size = m_data.count();
-
-    int res_packet = size%7; //sweep packets are 7 bytes
-
-    if(!res_packet) {
-        parseRxSweepData();
-
-    } else if (res_packet == 1 && size < 15) { //Filter echo (only relevant for implantable reader!)
-        const char* aux = m_data.constData();
-        if (aux[0] == 'f' && aux[1] == 'f') {
-            qDebug()<<"Filtering echo";
-            m_data.remove(0,1);
-            parseRxSweepData();
-        }
-    } else {
-        qDebug()<<"Size: "<< size << " Packet incomplete";
+    //Process sensor data only if NMES is active
+    if (!m_timer->isActive())
         return;
+
+     m_data.append(data);
+
+    int size = data.count();
+    if (size%2) { //each sample is 2 bytes. There is an incomplete value!
+        qDebug()<<"Odd number of bytes received, appending";
+        return; //wait for the next rx to complete
+
+    } else if (size < 4) { // at least one sample per channel needs to arrive
+        qDebug()<<"Incomplete packet received, appending";
+        return; //wait for the next rx to complete
+
+    } else { // Process the received values
+        PlotRx(m_data);
+        m_data.clear();
     }
 
-*/
 }
 
 void MainWindow::WiFiRead()
@@ -202,37 +194,58 @@ void MainWindow::PlotRx(const QByteArray &data)
     DataPoint aux_point;
     int index = 0;   
     quint16 value;
-    double val;
 
+/*
+    //Single channel
     int size = data.count()/2; //Each converted value comes in 2 bytes unsigned short.
 
-    m_trace.clear();
     for (int i = 0; i < size; i++) {
         //reconstruct the digital value
         value = data.at(index++) & 0xff;
         value |= (data.at(index++) << 8) & 0xff00;
 
-        val = value*1.8/4096.0;
-      /*  //Create a data point
+        //Create a data point
         aux_point.first.setX(m_DataCounter);
         aux_point.first.setY(value);
-        aux_point.second = QString::number(m_DataCounter); */
-
-        aux_point.first.setX(val);
-        //aux_point.first.setY(m_current[i]);
-        aux_point.second = QString::number(value);
-
+        aux_point.second = QString::number(m_DataCounter);
 
         //Save the data point for further processing/plotting
         m_trace.append(aux_point);
         m_DataCounter++;
     }
+  */
+    // Dual channel
+    int size = data.count()/4; //Each converted value comes in 2 bytes unsigned short.
 
-    if(m_trace.count()) {
-        m_chartMag->clearTable();
-        m_chartMag->addTrace(m_trace);
-        m_chartMag->updatePlot();
+    for (int i = 0; i < size; i++) {
+        //reconstruct the digital value
+        value = data.at(index++) & 0xff;
+        value |= (data.at(index++) << 8) & 0xff00;
+
+        //Create a data point
+        aux_point.first.setX(m_DataCounter);
+        aux_point.first.setY(value);
+        aux_point.second = QString::number(m_DataCounter);
+
+        //Save the data point for further processing/plotting
+        m_trace.append(aux_point);
+
+        //reconstruct the digital value2
+        value = data.at(index++) & 0xff;
+        value |= (data.at(index++) << 8) & 0xff00;
+
+        //Create a data point2
+        aux_point.first.setX(m_DataCounter);
+        aux_point.first.setY(value);
+        aux_point.second = QString::number(m_DataCounter);
+
+        //Save the data point for further processing/plotting
+        m_trace2.append(aux_point);
+
+        m_DataCounter++;
     }
+    //The data is plotted using PlotTimeout()
+
 }
 
 void MainWindow::PlotTimeout()
@@ -254,6 +267,12 @@ void MainWindow::PlotTimeout()
 
     //Uncomment the next line in order to update the plot with all the new data at once
     //head = m_DataCounter;
+
+    //Uncomment the next lines in order to update the plot with the available data
+    head = m_PlotCounter + m_PlotNumUpdate;
+    if (head > m_DataCounter) {
+            head = m_DataCounter;
+    }
 /*
     if (ui->checkBoxConfigSmoothPlot->isChecked()) { //Only add M_PlotNumUpdate samples to the plot
         head = m_PlotCounter + m_PlotNumUpdate;
@@ -268,26 +287,37 @@ void MainWindow::PlotTimeout()
         plot_index = m_PlotCounter%m_MaxDataPlot; //create a index between 0 - m_MaxDataPot
         if (plot_index == 0) {  //clear the plot trace
             m_plot_trace.clear();
+            m_plot_trace2.clear();
         } else {
             aux_point = m_trace.at(i);
             aux_point.first.setX(plot_index);
             m_plot_trace.append(aux_point);
+
+            aux_point = m_trace2.at(i);
+            aux_point.first.setX(plot_index);
+            m_plot_trace2.append(aux_point);
         }
         m_PlotCounter++;
     }
 
     //replot the trace
     if(m_plot_trace.count()) {
-        m_chartMag->clearTable();
-        m_chartMag->addTrace(m_plot_trace);
-        m_chartMag->updatePlot();
+        m_chartSen1->clearTable();
+        m_chartSen1->addTrace(m_plot_trace);
+        m_chartSen1->updatePlot();
+
+        m_chartSen2->clearTable();
+        m_chartSen2->addTrace(m_plot_trace2);
+        m_chartSen2->updatePlot();
     }
 
     //Check if number of samples are exceeded
     if (m_trace.count() >= m_MaxNumSamples) {
         m_trace.clear();
+        m_trace2.clear();
         m_DataCounter = 0;
         m_plot_trace.clear();
+        m_plot_trace2.clear();
         m_PlotCounter = 0;
     }
 }
@@ -422,11 +452,11 @@ void MainWindow::on_pushButtonWiFiDisconnect_clicked()
 void MainWindow::on_checkBoxConfigAntialias_toggled(bool checked)
 {
     if (checked) {
-        m_chartViewMag->setRenderHint(QPainter::Antialiasing, true); //false or true
-        m_chartViewPha->setRenderHint(QPainter::Antialiasing, true); //false or true
+        m_chartViewSen1->setRenderHint(QPainter::Antialiasing, true); //false or true
+        m_chartViewSen2->setRenderHint(QPainter::Antialiasing, true); //false or true
     } else {
-        m_chartViewMag->setRenderHint(QPainter::Antialiasing, false); //false or true
-        m_chartViewPha->setRenderHint(QPainter::Antialiasing, false); //false or true
+        m_chartViewSen1->setRenderHint(QPainter::Antialiasing, false); //false or true
+        m_chartViewSen2->setRenderHint(QPainter::Antialiasing, false); //false or true
     }
 }
 
@@ -461,6 +491,9 @@ void MainWindow::on_action_Run_triggered()
     QByteArray data;
     data.append('n');
     send(data);
+
+    m_timer->start(m_PlotTimeout);
+    ui->action_Run->setEnabled(false);
 }
 
 void MainWindow::on_action_Clean_triggered()
@@ -677,7 +710,8 @@ void MainWindow::on_actionStop_triggered()
     data.append('N');
     send(data);
 
-
+    m_timer->stop();
+    ui->action_Run->setEnabled(true);
 
 }
 
