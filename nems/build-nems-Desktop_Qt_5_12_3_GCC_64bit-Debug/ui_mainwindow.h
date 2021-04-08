@@ -16,6 +16,7 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
+#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -41,6 +42,7 @@ public:
     QAction *actionStop;
     QAction *action_Open;
     QAction *action_Display_program;
+    QAction *actionSensors;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -135,6 +137,8 @@ public:
     QGridLayout *gridLayout_6;
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
+    QWidget *tab_4;
+    QLCDNumber *lcdNumber;
     QMenuBar *menuBar;
     QMenu *menu_Measurement;
     QToolBar *mainToolBar;
@@ -175,6 +179,12 @@ public:
         QIcon icon5;
         icon5.addFile(QString::fromUtf8(":/images/images/Read_icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         action_Display_program->setIcon(icon5);
+        actionSensors = new QAction(MainWindow);
+        actionSensors->setObjectName(QString::fromUtf8("actionSensors"));
+        actionSensors->setCheckable(true);
+        QIcon icon6;
+        icon6.addFile(QString::fromUtf8(":/images/images/sensor.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSensors->setIcon(icon6);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -710,6 +720,12 @@ public:
         gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
         tabWidget->addTab(tab, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName(QString::fromUtf8("tab_4"));
+        lcdNumber = new QLCDNumber(tab_4);
+        lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
+        lcdNumber->setGeometry(QRect(110, 60, 101, 101));
+        tabWidget->addTab(tab_4, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -772,8 +788,10 @@ public:
         menu_Measurement->addAction(action_Save);
         menu_Measurement->addAction(action_Clean);
         menu_Measurement->addAction(action_Display_program);
+        menu_Measurement->addAction(actionSensors);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(actionStop);
+        mainToolBar->addAction(actionSensors);
         mainToolBar->addAction(action_Open);
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Display_program);
@@ -782,7 +800,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(3);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -818,6 +836,7 @@ public:
 #ifndef QT_NO_SHORTCUT
         action_Display_program->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", nullptr));
 #endif // QT_NO_SHORTCUT
+        actionSensors->setText(QApplication::translate("MainWindow", "Sensors", nullptr));
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
@@ -863,6 +882,7 @@ public:
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi
 

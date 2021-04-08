@@ -3,8 +3,7 @@
 
 #include "btclient.h"
 #include "cplotchart.h"
-//#include "sweep.h"
-//#include "bioimpedance.h"
+#include "nmessensor.h"
 
 #include <QMainWindow>
 #include <QDataStream>
@@ -61,19 +60,15 @@ private:
     QTimer *m_timer;
     int m_PlotTimeout;
 
-    //nanosense
-
-    QTimer *m_timerMeas;    //timeout for the measurent
-    QTime m_timearrival;    //used to check speed of the measurement (time elapsed)
-
-    double m_gainCalFactor[11];
-    double m_phaseCalFactor[11];
+    //NMES
+    NmesSensor sens1;
 
 
 private slots:
     void BTgetDevice(QString name);
     void BTConnected(QString name);
     void BTrxData(const QByteArray &data);
+
 
     void WiFiRead();
     void WiFiDisplayError(QAbstractSocket::SocketError socketError);
@@ -82,6 +77,8 @@ private slots:
     void PlotTimeout();
 
     void send(QByteArray data);
+
+    void parseProgram(const QByteArray &data);
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
@@ -118,6 +115,7 @@ private slots:
     void on_pushButtonChannel3_clicked();
     void on_pushButtonChannel4_clicked();
     void on_pushButtonAmplitude2_clicked();
+    void on_actionSensors_triggered(bool checked);
 };
 
 #endif // MAINWINDOW_H

@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -653,6 +653,21 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="tab_4">
+         <attribute name="title">
+          <string>Sensors</string>
+         </attribute>
+         <widget class="QLCDNumber" name="lcdNumber">
+          <property name="geometry">
+           <rect>
+            <x>110</x>
+            <y>60</y>
+            <width>101</width>
+            <height>101</height>
+           </rect>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </item>
      </layout>
@@ -678,6 +693,7 @@
     <addaction name="action_Save"/>
     <addaction name="action_Clean"/>
     <addaction name="action_Display_program"/>
+    <addaction name="actionSensors"/>
    </widget>
    <addaction name="menu_Measurement"/>
   </widget>
@@ -690,6 +706,7 @@
    </attribute>
    <addaction name="action_Run"/>
    <addaction name="actionStop"/>
+   <addaction name="actionSensors"/>
    <addaction name="action_Open"/>
    <addaction name="action_Save"/>
    <addaction name="action_Display_program"/>
@@ -770,6 +787,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionSensors">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/sensor.png</normaloff>:/images/images/sensor.png</iconset>
+   </property>
+   <property name="text">
+    <string>Sensors</string>
    </property>
   </action>
  </widget>

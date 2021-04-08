@@ -26,12 +26,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     btclient.cpp \
-    cplotchart.cpp
+    cplotchart.cpp \
+    nmessensor.cpp
 
 HEADERS += \
         mainwindow.h \
     btclient.h \
-    cplotchart.h
+    cplotchart.h \
+    nmessensor.h
 
 FORMS += \
         mainwindow.ui

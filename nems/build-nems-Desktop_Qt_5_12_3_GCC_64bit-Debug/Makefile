@@ -55,16 +55,20 @@ OBJECTS_DIR   = ./
 SOURCES       = ../nems/main.cpp \
 		../nems/mainwindow.cpp \
 		../nems/btclient.cpp \
-		../nems/cplotchart.cpp qrc_images.cpp \
+		../nems/cplotchart.cpp \
+		../nems/nmessensor.cpp qrc_images.cpp \
 		moc_mainwindow.cpp \
-		moc_btclient.cpp
+		moc_btclient.cpp \
+		moc_nmessensor.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		btclient.o \
 		cplotchart.o \
+		nmessensor.o \
 		qrc_images.o \
 		moc_mainwindow.o \
-		moc_btclient.o
+		moc_btclient.o \
+		moc_nmessensor.o
 DIST          = ../nems/android/AndroidManifest.xml \
 		../nems/android/gradle/wrapper/gradle-wrapper.jar \
 		../nems/android/gradlew \
@@ -274,10 +278,12 @@ DIST          = ../nems/android/AndroidManifest.xml \
 		/pkg/Qt/5.12.3/gcc_64/mkspecs/features/lex.prf \
 		../nems/nems.pro ../nems/mainwindow.h \
 		../nems/btclient.h \
-		../nems/cplotchart.h ../nems/main.cpp \
+		../nems/cplotchart.h \
+		../nems/nmessensor.h ../nems/main.cpp \
 		../nems/mainwindow.cpp \
 		../nems/btclient.cpp \
-		../nems/cplotchart.cpp
+		../nems/cplotchart.cpp \
+		../nems/nmessensor.cpp
 QMAKE_TARGET  = nems
 DESTDIR       = 
 TARGET        = nems
@@ -708,8 +714,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /pkg/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmessensor.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmessensor.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/mainwindow.ui $(DISTDIR)/
 
 
@@ -741,6 +747,7 @@ qrc_images.cpp: ../nems/images.qrc \
 		/pkg/Qt/5.12.3/gcc_64/bin/rcc \
 		../nems/images/Read_icon.png \
 		../nems/images/Clean-icon.png \
+		../nems/images/sensor.png \
 		../nems/images/Save-icon.png \
 		../nems/images/Button-Play-icon.png \
 		../nems/images/Delete-icon.png \
@@ -754,9 +761,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /pkg/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -std=gnu++11 -Wall -W -dM -E -o moc_predefs.h /pkg/Qt/5.12.3/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_btclient.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_btclient.cpp moc_nmessensor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_btclient.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_btclient.cpp moc_nmessensor.cpp
 moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../nems/btclient.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
@@ -916,6 +923,7 @@ moc_mainwindow.cpp: ../nems/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		../nems/nmessensor.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1042,6 +1050,61 @@ moc_btclient.cpp: ../nems/btclient.h \
 		moc_predefs.h \
 		/pkg/Qt/5.12.3/gcc_64/bin/moc
 	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtCharts -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtBluetooth -I/pkg/Qt/5.12.3/gcc_64/include/QtNetwork -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/btclient.h -o moc_btclient.cpp
+
+moc_nmessensor.cpp: ../nems/nmessensor.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qnamespace.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qconfig.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtcore-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsysinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlogging.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qflags.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmutex.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qnumeric.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstring.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qchar.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbytearray.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qrefcount.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qarraydata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringliteral.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiterator.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpair.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringlist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qregexp.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreevent.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		moc_predefs.h \
+		/pkg/Qt/5.12.3/gcc_64/bin/moc
+	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtCharts -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtBluetooth -I/pkg/Qt/5.12.3/gcc_64/include/QtNetwork -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmessensor.h -o moc_nmessensor.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1223,6 +1286,7 @@ main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		../nems/nmessensor.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1413,6 +1477,7 @@ mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qlineseries.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QXYSeries \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/qxyseries.h \
+		../nems/nmessensor.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1467,6 +1532,8 @@ mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QGroupBox \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qgroupbox.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QHBoxLayout \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QLCDNumber \
+		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlcdnumber.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QLabel \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qlabel.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QLineEdit \
@@ -1750,6 +1817,61 @@ cplotchart.o: ../nems/cplotchart.cpp ../nems/cplotchart.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCharts/QValueAxis
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o cplotchart.o ../nems/cplotchart.cpp
 
+nmessensor.o: ../nems/nmessensor.cpp ../nems/nmessensor.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QObject \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qnamespace.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobal.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qconfig-bootstrapped.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qconfig.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtcore-config.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qsysinfo.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlogging.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qflags.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_bootstrap.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qatomic_msvc.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmutex.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qnumeric.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qversiontagging.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstring.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qchar.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbytearray.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qrefcount.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qarraydata.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringliteral.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringview.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qlist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qalgorithms.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qiterator.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qpair.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringlist.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qregexp.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcoreevent.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QtMath \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmath.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nmessensor.o ../nems/nmessensor.cpp
+
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
 
@@ -1758,6 +1880,9 @@ moc_mainwindow.o: moc_mainwindow.cpp
 
 moc_btclient.o: moc_btclient.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_btclient.o moc_btclient.cpp
+
+moc_nmessensor.o: moc_nmessensor.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_nmessensor.o moc_nmessensor.cpp
 
 ####### Install
 

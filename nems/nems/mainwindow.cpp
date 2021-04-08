@@ -77,7 +77,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //timer to refresh the plot
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
-    m_timer->start(m_PlotTimeout);
+    //m_timer->start(m_PlotTimeout);
+
+    //sens1.test();
 
 
 }
@@ -112,10 +114,14 @@ void MainWindow::BTrxData(const QByteArray &data)
         ui->plainTextEditAT->clear();
     }
 
+    //Check if received data is current program configuration
+    parseProgram(data);
+
     //Process sensor data only if NMES is active
     if (!m_timer->isActive())
         return;
 
+    //Receive sensor data
      m_data.append(data);
 
     int size = data.count();
@@ -331,6 +337,131 @@ void MainWindow::send(QByteArray data)
         data.append('\n');
         m_WiFiTcpSocket->write(data);
     }
+}
+
+void MainWindow::parseProgram(const QByteArray &data)
+{
+    QString dataStr;
+    QStringList dataLst;
+    QStringList parameterLst;
+    QString aux;
+    QString parameter;
+
+    dataStr = QString::fromStdString(data.toStdString());
+
+    dataLst = dataStr.split(QRegExp("\n"));
+
+    int n = dataLst.count();
+
+    // check that message is program configuration
+    if (n != 17) {
+        return;
+    }
+
+    aux = dataLst.at(1);
+    if (aux.compare("NEMS program")) {
+            return;
+    }
+
+    // extract program data
+
+    //Amplitude1
+    aux = dataLst.at(2);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditAmplitude->setText(parameter);
+
+    //Amplitude2
+    aux = dataLst.at(3);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditAmplitude2->setText(parameter);
+
+    //Frequency
+    aux = dataLst.at(4);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditFrequency->setText(parameter);
+
+    //Phase Duration
+    aux = dataLst.at(5);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditPhase->setText(parameter);
+
+    //Symmetry Factor
+    aux = dataLst.at(6);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditSymetry->setText(parameter);
+
+    //ON Time
+    aux = dataLst.at(7);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditON->setText(parameter);
+
+    //OFF Time
+    aux = dataLst.at(8);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditOFF->setText(parameter);
+
+    //Ramp up
+    aux = dataLst.at(9);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditRampUp->setText(parameter);
+
+    //Ramp down
+    aux = dataLst.at(10);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditRampDown->setText(parameter);
+
+    //Contractions
+    aux = dataLst.at(11);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditContractions->setText(parameter);
+
+    //channel1
+    aux = dataLst.at(12);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditChannel1->setText(parameter);
+
+    //channel2
+    aux = dataLst.at(13);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditChannel2->setText(parameter);
+
+    //channel3
+    aux = dataLst.at(14);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditChannel3->setText(parameter);
+
+    //channel4
+    aux = dataLst.at(15);
+    parameterLst = aux.split(QRegExp(" "));
+    n = parameterLst.count();
+    parameter = parameterLst.at(n-1);
+    ui->lineEditChannel4->setText(parameter);
 
 }
 
@@ -492,7 +623,7 @@ void MainWindow::on_action_Run_triggered()
     data.append('n');
     send(data);
 
-    m_timer->start(m_PlotTimeout);
+    //m_timer->start(m_PlotTimeout);
     ui->action_Run->setEnabled(false);
 }
 
@@ -710,7 +841,7 @@ void MainWindow::on_actionStop_triggered()
     data.append('N');
     send(data);
 
-    m_timer->stop();
+    //m_timer->stop();
     ui->action_Run->setEnabled(true);
 
 }
@@ -778,6 +909,23 @@ void MainWindow::on_pushButtonAmplitude2_clicked()
         data.append('0');
     }
     data.append(aux);
+
+    send(data);
+}
+
+void MainWindow::on_actionSensors_triggered(bool checked)
+{
+    QByteArray data;
+
+    if (!checked) {
+        data.append("B"); // stop sensors
+        m_timer->stop();
+    } else {
+        data.append("b"); // start sensors
+        if(!m_timer->isActive()) {
+             m_timer->start(m_PlotTimeout);
+        }
+    }
 
     send(data);
 }
