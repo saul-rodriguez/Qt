@@ -60,8 +60,12 @@ private:
     QTimer *m_timer;
     int m_PlotTimeout;
 
-    //NMES
-    NmesSensor sens1;
+    //NMES sensors
+    NmesSensor m_sens1;
+    NmesSensor m_sens2;
+    int m_energy_range;
+    int m_energy_threshold;
+    int m_maxEnergy;
 
 
 private slots:
@@ -75,6 +79,7 @@ private slots:
 
     void PlotRx(const QByteArray &data);
     void PlotTimeout();
+    void UpdateSensorData();
 
     void send(QByteArray data);
 
@@ -116,6 +121,9 @@ private slots:
     void on_pushButtonChannel4_clicked();
     void on_pushButtonAmplitude2_clicked();
     void on_actionSensors_triggered(bool checked);
+    void on_verticalSliderEnergyMax_valueChanged(int value);
+    void on_verticalSliderEnergyThreshold_valueChanged(int value);
+    void on_pushButtonResetMaxEnergy_clicked();
 };
 
 #endif // MAINWINDOW_H

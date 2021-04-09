@@ -38,7 +38,7 @@ void NmesSensor::add_point(double value)
     double aux[DATA_POINTS];
     double aux2[AVERAGE_POINTS];
 
-    //insert new data value and discard the last one
+    //insert new data value and discard the last point
     for (int i=1; i < DATA_POINTS; i++) {
         aux[i] = data_points[i-1];
     }
@@ -58,6 +58,7 @@ void NmesSensor::add_point(double value)
         average_points[i] = aux2[i];
     }
 
+    //recalculate average and energy
     calculateAverage();
     calculateEnergy();
 }

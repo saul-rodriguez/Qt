@@ -79,7 +79,30 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
     //m_timer->start(m_PlotTimeout);
 
-    //sens1.test();
+    //sensors
+
+    ui->verticalSliderEnergyMax->setRange(0,5); // m_energy_range up to 1000*10^5
+    ui->verticalSliderEnergyMax->setValue(0);
+
+    double aux;
+    aux = 1000*qPow(10,0);
+    m_energy_range = aux;
+    m_energy_threshold = aux;
+
+    m_maxEnergy = 0;
+
+    ui->labelEnergyRange->setText(QString::number((int)aux));
+    ui->progressBarEnergy->setRange(0,m_energy_range);
+    ui->progressBarEnergy->setValue(0);
+
+    ui->verticalSliderEnergyThreshold->setRange(0,m_energy_range);
+    ui->verticalSliderEnergyThreshold->setValue(m_energy_threshold);
+    ui->labelThreshold->setText(QString::number((int)m_energy_threshold));
+
+    ui->progressBarMuscle->setRange(0,1);
+    ui->progressBarMuscle->setValue(0);
+
+    ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
 
 
 }
@@ -235,6 +258,7 @@ void MainWindow::PlotRx(const QByteArray &data)
 
         //Save the data point for further processing/plotting
         m_trace.append(aux_point);
+        m_sens1.add_point(value);
 
         //reconstruct the digital value2
         value = data.at(index++) & 0xff;
@@ -247,6 +271,7 @@ void MainWindow::PlotRx(const QByteArray &data)
 
         //Save the data point for further processing/plotting
         m_trace2.append(aux_point);
+        m_sens2.add_point(value);
 
         m_DataCounter++;
     }
@@ -326,6 +351,39 @@ void MainWindow::PlotTimeout()
         m_plot_trace2.clear();
         m_PlotCounter = 0;
     }
+
+    //Update sensor data
+    UpdateSensorData();
+}
+
+void MainWindow::UpdateSensorData()
+{
+    double energy1 = m_sens1.getEnergy();
+
+    ui->labelEnergyValue->setText(QString::number((int)energy1));
+
+    if (energy1 > m_energy_range) {
+        ui->progressBarEnergy->setValue(m_energy_range);
+    } else {
+        ui->progressBarEnergy->setValue((int)energy1);
+    }
+
+    if (energy1 > m_energy_threshold) {
+        ui->progressBarMuscle->setValue(1);
+    } else {
+        ui->progressBarMuscle->setValue(0);
+    }
+
+    if (energy1 > m_maxEnergy) {
+        m_maxEnergy = energy1;
+        ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
+
+    }
+
+
+
+
+
 }
 
 void MainWindow::send(QByteArray data)
@@ -928,4 +986,28 @@ void MainWindow::on_actionSensors_triggered(bool checked)
     }
 
     send(data);
+}
+
+void MainWindow::on_verticalSliderEnergyMax_valueChanged(int value)
+{
+    double aux;
+    aux = 1000*qPow(10,value);
+    m_energy_range = aux;
+
+    //m_energy_range = value;
+    ui->progressBarEnergy->setRange(0,m_energy_range);
+    ui->verticalSliderEnergyThreshold->setRange(0,m_energy_range);
+    ui->labelEnergyRange->setText(QString::number((int)m_energy_range));
+}
+
+void MainWindow::on_verticalSliderEnergyThreshold_valueChanged(int value)
+{
+    m_energy_threshold = value;
+    ui->labelThreshold->setText(QString::number((int)value));
+}
+
+void MainWindow::on_pushButtonResetMaxEnergy_clicked()
+{
+    m_maxEnergy = 0;
+    ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
 }

@@ -16,15 +16,17 @@
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
-#include <QtWidgets/QLCDNumber>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QToolBar>
@@ -138,7 +140,32 @@ public:
     QVBoxLayout *verticalLayout_3;
     QHBoxLayout *horizontalLayout_2;
     QWidget *tab_4;
-    QLCDNumber *lcdNumber;
+    QGridLayout *gridLayout_8;
+    QHBoxLayout *horizontalLayout_19;
+    QVBoxLayout *verticalLayout_5;
+    QLabel *labelScale;
+    QSlider *verticalSliderEnergyMax;
+    QVBoxLayout *verticalLayout_4;
+    QLabel *labelEnergy;
+    QProgressBar *progressBarEnergy;
+    QVBoxLayout *verticalLayout_8;
+    QLabel *label_16;
+    QLabel *labelEnergyRange;
+    QLabel *label_17;
+    QLabel *labelEnergyValue;
+    QLabel *label_20;
+    QLabel *labelThreshold;
+    QLabel *label_21;
+    QLabel *labelEnergyMax;
+    QPushButton *pushButtonResetMaxEnergy;
+    QSpacerItem *verticalSpacer;
+    QVBoxLayout *verticalLayout_6;
+    QLabel *label_18;
+    QSlider *verticalSliderEnergyThreshold;
+    QVBoxLayout *verticalLayout_7;
+    QLabel *label_19;
+    QProgressBar *progressBarMuscle;
+    QSpacerItem *horizontalSpacer;
     QMenuBar *menuBar;
     QMenu *menu_Measurement;
     QToolBar *mainToolBar;
@@ -722,9 +749,146 @@ public:
         tabWidget->addTab(tab, QString());
         tab_4 = new QWidget();
         tab_4->setObjectName(QString::fromUtf8("tab_4"));
-        lcdNumber = new QLCDNumber(tab_4);
-        lcdNumber->setObjectName(QString::fromUtf8("lcdNumber"));
-        lcdNumber->setGeometry(QRect(110, 60, 101, 101));
+        gridLayout_8 = new QGridLayout(tab_4);
+        gridLayout_8->setSpacing(6);
+        gridLayout_8->setContentsMargins(11, 11, 11, 11);
+        gridLayout_8->setObjectName(QString::fromUtf8("gridLayout_8"));
+        horizontalLayout_19 = new QHBoxLayout();
+        horizontalLayout_19->setSpacing(6);
+        horizontalLayout_19->setObjectName(QString::fromUtf8("horizontalLayout_19"));
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        labelScale = new QLabel(tab_4);
+        labelScale->setObjectName(QString::fromUtf8("labelScale"));
+
+        verticalLayout_5->addWidget(labelScale);
+
+        verticalSliderEnergyMax = new QSlider(tab_4);
+        verticalSliderEnergyMax->setObjectName(QString::fromUtf8("verticalSliderEnergyMax"));
+        verticalSliderEnergyMax->setMaximum(5);
+        verticalSliderEnergyMax->setOrientation(Qt::Vertical);
+
+        verticalLayout_5->addWidget(verticalSliderEnergyMax);
+
+
+        horizontalLayout_19->addLayout(verticalLayout_5);
+
+        verticalLayout_4 = new QVBoxLayout();
+        verticalLayout_4->setSpacing(6);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        labelEnergy = new QLabel(tab_4);
+        labelEnergy->setObjectName(QString::fromUtf8("labelEnergy"));
+
+        verticalLayout_4->addWidget(labelEnergy);
+
+        progressBarEnergy = new QProgressBar(tab_4);
+        progressBarEnergy->setObjectName(QString::fromUtf8("progressBarEnergy"));
+        progressBarEnergy->setValue(24);
+        progressBarEnergy->setOrientation(Qt::Vertical);
+
+        verticalLayout_4->addWidget(progressBarEnergy);
+
+
+        horizontalLayout_19->addLayout(verticalLayout_4);
+
+        verticalLayout_8 = new QVBoxLayout();
+        verticalLayout_8->setSpacing(6);
+        verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
+        label_16 = new QLabel(tab_4);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        verticalLayout_8->addWidget(label_16);
+
+        labelEnergyRange = new QLabel(tab_4);
+        labelEnergyRange->setObjectName(QString::fromUtf8("labelEnergyRange"));
+
+        verticalLayout_8->addWidget(labelEnergyRange);
+
+        label_17 = new QLabel(tab_4);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        verticalLayout_8->addWidget(label_17);
+
+        labelEnergyValue = new QLabel(tab_4);
+        labelEnergyValue->setObjectName(QString::fromUtf8("labelEnergyValue"));
+
+        verticalLayout_8->addWidget(labelEnergyValue);
+
+        label_20 = new QLabel(tab_4);
+        label_20->setObjectName(QString::fromUtf8("label_20"));
+
+        verticalLayout_8->addWidget(label_20);
+
+        labelThreshold = new QLabel(tab_4);
+        labelThreshold->setObjectName(QString::fromUtf8("labelThreshold"));
+
+        verticalLayout_8->addWidget(labelThreshold);
+
+        label_21 = new QLabel(tab_4);
+        label_21->setObjectName(QString::fromUtf8("label_21"));
+
+        verticalLayout_8->addWidget(label_21);
+
+        labelEnergyMax = new QLabel(tab_4);
+        labelEnergyMax->setObjectName(QString::fromUtf8("labelEnergyMax"));
+
+        verticalLayout_8->addWidget(labelEnergyMax);
+
+        pushButtonResetMaxEnergy = new QPushButton(tab_4);
+        pushButtonResetMaxEnergy->setObjectName(QString::fromUtf8("pushButtonResetMaxEnergy"));
+
+        verticalLayout_8->addWidget(pushButtonResetMaxEnergy);
+
+        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_8->addItem(verticalSpacer);
+
+
+        horizontalLayout_19->addLayout(verticalLayout_8);
+
+        verticalLayout_6 = new QVBoxLayout();
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
+        label_18 = new QLabel(tab_4);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        verticalLayout_6->addWidget(label_18);
+
+        verticalSliderEnergyThreshold = new QSlider(tab_4);
+        verticalSliderEnergyThreshold->setObjectName(QString::fromUtf8("verticalSliderEnergyThreshold"));
+        verticalSliderEnergyThreshold->setOrientation(Qt::Vertical);
+
+        verticalLayout_6->addWidget(verticalSliderEnergyThreshold);
+
+
+        horizontalLayout_19->addLayout(verticalLayout_6);
+
+        verticalLayout_7 = new QVBoxLayout();
+        verticalLayout_7->setSpacing(6);
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
+        label_19 = new QLabel(tab_4);
+        label_19->setObjectName(QString::fromUtf8("label_19"));
+
+        verticalLayout_7->addWidget(label_19);
+
+        progressBarMuscle = new QProgressBar(tab_4);
+        progressBarMuscle->setObjectName(QString::fromUtf8("progressBarMuscle"));
+        progressBarMuscle->setValue(24);
+        progressBarMuscle->setOrientation(Qt::Vertical);
+
+        verticalLayout_7->addWidget(progressBarMuscle);
+
+
+        horizontalLayout_19->addLayout(verticalLayout_7);
+
+
+        gridLayout_8->addLayout(horizontalLayout_19, 0, 0, 1, 1);
+
+        horizontalSpacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        gridLayout_8->addItem(horizontalSpacer, 0, 1, 1, 1);
+
         tabWidget->addTab(tab_4, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -775,8 +939,7 @@ public:
         QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
         QWidget::setTabOrder(lineEditWiFiAddress, plainTextEditAT);
         QWidget::setTabOrder(plainTextEditAT, pushButtonWiFiConnect);
-        QWidget::setTabOrder(pushButtonWiFiConnect, tabWidget);
-        QWidget::setTabOrder(tabWidget, radioButtonBT);
+        QWidget::setTabOrder(pushButtonWiFiConnect, radioButtonBT);
         QWidget::setTabOrder(radioButtonBT, lineEditWiFiPort);
         QWidget::setTabOrder(lineEditWiFiPort, pushButtonWiFiDisconnect);
         QWidget::setTabOrder(pushButtonWiFiDisconnect, pushButtonBTdisconnect);
@@ -882,6 +1045,19 @@ public:
         pushButtonATSend->setText(QApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
+        labelScale->setText(QApplication::translate("MainWindow", "Scale", nullptr));
+        labelEnergy->setText(QApplication::translate("MainWindow", "Energy", nullptr));
+        label_16->setText(QApplication::translate("MainWindow", "Max Range", nullptr));
+        labelEnergyRange->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_17->setText(QApplication::translate("MainWindow", "Energy Value", nullptr));
+        labelEnergyValue->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_20->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
+        labelThreshold->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_21->setText(QApplication::translate("MainWindow", "Max Energy", nullptr));
+        labelEnergyMax->setText(QApplication::translate("MainWindow", "0", nullptr));
+        pushButtonResetMaxEnergy->setText(QApplication::translate("MainWindow", "Reset", nullptr));
+        label_18->setText(QApplication::translate("MainWindow", "Theshold", nullptr));
+        label_19->setText(QApplication::translate("MainWindow", "Movement", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi
