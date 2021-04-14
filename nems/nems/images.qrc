@@ -8,5 +8,6 @@
         <file>images/Open_icon.png</file>
         <file>images/Read_icon.png</file>
         <file>images/sensor.png</file>
+        <file>images/search.png</file>
     </qresource>
 </RCC>

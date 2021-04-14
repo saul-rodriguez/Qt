@@ -45,6 +45,7 @@ public:
     QAction *action_Open;
     QAction *action_Display_program;
     QAction *actionSensors;
+    QAction *actionSearch;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -166,6 +167,8 @@ public:
     QLabel *label_19;
     QProgressBar *progressBarMuscle;
     QSpacerItem *horizontalSpacer;
+    QWidget *tab_5;
+    QPlainTextEdit *plainTextEditSearch;
     QMenuBar *menuBar;
     QMenu *menu_Measurement;
     QToolBar *mainToolBar;
@@ -212,6 +215,11 @@ public:
         QIcon icon6;
         icon6.addFile(QString::fromUtf8(":/images/images/sensor.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSensors->setIcon(icon6);
+        actionSearch = new QAction(MainWindow);
+        actionSearch->setObjectName(QString::fromUtf8("actionSearch"));
+        QIcon icon7;
+        icon7.addFile(QString::fromUtf8(":/images/images/search.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionSearch->setIcon(icon7);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -890,6 +898,12 @@ public:
         gridLayout_8->addItem(horizontalSpacer, 0, 1, 1, 1);
 
         tabWidget->addTab(tab_4, QString());
+        tab_5 = new QWidget();
+        tab_5->setObjectName(QString::fromUtf8("tab_5"));
+        plainTextEditSearch = new QPlainTextEdit(tab_5);
+        plainTextEditSearch->setObjectName(QString::fromUtf8("plainTextEditSearch"));
+        plainTextEditSearch->setGeometry(QRect(60, 130, 421, 261));
+        tabWidget->addTab(tab_5, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -952,18 +966,20 @@ public:
         menu_Measurement->addAction(action_Clean);
         menu_Measurement->addAction(action_Display_program);
         menu_Measurement->addAction(actionSensors);
+        menu_Measurement->addAction(actionSearch);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(actionStop);
         mainToolBar->addAction(actionSensors);
         mainToolBar->addAction(action_Open);
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Display_program);
+        mainToolBar->addAction(actionSearch);
         mainToolBar->addAction(action_Clean);
         mainToolBar->addSeparator();
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1000,6 +1016,7 @@ public:
         action_Display_program->setShortcut(QApplication::translate("MainWindow", "Ctrl+P", nullptr));
 #endif // QT_NO_SHORTCUT
         actionSensors->setText(QApplication::translate("MainWindow", "Sensors", nullptr));
+        actionSearch->setText(QApplication::translate("MainWindow", "Search", nullptr));
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
@@ -1059,6 +1076,7 @@ public:
         label_18->setText(QApplication::translate("MainWindow", "Theshold", nullptr));
         label_19->setText(QApplication::translate("MainWindow", "Movement", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi
 

@@ -15,7 +15,8 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    //config initialization, WiFi disabled
+    /**** config initialization, WiFi disabled  *****/
+
     ui->pushButtonBTconnect->setEnabled(true);
     ui->pushButtonBTdiscoverDevices->setEnabled(true);
     ui->pushButtonWiFiConnect->setEnabled(false);
@@ -30,7 +31,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_PlotTimeout = 100; //time in ms
     m_PlotNumUpdate = 10; //number of samples to update every m_PlotTimeout
 
-    //Bluetooth
+    /****** Bluetooth *******/
+
     m_bt = new BTClient(this);
     connect(m_bt, SIGNAL(BTnewDeviceDiscovered(QString)),
             this, SLOT(BTgetDevice(QString)));
@@ -39,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_bt, SIGNAL(BTrxData(QByteArray)),
             this, SLOT(BTrxData(const QByteArray)));
 
-    //WiFi
+    /***** WiFi ****/
     m_WiFiTcpSocket = new QTcpSocket(this);
     m_WiFi_in.setDevice(m_WiFiTcpSocket);
     m_WiFi_in.setVersion(QDataStream::Qt_5_11);
@@ -47,7 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
                this, &MainWindow::WiFiDisplayError);
 
-    //Plot
+    /***** Plot *****/
+
     // plot Sensor1
     m_chartSen1 = new CPlotChart();
     m_chartSen1->setType(NORMAL);
@@ -79,7 +82,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_timer, SIGNAL(timeout()), this, SLOT(PlotTimeout()));
     //m_timer->start(m_PlotTimeout);
 
-    //sensors
+    //timer to inhibit the sensors during communication
+    m_timer_silence = new QTimer(this);
+    connect(m_timer_silence, SIGNAL(timeout()), this, SLOT(SilenceTimeout()));
+
+    /******* sensors *******/
 
     ui->verticalSliderEnergyMax->setRange(0,5); // m_energy_range up to 1000*10^5
     ui->verticalSliderEnergyMax->setValue(0);
@@ -103,6 +110,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->progressBarMuscle->setValue(0);
 
     ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
+
+    /****** Search motor points  *****/
+
+    m_search = new NMESsearch(this);
+    connect(m_search,SIGNAL(updateSearchText(QString)),this,SLOT(updateSearchText(QString)));
+    connect(m_search,SIGNAL(send(QByteArray)),this,SLOT(send(QByteArray)));
+    connect(m_search,SIGNAL(CopyResetMaxEnergy()),this,SLOT(on_pushButtonResetMaxEnergy_clicked()));
+    connect(m_search,SIGNAL(scanDone()),this,SLOT(SearchDone()));
 
 
 }
@@ -140,9 +155,14 @@ void MainWindow::BTrxData(const QByteArray &data)
     //Check if received data is current program configuration
     parseProgram(data);
 
-    //Process sensor data only if NMES is active
+    //Process sensor data only if NMES is active or when
+    //sensors are not inhibited
     if (!m_timer->isActive())
         return;
+
+    if (m_timer_silence->isActive())
+        return;
+
 
     //Receive sensor data
      m_data.append(data);
@@ -356,6 +376,11 @@ void MainWindow::PlotTimeout()
     UpdateSensorData();
 }
 
+void MainWindow::SilenceTimeout()
+{
+    m_timer_silence->stop();
+}
+
 void MainWindow::UpdateSensorData()
 {
     double energy1 = m_sens1.getEnergy();
@@ -377,13 +402,21 @@ void MainWindow::UpdateSensorData()
     if (energy1 > m_maxEnergy) {
         m_maxEnergy = energy1;
         ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
-
+        //if (m_search->isActive()) {
+        //    m_search->updateMaxEnergy(m_maxEnergy);
+        //}
     }
 
+}
 
+void MainWindow::SearchDone()
+{
+    channel aux;
+    aux = m_search->getMotorPoint();
 
-
-
+    qDebug()<<"Motor point: ch1 " << QString::number(aux.ch1) << "-"
+            << QString::number(aux.ch2) << ", Energy: "
+            << QString::number(aux.maxEnergy);
 }
 
 void MainWindow::send(QByteArray data)
@@ -395,6 +428,8 @@ void MainWindow::send(QByteArray data)
         data.append('\n');
         m_WiFiTcpSocket->write(data);
     }
+
+    m_timer_silence->start(150);
 }
 
 void MainWindow::parseProgram(const QByteArray &data)
@@ -520,6 +555,12 @@ void MainWindow::parseProgram(const QByteArray &data)
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditChannel4->setText(parameter);
+
+}
+
+void MainWindow::updateSearchText(QString text)
+{
+    ui->plainTextEditSearch->appendPlainText(text);
 
 }
 
@@ -687,7 +728,7 @@ void MainWindow::on_action_Run_triggered()
 
 void MainWindow::on_action_Clean_triggered()
 {
-    QMessageBox msgBox;
+    /*QMessageBox msgBox;
     msgBox.setText("Clean Measurements");
     msgBox.setInformativeText("Do you want to delete all the measurements?");
     msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
@@ -695,7 +736,9 @@ void MainWindow::on_action_Clean_triggered()
     int ret = msgBox.exec();
 
     if (ret == QMessageBox::No) return;
-
+*/
+    ui->plainTextEditAT->clear();
+    ui->plainTextEditSearch->clear();
 }
 
 void MainWindow::on_action_Delete_sweep_triggered()
@@ -902,6 +945,11 @@ void MainWindow::on_actionStop_triggered()
     //m_timer->stop();
     ui->action_Run->setEnabled(true);
 
+    if (m_search->isActive()) {
+        m_search->stopScan();
+        updateSearchText("Search stopped");
+    }
+
 }
 
 void MainWindow::on_action_Open_triggered()
@@ -1008,6 +1056,16 @@ void MainWindow::on_verticalSliderEnergyThreshold_valueChanged(int value)
 
 void MainWindow::on_pushButtonResetMaxEnergy_clicked()
 {
+    m_search->updateMaxEnergy(m_maxEnergy);
     m_maxEnergy = 0;
     ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
+}
+
+void MainWindow::on_actionSearch_triggered()
+{
+    //Ceck if BT is connected
+    if (ui->labelBTstatus->text() != "Connected")
+        return;
+
+    m_search->scan();
 }

@@ -87,7 +87,7 @@ void BTClient::BTread()
     QByteArray data;
     data = socket->readAll();
 
-    qDebug()<<"received :" + QString::number(data.count());
+    //qDebug()<<"received :" + QString::number(data.count());
 
     switch (m_RX_state) {
         case btRxState::BT_IDLE :
@@ -111,7 +111,7 @@ void BTClient::BTrxTimeOut()
     m_timer->stop();
     m_RX_state = btRxState::BT_IDLE;
 
-    qDebug()<<"Rx timeout!";
+    //qDebug()<<"Rx timeout!";
 
 
     emit BTrxData(m_rxData);

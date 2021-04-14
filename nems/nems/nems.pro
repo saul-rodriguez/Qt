@@ -27,12 +27,14 @@ SOURCES += \
         mainwindow.cpp \
     btclient.cpp \
     cplotchart.cpp \
+    nmessearch.cpp \
     nmessensor.cpp
 
 HEADERS += \
         mainwindow.h \
     btclient.h \
     cplotchart.h \
+    nmessearch.h \
     nmessensor.h
 
 FORMS += \

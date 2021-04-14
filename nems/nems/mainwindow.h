@@ -4,6 +4,7 @@
 #include "btclient.h"
 #include "cplotchart.h"
 #include "nmessensor.h"
+#include "nmessearch.h"
 
 #include <QMainWindow>
 #include <QDataStream>
@@ -58,6 +59,7 @@ private:
     int m_PlotCounter;
     int m_PlotNumUpdate; // Number of additional data points to plot at timeout
     QTimer *m_timer;
+    QTimer *m_timer_silence;
     int m_PlotTimeout;
 
     //NMES sensors
@@ -66,6 +68,12 @@ private:
     int m_energy_range;
     int m_energy_threshold;
     int m_maxEnergy;
+
+    //Search motorpoints
+    NMESsearch *m_search;
+
+public slots:
+    void updateSearchText(QString text);
 
 
 private slots:
@@ -79,7 +87,9 @@ private slots:
 
     void PlotRx(const QByteArray &data);
     void PlotTimeout();
+    void SilenceTimeout();
     void UpdateSensorData();
+    void SearchDone();
 
     void send(QByteArray data);
 
@@ -94,7 +104,6 @@ private slots:
     void on_pushButtonWiFiDisconnect_clicked();       
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();    
-
 
     void resizeEvent(QResizeEvent* event);
 
@@ -124,6 +133,7 @@ private slots:
     void on_verticalSliderEnergyMax_valueChanged(int value);
     void on_verticalSliderEnergyThreshold_valueChanged(int value);
     void on_pushButtonResetMaxEnergy_clicked();
+    void on_actionSearch_triggered();
 };
 
 #endif // MAINWINDOW_H
