@@ -158,6 +158,7 @@ public:
     QLabel *labelThreshold;
     QLabel *label_21;
     QLabel *labelEnergyMax;
+    QLabel *labelEnergyMaxdB;
     QPushButton *pushButtonResetMaxEnergy;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_6;
@@ -168,6 +169,12 @@ public:
     QProgressBar *progressBarMuscle;
     QSpacerItem *horizontalSpacer;
     QWidget *tab_5;
+    QGridLayout *gridLayout_9;
+    QVBoxLayout *verticalLayout_10;
+    QHBoxLayout *horizontalLayout_20;
+    QLabel *label_motorpoint;
+    QPushButton *pushButtonUpdateCh1MotorPoint;
+    QSpacerItem *horizontalSpacer_2;
     QPlainTextEdit *plainTextEditSearch;
     QMenuBar *menuBar;
     QMenu *menu_Measurement;
@@ -843,6 +850,11 @@ public:
 
         verticalLayout_8->addWidget(labelEnergyMax);
 
+        labelEnergyMaxdB = new QLabel(tab_4);
+        labelEnergyMaxdB->setObjectName(QString::fromUtf8("labelEnergyMaxdB"));
+
+        verticalLayout_8->addWidget(labelEnergyMaxdB);
+
         pushButtonResetMaxEnergy = new QPushButton(tab_4);
         pushButtonResetMaxEnergy->setObjectName(QString::fromUtf8("pushButtonResetMaxEnergy"));
 
@@ -900,9 +912,41 @@ public:
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QString::fromUtf8("tab_5"));
+        gridLayout_9 = new QGridLayout(tab_5);
+        gridLayout_9->setSpacing(6);
+        gridLayout_9->setContentsMargins(11, 11, 11, 11);
+        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
+        verticalLayout_10 = new QVBoxLayout();
+        verticalLayout_10->setSpacing(6);
+        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        horizontalLayout_20 = new QHBoxLayout();
+        horizontalLayout_20->setSpacing(6);
+        horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
+        label_motorpoint = new QLabel(tab_5);
+        label_motorpoint->setObjectName(QString::fromUtf8("label_motorpoint"));
+
+        horizontalLayout_20->addWidget(label_motorpoint);
+
+        pushButtonUpdateCh1MotorPoint = new QPushButton(tab_5);
+        pushButtonUpdateCh1MotorPoint->setObjectName(QString::fromUtf8("pushButtonUpdateCh1MotorPoint"));
+
+        horizontalLayout_20->addWidget(pushButtonUpdateCh1MotorPoint);
+
+        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_20->addItem(horizontalSpacer_2);
+
+
+        verticalLayout_10->addLayout(horizontalLayout_20);
+
         plainTextEditSearch = new QPlainTextEdit(tab_5);
         plainTextEditSearch->setObjectName(QString::fromUtf8("plainTextEditSearch"));
-        plainTextEditSearch->setGeometry(QRect(60, 130, 421, 261));
+
+        verticalLayout_10->addWidget(plainTextEditSearch);
+
+
+        gridLayout_9->addLayout(verticalLayout_10, 0, 0, 1, 1);
+
         tabWidget->addTab(tab_5, QString());
 
         verticalLayout->addWidget(tabWidget);
@@ -1072,10 +1116,13 @@ public:
         labelThreshold->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_21->setText(QApplication::translate("MainWindow", "Max Energy", nullptr));
         labelEnergyMax->setText(QApplication::translate("MainWindow", "0", nullptr));
+        labelEnergyMaxdB->setText(QApplication::translate("MainWindow", "dB", nullptr));
         pushButtonResetMaxEnergy->setText(QApplication::translate("MainWindow", "Reset", nullptr));
         label_18->setText(QApplication::translate("MainWindow", "Theshold", nullptr));
         label_19->setText(QApplication::translate("MainWindow", "Movement", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
+        label_motorpoint->setText(QApplication::translate("MainWindow", "Motor point: -,- ", nullptr));
+        pushButtonUpdateCh1MotorPoint->setText(QApplication::translate("MainWindow", "Update Ch1 ", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi

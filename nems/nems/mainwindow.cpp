@@ -402,6 +402,19 @@ void MainWindow::UpdateSensorData()
     if (energy1 > m_maxEnergy) {
         m_maxEnergy = energy1;
         ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
+
+        double aux;
+        QString endB;
+        if (m_maxEnergy > 0) {
+            aux = 20*qLn(m_maxEnergy)/qLn(10);
+            endB = QString::number((int)aux) + " dB";
+        } else {
+            endB = "- dB";
+        }
+        ui->labelEnergyMaxdB->setText(endB);
+
+
+
         //if (m_search->isActive()) {
         //    m_search->updateMaxEnergy(m_maxEnergy);
         //}
@@ -414,9 +427,18 @@ void MainWindow::SearchDone()
     channel aux;
     aux = m_search->getMotorPoint();
 
-    qDebug()<<"Motor point: ch1 " << QString::number(aux.ch1) << "-"
-            << QString::number(aux.ch2) << ", Energy: "
-            << QString::number(aux.maxEnergy);
+    QString motorPoint;
+
+    motorPoint = "Motor point: " + QString::number(aux.ch1) +
+                 "," + QString::number(aux.ch2);
+
+    ui->label_motorpoint->setText(motorPoint);
+
+    m_motorPoint = aux;
+
+    //qDebug()<<"Motor point: ch1 " << QString::number(aux.ch1) << "-"
+    //        << QString::number(aux.ch2) << ", Energy: "
+    //        << QString::number(aux.maxEnergy);
 }
 
 void MainWindow::send(QByteArray data)
@@ -945,8 +967,9 @@ void MainWindow::on_actionStop_triggered()
     //m_timer->stop();
     ui->action_Run->setEnabled(true);
 
-    if (m_search->isActive()) {
+ //
         m_search->stopScan();
+     if (m_search->isActive()) {
         updateSearchText("Search stopped");
     }
 
@@ -1068,4 +1091,13 @@ void MainWindow::on_actionSearch_triggered()
         return;
 
     m_search->scan();
+}
+
+void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
+{
+    ui->lineEditChannel1->setText(QString::number(m_motorPoint.ch1));
+    ui->lineEditChannel2->setText(QString::number(m_motorPoint.ch2));
+
+    m_search->programCH();
+
 }

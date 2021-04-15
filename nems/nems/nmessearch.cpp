@@ -1,6 +1,8 @@
 #include "nmessearch.h"
 #include <QThread>
 
+#include <QtMath>
+
 NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 {
 
@@ -26,6 +28,14 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_conf_timer->setSingleShot(true);
     connect(m_conf_timer, SIGNAL(timeout()),this,SLOT(programTimeout()));
 
+    m_prog_CH_state = IDLE;
+    m_conf_CH_timer = new QTimer(this);
+    m_conf_CH_timer->setSingleShot(true);
+    connect(m_conf_CH_timer, SIGNAL(timeout()),this,SLOT(programChTimeout()));
+
+
+    m_motorPoint.ch1 = 0;
+    m_motorPoint.ch2 = 0;
 }
 
 void NMESsearch::scan()
@@ -72,6 +82,8 @@ channel NMESsearch::getMotorPoint()
             aux = m_channel[i];
         }
     }
+
+    m_motorPoint = aux;
 
     return aux;
 }
@@ -140,6 +152,49 @@ void NMESsearch::programNEMS()
 
 }
 
+void NMESsearch::programCH()
+{
+    QByteArray data;
+
+    switch (m_prog_CH_state) {
+        case (IDLE):
+            m_prog_CH_state = CH1;
+            if (m_motorPoint.ch1 < 10) {
+                data.append("M0");
+            } else {
+                data.append("M");
+            }
+
+            data.append(QString::number(m_motorPoint.ch1));
+            send(data);
+
+            m_conf_CH_timer->start(150);
+            break;
+
+        case (CH1):
+            m_prog_CH_state = IDLE;
+            if (m_motorPoint.ch2 < 10) {
+                data.append("m0");
+            } else {
+                data.append("m");
+            }
+
+            data.append(QString::number(m_motorPoint.ch2));
+            send(data);
+            //m_conf_CH_timer->start(150);
+            m_conf_CH_timer->stop();
+            break;
+
+        default:
+            m_conf_CH_timer->stop();
+            m_prog_CH_state = IDLE;
+            break;
+    }
+
+
+
+}
+
 void NMESsearch::scanArray()
 {
 
@@ -160,7 +215,12 @@ void NMESsearch::SearchTimeout()
     aux = "iteration " + QString::number(m_search_index);
     aux += " " + QString::number(m_ch1) +",";
     aux += QString::number(m_ch2) + ": ";
-    aux += QString::number(m_maxEnergy);
+    aux += QString::number(m_maxEnergy) + " ";
+
+    double dB = 20*qLn(m_maxEnergy)/qLn(10);
+    aux += QString::number((int)dB) + " dB";
+
+
     //aux += "\n";
     updateSearchText(aux);
 
@@ -186,4 +246,9 @@ void NMESsearch::SearchTimeout()
 void NMESsearch::programTimeout()
 {
     programNEMS();
+}
+
+void NMESsearch::programChTimeout()
+{
+    programCH();
 }

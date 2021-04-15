@@ -71,6 +71,7 @@ private:
 
     //Search motorpoints
     NMESsearch *m_search;
+    channel m_motorPoint;
 
 public slots:
     void updateSearchText(QString text);
@@ -134,6 +135,7 @@ private slots:
     void on_verticalSliderEnergyThreshold_valueChanged(int value);
     void on_pushButtonResetMaxEnergy_clicked();
     void on_actionSearch_triggered();
+    void on_pushButtonUpdateCh1MotorPoint_clicked();
 };
 
 #endif // MAINWINDOW_H

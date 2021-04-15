@@ -6,13 +6,14 @@
 
 //Electrode Matrix order
 #define N 16
-#define NUM_CATHODES 6
+#define NUM_CATHODES 11
 
 typedef enum {
     IDLE,
     CH1,
     CH2,
-    GO
+    GO,
+    END
 } NMES_prog_state;
 
 typedef struct channel_struct {
@@ -42,6 +43,10 @@ public:
     QTimer *m_conf_timer;
     NMES_prog_state m_prog_state;
 
+    QTimer *m_conf_CH_timer;
+    NMES_prog_state m_prog_CH_state;
+    channel m_motorPoint;
+
     void scan();
     void stopScan();
     bool isActive();
@@ -50,6 +55,8 @@ public:
     void cleanChannels();
 
     void programNEMS();
+    void programCH();
+
     void scanArray();
 
 signals:
@@ -62,6 +69,7 @@ signals:
 private slots:
     void SearchTimeout();
     void programTimeout();
+    void programChTimeout();
 
 };
 

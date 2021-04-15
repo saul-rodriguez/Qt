@@ -761,6 +761,13 @@
                </widget>
               </item>
               <item>
+               <widget class="QLabel" name="labelEnergyMaxdB">
+                <property name="text">
+                 <string>dB</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QPushButton" name="pushButtonResetMaxEnergy">
                 <property name="text">
                  <string>Reset</string>
@@ -842,16 +849,46 @@
          <attribute name="title">
           <string>Search</string>
          </attribute>
-         <widget class="QPlainTextEdit" name="plainTextEditSearch">
-          <property name="geometry">
-           <rect>
-            <x>60</x>
-            <y>130</y>
-            <width>421</width>
-            <height>261</height>
-           </rect>
-          </property>
-         </widget>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0">
+           <layout class="QVBoxLayout" name="verticalLayout_10">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_20">
+              <item>
+               <widget class="QLabel" name="label_motorpoint">
+                <property name="text">
+                 <string>Motor point: -,- </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="pushButtonUpdateCh1MotorPoint">
+                <property name="text">
+                 <string>Update Ch1 </string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QPlainTextEdit" name="plainTextEditSearch"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </widget>
        </widget>
       </item>
