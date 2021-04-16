@@ -406,7 +406,7 @@ void MainWindow::UpdateSensorData()
         double aux;
         QString endB;
         if (m_maxEnergy > 0) {
-            aux = 20*qLn(m_maxEnergy)/qLn(10);
+            aux = 10*qLn(m_maxEnergy)/qLn(10);
             endB = QString::number((int)aux) + " dB";
         } else {
             endB = "- dB";
@@ -434,6 +434,7 @@ void MainWindow::SearchDone()
 
     ui->label_motorpoint->setText(motorPoint);
 
+    ui->plainTextEditSearch->appendPlainText(motorPoint);
     m_motorPoint = aux;
 
     //qDebug()<<"Motor point: ch1 " << QString::number(aux.ch1) << "-"

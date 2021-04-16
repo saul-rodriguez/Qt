@@ -217,7 +217,7 @@ void NMESsearch::SearchTimeout()
     aux += QString::number(m_ch2) + ": ";
     aux += QString::number(m_maxEnergy) + " ";
 
-    double dB = 20*qLn(m_maxEnergy)/qLn(10);
+    double dB = 10*qLn(m_maxEnergy)/qLn(10);
     aux += QString::number((int)dB) + " dB";
 
 

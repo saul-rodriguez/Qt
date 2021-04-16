@@ -6,7 +6,7 @@
 
 //Electrode Matrix order
 #define N 16
-#define NUM_CATHODES 11
+#define NUM_CATHODES 14
 
 typedef enum {
     IDLE,
