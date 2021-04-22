@@ -174,6 +174,8 @@ public:
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_motorpoint;
     QPushButton *pushButtonUpdateCh1MotorPoint;
+    QLabel *label_22;
+    QLineEdit *lineEditNumElectrodes;
     QSpacerItem *horizontalSpacer_2;
     QPlainTextEdit *plainTextEditSearch;
     QMenuBar *menuBar;
@@ -932,6 +934,18 @@ public:
 
         horizontalLayout_20->addWidget(pushButtonUpdateCh1MotorPoint);
 
+        label_22 = new QLabel(tab_5);
+        label_22->setObjectName(QString::fromUtf8("label_22"));
+
+        horizontalLayout_20->addWidget(label_22);
+
+        lineEditNumElectrodes = new QLineEdit(tab_5);
+        lineEditNumElectrodes->setObjectName(QString::fromUtf8("lineEditNumElectrodes"));
+        sizePolicy1.setHeightForWidth(lineEditNumElectrodes->sizePolicy().hasHeightForWidth());
+        lineEditNumElectrodes->setSizePolicy(sizePolicy1);
+
+        horizontalLayout_20->addWidget(lineEditNumElectrodes);
+
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_20->addItem(horizontalSpacer_2);
@@ -1023,7 +1037,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1123,6 +1137,7 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
         label_motorpoint->setText(QApplication::translate("MainWindow", "Motor point: -,- ", nullptr));
         pushButtonUpdateCh1MotorPoint->setText(QApplication::translate("MainWindow", "Update Ch1 ", nullptr));
+        label_22->setText(QApplication::translate("MainWindow", "Num  Electrodes:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi

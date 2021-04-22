@@ -119,7 +119,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_search,SIGNAL(CopyResetMaxEnergy()),this,SLOT(on_pushButtonResetMaxEnergy_clicked()));
     connect(m_search,SIGNAL(scanDone()),this,SLOT(SearchDone()));
 
-
+    m_numSearchElectrodes = 16;
+    ui->lineEditNumElectrodes->setText(QString::number((int)m_numSearchElectrodes));
 }
 
 MainWindow::~MainWindow()
@@ -1091,7 +1092,9 @@ void MainWindow::on_actionSearch_triggered()
     if (ui->labelBTstatus->text() != "Connected")
         return;
 
-    m_search->scan();
+    QString num_electrodes;
+    num_electrodes = ui->lineEditNumElectrodes->text();
+    m_search->scan(num_electrodes.toInt());
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()

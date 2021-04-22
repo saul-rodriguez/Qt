@@ -6,19 +6,18 @@
 NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 {
 
-
-
     m_search_index = 0;
 
     //Scan all cathodes method initialization;
     m_ch1 = 1;
     m_ch2 = 2;
+    m_go = 0;
     m_num_cathodes = NUM_CATHODES;
     m_maxEnergy = 0;
 
     cleanChannels();
 
-    // Each search takes 2 seconds
+    // Each search takes m_timeout ms
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()),this,SLOT(SearchTimeout()));
     m_timeout = 2500;
@@ -38,15 +37,20 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_motorPoint.ch2 = 0;
 }
 
-void NMESsearch::scan()
+void NMESsearch::scan(int num_electrodes)
 {
     //Initialize
+    m_num_cathodes = num_electrodes - 1; // Electrode 1 is set as anode
+
     m_ch1 = 1; // set initial anode
     m_ch2 = 2; // set initial cathode
+    m_go = 1; // activate
     cleanChannels();
     CopyResetMaxEnergy();
     m_search_index = 0;
-    programNEMS(); // set channels and start NEMS
+
+    //programNEMS(); // set channels and start NEMS
+    programNEMSbin(); // set channels and start NEMS
 
     m_timer->start(m_timeout); //wait 2S
     updateSearchText("** Scan search started **");
@@ -152,6 +156,19 @@ void NMESsearch::programNEMS()
 
 }
 
+void NMESsearch::programNEMSbin()
+{
+    QByteArray data;
+
+    data.append('e');
+    data.append((unsigned char)m_ch1);
+    data.append((unsigned char)m_ch2);
+    data.append((unsigned char)m_go);
+
+    send(data);
+
+}
+
 void NMESsearch::programCH()
 {
     QByteArray data;
@@ -226,10 +243,12 @@ void NMESsearch::SearchTimeout()
 
     m_maxEnergy = 0;
 
+    /*Search algorithm here*/
     if (m_search_index < (m_num_cathodes-1)) {
         m_search_index++;
         m_ch2 = 2 + m_search_index;
-        programNEMS(); // advance to next iteration
+        //programNEMS(); // advance to next iteration
+        programNEMSbin(); // advance to next iteration
 
         m_timer->start(m_timeout);
     } else { // Finish search

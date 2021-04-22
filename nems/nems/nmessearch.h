@@ -5,8 +5,8 @@
 #include <QTimer>
 
 //Electrode Matrix order
-#define N 16
-#define NUM_CATHODES 14
+#define N 32
+#define NUM_CATHODES 31
 
 typedef enum {
     IDLE,
@@ -35,6 +35,7 @@ public:
     channel m_channel[NUM_CATHODES];
     unsigned int m_ch1;
     unsigned int m_ch2;
+    unsigned int m_go;
     int m_num_cathodes;
 
     int m_timeout;
@@ -47,7 +48,7 @@ public:
     NMES_prog_state m_prog_CH_state;
     channel m_motorPoint;
 
-    void scan();
+    void scan(int num_electrodes);
     void stopScan();
     bool isActive();
     void updateMaxEnergy(int maxEnergy);
@@ -55,6 +56,7 @@ public:
     void cleanChannels();
 
     void programNEMS();
+    void programNEMSbin();
     void programCH();
 
     void scanArray();

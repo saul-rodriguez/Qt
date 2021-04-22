@@ -72,6 +72,7 @@ private:
     //Search motorpoints
     NMESsearch *m_search;
     channel m_motorPoint;
+    int m_numSearchElectrodes;
 
 public slots:
     void updateSearchText(QString text);
