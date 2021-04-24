@@ -37,6 +37,7 @@ public:
     unsigned int m_ch2;
     unsigned int m_go;
     int m_num_cathodes;
+    int m_amplitude;
 
     int m_timeout;
     QTimer *m_timer;
@@ -48,7 +49,7 @@ public:
     NMES_prog_state m_prog_CH_state;
     channel m_motorPoint;
 
-    void scan(int num_electrodes);
+    void scan(int num_electrodes, int amplitude);
     void stopScan();
     bool isActive();
     void updateMaxEnergy(int maxEnergy);
@@ -61,11 +62,14 @@ public:
 
     void scanArray();
 
+    void saveMeasTxtFile();
+
 signals:
     void send(QByteArray data);
     void updateSearchText(QString text);
     void CopyResetMaxEnergy();
     void scanDone();
+
 
 
 private slots:

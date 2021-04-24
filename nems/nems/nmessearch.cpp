@@ -2,6 +2,8 @@
 #include <QThread>
 
 #include <QtMath>
+#include <QFile>
+#include <QTextStream>
 
 NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 {
@@ -37,10 +39,11 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_motorPoint.ch2 = 0;
 }
 
-void NMESsearch::scan(int num_electrodes)
+void NMESsearch::scan(int num_electrodes, int amplitude)
 {
     //Initialize
     m_num_cathodes = num_electrodes - 1; // Electrode 1 is set as anode
+    m_amplitude = amplitude;
 
     m_ch1 = 1; // set initial anode
     m_ch2 = 2; // set initial cathode
@@ -53,7 +56,11 @@ void NMESsearch::scan(int num_electrodes)
     programNEMSbin(); // set channels and start NEMS
 
     m_timer->start(m_timeout); //wait 2S
-    updateSearchText("** Scan search started **");
+
+    QString aux = "** Scan search started "
+                  + QString::number(m_amplitude)
+                  + " mA **";
+    updateSearchText(aux);
 }
 
 void NMESsearch::stopScan()
@@ -217,6 +224,35 @@ void NMESsearch::scanArray()
 
 }
 
+void NMESsearch::saveMeasTxtFile()
+{
+    QString filename;
+    filename = QString::number(m_amplitude) + "mA.csv";
+
+    QFile outfile(filename);
+        outfile.open(QIODevice::ReadWrite | QIODevice::Text);
+        QTextStream stream(&outfile);
+      //  stream.setCodec("UTF-8");
+      //  int size = HEXdata4.size();
+
+      //  for (int i = 0; i < size; i++) {
+      //      stream << HEXdata4[i] << "\n";
+      //  }
+
+        for (int i = 0; i < m_num_cathodes; i++) {
+            stream << QString::number(i) << " "
+                   << QString::number(m_channel[i].maxEnergy) << "\n";
+        }
+
+
+        outfile.close();
+
+       // qDebug()<< "ihex2all: "<< size<< " words written to: " <<filenameOut ;
+
+
+
+}
+
 void NMESsearch::SearchTimeout()
 {
     QString aux;
@@ -258,6 +294,7 @@ void NMESsearch::SearchTimeout()
         //m_timer->stop();
         updateSearchText("** Scan search finished **");
         scanDone();
+        saveMeasTxtFile();
     }
 
 }

@@ -1094,7 +1094,10 @@ void MainWindow::on_actionSearch_triggered()
 
     QString num_electrodes;
     num_electrodes = ui->lineEditNumElectrodes->text();
-    m_search->scan(num_electrodes.toInt());
+
+    QString amplitude;
+    amplitude = ui->lineEditAmplitude->text();
+    m_search->scan(num_electrodes.toInt(),amplitude.toInt());
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
