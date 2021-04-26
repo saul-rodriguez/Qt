@@ -65,11 +65,18 @@ void NMESsearch::scan(int num_electrodes, int amplitude)
 
 void NMESsearch::stopScan()
 {
-     QByteArray data;
+    // QByteArray data;
 
     m_timer->stop();
-    data.append("N");
-    send(data);
+    m_go = 0;
+    programNEMSbin();
+
+    //data.append("N");
+    //data.append('e');
+    //data.append((unsigned char)m_ch1);
+    //data.append((unsigned char)m_ch2);
+    //data.append((unsigned char)m_go);
+    //send(data);
 
 }
 
