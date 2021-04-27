@@ -5,21 +5,13 @@
 #include <QTimer>
 
 //Electrode Matrix order
-#define N 32
 #define NUM_CATHODES 31
-
-typedef enum {
-    IDLE,
-    CH1,
-    CH2,
-    GO,
-    END
-} NMES_prog_state;
 
 typedef struct channel_struct {
     int ch1;
     int ch2;
     int maxEnergy;
+    double maxEnergydB;
 } channel;
 
 class NMESsearch : public QObject
@@ -42,26 +34,19 @@ public:
     int m_timeout;
     QTimer *m_timer;
 
-    QTimer *m_conf_timer;
-    NMES_prog_state m_prog_state;
-
-    QTimer *m_conf_CH_timer;
-    NMES_prog_state m_prog_CH_state;
     channel m_motorPoint;
 
     void scan(int num_electrodes, int amplitude);
     void stopScan();
     bool isActive();
+
     void updateMaxEnergy(int maxEnergy);
     channel getMotorPoint();
     void cleanChannels();
 
-    void programNEMS();
     void programNEMSbin();
-    void programCH();
 
     void scanArray();
-
     void saveMeasTxtFile();
 
 signals:
@@ -70,12 +55,8 @@ signals:
     void CopyResetMaxEnergy();
     void scanDone();
 
-
-
 private slots:
-    void SearchTimeout();
-    void programTimeout();
-    void programChTimeout();
+    void SearchTimeout();  
 
 };
 

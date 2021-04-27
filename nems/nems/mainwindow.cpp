@@ -121,6 +121,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     m_numSearchElectrodes = 16;
     ui->lineEditNumElectrodes->setText(QString::number((int)m_numSearchElectrodes));
+
+    /***** Automatic search configuration ****/
+    m_startAmplitude = 6;
+    m_stopAmplitude = 10;
+    m_autosearch.setSearch(m_search);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -438,9 +445,22 @@ void MainWindow::SearchDone()
     ui->plainTextEditSearch->appendPlainText(motorPoint);
     m_motorPoint = aux;
 
-    //qDebug()<<"Motor point: ch1 " << QString::number(aux.ch1) << "-"
-    //        << QString::number(aux.ch2) << ", Energy: "
-    //        << QString::number(aux.maxEnergy);
+    int search_done =  m_autosearch.addMotorPoint(&m_motorPoint);
+
+    if (search_done == 1) {
+        //Motor point found
+        ui->plainTextEditSearch->appendPlainText("Motor point found, search stopped");
+    }
+
+    if (search_done == 2) {
+        //Search finished without motor point
+        ui->plainTextEditSearch->appendPlainText("Search finished, no motor point found");
+    }
+
+    if (search_done == 3) {
+        //Search finished without motor point
+        ui->plainTextEditSearch->appendPlainText("Search cancelled");
+    }
 }
 
 void MainWindow::send(QByteArray data)
@@ -588,8 +608,6 @@ void MainWindow::updateSearchText(QString text)
 
 }
 
-
-
 void MainWindow::on_pushButtonBTdiscoverDevices_clicked()
 {
     ui->comboBoxBTdevices->clear();
@@ -692,14 +710,12 @@ void MainWindow::on_pushButtonWiFiConnect_clicked()
        }
 
        ui->labelWiFiStatus->setText("Connected");
-
 }
 
 void MainWindow::on_pushButtonWiFiDisconnect_clicked()
 {
     ui->labelWiFiStatus->setText("Disconnecting...");
     m_WiFiTcpSocket->disconnectFromHost();;
-
 }
 
 
@@ -786,8 +802,6 @@ void MainWindow::on_action_Save_triggered()
     QByteArray data;
     data.append('s');
     send(data);
-
-
 }
 
 
@@ -1097,7 +1111,9 @@ void MainWindow::on_actionSearch_triggered()
 
     QString amplitude;
     amplitude = ui->lineEditAmplitude->text();
-    m_search->scan(num_electrodes.toInt(),amplitude.toInt());
+
+    //m_search->scan(num_electrodes.toInt(),amplitude.toInt());
+    m_autosearch.start(m_startAmplitude,m_stopAmplitude,num_electrodes.toInt());
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
@@ -1105,6 +1121,8 @@ void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
     ui->lineEditChannel1->setText(QString::number(m_motorPoint.ch1));
     ui->lineEditChannel2->setText(QString::number(m_motorPoint.ch2));
 
-    m_search->programCH();
-
+    m_search->m_go = 0;
+    m_search->m_ch1 = m_motorPoint.ch1;
+    m_search->m_ch2 = m_motorPoint.ch2;
+    m_search->programNEMSbin();
 }

@@ -5,6 +5,7 @@
 #include "cplotchart.h"
 #include "nmessensor.h"
 #include "nmessearch.h"
+#include "nmesautomaticsearch.h"
 
 #include <QMainWindow>
 #include <QDataStream>
@@ -74,9 +75,14 @@ private:
     channel m_motorPoint;
     int m_numSearchElectrodes;
 
+    //Automatic Search
+    int m_startAmplitude;
+    int m_stopAmplitude;
+
+    NMESAutomaticSearch m_autosearch;
+
 public slots:
     void updateSearchText(QString text);
-
 
 private slots:
     void BTgetDevice(QString name);

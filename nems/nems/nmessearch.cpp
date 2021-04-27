@@ -24,17 +24,6 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     connect(m_timer, SIGNAL(timeout()),this,SLOT(SearchTimeout()));
     m_timeout = 2500;
 
-    m_prog_state = IDLE;
-    m_conf_timer = new QTimer(this);
-    m_conf_timer->setSingleShot(true);
-    connect(m_conf_timer, SIGNAL(timeout()),this,SLOT(programTimeout()));
-
-    m_prog_CH_state = IDLE;
-    m_conf_CH_timer = new QTimer(this);
-    m_conf_CH_timer->setSingleShot(true);
-    connect(m_conf_CH_timer, SIGNAL(timeout()),this,SLOT(programChTimeout()));
-
-
     m_motorPoint.ch1 = 0;
     m_motorPoint.ch2 = 0;
 }
@@ -70,13 +59,6 @@ void NMESsearch::stopScan()
     m_timer->stop();
     m_go = 0;
     programNEMSbin();
-
-    //data.append("N");
-    //data.append('e');
-    //data.append((unsigned char)m_ch1);
-    //data.append((unsigned char)m_ch2);
-    //data.append((unsigned char)m_go);
-    //send(data);
 
 }
 
@@ -115,60 +97,6 @@ void NMESsearch::cleanChannels()
     }
 }
 
-void NMESsearch::programNEMS()
-{
-    QByteArray data;
-
-    switch (m_prog_state) {
-        case (IDLE):
-            m_prog_state = CH1;
-            if (m_ch1 < 10) {
-                data.append("M0");
-            } else {
-                data.append("M");
-            }
-
-            data.append(QString::number(m_ch1));
-            send(data);
-
-            m_conf_timer->start(150);
-            break;
-
-        case (CH1):
-            m_prog_state = CH2;
-            if (m_ch2 < 10) {
-                data.append("m0");
-            } else {
-                data.append("m");
-            }
-
-            data.append(QString::number(m_ch2));
-            send(data);
-            m_conf_timer->start(150);
-            break;
-
-        case (CH2):
-            m_prog_state = GO;
-
-            data.append("n");
-            send(data);
-            //m_conf_timer->start(150);
-            break;
-
-        case (GO):
-            m_prog_state = IDLE;
-            data.append("N");
-            send(data);
-            m_conf_timer->start(150);
-            break;
-
-        default:
-            m_conf_timer->stop();
-            m_prog_state = IDLE;
-            break;
-    }
-
-}
 
 void NMESsearch::programNEMSbin()
 {
@@ -180,51 +108,9 @@ void NMESsearch::programNEMSbin()
     data.append((unsigned char)m_go);
 
     send(data);
-
 }
 
-void NMESsearch::programCH()
-{
-    QByteArray data;
 
-    switch (m_prog_CH_state) {
-        case (IDLE):
-            m_prog_CH_state = CH1;
-            if (m_motorPoint.ch1 < 10) {
-                data.append("M0");
-            } else {
-                data.append("M");
-            }
-
-            data.append(QString::number(m_motorPoint.ch1));
-            send(data);
-
-            m_conf_CH_timer->start(150);
-            break;
-
-        case (CH1):
-            m_prog_CH_state = IDLE;
-            if (m_motorPoint.ch2 < 10) {
-                data.append("m0");
-            } else {
-                data.append("m");
-            }
-
-            data.append(QString::number(m_motorPoint.ch2));
-            send(data);
-            //m_conf_CH_timer->start(150);
-            m_conf_CH_timer->stop();
-            break;
-
-        default:
-            m_conf_CH_timer->stop();
-            m_prog_CH_state = IDLE;
-            break;
-    }
-
-
-
-}
 
 void NMESsearch::scanArray()
 {
@@ -237,27 +123,14 @@ void NMESsearch::saveMeasTxtFile()
     filename = QString::number(m_amplitude) + "mA.csv";
 
     QFile outfile(filename);
-        outfile.open(QIODevice::ReadWrite | QIODevice::Text);
-        QTextStream stream(&outfile);
-      //  stream.setCodec("UTF-8");
-      //  int size = HEXdata4.size();
+    outfile.open(QIODevice::ReadWrite | QIODevice::Text);
+    QTextStream stream(&outfile);
 
-      //  for (int i = 0; i < size; i++) {
-      //      stream << HEXdata4[i] << "\n";
-      //  }
-
-        for (int i = 0; i < m_num_cathodes; i++) {
-            stream << QString::number(i) << " "
-                   << QString::number(m_channel[i].maxEnergy) << "\n";
-        }
-
-
-        outfile.close();
-
-       // qDebug()<< "ihex2all: "<< size<< " words written to: " <<filenameOut ;
-
-
-
+    for (int i = 0; i < m_num_cathodes; i++) {
+        stream << QString::number(i) << " "
+               << QString::number(m_channel[i].maxEnergy) << "\n";
+    }
+    outfile.close();
 }
 
 void NMESsearch::SearchTimeout()
@@ -280,7 +153,7 @@ void NMESsearch::SearchTimeout()
     double dB = 10*qLn(m_maxEnergy)/qLn(10);
     aux += QString::number((int)dB) + " dB";
 
-
+    m_channel[m_search_index].maxEnergydB = dB;
     //aux += "\n";
     updateSearchText(aux);
 
@@ -304,14 +177,4 @@ void NMESsearch::SearchTimeout()
         saveMeasTxtFile();
     }
 
-}
-
-void NMESsearch::programTimeout()
-{
-    programNEMS();
-}
-
-void NMESsearch::programChTimeout()
-{
-    programCH();
 }

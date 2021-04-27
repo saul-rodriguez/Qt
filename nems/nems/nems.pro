@@ -27,6 +27,7 @@ SOURCES += \
         mainwindow.cpp \
     btclient.cpp \
     cplotchart.cpp \
+    nmesautomaticsearch.cpp \
     nmessearch.cpp \
     nmessensor.cpp
 
@@ -34,6 +35,7 @@ HEADERS += \
         mainwindow.h \
     btclient.h \
     cplotchart.h \
+    nmesautomaticsearch.h \
     nmessearch.h \
     nmessensor.h
 
