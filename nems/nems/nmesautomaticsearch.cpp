@@ -66,6 +66,21 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
         return 2;
     }
 
+    //Check if user wants to repeat measurement
+    QString auxr = "Repeat search " + QString::number(m_current) + "mA?";
+    QMessageBox msgBoxR;
+
+    msgBoxR.setText(auxr);
+    msgBoxR.setInformativeText("Press Yes to Repeat ");
+    msgBoxR.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    msgBoxR.setDefaultButton(QMessageBox::No);
+    int retR = msgBoxR.exec();
+
+    if (retR == QMessageBox::Yes) {
+        m_search->scan(m_numElectrodes,m_current);
+        return 0;
+    }
+
     //Increase current and search again
     m_channel_index++;
     m_current++;

@@ -97,10 +97,15 @@ MainWindow::MainWindow(QWidget *parent) :
     m_energy_threshold = aux;
 
     m_maxEnergy = 0;
+    m_maxEnergy2 = 0;
 
     ui->labelEnergyRange->setText(QString::number((int)aux));
+
     ui->progressBarEnergy->setRange(0,m_energy_range);
     ui->progressBarEnergy->setValue(0);
+
+    ui->progressBarEnergy2->setRange(0,m_energy_range);
+    ui->progressBarEnergy2->setValue(0);
 
     ui->verticalSliderEnergyThreshold->setRange(0,m_energy_range);
     ui->verticalSliderEnergyThreshold->setValue(m_energy_threshold);
@@ -110,6 +115,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->progressBarMuscle->setValue(0);
 
     ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
+    ui->labelEnergyMax2->setText(QString::number((int)m_maxEnergy2));
 
     /****** Search motor points  *****/
 
@@ -391,14 +397,38 @@ void MainWindow::SilenceTimeout()
 
 void MainWindow::UpdateSensorData()
 {
-    double energy1 = m_sens1.getEnergy();
 
-    ui->labelEnergyValue->setText(QString::number((int)energy1));
+    // Get the energy data from the sensors
+
+    double energy1 = m_sens1.getEnergy();
+    QString text;
+    text = QString::number((int)energy1) + "\n" +
+           QString::number((int)(10*qLn(energy1)/qLn(10))) +
+           " dB";
+
+    double energy2 = m_sens2.getEnergy();
+    QString text2;
+    text2 = QString::number((int)energy2) + "\n" +
+           QString::number((int)(10*qLn(energy2)/qLn(10))) +
+           " dB";
+
+    // Update the Energy text fields
+
+    ui->labelEnergyValue->setText(text);
+    ui->labelEnergyValue2->setText(text2);
+
+    // Update the progress bars
 
     if (energy1 > m_energy_range) {
         ui->progressBarEnergy->setValue(m_energy_range);
     } else {
         ui->progressBarEnergy->setValue((int)energy1);
+    }
+
+    if (energy2 > m_energy_range) {
+        ui->progressBarEnergy2->setValue(m_energy_range);
+    } else {
+        ui->progressBarEnergy2->setValue((int)energy2);
     }
 
     if (energy1 > m_energy_threshold) {
@@ -407,9 +437,10 @@ void MainWindow::UpdateSensorData()
         ui->progressBarMuscle->setValue(0);
     }
 
+    // Update max energy
+
     if (energy1 > m_maxEnergy) {
         m_maxEnergy = energy1;
-        ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
 
         double aux;
         QString endB;
@@ -419,13 +450,27 @@ void MainWindow::UpdateSensorData()
         } else {
             endB = "- dB";
         }
-        ui->labelEnergyMaxdB->setText(endB);
 
+        QString text = QString::number((int)m_maxEnergy) + "\n" + endB;
 
+        ui->labelEnergyMax->setText(text);
+    }
 
-        //if (m_search->isActive()) {
-        //    m_search->updateMaxEnergy(m_maxEnergy);
-        //}
+    if (energy2 > m_maxEnergy2) {
+        m_maxEnergy2 = energy2;
+
+        double aux2;
+        QString endB2;
+        if (m_maxEnergy2 > 0) {
+            aux2 = 10*qLn(m_maxEnergy2)/qLn(10);
+            endB2 = QString::number((int)aux2) + " dB";
+        } else {
+            endB2 = "- dB";
+        }
+
+        QString text2 = QString::number((int)m_maxEnergy2) + "\n" + endB2;
+
+        ui->labelEnergyMax2->setText(text2);
     }
 
 }
@@ -1083,21 +1128,45 @@ void MainWindow::on_verticalSliderEnergyMax_valueChanged(int value)
 
     //m_energy_range = value;
     ui->progressBarEnergy->setRange(0,m_energy_range);
+    ui->progressBarEnergy2->setRange(0,m_energy_range);
     ui->verticalSliderEnergyThreshold->setRange(0,m_energy_range);
-    ui->labelEnergyRange->setText(QString::number((int)m_energy_range));
+
+    QString text;
+    text = QString::number((int)m_energy_range) +
+           " " +
+           QString::number((int)qCeil(10*qLn(m_energy_range)/qLn(10))) +
+            "dB";
+
+    //ui->labelEnergyRange->setText(QString::number((int)m_energy_range));
+    ui->labelEnergyRange->setText(text);
+
 }
 
 void MainWindow::on_verticalSliderEnergyThreshold_valueChanged(int value)
 {
     m_energy_threshold = value;
-    ui->labelThreshold->setText(QString::number((int)value));
+
+    QString text;
+    text = QString::number((int)m_energy_threshold) +
+           " " +
+           QString::number((int)qCeil(10*qLn(m_energy_threshold)/qLn(10))) +
+            "dB";
+
+    //ui->labelThreshold->setText(QString::number((int)value));
+    ui->labelThreshold->setText(text);
 }
 
 void MainWindow::on_pushButtonResetMaxEnergy_clicked()
 {
-    m_search->updateMaxEnergy(m_maxEnergy);
+    m_search->updateMaxEnergy(m_maxEnergy, m_maxEnergy2);
+
     m_maxEnergy = 0;
     ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
+
+    m_maxEnergy2 = 0;
+    ui->labelEnergyMax2->setText(QString::number((int)m_maxEnergy2));
+
+
 }
 
 void MainWindow::on_actionSearch_triggered()

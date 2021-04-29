@@ -20,7 +20,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>5</number>
+         <number>4</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -686,12 +686,33 @@
               <item>
                <widget class="QLabel" name="labelEnergy">
                 <property name="text">
-                 <string>Energy</string>
+                 <string>Energy1</string>
                 </property>
                </widget>
               </item>
               <item>
                <widget class="QProgressBar" name="progressBarEnergy">
+                <property name="value">
+                 <number>24</number>
+                </property>
+                <property name="orientation">
+                 <enum>Qt::Vertical</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QVBoxLayout" name="verticalLayout_11">
+              <item>
+               <widget class="QLabel" name="labelEnergy2">
+                <property name="text">
+                 <string>Energy2</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QProgressBar" name="progressBarEnergy2">
                 <property name="value">
                  <number>24</number>
                 </property>
@@ -719,20 +740,6 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_17">
-                <property name="text">
-                 <string>Energy Value</string>
-                </property>
-               </widget>
-              </item>
-              <item>
-               <widget class="QLabel" name="labelEnergyValue">
-                <property name="text">
-                 <string>0</string>
-                </property>
-               </widget>
-              </item>
-              <item>
                <widget class="QLabel" name="label_20">
                 <property name="text">
                  <string>Threshold</string>
@@ -747,9 +754,23 @@
                </widget>
               </item>
               <item>
+               <widget class="QLabel" name="label_17">
+                <property name="text">
+                 <string>Energy1</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelEnergyValue">
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item>
                <widget class="QLabel" name="label_21">
                 <property name="text">
-                 <string>Max Energy</string>
+                 <string>Max Energy1</string>
                 </property>
                </widget>
               </item>
@@ -761,9 +782,30 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="labelEnergyMaxdB">
+               <widget class="QLabel" name="label_23">
                 <property name="text">
-                 <string>dB</string>
+                 <string>Energy2</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelEnergyValue2">
+                <property name="text">
+                 <string>0</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_24">
+                <property name="text">
+                 <string>Max Energy2</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLabel" name="labelEnergyMax2">
+                <property name="text">
+                 <string>0</string>
                 </property>
                </widget>
               </item>

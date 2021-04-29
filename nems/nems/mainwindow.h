@@ -69,6 +69,7 @@ private:
     int m_energy_range;
     int m_energy_threshold;
     int m_maxEnergy;
+    int m_maxEnergy2;
 
     //Search motorpoints
     NMESsearch *m_search;

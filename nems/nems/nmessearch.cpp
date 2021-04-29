@@ -4,6 +4,7 @@
 #include <QtMath>
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 
 NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 {
@@ -16,6 +17,7 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_go = 0;
     m_num_cathodes = NUM_CATHODES;
     m_maxEnergy = 0;
+    m_maxEnergy2 = 0;
 
     cleanChannels();
 
@@ -67,18 +69,26 @@ bool NMESsearch::isActive()
     return m_timer->isActive();
 }
 
-void NMESsearch::updateMaxEnergy(int maxEnergy)
+void NMESsearch::updateMaxEnergy(int maxEnergy, int maxEnergy2)
 {
     m_maxEnergy = maxEnergy;
+    m_maxEnergy2 = maxEnergy2;
+
+    m_totEnergy = qSqrt((m_maxEnergy*m_maxEnergy )+
+                        (m_maxEnergy2*m_maxEnergy2));
+
 }
 
 channel NMESsearch::getMotorPoint()
 {
     channel aux;
     aux.maxEnergy = 0;
+    aux.maxEnergy2 = 0;
+    aux.totEnergy = 0;
 
     for (int i=0; i < m_num_cathodes; i++) {
-        if (m_channel[i].maxEnergy > aux.maxEnergy) {
+        //if (m_channel[i].maxEnergy > aux.maxEnergy) {
+        if (m_channel[i].totEnergy > aux.totEnergy) {
             aux = m_channel[i];
         }
     }
@@ -94,6 +104,8 @@ void NMESsearch::cleanChannels()
         m_channel->ch1 = 0;
         m_channel->ch2 = 0;
         m_channel->maxEnergy = 0;
+        m_channel->maxEnergy2 = 0;
+        m_channel->totEnergy = 0;
     }
 }
 
@@ -135,29 +147,44 @@ void NMESsearch::saveMeasTxtFile()
 
 void NMESsearch::SearchTimeout()
 {
-    QString aux;
-
     //Update MaxEnergy and clears it in the gui for the next iteration
     CopyResetMaxEnergy();
+    qDebug()<<"reset energy";
 
     //Store channel information
     m_channel[m_search_index].ch1 = m_ch1;
     m_channel[m_search_index].ch2 = m_ch2;
     m_channel[m_search_index].maxEnergy = m_maxEnergy;
+    m_channel[m_search_index].maxEnergy2 = m_maxEnergy2;
+    m_channel[m_search_index].totEnergy = m_totEnergy;
 
-    aux = "iteration " + QString::number(m_search_index);
-    aux += " " + QString::number(m_ch1) +",";
-    aux += QString::number(m_ch2) + ": ";
+    //Update text in GUI
+    QString aux;
+    aux =  QString::number(m_search_index);
+    aux += " (" + QString::number(m_ch1) +",";
+    aux += QString::number(m_ch2) + ") S1: ";
     aux += QString::number(m_maxEnergy) + " ";
 
     double dB = 10*qLn(m_maxEnergy)/qLn(10);
-    aux += QString::number((int)dB) + " dB";
+    aux += QString::number((int)dB) + " dB,  S2: ";
+
+    aux += QString::number(m_maxEnergy2) + " ";
+    double dB2 = 10*qLn(m_maxEnergy2)/qLn(10);
+    aux += QString::number((int)dB2) + " dB,  Tot: ";
+
+    aux += QString::number(m_totEnergy) + " ";
+    double tot = 10*qLn(m_totEnergy)/qLn(10);
+    aux += QString::number((int)tot) + " dB";
 
     m_channel[m_search_index].maxEnergydB = dB;
+    m_channel[m_search_index].maxEnergy2dB = dB2;
+    m_channel[m_search_index].totEnergydB = dB2;
+
     //aux += "\n";
     updateSearchText(aux);
 
     m_maxEnergy = 0;
+    m_maxEnergy2 = 0;
 
     /*Search algorithm here*/
     if (m_search_index < (m_num_cathodes-1)) {
@@ -178,3 +205,4 @@ void NMESsearch::SearchTimeout()
     }
 
 }
+

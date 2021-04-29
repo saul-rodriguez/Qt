@@ -11,7 +11,11 @@ typedef struct channel_struct {
     int ch1;
     int ch2;
     int maxEnergy;
+    int maxEnergy2;
+    int totEnergy;
     double maxEnergydB;
+    double maxEnergy2dB;
+    double totEnergydB;
 } channel;
 
 class NMESsearch : public QObject
@@ -22,6 +26,8 @@ public:
 
     int m_search_index;
     int m_maxEnergy;
+    int m_maxEnergy2;
+    int m_totEnergy;
 
     //Scan method with 1 anode in ch1 and M cathodes
     channel m_channel[NUM_CATHODES];
@@ -40,7 +46,7 @@ public:
     void stopScan();
     bool isActive();
 
-    void updateMaxEnergy(int maxEnergy);
+    void updateMaxEnergy(int maxEnergy, int maxEnergy2);
     channel getMotorPoint();
     void cleanChannels();
 

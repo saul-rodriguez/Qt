@@ -149,16 +149,22 @@ public:
     QVBoxLayout *verticalLayout_4;
     QLabel *labelEnergy;
     QProgressBar *progressBarEnergy;
+    QVBoxLayout *verticalLayout_11;
+    QLabel *labelEnergy2;
+    QProgressBar *progressBarEnergy2;
     QVBoxLayout *verticalLayout_8;
     QLabel *label_16;
     QLabel *labelEnergyRange;
-    QLabel *label_17;
-    QLabel *labelEnergyValue;
     QLabel *label_20;
     QLabel *labelThreshold;
+    QLabel *label_17;
+    QLabel *labelEnergyValue;
     QLabel *label_21;
     QLabel *labelEnergyMax;
-    QLabel *labelEnergyMaxdB;
+    QLabel *label_23;
+    QLabel *labelEnergyValue2;
+    QLabel *label_24;
+    QLabel *labelEnergyMax2;
     QPushButton *pushButtonResetMaxEnergy;
     QSpacerItem *verticalSpacer;
     QVBoxLayout *verticalLayout_6;
@@ -809,6 +815,24 @@ public:
 
         horizontalLayout_19->addLayout(verticalLayout_4);
 
+        verticalLayout_11 = new QVBoxLayout();
+        verticalLayout_11->setSpacing(6);
+        verticalLayout_11->setObjectName(QString::fromUtf8("verticalLayout_11"));
+        labelEnergy2 = new QLabel(tab_4);
+        labelEnergy2->setObjectName(QString::fromUtf8("labelEnergy2"));
+
+        verticalLayout_11->addWidget(labelEnergy2);
+
+        progressBarEnergy2 = new QProgressBar(tab_4);
+        progressBarEnergy2->setObjectName(QString::fromUtf8("progressBarEnergy2"));
+        progressBarEnergy2->setValue(24);
+        progressBarEnergy2->setOrientation(Qt::Vertical);
+
+        verticalLayout_11->addWidget(progressBarEnergy2);
+
+
+        horizontalLayout_19->addLayout(verticalLayout_11);
+
         verticalLayout_8 = new QVBoxLayout();
         verticalLayout_8->setSpacing(6);
         verticalLayout_8->setObjectName(QString::fromUtf8("verticalLayout_8"));
@@ -822,16 +846,6 @@ public:
 
         verticalLayout_8->addWidget(labelEnergyRange);
 
-        label_17 = new QLabel(tab_4);
-        label_17->setObjectName(QString::fromUtf8("label_17"));
-
-        verticalLayout_8->addWidget(label_17);
-
-        labelEnergyValue = new QLabel(tab_4);
-        labelEnergyValue->setObjectName(QString::fromUtf8("labelEnergyValue"));
-
-        verticalLayout_8->addWidget(labelEnergyValue);
-
         label_20 = new QLabel(tab_4);
         label_20->setObjectName(QString::fromUtf8("label_20"));
 
@@ -841,6 +855,16 @@ public:
         labelThreshold->setObjectName(QString::fromUtf8("labelThreshold"));
 
         verticalLayout_8->addWidget(labelThreshold);
+
+        label_17 = new QLabel(tab_4);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+
+        verticalLayout_8->addWidget(label_17);
+
+        labelEnergyValue = new QLabel(tab_4);
+        labelEnergyValue->setObjectName(QString::fromUtf8("labelEnergyValue"));
+
+        verticalLayout_8->addWidget(labelEnergyValue);
 
         label_21 = new QLabel(tab_4);
         label_21->setObjectName(QString::fromUtf8("label_21"));
@@ -852,10 +876,25 @@ public:
 
         verticalLayout_8->addWidget(labelEnergyMax);
 
-        labelEnergyMaxdB = new QLabel(tab_4);
-        labelEnergyMaxdB->setObjectName(QString::fromUtf8("labelEnergyMaxdB"));
+        label_23 = new QLabel(tab_4);
+        label_23->setObjectName(QString::fromUtf8("label_23"));
 
-        verticalLayout_8->addWidget(labelEnergyMaxdB);
+        verticalLayout_8->addWidget(label_23);
+
+        labelEnergyValue2 = new QLabel(tab_4);
+        labelEnergyValue2->setObjectName(QString::fromUtf8("labelEnergyValue2"));
+
+        verticalLayout_8->addWidget(labelEnergyValue2);
+
+        label_24 = new QLabel(tab_4);
+        label_24->setObjectName(QString::fromUtf8("label_24"));
+
+        verticalLayout_8->addWidget(label_24);
+
+        labelEnergyMax2 = new QLabel(tab_4);
+        labelEnergyMax2->setObjectName(QString::fromUtf8("labelEnergyMax2"));
+
+        verticalLayout_8->addWidget(labelEnergyMax2);
 
         pushButtonResetMaxEnergy = new QPushButton(tab_4);
         pushButtonResetMaxEnergy->setObjectName(QString::fromUtf8("pushButtonResetMaxEnergy"));
@@ -1037,7 +1076,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1121,16 +1160,20 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QApplication::translate("MainWindow", "AT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QApplication::translate("MainWindow", "Plot", nullptr));
         labelScale->setText(QApplication::translate("MainWindow", "Scale", nullptr));
-        labelEnergy->setText(QApplication::translate("MainWindow", "Energy", nullptr));
+        labelEnergy->setText(QApplication::translate("MainWindow", "Energy1", nullptr));
+        labelEnergy2->setText(QApplication::translate("MainWindow", "Energy2", nullptr));
         label_16->setText(QApplication::translate("MainWindow", "Max Range", nullptr));
         labelEnergyRange->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_17->setText(QApplication::translate("MainWindow", "Energy Value", nullptr));
-        labelEnergyValue->setText(QApplication::translate("MainWindow", "0", nullptr));
         label_20->setText(QApplication::translate("MainWindow", "Threshold", nullptr));
         labelThreshold->setText(QApplication::translate("MainWindow", "0", nullptr));
-        label_21->setText(QApplication::translate("MainWindow", "Max Energy", nullptr));
+        label_17->setText(QApplication::translate("MainWindow", "Energy1", nullptr));
+        labelEnergyValue->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_21->setText(QApplication::translate("MainWindow", "Max Energy1", nullptr));
         labelEnergyMax->setText(QApplication::translate("MainWindow", "0", nullptr));
-        labelEnergyMaxdB->setText(QApplication::translate("MainWindow", "dB", nullptr));
+        label_23->setText(QApplication::translate("MainWindow", "Energy2", nullptr));
+        labelEnergyValue2->setText(QApplication::translate("MainWindow", "0", nullptr));
+        label_24->setText(QApplication::translate("MainWindow", "Max Energy2", nullptr));
+        labelEnergyMax2->setText(QApplication::translate("MainWindow", "0", nullptr));
         pushButtonResetMaxEnergy->setText(QApplication::translate("MainWindow", "Reset", nullptr));
         label_18->setText(QApplication::translate("MainWindow", "Theshold", nullptr));
         label_19->setText(QApplication::translate("MainWindow", "Movement", nullptr));
