@@ -6,6 +6,7 @@
 #include "nmessensor.h"
 #include "nmessearch.h"
 #include "nmesautomaticsearch.h"
+#include "nmesdualmp.h"
 
 #include <QMainWindow>
 #include <QDataStream>
@@ -82,6 +83,9 @@ private:
 
     NMESAutomaticSearch m_autosearch;
 
+    //Dual motor point stimulation
+    NMESDualMP *m_dualMPstim;
+
 public slots:
     void updateSearchText(QString text);
 
@@ -95,10 +99,12 @@ private slots:
     void WiFiDisplayError(QAbstractSocket::SocketError socketError);
 
     void PlotRx(const QByteArray &data);
-    void PlotTimeout();
+    void PlotTimeout();    
     void SilenceTimeout();
     void UpdateSensorData();
     void SearchDone();
+    //void DualStimulationTimeout();
+
 
     void send(QByteArray data);
 
@@ -144,6 +150,8 @@ private slots:
     void on_pushButtonResetMaxEnergy_clicked();
     void on_actionSearch_triggered();
     void on_pushButtonUpdateCh1MotorPoint_clicked();
+    void on_pushButtonStartDualStim_clicked();
+    void on_pushButtonUpdateCh2MotorPoint_clicked();
 };
 
 #endif // MAINWINDOW_H

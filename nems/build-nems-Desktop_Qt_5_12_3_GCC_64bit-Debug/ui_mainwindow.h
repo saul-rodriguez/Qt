@@ -48,7 +48,7 @@ public:
     QAction *actionSearch;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
-    QVBoxLayout *verticalLayout;
+    QGridLayout *gridLayout_10;
     QTabWidget *tabWidget;
     QWidget *Connect;
     QGridLayout *gridLayout_3;
@@ -180,12 +180,38 @@ public:
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_motorpoint;
     QPushButton *pushButtonUpdateCh1MotorPoint;
+    QPushButton *pushButtonUpdateCh2MotorPoint;
     QLabel *label_25;
     QLineEdit *lineEditAnode;
     QLabel *label_22;
     QLineEdit *lineEditStopElectrodes;
     QSpacerItem *horizontalSpacer_2;
     QPlainTextEdit *plainTextEditSearch;
+    QWidget *tab_6;
+    QGridLayout *gridLayout_11;
+    QVBoxLayout *verticalLayout_12;
+    QHBoxLayout *horizontalLayout_23;
+    QLabel *label_27;
+    QLabel *label_28;
+    QLineEdit *lineEditDualStim1_1;
+    QLabel *label_29;
+    QLineEdit *lineEditDualStim1_2;
+    QLabel *label_33;
+    QLineEdit *lineEditDualAmp1;
+    QHBoxLayout *horizontalLayout_24;
+    QLabel *label_32;
+    QLabel *label_30;
+    QLineEdit *lineEditDualStim2_1;
+    QLabel *label_31;
+    QLineEdit *lineEditDualStim2_2;
+    QLabel *label_34;
+    QLineEdit *lineEditDualAmp2;
+    QHBoxLayout *horizontalLayout_25;
+    QHBoxLayout *horizontalLayout_21;
+    QLabel *label_26;
+    QLineEdit *lineEditDelay;
+    QPushButton *pushButtonStartDualStim;
+    QSpacerItem *verticalSpacer_2;
     QMenuBar *menuBar;
     QMenu *menu_Measurement;
     QToolBar *mainToolBar;
@@ -243,9 +269,9 @@ public:
         gridLayout->setSpacing(6);
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        gridLayout_10 = new QGridLayout();
+        gridLayout_10->setSpacing(6);
+        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         Connect = new QWidget();
@@ -975,6 +1001,11 @@ public:
 
         horizontalLayout_20->addWidget(pushButtonUpdateCh1MotorPoint);
 
+        pushButtonUpdateCh2MotorPoint = new QPushButton(tab_5);
+        pushButtonUpdateCh2MotorPoint->setObjectName(QString::fromUtf8("pushButtonUpdateCh2MotorPoint"));
+
+        horizontalLayout_20->addWidget(pushButtonUpdateCh2MotorPoint);
+
         label_25 = new QLabel(tab_5);
         label_25->setObjectName(QString::fromUtf8("label_25"));
 
@@ -1013,11 +1044,141 @@ public:
         gridLayout_9->addLayout(verticalLayout_10, 0, 0, 1, 1);
 
         tabWidget->addTab(tab_5, QString());
+        tab_6 = new QWidget();
+        tab_6->setObjectName(QString::fromUtf8("tab_6"));
+        gridLayout_11 = new QGridLayout(tab_6);
+        gridLayout_11->setSpacing(6);
+        gridLayout_11->setContentsMargins(11, 11, 11, 11);
+        gridLayout_11->setObjectName(QString::fromUtf8("gridLayout_11"));
+        verticalLayout_12 = new QVBoxLayout();
+        verticalLayout_12->setSpacing(6);
+        verticalLayout_12->setObjectName(QString::fromUtf8("verticalLayout_12"));
+        horizontalLayout_23 = new QHBoxLayout();
+        horizontalLayout_23->setSpacing(6);
+        horizontalLayout_23->setObjectName(QString::fromUtf8("horizontalLayout_23"));
+        label_27 = new QLabel(tab_6);
+        label_27->setObjectName(QString::fromUtf8("label_27"));
 
-        verticalLayout->addWidget(tabWidget);
+        horizontalLayout_23->addWidget(label_27);
+
+        label_28 = new QLabel(tab_6);
+        label_28->setObjectName(QString::fromUtf8("label_28"));
+
+        horizontalLayout_23->addWidget(label_28);
+
+        lineEditDualStim1_1 = new QLineEdit(tab_6);
+        lineEditDualStim1_1->setObjectName(QString::fromUtf8("lineEditDualStim1_1"));
+
+        horizontalLayout_23->addWidget(lineEditDualStim1_1);
+
+        label_29 = new QLabel(tab_6);
+        label_29->setObjectName(QString::fromUtf8("label_29"));
+
+        horizontalLayout_23->addWidget(label_29);
+
+        lineEditDualStim1_2 = new QLineEdit(tab_6);
+        lineEditDualStim1_2->setObjectName(QString::fromUtf8("lineEditDualStim1_2"));
+
+        horizontalLayout_23->addWidget(lineEditDualStim1_2);
+
+        label_33 = new QLabel(tab_6);
+        label_33->setObjectName(QString::fromUtf8("label_33"));
+
+        horizontalLayout_23->addWidget(label_33);
+
+        lineEditDualAmp1 = new QLineEdit(tab_6);
+        lineEditDualAmp1->setObjectName(QString::fromUtf8("lineEditDualAmp1"));
+
+        horizontalLayout_23->addWidget(lineEditDualAmp1);
 
 
-        gridLayout->addLayout(verticalLayout, 0, 0, 1, 1);
+        verticalLayout_12->addLayout(horizontalLayout_23);
+
+        horizontalLayout_24 = new QHBoxLayout();
+        horizontalLayout_24->setSpacing(6);
+        horizontalLayout_24->setObjectName(QString::fromUtf8("horizontalLayout_24"));
+        label_32 = new QLabel(tab_6);
+        label_32->setObjectName(QString::fromUtf8("label_32"));
+
+        horizontalLayout_24->addWidget(label_32);
+
+        label_30 = new QLabel(tab_6);
+        label_30->setObjectName(QString::fromUtf8("label_30"));
+
+        horizontalLayout_24->addWidget(label_30);
+
+        lineEditDualStim2_1 = new QLineEdit(tab_6);
+        lineEditDualStim2_1->setObjectName(QString::fromUtf8("lineEditDualStim2_1"));
+
+        horizontalLayout_24->addWidget(lineEditDualStim2_1);
+
+        label_31 = new QLabel(tab_6);
+        label_31->setObjectName(QString::fromUtf8("label_31"));
+
+        horizontalLayout_24->addWidget(label_31);
+
+        lineEditDualStim2_2 = new QLineEdit(tab_6);
+        lineEditDualStim2_2->setObjectName(QString::fromUtf8("lineEditDualStim2_2"));
+
+        horizontalLayout_24->addWidget(lineEditDualStim2_2);
+
+        label_34 = new QLabel(tab_6);
+        label_34->setObjectName(QString::fromUtf8("label_34"));
+
+        horizontalLayout_24->addWidget(label_34);
+
+        lineEditDualAmp2 = new QLineEdit(tab_6);
+        lineEditDualAmp2->setObjectName(QString::fromUtf8("lineEditDualAmp2"));
+
+        horizontalLayout_24->addWidget(lineEditDualAmp2);
+
+
+        verticalLayout_12->addLayout(horizontalLayout_24);
+
+        horizontalLayout_25 = new QHBoxLayout();
+        horizontalLayout_25->setSpacing(6);
+        horizontalLayout_25->setObjectName(QString::fromUtf8("horizontalLayout_25"));
+        horizontalLayout_21 = new QHBoxLayout();
+        horizontalLayout_21->setSpacing(6);
+        horizontalLayout_21->setObjectName(QString::fromUtf8("horizontalLayout_21"));
+        label_26 = new QLabel(tab_6);
+        label_26->setObjectName(QString::fromUtf8("label_26"));
+
+        horizontalLayout_21->addWidget(label_26);
+
+        lineEditDelay = new QLineEdit(tab_6);
+        lineEditDelay->setObjectName(QString::fromUtf8("lineEditDelay"));
+        sizePolicy2.setHeightForWidth(lineEditDelay->sizePolicy().hasHeightForWidth());
+        lineEditDelay->setSizePolicy(sizePolicy2);
+
+        horizontalLayout_21->addWidget(lineEditDelay);
+
+
+        horizontalLayout_25->addLayout(horizontalLayout_21);
+
+        pushButtonStartDualStim = new QPushButton(tab_6);
+        pushButtonStartDualStim->setObjectName(QString::fromUtf8("pushButtonStartDualStim"));
+        sizePolicy3.setHeightForWidth(pushButtonStartDualStim->sizePolicy().hasHeightForWidth());
+        pushButtonStartDualStim->setSizePolicy(sizePolicy3);
+
+        horizontalLayout_25->addWidget(pushButtonStartDualStim);
+
+
+        verticalLayout_12->addLayout(horizontalLayout_25);
+
+
+        gridLayout_11->addLayout(verticalLayout_12, 0, 0, 1, 1);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        gridLayout_11->addItem(verticalSpacer_2, 1, 0, 1, 1);
+
+        tabWidget->addTab(tab_6, QString());
+
+        gridLayout_10->addWidget(tabWidget, 0, 0, 1, 1);
+
+
+        gridLayout->addLayout(gridLayout_10, 0, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
@@ -1088,7 +1249,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1191,10 +1352,22 @@ public:
         label_19->setText(QApplication::translate("MainWindow", "Movement", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
         label_motorpoint->setText(QApplication::translate("MainWindow", "Motor point: -,- ", nullptr));
-        pushButtonUpdateCh1MotorPoint->setText(QApplication::translate("MainWindow", "Update Ch1 ", nullptr));
+        pushButtonUpdateCh1MotorPoint->setText(QApplication::translate("MainWindow", "Update MP1 ", nullptr));
+        pushButtonUpdateCh2MotorPoint->setText(QApplication::translate("MainWindow", "Update MP2", nullptr));
         label_25->setText(QApplication::translate("MainWindow", "Anode Electrode:", nullptr));
         label_22->setText(QApplication::translate("MainWindow", "Stop Electrode:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
+        label_27->setText(QApplication::translate("MainWindow", "Motor Point 1:", nullptr));
+        label_28->setText(QApplication::translate("MainWindow", "Electrode1", nullptr));
+        label_29->setText(QApplication::translate("MainWindow", "Electrode2", nullptr));
+        label_33->setText(QApplication::translate("MainWindow", "Amplitude1:", nullptr));
+        label_32->setText(QApplication::translate("MainWindow", "Motor Point 2:", nullptr));
+        label_30->setText(QApplication::translate("MainWindow", "Electrode1", nullptr));
+        label_31->setText(QApplication::translate("MainWindow", "Electrode2", nullptr));
+        label_34->setText(QApplication::translate("MainWindow", "Amplitude2:", nullptr));
+        label_26->setText(QApplication::translate("MainWindow", "Delay (ms)", nullptr));
+        pushButtonStartDualStim->setText(QApplication::translate("MainWindow", "Start", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_6), QApplication::translate("MainWindow", "D-Stim", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi
 

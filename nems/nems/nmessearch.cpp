@@ -15,6 +15,7 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_ch1 = 1;
     m_ch2 = 2;
     m_go = 0;
+    m_amplitude = 0;
     m_anode = 1;
     m_stop_cathodes = NUM_CATHODES;
     m_maxEnergy = 0;
@@ -76,9 +77,8 @@ void NMESsearch::updateMaxEnergy(int maxEnergy, int maxEnergy2)
     m_maxEnergy = maxEnergy;
     m_maxEnergy2 = maxEnergy2;
 
-    m_totEnergy = qSqrt((m_maxEnergy*m_maxEnergy )+
-                        (m_maxEnergy2*m_maxEnergy2));
-
+   // m_totEnergy = qSqrt((m_maxEnergy*m_maxEnergy )+ (m_maxEnergy2*m_maxEnergy2));
+    m_totEnergy = maxEnergy + maxEnergy2;
 }
 
 channel NMESsearch::getMotorPoint()
@@ -117,6 +117,7 @@ void NMESsearch::programNEMSbin()
     QByteArray data;
 
     data.append('e');
+    data.append((unsigned char)m_amplitude);
     data.append((unsigned char)m_ch1);
     data.append((unsigned char)m_ch2);
     data.append((unsigned char)m_go);

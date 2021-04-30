@@ -135,6 +135,21 @@ MainWindow::MainWindow(QWidget *parent) :
     m_stopAmplitude = 10;
     m_autosearch.setSearch(m_search);
 
+    /**** Dual Motor Point Stimulation *****/
+    ui->lineEditDualStim1_1->setText("0");
+    ui->lineEditDualStim1_2->setText("0");
+    ui->lineEditDualStim2_1->setText("0");
+    ui->lineEditDualStim2_2->setText("0");
+    ui->lineEditDelay->setText("0");
+    ui->lineEditDualAmp1->setText("0");
+    ui->lineEditDualAmp2->setText("0");
+
+    m_dualMPstim = new NMESDualMP(this);
+    connect(m_dualMPstim,SIGNAL(send(QByteArray)),this,SLOT(send(QByteArray)));
+    //m_timer_dualStim = new QTimer(this);
+    //m_timer_dualStim->setSingleShot(true);
+    //connect(m_timer_dualStim, SIGNAL(timeout()), this, SLOT(DualStimulationTimeout()));
+
 
 }
 
@@ -514,6 +529,29 @@ void MainWindow::SearchDone()
         ui->plainTextEditSearch->appendPlainText("Search cancelled");
     }
 }
+
+/*
+void MainWindow::DualStimulationTimeout()
+{
+    unsigned char amp2, ch1, ch2, go;
+
+    QString aux;
+
+    // Get Motor point 1 parameters
+    aux = ui->lineEditDualAmp2->text();
+    amp2 = aux.toInt();
+    aux = ui->lineEditDualStim2_1->text();
+    ch1 = aux.toInt();
+    aux = ui->lineEditDualStim2_2->text();
+    ch2 = aux.toInt();
+    go = 1;
+
+
+
+
+
+}
+*/
 
 void MainWindow::send(QByteArray data)
 {
@@ -1195,6 +1233,7 @@ void MainWindow::on_actionSearch_triggered()
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
 {
+    /*
     ui->lineEditChannel1->setText(QString::number(m_motorPoint.ch1));
     ui->lineEditChannel2->setText(QString::number(m_motorPoint.ch2));
 
@@ -1202,4 +1241,60 @@ void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
     m_search->m_ch1 = m_motorPoint.ch1;
     m_search->m_ch2 = m_motorPoint.ch2;
     m_search->programNEMSbin();
+    */
+
+    // Send motor points to dual stimulation tab
+    ui->lineEditDualStim1_1->setText(QString::number(m_motorPoint.ch1));
+    ui->lineEditDualStim1_2->setText(QString::number(m_motorPoint.ch2));
+
+}
+
+void MainWindow::on_pushButtonStartDualStim_clicked()
+{
+
+    // Get Motor point parameters
+    dual_motorPoint mp_config;
+    QString aux;
+
+    aux = ui->lineEditDualAmp1->text();
+    mp_config.amp1 = aux.toInt();
+
+    aux = ui->lineEditDualAmp2->text();
+    mp_config.amp2 = aux.toInt();
+
+    aux = ui->lineEditDualStim1_1->text();
+    mp_config.ch1_1 = aux.toInt();
+
+    aux = ui->lineEditDualStim1_2->text();
+    mp_config.ch1_2 = aux.toInt();
+
+    aux = ui->lineEditDualStim2_1->text();
+    mp_config.ch2_1 = aux.toInt();
+
+    aux = ui->lineEditDualStim2_2->text();
+    mp_config.ch2_2 = aux.toInt();
+
+    aux = ui->lineEditDelay->text();
+    mp_config.delay = aux.toInt(); //ms
+
+    aux = ui->lineEditON->text(); // sec
+    mp_config.ON = aux.toInt()*1000;
+
+    aux = ui->lineEditRampUp->text(); // ds
+    mp_config.rampUp = aux.toInt()*100;
+
+    aux = ui->lineEditRampDown->text(); // ds
+    mp_config.rampDown = aux.toInt()*100;
+
+    m_dualMPstim->start(&mp_config);
+
+
+
+
+}
+
+void MainWindow::on_pushButtonUpdateCh2MotorPoint_clicked()
+{
+    ui->lineEditDualStim2_1->setText(QString::number(m_motorPoint.ch1));
+    ui->lineEditDualStim2_2->setText(QString::number(m_motorPoint.ch2));
 }
