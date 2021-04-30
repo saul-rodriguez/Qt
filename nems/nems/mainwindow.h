@@ -74,7 +74,7 @@ private:
     //Search motorpoints
     NMESsearch *m_search;
     channel m_motorPoint;
-    int m_numSearchElectrodes;
+    //int m_numSearchElectrodes;
 
     //Automatic Search
     int m_startAmplitude;

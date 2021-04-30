@@ -125,9 +125,11 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_search,SIGNAL(CopyResetMaxEnergy()),this,SLOT(on_pushButtonResetMaxEnergy_clicked()));
     connect(m_search,SIGNAL(scanDone()),this,SLOT(SearchDone()));
 
-    m_numSearchElectrodes = 16;
-    ui->lineEditNumElectrodes->setText(QString::number((int)m_numSearchElectrodes));
 
+    //m_numSearchElectrodes = 16;
+    //ui->lineEditStopElectrodes->setText(QString::number((int)m_numSearchElectrodes));
+    ui->lineEditStopElectrodes->setText("16");
+    ui->lineEditAnode->setText("1");
     /***** Automatic search configuration ****/
     m_startAmplitude = 6;
     m_stopAmplitude = 10;
@@ -431,7 +433,12 @@ void MainWindow::UpdateSensorData()
         ui->progressBarEnergy2->setValue((int)energy2);
     }
 
-    if (energy1 > m_energy_threshold) {
+    // Sensor fussion and updating of the muscle movement bar
+    double energy_tot;
+
+    energy_tot = qSqrt((energy1*energy1) + (energy2*energy2));
+
+    if (energy_tot > m_energy_threshold) {
         ui->progressBarMuscle->setValue(1);
     } else {
         ui->progressBarMuscle->setValue(0);
@@ -1165,8 +1172,6 @@ void MainWindow::on_pushButtonResetMaxEnergy_clicked()
 
     m_maxEnergy2 = 0;
     ui->labelEnergyMax2->setText(QString::number((int)m_maxEnergy2));
-
-
 }
 
 void MainWindow::on_actionSearch_triggered()
@@ -1175,14 +1180,17 @@ void MainWindow::on_actionSearch_triggered()
     if (ui->labelBTstatus->text() != "Connected")
         return;
 
-    QString num_electrodes;
-    num_electrodes = ui->lineEditNumElectrodes->text();
+    QString stop_electrode;
+    stop_electrode = ui->lineEditStopElectrodes->text();
 
     QString amplitude;
     amplitude = ui->lineEditAmplitude->text();
 
+    QString anode;
+    anode = ui->lineEditAnode->text();
+
     //m_search->scan(num_electrodes.toInt(),amplitude.toInt());
-    m_autosearch.start(m_startAmplitude,m_stopAmplitude,num_electrodes.toInt());
+    m_autosearch.start(m_startAmplitude,m_stopAmplitude, anode.toInt(),stop_electrode.toInt());
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()

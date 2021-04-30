@@ -7,16 +7,18 @@ NMESAutomaticSearch::NMESAutomaticSearch(QObject *parent) : QObject(parent)
     //Default values
     m_current = 6;
     m_stopCurrent = 10;
-    m_numElectrodes = 4;
+    m_anode = 1;
+    m_stopElectrodes = 4;
 
     m_channel_index = 0;
 }
 
-void NMESAutomaticSearch::start(int startCurrent, int stopCurrent, int numElectrodes)
+void NMESAutomaticSearch::start(int startCurrent, int stopCurrent, int anode, int stopElectrodes)
 {
     m_current = startCurrent;
     m_stopCurrent = stopCurrent;
-    m_numElectrodes = numElectrodes;
+    m_anode = anode;
+    m_stopElectrodes = stopElectrodes;
 
     m_channel_index = 0;
 
@@ -32,7 +34,7 @@ void NMESAutomaticSearch::start(int startCurrent, int stopCurrent, int numElectr
     if (ret == QMessageBox::No) return;
 
 
-    m_search->scan(m_numElectrodes,m_current);
+    m_search->scan(m_anode, m_stopElectrodes,m_current);
 }
 
 void NMESAutomaticSearch::setSearch(NMESsearch *search)
@@ -77,7 +79,7 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
     int retR = msgBoxR.exec();
 
     if (retR == QMessageBox::Yes) {
-        m_search->scan(m_numElectrodes,m_current);
+        m_search->scan(m_anode, m_stopElectrodes,m_current);
         return 0;
     }
 
@@ -97,7 +99,7 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
 
     if (ret == QMessageBox::No) return 3; // Cancel search
 
-    m_search->scan(m_numElectrodes,m_current);
+    m_search->scan(m_anode, m_stopElectrodes,m_current);
     return 0;
 }
 

@@ -15,7 +15,8 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_ch1 = 1;
     m_ch2 = 2;
     m_go = 0;
-    m_num_cathodes = NUM_CATHODES;
+    m_anode = 1;
+    m_stop_cathodes = NUM_CATHODES;
     m_maxEnergy = 0;
     m_maxEnergy2 = 0;
 
@@ -30,14 +31,15 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_motorPoint.ch2 = 0;
 }
 
-void NMESsearch::scan(int num_electrodes, int amplitude)
+void NMESsearch::scan(int anode, int stop_electrodes, int amplitude)
 {
     //Initialize
-    m_num_cathodes = num_electrodes - 1; // Electrode 1 is set as anode
+    m_anode = anode;
+    m_stop_cathodes = stop_electrodes;
     m_amplitude = amplitude;
 
-    m_ch1 = 1; // set initial anode
-    m_ch2 = 2; // set initial cathode
+    m_ch1 = m_anode; // set initial anode
+    m_ch2 = m_anode + 1; // set initial cathode
     m_go = 1; // activate
     cleanChannels();
     CopyResetMaxEnergy();
@@ -86,7 +88,7 @@ channel NMESsearch::getMotorPoint()
     aux.maxEnergy2 = 0;
     aux.totEnergy = 0;
 
-    for (int i=0; i < m_num_cathodes; i++) {
+    for (int i=0; i < (m_stop_cathodes - m_anode); i++) {
         //if (m_channel[i].maxEnergy > aux.maxEnergy) {
         if (m_channel[i].totEnergy > aux.totEnergy) {
             aux = m_channel[i];
@@ -100,7 +102,7 @@ channel NMESsearch::getMotorPoint()
 
 void NMESsearch::cleanChannels()
 {
-    for (int i = 0; i < m_num_cathodes; i++) {
+    for (int i = 0; i < (m_stop_cathodes - m_anode); i++) {
         m_channel->ch1 = 0;
         m_channel->ch2 = 0;
         m_channel->maxEnergy = 0;
@@ -138,7 +140,7 @@ void NMESsearch::saveMeasTxtFile()
     outfile.open(QIODevice::ReadWrite | QIODevice::Text);
     QTextStream stream(&outfile);
 
-    for (int i = 0; i < m_num_cathodes; i++) {
+    for (int i = 0; i < (m_stop_cathodes - m_anode); i++) {
         stream << QString::number(i) << " "
                << QString::number(m_channel[i].maxEnergy) << "\n";
     }
@@ -187,9 +189,11 @@ void NMESsearch::SearchTimeout()
     m_maxEnergy2 = 0;
 
     /*Search algorithm here*/
-    if (m_search_index < (m_num_cathodes-1)) {
+    if (m_search_index < (m_stop_cathodes - m_anode -1)) {
         m_search_index++;
-        m_ch2 = 2 + m_search_index;
+
+        //m_ch2 = 2 + m_search_index;
+        m_ch2++;
         //programNEMS(); // advance to next iteration
         programNEMSbin(); // advance to next iteration
 

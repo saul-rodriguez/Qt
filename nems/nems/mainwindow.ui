@@ -911,14 +911,24 @@
                </widget>
               </item>
               <item>
-               <widget class="QLabel" name="label_22">
+               <widget class="QLabel" name="label_25">
                 <property name="text">
-                 <string>Num  Electrodes:</string>
+                 <string>Anode Electrode:</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEditNumElectrodes">
+               <widget class="QLineEdit" name="lineEditAnode"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_22">
+                <property name="text">
+                 <string>Stop Electrode:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditStopElectrodes">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                   <horstretch>0</horstretch>

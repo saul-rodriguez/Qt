@@ -180,8 +180,10 @@ public:
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_motorpoint;
     QPushButton *pushButtonUpdateCh1MotorPoint;
+    QLabel *label_25;
+    QLineEdit *lineEditAnode;
     QLabel *label_22;
-    QLineEdit *lineEditNumElectrodes;
+    QLineEdit *lineEditStopElectrodes;
     QSpacerItem *horizontalSpacer_2;
     QPlainTextEdit *plainTextEditSearch;
     QMenuBar *menuBar;
@@ -973,17 +975,27 @@ public:
 
         horizontalLayout_20->addWidget(pushButtonUpdateCh1MotorPoint);
 
+        label_25 = new QLabel(tab_5);
+        label_25->setObjectName(QString::fromUtf8("label_25"));
+
+        horizontalLayout_20->addWidget(label_25);
+
+        lineEditAnode = new QLineEdit(tab_5);
+        lineEditAnode->setObjectName(QString::fromUtf8("lineEditAnode"));
+
+        horizontalLayout_20->addWidget(lineEditAnode);
+
         label_22 = new QLabel(tab_5);
         label_22->setObjectName(QString::fromUtf8("label_22"));
 
         horizontalLayout_20->addWidget(label_22);
 
-        lineEditNumElectrodes = new QLineEdit(tab_5);
-        lineEditNumElectrodes->setObjectName(QString::fromUtf8("lineEditNumElectrodes"));
-        sizePolicy1.setHeightForWidth(lineEditNumElectrodes->sizePolicy().hasHeightForWidth());
-        lineEditNumElectrodes->setSizePolicy(sizePolicy1);
+        lineEditStopElectrodes = new QLineEdit(tab_5);
+        lineEditStopElectrodes->setObjectName(QString::fromUtf8("lineEditStopElectrodes"));
+        sizePolicy1.setHeightForWidth(lineEditStopElectrodes->sizePolicy().hasHeightForWidth());
+        lineEditStopElectrodes->setSizePolicy(sizePolicy1);
 
-        horizontalLayout_20->addWidget(lineEditNumElectrodes);
+        horizontalLayout_20->addWidget(lineEditStopElectrodes);
 
         horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1180,7 +1192,8 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QApplication::translate("MainWindow", "Sensors", nullptr));
         label_motorpoint->setText(QApplication::translate("MainWindow", "Motor point: -,- ", nullptr));
         pushButtonUpdateCh1MotorPoint->setText(QApplication::translate("MainWindow", "Update Ch1 ", nullptr));
-        label_22->setText(QApplication::translate("MainWindow", "Num  Electrodes:", nullptr));
+        label_25->setText(QApplication::translate("MainWindow", "Anode Electrode:", nullptr));
+        label_22->setText(QApplication::translate("MainWindow", "Stop Electrode:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
         menu_Measurement->setTitle(QApplication::translate("MainWindow", "&Measurement", nullptr));
     } // retranslateUi

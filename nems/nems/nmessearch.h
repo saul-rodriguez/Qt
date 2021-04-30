@@ -34,7 +34,8 @@ public:
     unsigned int m_ch1;
     unsigned int m_ch2;
     unsigned int m_go;
-    int m_num_cathodes;
+    int m_anode;
+    int m_stop_cathodes;
     int m_amplitude;
 
     int m_timeout;
@@ -42,7 +43,7 @@ public:
 
     channel m_motorPoint;
 
-    void scan(int num_electrodes, int amplitude);
+    void scan(int anode, int stop_electrodes, int amplitude);
     void stopScan();
     bool isActive();
 
