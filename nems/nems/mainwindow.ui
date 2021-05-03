@@ -893,7 +893,7 @@
          </attribute>
          <layout class="QGridLayout" name="gridLayout_9">
           <item row="0" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_10">
+           <layout class="QVBoxLayout" name="verticalLayout">
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_20">
               <item>
@@ -946,6 +946,43 @@
               </item>
               <item>
                <spacer name="horizontalSpacer_2">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_22">
+              <item>
+               <widget class="QLabel" name="label_35">
+                <property name="text">
+                 <string>Start Current:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditSearchStartCurrent"/>
+              </item>
+              <item>
+               <widget class="QLabel" name="label_36">
+                <property name="text">
+                 <string>Stop Current:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditSearchStopCurrent"/>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_3">
                 <property name="orientation">
                  <enum>Qt::Horizontal</enum>
                 </property>
@@ -1137,6 +1174,7 @@
     <addaction name="action_Display_program"/>
     <addaction name="actionSensors"/>
     <addaction name="actionSearch"/>
+    <addaction name="actionStop_Search"/>
    </widget>
    <addaction name="menu_Measurement"/>
   </widget>
@@ -1154,6 +1192,7 @@
    <addaction name="action_Save"/>
    <addaction name="action_Display_program"/>
    <addaction name="actionSearch"/>
+   <addaction name="actionStop_Search"/>
    <addaction name="action_Clean"/>
    <addaction name="separator"/>
   </widget>
@@ -1252,6 +1291,11 @@
    </property>
    <property name="text">
     <string>Search</string>
+   </property>
+  </action>
+  <action name="actionStop_Search">
+   <property name="text">
+    <string>Stop Search</string>
    </property>
   </action>
  </widget>

@@ -143,7 +143,10 @@ void NMESsearch::saveMeasTxtFile()
 
     for (int i = 0; i < (m_stop_cathodes - m_anode); i++) {
         stream << QString::number(i) << " "
-               << QString::number(m_channel[i].maxEnergy) << "\n";
+               << QString::number(m_channel[i].maxEnergy) << " " <<
+                  QString::number(m_channel[i].maxEnergy2) << " " <<
+                  QString::number(m_channel[i].totEnergy) << " " <<
+                  "\n";
     }
     outfile.close();
 }
@@ -200,13 +203,13 @@ void NMESsearch::SearchTimeout()
 
         m_timer->start(m_timeout);
     } else { // Finish search
+        saveMeasTxtFile();
         m_search_index = 0;
-
         stopScan();
         //m_timer->stop();
         updateSearchText("** Scan search finished **");
         scanDone();
-        saveMeasTxtFile();
+
     }
 
 }

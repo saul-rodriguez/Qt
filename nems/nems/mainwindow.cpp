@@ -133,6 +133,8 @@ MainWindow::MainWindow(QWidget *parent) :
     /***** Automatic search configuration ****/
     m_startAmplitude = 6;
     m_stopAmplitude = 10;
+    ui->lineEditSearchStartCurrent->setText(QString::number(m_startAmplitude));
+    ui->lineEditSearchStopCurrent->setText(QString::number(m_stopAmplitude));
     m_autosearch.setSearch(m_search);
 
     /**** Dual Motor Point Stimulation *****/
@@ -1073,11 +1075,17 @@ void MainWindow::on_actionStop_triggered()
     //m_timer->stop();
     ui->action_Run->setEnabled(true);
 
+    if (m_search->isActive()) {
+       on_actionStop_Search_triggered();
+    }
  //
+    /*
         m_search->stopScan();
      if (m_search->isActive()) {
         updateSearchText("Search stopped");
     }
+    */
+
 
 }
 
@@ -1228,6 +1236,10 @@ void MainWindow::on_actionSearch_triggered()
     anode = ui->lineEditAnode->text();
 
     //m_search->scan(num_electrodes.toInt(),amplitude.toInt());
+    m_startAmplitude = ui->lineEditSearchStartCurrent->text().toInt();
+    m_stopAmplitude = ui->lineEditSearchStopCurrent->text().toInt();
+
+
     m_autosearch.start(m_startAmplitude,m_stopAmplitude, anode.toInt(),stop_electrode.toInt());
 }
 
@@ -1297,4 +1309,16 @@ void MainWindow::on_pushButtonUpdateCh2MotorPoint_clicked()
 {
     ui->lineEditDualStim2_1->setText(QString::number(m_motorPoint.ch1));
     ui->lineEditDualStim2_2->setText(QString::number(m_motorPoint.ch2));
+}
+
+void MainWindow::on_actionStop_Search_triggered()
+{
+
+    if (m_search->isActive()) {
+       updateSearchText("Search stopped");
+    }
+
+    m_search->stopScan();
+
+
 }

@@ -46,6 +46,7 @@ public:
     QAction *action_Display_program;
     QAction *actionSensors;
     QAction *actionSearch;
+    QAction *actionStop_Search;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QGridLayout *gridLayout_10;
@@ -176,7 +177,7 @@ public:
     QSpacerItem *horizontalSpacer;
     QWidget *tab_5;
     QGridLayout *gridLayout_9;
-    QVBoxLayout *verticalLayout_10;
+    QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_motorpoint;
     QPushButton *pushButtonUpdateCh1MotorPoint;
@@ -186,6 +187,12 @@ public:
     QLabel *label_22;
     QLineEdit *lineEditStopElectrodes;
     QSpacerItem *horizontalSpacer_2;
+    QHBoxLayout *horizontalLayout_22;
+    QLabel *label_35;
+    QLineEdit *lineEditSearchStartCurrent;
+    QLabel *label_36;
+    QLineEdit *lineEditSearchStopCurrent;
+    QSpacerItem *horizontalSpacer_3;
     QPlainTextEdit *plainTextEditSearch;
     QWidget *tab_6;
     QGridLayout *gridLayout_11;
@@ -263,6 +270,8 @@ public:
         QIcon icon7;
         icon7.addFile(QString::fromUtf8(":/images/images/search.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionSearch->setIcon(icon7);
+        actionStop_Search = new QAction(MainWindow);
+        actionStop_Search->setObjectName(QString::fromUtf8("actionStop_Search"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -985,9 +994,9 @@ public:
         gridLayout_9->setSpacing(6);
         gridLayout_9->setContentsMargins(11, 11, 11, 11);
         gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
-        verticalLayout_10 = new QVBoxLayout();
-        verticalLayout_10->setSpacing(6);
-        verticalLayout_10->setObjectName(QString::fromUtf8("verticalLayout_10"));
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setSpacing(6);
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         horizontalLayout_20 = new QHBoxLayout();
         horizontalLayout_20->setSpacing(6);
         horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
@@ -1033,15 +1042,45 @@ public:
         horizontalLayout_20->addItem(horizontalSpacer_2);
 
 
-        verticalLayout_10->addLayout(horizontalLayout_20);
+        verticalLayout->addLayout(horizontalLayout_20);
+
+        horizontalLayout_22 = new QHBoxLayout();
+        horizontalLayout_22->setSpacing(6);
+        horizontalLayout_22->setObjectName(QString::fromUtf8("horizontalLayout_22"));
+        label_35 = new QLabel(tab_5);
+        label_35->setObjectName(QString::fromUtf8("label_35"));
+
+        horizontalLayout_22->addWidget(label_35);
+
+        lineEditSearchStartCurrent = new QLineEdit(tab_5);
+        lineEditSearchStartCurrent->setObjectName(QString::fromUtf8("lineEditSearchStartCurrent"));
+
+        horizontalLayout_22->addWidget(lineEditSearchStartCurrent);
+
+        label_36 = new QLabel(tab_5);
+        label_36->setObjectName(QString::fromUtf8("label_36"));
+
+        horizontalLayout_22->addWidget(label_36);
+
+        lineEditSearchStopCurrent = new QLineEdit(tab_5);
+        lineEditSearchStopCurrent->setObjectName(QString::fromUtf8("lineEditSearchStopCurrent"));
+
+        horizontalLayout_22->addWidget(lineEditSearchStopCurrent);
+
+        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+
+        horizontalLayout_22->addItem(horizontalSpacer_3);
+
+
+        verticalLayout->addLayout(horizontalLayout_22);
 
         plainTextEditSearch = new QPlainTextEdit(tab_5);
         plainTextEditSearch->setObjectName(QString::fromUtf8("plainTextEditSearch"));
 
-        verticalLayout_10->addWidget(plainTextEditSearch);
+        verticalLayout->addWidget(plainTextEditSearch);
 
 
-        gridLayout_9->addLayout(verticalLayout_10, 0, 0, 1, 1);
+        gridLayout_9->addLayout(verticalLayout, 0, 0, 1, 1);
 
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
@@ -1237,6 +1276,7 @@ public:
         menu_Measurement->addAction(action_Display_program);
         menu_Measurement->addAction(actionSensors);
         menu_Measurement->addAction(actionSearch);
+        menu_Measurement->addAction(actionStop_Search);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(actionStop);
         mainToolBar->addAction(actionSensors);
@@ -1244,6 +1284,7 @@ public:
         mainToolBar->addAction(action_Save);
         mainToolBar->addAction(action_Display_program);
         mainToolBar->addAction(actionSearch);
+        mainToolBar->addAction(actionStop_Search);
         mainToolBar->addAction(action_Clean);
         mainToolBar->addSeparator();
 
@@ -1287,6 +1328,7 @@ public:
 #endif // QT_NO_SHORTCUT
         actionSensors->setText(QApplication::translate("MainWindow", "Sensors", nullptr));
         actionSearch->setText(QApplication::translate("MainWindow", "Search", nullptr));
+        actionStop_Search->setText(QApplication::translate("MainWindow", "Stop Search", nullptr));
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QApplication::translate("MainWindow", "WiFi", nullptr));
@@ -1356,6 +1398,8 @@ public:
         pushButtonUpdateCh2MotorPoint->setText(QApplication::translate("MainWindow", "Update MP2", nullptr));
         label_25->setText(QApplication::translate("MainWindow", "Anode Electrode:", nullptr));
         label_22->setText(QApplication::translate("MainWindow", "Stop Electrode:", nullptr));
+        label_35->setText(QApplication::translate("MainWindow", "Start Current:", nullptr));
+        label_36->setText(QApplication::translate("MainWindow", "Stop Current:", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
         label_27->setText(QApplication::translate("MainWindow", "Motor Point 1:", nullptr));
         label_28->setText(QApplication::translate("MainWindow", "Electrode1", nullptr));

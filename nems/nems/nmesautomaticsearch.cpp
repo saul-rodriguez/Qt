@@ -6,7 +6,7 @@ NMESAutomaticSearch::NMESAutomaticSearch(QObject *parent) : QObject(parent)
 {
     //Default values
     m_current = 6;
-    m_stopCurrent = 10;
+    m_stopCurrent = 17;
     m_anode = 1;
     m_stopElectrodes = 4;
 

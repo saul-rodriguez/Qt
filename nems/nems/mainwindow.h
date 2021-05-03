@@ -152,6 +152,7 @@ private slots:
     void on_pushButtonUpdateCh1MotorPoint_clicked();
     void on_pushButtonStartDualStim_clicked();
     void on_pushButtonUpdateCh2MotorPoint_clicked();
+    void on_actionStop_Search_triggered();
 };
 
 #endif // MAINWINDOW_H
