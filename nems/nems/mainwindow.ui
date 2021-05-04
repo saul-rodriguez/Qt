@@ -1294,6 +1294,10 @@
    </property>
   </action>
   <action name="actionStop_Search">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/cancel.png</normaloff>:/images/images/cancel.png</iconset>
+   </property>
    <property name="text">
     <string>Stop Search</string>
    </property>

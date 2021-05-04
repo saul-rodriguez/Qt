@@ -769,6 +769,7 @@ qrc_images.cpp: ../nems/images.qrc \
 		../nems/images/Save-icon.png \
 		../nems/images/Button-Play-icon.png \
 		../nems/images/search.png \
+		../nems/images/cancel.png \
 		../nems/images/Delete-icon.png \
 		../nems/images/Stop-icon.png \
 		../nems/images/Open_icon.png
@@ -945,6 +946,7 @@ moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
 		../nems/nmesautomaticsearch.h \
+		../nems/nmesdualmp.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1182,6 +1184,9 @@ moc_nmesdualmp.cpp: ../nems/nmesdualmp.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTimer \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtimer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbasictimer.h \
 		moc_predefs.h \
 		/pkg/Qt/5.12.3/gcc_64/bin/moc
 	/pkg/Qt/5.12.3/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_5_12_3_GCC_64bit-Debug/moc_predefs.h -I/pkg/Qt/5.12.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/pkg/Qt/5.12.3/gcc_64/include -I/pkg/Qt/5.12.3/gcc_64/include/QtCharts -I/pkg/Qt/5.12.3/gcc_64/include/QtWidgets -I/pkg/Qt/5.12.3/gcc_64/include/QtGui -I/pkg/Qt/5.12.3/gcc_64/include/QtBluetooth -I/pkg/Qt/5.12.3/gcc_64/include/QtNetwork -I/pkg/Qt/5.12.3/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmesdualmp.h -o moc_nmesdualmp.cpp
@@ -1482,6 +1487,7 @@ main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
 		../nems/nmesautomaticsearch.h \
+		../nems/nmesdualmp.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -1675,6 +1681,7 @@ mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
 		../nems/nmesautomaticsearch.h \
+		../nems/nmesdualmp.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/QMainWindow \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qmainwindow.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtWidgets/qwidget.h \
@@ -2180,7 +2187,10 @@ nmesdualmp.o: ../nems/nmesdualmp.cpp ../nems/nmesdualmp.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qmetatype.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qvarlengtharray.h \
 		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qcontainerfwd.h \
-		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qobject_impl.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/QTimer \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qtimer.h \
+		/pkg/Qt/5.12.3/gcc_64/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nmesdualmp.o ../nems/nmesdualmp.cpp
 
 nmessearch.o: ../nems/nmessearch.cpp ../nems/nmessearch.h \

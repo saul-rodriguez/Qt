@@ -272,6 +272,9 @@ public:
         actionSearch->setIcon(icon7);
         actionStop_Search = new QAction(MainWindow);
         actionStop_Search->setObjectName(QString::fromUtf8("actionStop_Search"));
+        QIcon icon8;
+        icon8.addFile(QString::fromUtf8(":/images/images/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionStop_Search->setIcon(icon8);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);

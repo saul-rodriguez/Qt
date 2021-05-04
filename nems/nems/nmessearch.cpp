@@ -62,6 +62,7 @@ void NMESsearch::stopScan()
     // QByteArray data;
 
     m_timer->stop();
+    m_search_index = 0;
     m_go = 0;
     programNEMSbin();
 
