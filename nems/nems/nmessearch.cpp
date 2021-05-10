@@ -202,11 +202,14 @@ void NMESsearch::SearchTimeout()
 
     /*Search algorithm here*/
     if (m_search_index < (m_stop_cathodes - m_anode -1)) {
-        m_search_index++;
+        if (m_super_electrode) {
+            m_search_index+=4;
+            m_ch2+=4;
+        } else {
+            m_search_index++;
+            m_ch2++;
+        }
 
-        //m_ch2 = 2 + m_search_index;
-        m_ch2++;
-        //programNEMS(); // advance to next iteration
         programNEMSbin(); // advance to next iteration
 
         m_timer->start(m_timeout);
