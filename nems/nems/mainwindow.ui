@@ -920,7 +920,7 @@
               <item>
                <widget class="QLabel" name="label_25">
                 <property name="text">
-                 <string>Anode Electrode:</string>
+                 <string>Anode Elec:</string>
                 </property>
                </widget>
               </item>
@@ -928,9 +928,19 @@
                <widget class="QLineEdit" name="lineEditAnode"/>
               </item>
               <item>
+               <widget class="QLabel" name="label_37">
+                <property name="text">
+                 <string>Start Elec:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditStartElectrodes"/>
+              </item>
+              <item>
                <widget class="QLabel" name="label_22">
                 <property name="text">
-                 <string>Stop Electrode:</string>
+                 <string>Stop Elec:</string>
                 </property>
                </widget>
               </item>
@@ -980,6 +990,13 @@
               </item>
               <item>
                <widget class="QLineEdit" name="lineEditSearchStopCurrent"/>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxSuperElectrode">
+                <property name="text">
+                 <string>Super Electrode</string>
+                </property>
+               </widget>
               </item>
               <item>
                <spacer name="horizontalSpacer_3">

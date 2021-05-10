@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
@@ -184,6 +185,8 @@ public:
     QPushButton *pushButtonUpdateCh2MotorPoint;
     QLabel *label_25;
     QLineEdit *lineEditAnode;
+    QLabel *label_37;
+    QLineEdit *lineEditStartElectrodes;
     QLabel *label_22;
     QLineEdit *lineEditStopElectrodes;
     QSpacerItem *horizontalSpacer_2;
@@ -192,6 +195,7 @@ public:
     QLineEdit *lineEditSearchStartCurrent;
     QLabel *label_36;
     QLineEdit *lineEditSearchStopCurrent;
+    QCheckBox *checkBoxSuperElectrode;
     QSpacerItem *horizontalSpacer_3;
     QPlainTextEdit *plainTextEditSearch;
     QWidget *tab_6;
@@ -1028,6 +1032,16 @@ public:
 
         horizontalLayout_20->addWidget(lineEditAnode);
 
+        label_37 = new QLabel(tab_5);
+        label_37->setObjectName(QString::fromUtf8("label_37"));
+
+        horizontalLayout_20->addWidget(label_37);
+
+        lineEditStartElectrodes = new QLineEdit(tab_5);
+        lineEditStartElectrodes->setObjectName(QString::fromUtf8("lineEditStartElectrodes"));
+
+        horizontalLayout_20->addWidget(lineEditStartElectrodes);
+
         label_22 = new QLabel(tab_5);
         label_22->setObjectName(QString::fromUtf8("label_22"));
 
@@ -1069,6 +1083,11 @@ public:
         lineEditSearchStopCurrent->setObjectName(QString::fromUtf8("lineEditSearchStopCurrent"));
 
         horizontalLayout_22->addWidget(lineEditSearchStopCurrent);
+
+        checkBoxSuperElectrode = new QCheckBox(tab_5);
+        checkBoxSuperElectrode->setObjectName(QString::fromUtf8("checkBoxSuperElectrode"));
+
+        horizontalLayout_22->addWidget(checkBoxSuperElectrode);
 
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
@@ -1399,10 +1418,12 @@ public:
         label_motorpoint->setText(QApplication::translate("MainWindow", "Motor point: -,- ", nullptr));
         pushButtonUpdateCh1MotorPoint->setText(QApplication::translate("MainWindow", "Update MP1 ", nullptr));
         pushButtonUpdateCh2MotorPoint->setText(QApplication::translate("MainWindow", "Update MP2", nullptr));
-        label_25->setText(QApplication::translate("MainWindow", "Anode Electrode:", nullptr));
-        label_22->setText(QApplication::translate("MainWindow", "Stop Electrode:", nullptr));
+        label_25->setText(QApplication::translate("MainWindow", "Anode Elec:", nullptr));
+        label_37->setText(QApplication::translate("MainWindow", "Start Elec:", nullptr));
+        label_22->setText(QApplication::translate("MainWindow", "Stop Elec:", nullptr));
         label_35->setText(QApplication::translate("MainWindow", "Start Current:", nullptr));
         label_36->setText(QApplication::translate("MainWindow", "Stop Current:", nullptr));
+        checkBoxSuperElectrode->setText(QApplication::translate("MainWindow", "Super Electrode", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QApplication::translate("MainWindow", "Search", nullptr));
         label_27->setText(QApplication::translate("MainWindow", "Motor Point 1:", nullptr));
         label_28->setText(QApplication::translate("MainWindow", "Electrode1", nullptr));

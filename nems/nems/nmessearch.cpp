@@ -17,7 +17,10 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_go = 0;
     m_amplitude = 0;
     m_anode = 1;
+    m_start_cathodes = 2;
     m_stop_cathodes = NUM_CATHODES;
+    m_super_electrode = 0;
+
     m_maxEnergy = 0;
     m_maxEnergy2 = 0;
 
@@ -32,15 +35,18 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_motorPoint.ch2 = 0;
 }
 
-void NMESsearch::scan(int anode, int stop_electrodes, int amplitude)
+void NMESsearch::scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode)
 {
     //Initialize
     m_anode = anode;
+    m_start_cathodes = start_electrodes;
     m_stop_cathodes = stop_electrodes;
     m_amplitude = amplitude;
+    m_super_electrode = super_electrode;
 
     m_ch1 = m_anode; // set initial anode
-    m_ch2 = m_anode + 1; // set initial cathode
+    //m_ch2 = m_anode + 1; // set initial cathode
+    m_ch2 = m_start_cathodes; // set initial cathode
     m_go = 1; // activate
     cleanChannels();
     CopyResetMaxEnergy();
@@ -122,6 +128,7 @@ void NMESsearch::programNEMSbin()
     data.append((unsigned char)m_ch1);
     data.append((unsigned char)m_ch2);
     data.append((unsigned char)m_go);
+    data.append((unsigned char)m_super_electrode);
 
     send(data);
 }

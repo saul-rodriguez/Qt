@@ -128,6 +128,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //m_numSearchElectrodes = 16;
     //ui->lineEditStopElectrodes->setText(QString::number((int)m_numSearchElectrodes));
+    ui->lineEditStartElectrodes->setText("2");
     ui->lineEditStopElectrodes->setText("16");
     ui->lineEditAnode->setText("1");
     /***** Automatic search configuration ****/
@@ -1226,6 +1227,9 @@ void MainWindow::on_actionSearch_triggered()
     if (ui->labelBTstatus->text() != "Connected")
         return;
 
+    QString start_electrode;
+    start_electrode = ui->lineEditStartElectrodes->text();
+
     QString stop_electrode;
     stop_electrode = ui->lineEditStopElectrodes->text();
 
@@ -1235,12 +1239,20 @@ void MainWindow::on_actionSearch_triggered()
     QString anode;
     anode = ui->lineEditAnode->text();
 
+    int SuperElec = ui->checkBoxSuperElectrode->isChecked();
+
     //m_search->scan(num_electrodes.toInt(),amplitude.toInt());
     m_startAmplitude = ui->lineEditSearchStartCurrent->text().toInt();
     m_stopAmplitude = ui->lineEditSearchStopCurrent->text().toInt();
 
 
-    m_autosearch.start(m_startAmplitude,m_stopAmplitude, anode.toInt(),stop_electrode.toInt());
+
+    m_autosearch.start(m_startAmplitude,
+                       m_stopAmplitude,
+                       anode.toInt(),
+                       stop_electrode.toInt(),
+                       start_electrode.toInt(),
+                       SuperElec);
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()
