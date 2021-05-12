@@ -201,7 +201,19 @@ void NMESsearch::SearchTimeout()
     m_maxEnergy2 = 0;
 
     /*Search algorithm here*/
-    if (m_search_index < (m_stop_cathodes - m_anode -1)) {
+
+    int stop_count;
+
+    if(m_super_electrode) {
+        stop_count = m_stop_cathodes - m_start_cathodes - 4;
+    } else {
+        stop_count = m_stop_cathodes - m_start_cathodes;
+    }
+
+
+
+
+     if (m_search_index < stop_count) {
         if (m_super_electrode) {
             m_search_index+=4;
             m_ch2+=4;
