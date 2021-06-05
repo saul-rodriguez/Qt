@@ -12,6 +12,6 @@ int main(int argc, char *argv[])
     parser.readFile();
     parser.saveFile();
 
-    return 0;
+    return 1;
     //return a.exec();
 }

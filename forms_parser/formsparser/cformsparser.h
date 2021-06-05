@@ -12,6 +12,7 @@ public:
 
     QString filenameIn;
     QString filenameOut;
+    QString identifier;
 
     QStringList keys;
     QList <int> key_blooms_level;

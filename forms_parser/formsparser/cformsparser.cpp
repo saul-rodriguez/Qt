@@ -8,6 +8,7 @@ Cformsparser::Cformsparser(QObject *parent) : QObject(parent)
     filenameIn = "TIEDB_TEST.csv";
     filenameOut = "out.csv";
 
+    /*
     keys.clear();
     key_blooms_level.clear();
 
@@ -19,6 +20,8 @@ Cformsparser::Cformsparser(QObject *parent) : QObject(parent)
             key_blooms_level << j;
         }
     }
+    */
+
 }
 
 void Cformsparser::readFile()
@@ -91,11 +94,30 @@ void Cformsparser::saveFile()
 
 void Cformsparser::readArgument(int arg, char *argv[])
 {
-    if (arg < 2) {
+    //qDebug()<<"arg:" << arg;
+
+    if (arg < 4) {
             qDebug()<<"wrong number of arguments";
+            qDebug()<<"Usage: formparser input.csv output.csv objective_indentifier(1-99)";
+            exit(0);
     }
 
     filenameIn = QString::fromLocal8Bit(argv[1]);
     filenameOut = QString::fromLocal8Bit(argv[2]);
+    identifier = QString::fromLocal8Bit(argv[3]);
+
+    //Create keys
+    keys.clear();
+    key_blooms_level.clear();
+
+    for (int j = 1; j <= 6; j++) {
+        for (int i = 1; i <= 12; i++) {
+            QString aux;
+            aux = identifier +"." + QString::number(j) + "." + QString::number(i);
+            //qDebug()<<aux;
+            keys << aux;
+            key_blooms_level << j;
+        }
+    }
 
 }
