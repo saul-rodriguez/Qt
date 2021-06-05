@@ -21,6 +21,7 @@ typedef enum {
     IDLE,
     MP1,
     MP2,
+    STOP
 } dual_state_t;
 
 class NMESDualMP : public QObject

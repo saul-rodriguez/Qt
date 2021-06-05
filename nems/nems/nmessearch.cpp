@@ -95,7 +95,17 @@ channel NMESsearch::getMotorPoint()
     aux.maxEnergy2 = 0;
     aux.totEnergy = 0;
 
-    for (int i=0; i < (m_stop_cathodes - m_anode); i++) {
+    int stop_count;
+
+    if(m_super_electrode) {
+        stop_count = m_stop_cathodes - m_start_cathodes - 4;
+         stop_count = (m_stop_cathodes - m_start_cathodes+1)/4;
+    } else {
+        stop_count = m_stop_cathodes - m_start_cathodes;
+    }
+
+    //for (int i=0; i < (m_stop_cathodes - m_anode); i++) {
+    for (int i=0; i < (stop_count+1); i++) {
         //if (m_channel[i].maxEnergy > aux.maxEnergy) {
         if (m_channel[i].totEnergy > aux.totEnergy) {
             aux = m_channel[i];
@@ -109,7 +119,19 @@ channel NMESsearch::getMotorPoint()
 
 void NMESsearch::cleanChannels()
 {
-    for (int i = 0; i < (m_stop_cathodes - m_anode); i++) {
+
+    /*
+    int stop_count;
+
+    if(m_super_electrode) {
+        //stop_count = m_stop_cathodes - m_start_cathodes - 4;
+        stop_count = (m_stop_cathodes - m_start_cathodes+1)/4;
+    } else {
+        stop_count = m_stop_cathodes - m_start_cathodes;
+    }
+    */
+
+    for (int i = 0; i < (NUM_CATHODES); i++) {
         m_channel->ch1 = 0;
         m_channel->ch2 = 0;
         m_channel->maxEnergy = 0;
@@ -205,7 +227,7 @@ void NMESsearch::SearchTimeout()
     int stop_count;
 
     if(m_super_electrode) {
-        stop_count = m_stop_cathodes - m_start_cathodes - 4;
+        stop_count = (m_stop_cathodes - m_start_cathodes+1)/4;
     } else {
         stop_count = m_stop_cathodes - m_start_cathodes;
     }
@@ -215,7 +237,8 @@ void NMESsearch::SearchTimeout()
 
      if (m_search_index < stop_count) {
         if (m_super_electrode) {
-            m_search_index+=4;
+            //m_search_index+=4;
+            m_search_index++;
             m_ch2+=4;
         } else {
             m_search_index++;
