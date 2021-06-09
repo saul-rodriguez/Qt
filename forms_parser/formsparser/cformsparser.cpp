@@ -5,8 +5,28 @@
 
 Cformsparser::Cformsparser(QObject *parent) : QObject(parent)
 {
+    // This initialization is only for testing purposes
+
     filenameIn = "TIEDB_TEST.csv";
     filenameOut = "out.csv";
+
+    identifier = "11";
+
+    filenameProgramPlan = "TIEDB_plan.txt";
+
+    //Create keys
+    keys.clear();
+    key_blooms_level.clear();
+
+    for (int j = 1; j <= 6; j++) {
+        for (int i = 1; i <= 12; i++) {
+            QString aux;
+            aux = identifier +"." + QString::number(j) + "." + QString::number(i);
+            //qDebug()<<aux;
+            keys << aux;
+            key_blooms_level << j;
+        }
+    }
 
     /*
     keys.clear();
@@ -89,22 +109,77 @@ void Cformsparser::saveFile()
        qDebug()<< "formparser: "<< size<< " lines written to: " <<filenameOut ;
 
 
+}
+
+void Cformsparser::saveFileOrdered()
+{
+    //Load program text file
+    QFile auxfile(filenameProgramPlan);
+    int ret = auxfile.open(QIODevice::ReadOnly);
+
+    QTextStream in(&auxfile);
+    QStringList program_lines;
+
+    QString aux_line;
+    while(!in.atEnd()) {
+             aux_line = in.readLine();
+
+             if (aux_line.compare(""))
+                 //program_lines << in.readLine();
+                 program_lines << aux_line;
+    }
+    auxfile.close();
+
+    // reorder the parsed text file
+    QStringList aux;
+
+    int parsed_size = parsed.count();
+    int program_size = program_lines.count();
+
+    aux << parsed[0];
+    for (int j = 0; j < program_size; j++) {
+        for (int i = 1; i < parsed_size; i ++) {
+            if (parsed[i].contains(program_lines[j])) {
+                    aux << parsed[i];
+                    break;
+            }
+        }
+    }
+
+    //Save reordered file
+    QString auxFilename;
+    auxFilename = "ordered_" + filenameOut;
+
+    QFile outfile(auxFilename);
+    outfile.open(QIODevice::ReadWrite | QIODevice::Text);
+    QTextStream stream(&outfile);
+
+    int size = aux.size();
+
+    for (int i = 0; i < size; i++) {
+           stream << aux[i] << "\n";
+    }
+
+    outfile.close();
+
+    qDebug()<< "formparser: "<< size<< " lines written to: " <<auxFilename ;
 
 }
 
 void Cformsparser::readArgument(int arg, char *argv[])
 {
-    //qDebug()<<"arg:" << arg;
+    qDebug()<<"arg:" << arg;
 
-    if (arg < 4) {
+    if (arg < 5) {
             qDebug()<<"wrong number of arguments";
-            qDebug()<<"Usage: formparser input.csv output.csv objective_indentifier(1-99)";
+            qDebug()<<"Usage: formparser input.csv output.csv objective_indentifier(1-99) program_plan.txt";
             exit(0);
     }
 
     filenameIn = QString::fromLocal8Bit(argv[1]);
     filenameOut = QString::fromLocal8Bit(argv[2]);
     identifier = QString::fromLocal8Bit(argv[3]);
+    filenameProgramPlan = QString::fromLocal8Bit(argv[4]);
 
     //Create keys
     keys.clear();

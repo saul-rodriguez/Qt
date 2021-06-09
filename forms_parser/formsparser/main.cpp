@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     parser.readArgument(argc, argv);
     parser.readFile();
     parser.saveFile();
+    parser.saveFileOrdered();
 
     return 1;
     //return a.exec();

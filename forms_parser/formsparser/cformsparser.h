@@ -13,6 +13,7 @@ public:
     QString filenameIn;
     QString filenameOut;
     QString identifier;
+    QString filenameProgramPlan;
 
     QStringList keys;
     QList <int> key_blooms_level;
@@ -21,6 +22,7 @@ public:
 
     void readFile();
     void saveFile();
+    void saveFileOrdered();
 
     void readArgument(int arg, char *argv[]);
 
