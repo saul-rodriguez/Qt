@@ -23,7 +23,7 @@ public:
     void readFile();
     void saveFile();
     void saveFileOrdered();
-
+    void saveFileOrderedProgram();
     void readArgument(int arg, char *argv[]);
 
 
