@@ -10,7 +10,7 @@ Cformsparser::Cformsparser(QObject *parent) : QObject(parent)
     filenameIn = "test.csv";
     filenameOut = "out.csv";
 
-    identifier = "11";
+    identifier = "1";
 
     filenameProgramPlan = "TIEDB_plan.txt";
 
@@ -96,6 +96,10 @@ void Cformsparser::readFile()
         for (int j = 3; j < 9; j++) { //Parse every Blooms column
             bloom_level = j-2;
             for (int k = 0; k < keys_size; k++) {
+                if (line_split.size() <= k) continue;
+
+                if (line_split.size() <= j) continue;
+
                 if (line_split[j].contains(keys[k])) {
                     aux += identifier + "." + QString::number(bloom_level) + "." + QString::number((k+1));
                     aux += + ", ";
