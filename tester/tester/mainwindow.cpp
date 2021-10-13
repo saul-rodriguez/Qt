@@ -18,10 +18,10 @@ MainWindow::MainWindow(QWidget *parent) :
     //config initialization, WiFi disabled
     ui->pushButtonBTconnect->setEnabled(true);
     ui->pushButtonBTdiscoverDevices->setEnabled(true);
-    ui->pushButtonWiFiConnect->setEnabled(false);
-    ui->pushButtonWiFiDisconnect->setEnabled(false);
-    ui->lineEditWiFiAddress->setEnabled(false);
-    ui->lineEditWiFiPort->setEnabled(false);
+    //ui->pushButtonWiFiConnect->setEnabled(false);
+    //ui->pushButtonWiFiDisconnect->setEnabled(false);
+    //ui->lineEditWiFiAddress->setEnabled(false);
+    //ui->lineEditWiFiPort->setEnabled(false);
 
     m_MaxDataPlot = 640;
     m_DataCounter = 0;
@@ -798,10 +798,10 @@ void MainWindow::on_radioButtonWiFi_toggled(bool checked)
     if (checked) {
         ui->pushButtonBTconnect->setEnabled(false);
         ui->pushButtonBTdiscoverDevices->setEnabled(false);
-        ui->pushButtonWiFiConnect->setEnabled(true);
-        ui->pushButtonWiFiDisconnect->setEnabled(true);
-        ui->lineEditWiFiAddress->setEnabled(true);
-        ui->lineEditWiFiPort->setEnabled(true);
+        //ui->pushButtonWiFiConnect->setEnabled(true);
+        //ui->pushButtonWiFiDisconnect->setEnabled(true);
+        //ui->lineEditWiFiAddress->setEnabled(true);
+        //ui->lineEditWiFiPort->setEnabled(true);
     }
 }
 
@@ -810,36 +810,36 @@ void MainWindow::on_radioButtonBT_toggled(bool checked)
     if (checked) {
         ui->pushButtonBTconnect->setEnabled(true);
         ui->pushButtonBTdiscoverDevices->setEnabled(true);
-        ui->pushButtonWiFiConnect->setEnabled(false);
-        ui->pushButtonWiFiDisconnect->setEnabled(false);
-        ui->lineEditWiFiAddress->setEnabled(false);
-        ui->lineEditWiFiPort->setEnabled(false);
+        //ui->pushButtonWiFiConnect->setEnabled(false);
+        //ui->pushButtonWiFiDisconnect->setEnabled(false);
+        //ui->lineEditWiFiAddress->setEnabled(false);
+        //ui->lineEditWiFiPort->setEnabled(false);
     }
 
 }
 
 void MainWindow::on_pushButtonWiFiConnect_clicked()
 {
-    QString address = ui->lineEditWiFiAddress->text();
-    QString port = ui->lineEditWiFiPort->text();
+   // QString address = ui->lineEditWiFiAddress->text();
+   // QString port = ui->lineEditWiFiPort->text();
 
-       ui->labelWiFiStatus->setText("Connecting...");
+     //  ui->labelWiFiStatus->setText("Connecting...");
 
-       m_WiFiTcpSocket->connectToHost(address,port.toInt());
+       //m_WiFiTcpSocket->connectToHost(address,port.toInt());
 
        if(!m_WiFiTcpSocket->waitForConnected(5000)) {
               QString aux = "Error connecting: " + m_WiFiTcpSocket->errorString();
-              ui->labelWiFiStatus->setText(aux);
+         //     ui->labelWiFiStatus->setText(aux);
               return;
        }
 
-       ui->labelWiFiStatus->setText("Connected");
+       //ui->labelWiFiStatus->setText("Connected");
 
 }
 
 void MainWindow::on_pushButtonWiFiDisconnect_clicked()
 {
-    ui->labelWiFiStatus->setText("Disconnecting...");
+   // ui->labelWiFiStatus->setText("Disconnecting...");
     m_WiFiTcpSocket->disconnectFromHost();;
 
 }
