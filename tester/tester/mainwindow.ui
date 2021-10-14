@@ -547,14 +547,11 @@
    </property>
   </action>
   <action name="actionAM">
-   <property name="checkable">
-    <bool>true</bool>
-   </property>
    <property name="text">
-    <string>AM</string>
+    <string>DC</string>
    </property>
    <property name="toolTip">
-    <string>AM</string>
+    <string>DC</string>
    </property>
   </action>
  </widget>

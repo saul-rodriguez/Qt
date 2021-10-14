@@ -40,12 +40,12 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(BTrxData(const QByteArray)));
 
     //WiFi
-    m_WiFiTcpSocket = new QTcpSocket(this);
-    m_WiFi_in.setDevice(m_WiFiTcpSocket);
-    m_WiFi_in.setVersion(QDataStream::Qt_5_11);
-    connect(m_WiFiTcpSocket, SIGNAL(readyRead()),this, SLOT(WiFiRead()));
-    connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
-               this, &MainWindow::WiFiDisplayError);
+    //m_WiFiTcpSocket = new QTcpSocket(this);
+    //m_WiFi_in.setDevice(m_WiFiTcpSocket);
+    //m_WiFi_in.setVersion(QDataStream::Qt_5_11);
+    //connect(m_WiFiTcpSocket, SIGNAL(readyRead()),this, SLOT(WiFiRead()));
+    //connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
+    //           this, &MainWindow::WiFiDisplayError);
 
     //Plot
     // plot Magnitude
@@ -221,61 +221,6 @@ void MainWindow::BTrxData(const QByteArray &data)
     }
 
 
-}
-
-void MainWindow::WiFiRead()
-{
-    m_WiFi_in.startTransaction();
-
-    QByteArray data = m_WiFiTcpSocket->readAll();
-
-    if(!m_WiFi_in.commitTransaction()) {
-        return;
-    }
-
-    //Data is valid
-    ui->plainTextEditAT->appendPlainText(QString::fromStdString(data.toStdString()));
-
-
-    //Continuous sampling processing
-    if (!m_timer->isActive())
-        return;
-
-    m_data.append(data);
-
-    int size = data.count();
-    if (size%2) { //each value is 2 bytes. There is an incomplete value!
-        qDebug()<<"Odd number of bytes received";
-        return; //wait for the next rx
-    } else { // Process the received values
-        PlotRx(m_data);
-        m_data.clear();
-    }
-
-}
-
-void MainWindow::WiFiDisplayError(QAbstractSocket::SocketError socketError)
-{
-    switch (socketError) {
-         case QAbstractSocket::RemoteHostClosedError:
-             break;
-         case QAbstractSocket::HostNotFoundError:
-             QMessageBox::information(this, tr("TCP client"),
-                                      tr("The host was not found. Please check the "
-                                         "host name and port settings."));
-             break;
-         case QAbstractSocket::ConnectionRefusedError:
-             QMessageBox::information(this, tr("TCP client"),
-                                      tr("The connection was refused by the peer. "
-                                         "Make sure the fortune server is running, "
-                                         "and check that the host name and port "
-                                         "settings are correct."));
-             break;
-         default:
-             QMessageBox::information(this, tr("TCP client"),
-                                      tr("The following error occurred: %1.")
-                                      .arg(m_WiFiTcpSocket->errorString()));
-         }
 }
 
 void MainWindow::PlotRx(const QByteArray &data)
@@ -788,21 +733,9 @@ void MainWindow::on_pushButtonATSend_clicked()
     } else {    //The communication with the ESP-01 module is always terminated by cr + nl
         data.append('\r');
         data.append('\n');
-        m_WiFiTcpSocket->write(data);
+        //m_WiFiTcpSocket->write(data);
     }
 
-}
-
-void MainWindow::on_radioButtonWiFi_toggled(bool checked)
-{
-    if (checked) {
-        ui->pushButtonBTconnect->setEnabled(false);
-        ui->pushButtonBTdiscoverDevices->setEnabled(false);
-        //ui->pushButtonWiFiConnect->setEnabled(true);
-        //ui->pushButtonWiFiDisconnect->setEnabled(true);
-        //ui->lineEditWiFiAddress->setEnabled(true);
-        //ui->lineEditWiFiPort->setEnabled(true);
-    }
 }
 
 void MainWindow::on_radioButtonBT_toggled(bool checked)
@@ -817,33 +750,6 @@ void MainWindow::on_radioButtonBT_toggled(bool checked)
     }
 
 }
-
-void MainWindow::on_pushButtonWiFiConnect_clicked()
-{
-   // QString address = ui->lineEditWiFiAddress->text();
-   // QString port = ui->lineEditWiFiPort->text();
-
-     //  ui->labelWiFiStatus->setText("Connecting...");
-
-       //m_WiFiTcpSocket->connectToHost(address,port.toInt());
-
-       if(!m_WiFiTcpSocket->waitForConnected(5000)) {
-              QString aux = "Error connecting: " + m_WiFiTcpSocket->errorString();
-         //     ui->labelWiFiStatus->setText(aux);
-              return;
-       }
-
-       //ui->labelWiFiStatus->setText("Connected");
-
-}
-
-void MainWindow::on_pushButtonWiFiDisconnect_clicked()
-{
-   // ui->labelWiFiStatus->setText("Disconnecting...");
-    m_WiFiTcpSocket->disconnectFromHost();;
-
-}
-
 
 void MainWindow::on_checkBoxConfigAntialias_toggled(bool checked)
 {
@@ -1361,7 +1267,7 @@ void MainWindow::on_pushButtonPA_Config_clicked()
     } else {    //The communication with the ESP-01 module is always terminated by cr + nl
         data.append('\r');
         data.append('\n');
-        m_WiFiTcpSocket->write(data);
+       // m_WiFiTcpSocket->write(data);
     }
 }
 
@@ -1370,6 +1276,7 @@ void MainWindow::on_actionRun_Timer_triggered()
     m_timerDelay->start(1000);
 }
 
+/*
 void MainWindow::on_actionAM_toggled(bool arg1)
 {
     if (arg1) {
@@ -1378,4 +1285,10 @@ void MainWindow::on_actionAM_toggled(bool arg1)
         m_am = false;
     }
 
+}*/
+
+void MainWindow::on_actionAM_triggered()
+{
+    ui->lineEditAT->setText("a");
+    on_pushButtonATSend_clicked();
 }

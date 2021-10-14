@@ -170,7 +170,6 @@ public:
         actionRun_Timer->setObjectName(QStringLiteral("actionRun_Timer"));
         actionAM = new QAction(MainWindow);
         actionAM->setObjectName(QStringLiteral("actionAM"));
-        actionAM->setCheckable(true);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -689,9 +688,9 @@ public:
 #ifndef QT_NO_SHORTCUT
         actionRun_Timer->setShortcut(QApplication::translate("MainWindow", "Ctrl+T", nullptr));
 #endif // QT_NO_SHORTCUT
-        actionAM->setText(QApplication::translate("MainWindow", "AM", nullptr));
+        actionAM->setText(QApplication::translate("MainWindow", "DC", nullptr));
 #ifndef QT_NO_TOOLTIP
-        actionAM->setToolTip(QApplication::translate("MainWindow", "AM", nullptr));
+        actionAM->setToolTip(QApplication::translate("MainWindow", "DC", nullptr));
 #endif // QT_NO_TOOLTIP
         groupBoxWirelessInterface->setTitle(QApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QApplication::translate("MainWindow", "Discover BT", nullptr));

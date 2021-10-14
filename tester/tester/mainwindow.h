@@ -33,11 +33,6 @@ private:
     BTClient *m_bt;
     QByteArray m_data;
 
-    //WiFi
-    QTcpSocket *m_WiFiTcpSocket = nullptr;
-    QNetworkSession *m_WiFiNetworkSession = nullptr;
-    QDataStream m_WiFi_in;
-
     //Data storage
     DataTrace m_trace;
     int m_DataCounter; //Stores number of received binary samples (same as m_trace.count())
@@ -88,14 +83,10 @@ private:
     //Automatic Mode
     bool m_am;
 
-
 private slots:
     void BTgetDevice(QString name);
     void BTConnected(QString name);
     void BTrxData(const QByteArray &data);
-
-    void WiFiRead();
-    void WiFiDisplayError(QAbstractSocket::SocketError socketError);
 
     void PlotRx(const QByteArray &data);
     void PlotTimeout();
@@ -114,14 +105,10 @@ private slots:
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
-    void on_pushButtonATSend_clicked();
-    void on_radioButtonWiFi_toggled(bool checked);
-    void on_radioButtonBT_toggled(bool checked);
-    void on_pushButtonWiFiConnect_clicked();
-    void on_pushButtonWiFiDisconnect_clicked();       
+    void on_pushButtonATSend_clicked();    
+    void on_radioButtonBT_toggled(bool checked);    
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();    
-    //void on_pushButtonMeas_clicked();
 
     void resizeEvent(QResizeEvent* event);
     void on_pushButtonGenerateCalibration_clicked();
@@ -140,7 +127,8 @@ private slots:
     void on_comboBoxPA_config_currentIndexChanged(const QString &arg1);
     void on_pushButtonPA_Config_clicked();
     void on_actionRun_Timer_triggered();
-    void on_actionAM_toggled(bool arg1);
+    //void on_actionAM_toggled(bool arg1);
+    void on_actionAM_triggered();
 };
 
 #endif // MAINWINDOW_H
