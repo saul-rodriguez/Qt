@@ -241,6 +241,7 @@ void MainWindow::PlotTimeout()
 
 void MainWindow::on_pushButtonBTdiscoverDevices_clicked()
 {
+    ui->comboBoxBTdevices->clear();
     m_bt->BTfindDevices();
 }
 
