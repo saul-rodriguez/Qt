@@ -196,6 +196,7 @@ public:
     QLabel *label_36;
     QLineEdit *lineEditSearchStopCurrent;
     QCheckBox *checkBoxSuperElectrode;
+    QCheckBox *checkBoxAuto;
     QSpacerItem *horizontalSpacer_3;
     QPlainTextEdit *plainTextEditSearch;
     QWidget *tab_6;
@@ -232,7 +233,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(877, 611);
+        MainWindow->resize(877, 682);
         action_Run = new QAction(MainWindow);
         action_Run->setObjectName(QString::fromUtf8("action_Run"));
         QIcon icon;
@@ -1089,6 +1090,11 @@ public:
 
         horizontalLayout_22->addWidget(checkBoxSuperElectrode);
 
+        checkBoxAuto = new QCheckBox(tab_5);
+        checkBoxAuto->setObjectName(QString::fromUtf8("checkBoxAuto"));
+
+        horizontalLayout_22->addWidget(checkBoxAuto);
+
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_22->addItem(horizontalSpacer_3);
@@ -1250,6 +1256,8 @@ public:
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QString::fromUtf8("mainToolBar"));
+        mainToolBar->setIconSize(QSize(96, 96));
+        mainToolBar->setToolButtonStyle(Qt::ToolButtonIconOnly);
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QString::fromUtf8("statusBar"));
@@ -1312,7 +1320,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(5);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1320,7 +1328,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.1", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.2", nullptr));
         action_Run->setText(QCoreApplication::translate("MainWindow", "&Run", nullptr));
 #if QT_CONFIG(shortcut)
         action_Run->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+R", nullptr));
@@ -1378,7 +1386,7 @@ public:
         pushButtonPhase->setText(QCoreApplication::translate("MainWindow", "Update Pulse width", nullptr));
         label_2->setText(QCoreApplication::translate("MainWindow", "Amp. Ch1 0-31mA", nullptr));
         pushButtonAmplitude->setText(QCoreApplication::translate("MainWindow", "Update Amp. Ch1", nullptr));
-        label_7->setText(QCoreApplication::translate("MainWindow", "Off time (s)", nullptr));
+        label_7->setText(QCoreApplication::translate("MainWindow", "Off time (ds)", nullptr));
         pushButtonOFF->setText(QCoreApplication::translate("MainWindow", "Update OFF time", nullptr));
         label_10->setText(QCoreApplication::translate("MainWindow", "Number Contractions", nullptr));
         pushButtonContractions->setText(QCoreApplication::translate("MainWindow", "Update Contractions", nullptr));
@@ -1386,7 +1394,7 @@ public:
         pushButtonChannel2->setText(QCoreApplication::translate("MainWindow", "Update Ch1 El2", nullptr));
         label_11->setText(QCoreApplication::translate("MainWindow", "Ch1 Electrode 1", nullptr));
         pushButtonChannel1->setText(QCoreApplication::translate("MainWindow", "Update Ch1 El1", nullptr));
-        label_6->setText(QCoreApplication::translate("MainWindow", "On time (s)", nullptr));
+        label_6->setText(QCoreApplication::translate("MainWindow", "On time (ds)", nullptr));
         pushButtonOnTime->setText(QCoreApplication::translate("MainWindow", "Update ON time", nullptr));
         label_3->setText(QCoreApplication::translate("MainWindow", "Frequency Hz", nullptr));
         pushButtonFrequency->setText(QCoreApplication::translate("MainWindow", "Update Frequency", nullptr));
@@ -1424,6 +1432,7 @@ public:
         label_35->setText(QCoreApplication::translate("MainWindow", "Start Current:", nullptr));
         label_36->setText(QCoreApplication::translate("MainWindow", "Stop Current:", nullptr));
         checkBoxSuperElectrode->setText(QCoreApplication::translate("MainWindow", "Super Electrode", nullptr));
+        checkBoxAuto->setText(QCoreApplication::translate("MainWindow", "Auto Search", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Search", nullptr));
         label_27->setText(QCoreApplication::translate("MainWindow", "Motor Point 1:", nullptr));
         label_28->setText(QCoreApplication::translate("MainWindow", "Electrode1", nullptr));

@@ -22,6 +22,8 @@ public:
 
     int m_SuperElectrode;
 
+    bool m_autosearch;
+
     channel m_motorpoints[MAX_CHANNELS];
     int m_channel_index;
 
@@ -30,7 +32,7 @@ public:
 public:
     explicit NMESAutomaticSearch(QObject *parent = nullptr);
 
-    void start(int startCurrent, int stopCurrent, int anode, int stopElectrodes, int startElectrodes, int SuperElectrode);
+    void start(int startCurrent, int stopCurrent, int anode, int stopElectrodes, int startElectrodes, int SuperElectrode, bool autosearch);
     void setSearch(NMESsearch *search);
     int addMotorPoint(channel *motorpoint);
     int  compareChannels(channel a, channel b);

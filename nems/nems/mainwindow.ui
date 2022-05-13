@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>877</width>
-    <height>611</height>
+    <height>682</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
       <item row="0" column="0">
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="Connect">
          <attribute name="title">
@@ -390,7 +390,7 @@
             <item>
              <widget class="QLabel" name="label_7">
               <property name="text">
-               <string>Off time (s)</string>
+               <string>Off time (ds)</string>
               </property>
              </widget>
             </item>
@@ -519,7 +519,7 @@
             <item>
              <widget class="QLabel" name="label_6">
               <property name="text">
-               <string>On time (s)</string>
+               <string>On time (ds)</string>
               </property>
              </widget>
             </item>
@@ -995,6 +995,13 @@
                <widget class="QCheckBox" name="checkBoxSuperElectrode">
                 <property name="text">
                  <string>Super Electrode</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="checkBoxAuto">
+                <property name="text">
+                 <string>Auto Search</string>
                 </property>
                </widget>
               </item>

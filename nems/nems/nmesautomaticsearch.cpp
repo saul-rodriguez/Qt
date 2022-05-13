@@ -11,9 +11,11 @@ NMESAutomaticSearch::NMESAutomaticSearch(QObject *parent) : QObject(parent)
     m_stopElectrodes = 4;
 
     m_channel_index = 0;
+
+    m_autosearch = false;
 }
 
-void NMESAutomaticSearch::start(int startCurrent, int stopCurrent, int anode, int stopElectrodes, int startElectrodes, int SuperElectrode)
+void NMESAutomaticSearch::start(int startCurrent, int stopCurrent, int anode, int stopElectrodes, int startElectrodes, int SuperElectrode, bool autosearch)
 {
     m_current = startCurrent;
     m_stopCurrent = stopCurrent;
@@ -24,17 +26,20 @@ void NMESAutomaticSearch::start(int startCurrent, int stopCurrent, int anode, in
 
     m_channel_index = 0;
 
-    QMessageBox msgBox;
+    m_autosearch = autosearch;
 
-    QString aux = "Automatic Search: " + QString::number(m_current) + "mA";
-    msgBox.setText(aux);
-    msgBox.setInformativeText("Press Yes to start");
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
-    int ret = msgBox.exec();
+    if (m_autosearch == false) {
+        QMessageBox msgBox;
 
-    if (ret == QMessageBox::No) return;
+        QString aux = "Automatic Search: " + QString::number(m_current) + "mA";
+        msgBox.setText(aux);
+        msgBox.setInformativeText("Press Yes to start");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        int ret = msgBox.exec();
 
+        if (ret == QMessageBox::No) return;
+    }
 
     m_search->scan(m_anode,
                    m_startElectrodes,
@@ -75,40 +80,45 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
     }
 
     //Check if user wants to repeat measurement
-    QString auxr = "Repeat search " + QString::number(m_current) + "mA?";
-    QMessageBox msgBoxR;
+    if (m_autosearch == false) {
+        QString auxr = "Repeat search " + QString::number(m_current) + "mA?";
+        QMessageBox msgBoxR;
 
-    msgBoxR.setText(auxr);
-    msgBoxR.setInformativeText("Press Yes to Repeat ");
-    msgBoxR.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    msgBoxR.setDefaultButton(QMessageBox::No);
-    int retR = msgBoxR.exec();
+        msgBoxR.setText(auxr);
+        msgBoxR.setInformativeText("Press Yes to Repeat ");
+        msgBoxR.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBoxR.setDefaultButton(QMessageBox::No);
+        int retR = msgBoxR.exec();
 
-    if (retR == QMessageBox::Yes) {
-        //m_search->scan(m_anode, m_stopElectrodes,m_current);
-        m_search->scan(m_anode,
-                       m_startElectrodes,
-                       m_stopElectrodes,
-                       m_current,
-                       m_SuperElectrode);
-        return 0;
+        if (retR == QMessageBox::Yes) {
+            //m_search->scan(m_anode, m_stopElectrodes,m_current);
+            m_search->scan(m_anode,
+                           m_startElectrodes,
+                           m_stopElectrodes,
+                           m_current,
+                           m_SuperElectrode);
+            return 0;
+        }
     }
+
+
 
     //Increase current and search again
     m_channel_index++;
     m_current++;
 
-    QString aux = "Automatic Search: " + QString::number(m_current) + "mA";
+    if (m_autosearch == false) {
+        QString aux = "Automatic Search: " + QString::number(m_current) + "mA";
+        QMessageBox msgBox;
 
-    QMessageBox msgBox;
+        msgBox.setText(aux);
+        msgBox.setInformativeText("Press Yes to start");
+        msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+        msgBox.setDefaultButton(QMessageBox::No);
+        int ret = msgBox.exec();
 
-    msgBox.setText(aux);
-    msgBox.setInformativeText("Press Yes to start");
-    msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    msgBox.setDefaultButton(QMessageBox::No);
-    int ret = msgBox.exec();
-
-    if (ret == QMessageBox::No) return 3; // Cancel search
+        if (ret == QMessageBox::No) return 3; // Cancel search
+    }
 
     //m_search->scan(m_anode, m_stopElectrodes,m_current);
     m_search->scan(m_anode,
