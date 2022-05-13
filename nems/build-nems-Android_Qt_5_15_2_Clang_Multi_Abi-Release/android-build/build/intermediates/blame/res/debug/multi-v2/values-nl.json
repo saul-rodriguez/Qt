@@ -4,7 +4,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/incremental/mergeDebugResources/merged.dir/values-nl/values-nl.xml",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-nl/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-nl/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",

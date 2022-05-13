@@ -4,7 +4,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-nl_values-nl.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-nl/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-nl/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -26,7 +26,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-ms_values-ms.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-ms/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-ms/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -48,7 +48,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-fr_values-fr.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-fr/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-fr/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -70,7 +70,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-nb_values-nb.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-nb/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-nb/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -92,7 +92,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-ja_values-ja.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-ja/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-ja/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -114,7 +114,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-zh-rTW_values-zh-rTW.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-zh-rTW/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-zh-rTW/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -136,7 +136,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-el_values-el.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-el/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-el/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -158,7 +158,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-pl_values-pl.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-pl/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-pl/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -180,7 +180,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-zh-rCN_values-zh-rCN.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-zh-rCN/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-zh-rCN/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -202,7 +202,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-ru_values-ru.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-ru/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-ru/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -224,7 +224,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-de_values-de.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-de/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-de/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -246,7 +246,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-pt-rBR_values-pt-rBR.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-pt-rBR/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-pt-rBR/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -268,7 +268,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-se_values-se.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-se/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-se/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -309,7 +309,7 @@
                     }
                 },
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values/strings.xml",
                     "from": {
                         "startLines": "5,4,3,6",
                         "startColumns": "4,4,4,4",
@@ -331,7 +331,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-it_values-it.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-it/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-it/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -353,7 +353,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-es_values-es.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-es/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-es/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -375,7 +375,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-ro_values-ro.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-ro/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-ro/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -397,7 +397,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-in_values-in.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-in/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-in/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -419,7 +419,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-fa_values-fa.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-fa/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-fa/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",
@@ -441,7 +441,7 @@
             "outputFile": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/res/merged/debug/values-et_values-et.arsc.flat",
             "map": [
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values-et/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values-et/strings.xml",
                     "from": {
                         "startLines": "4,3,2,5",
                         "startColumns": "4,4,4,4",

@@ -15,6 +15,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    /**** Toolbar ******/
+   ui->mainToolBar->setIconSize(QSize(120, 120));
+
+  // ui->mainToolBar->setFixedHeight(50);
+
     /**** config initialization, WiFi disabled  *****/
 
     ui->pushButtonBTconnect->setEnabled(true);

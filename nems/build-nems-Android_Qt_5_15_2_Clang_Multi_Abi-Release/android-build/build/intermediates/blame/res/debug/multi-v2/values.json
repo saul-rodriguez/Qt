@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "/opt/Qt/5.15.2/android/src/android/java/res/values/strings.xml",
+                    "source": "/home/saul/installs/Qt/5.15.2/android/src/android/java/res/values/strings.xml",
                     "from": {
                         "startLines": "5,4,3,6",
                         "startColumns": "4,4,4,4",
