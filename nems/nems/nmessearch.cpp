@@ -35,7 +35,7 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
     m_motorPoint.ch2 = 0;
 }
 
-void NMESsearch::scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode)
+void NMESsearch::scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode, int period)
 {
     //Initialize
     m_anode = anode;
@@ -55,6 +55,7 @@ void NMESsearch::scan(int anode, int start_electrodes, int stop_electrodes, int 
     //programNEMS(); // set channels and start NEMS
     programNEMSbin(); // set channels and start NEMS
 
+    m_timeout = period;
     m_timer->start(m_timeout); //wait 2S
 
     QString aux = "** Scan search started "

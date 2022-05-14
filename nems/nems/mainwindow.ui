@@ -992,6 +992,16 @@
                <widget class="QLineEdit" name="lineEditSearchStopCurrent"/>
               </item>
               <item>
+               <widget class="QLabel" name="label_38">
+                <property name="text">
+                 <string>Period (ms)</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QLineEdit" name="lineEditPeriod"/>
+              </item>
+              <item>
                <widget class="QCheckBox" name="checkBoxSuperElectrode">
                 <property name="text">
                  <string>Super Electrode</string>

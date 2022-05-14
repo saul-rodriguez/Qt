@@ -143,6 +143,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->lineEditSearchStopCurrent->setText(QString::number(m_stopAmplitude));
     m_autosearch.setSearch(m_search);
     ui->checkBoxAuto->setChecked(true);
+    ui->lineEditPeriod->setText("2500");
 
     /**** Dual Motor Point Stimulation *****/
     ui->lineEditDualStim1_1->setText("0");
@@ -1253,13 +1254,16 @@ void MainWindow::on_actionSearch_triggered()
 
     bool autosearch = ui->checkBoxAuto->isChecked();
 
+    int period = ui->lineEditPeriod->text().toInt();
+
     m_autosearch.start(m_startAmplitude,
                        m_stopAmplitude,
                        anode.toInt(),
                        stop_electrode.toInt(),
                        start_electrode.toInt(),
                        SuperElec,
-                       autosearch);
+                       autosearch,
+                       period);
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()

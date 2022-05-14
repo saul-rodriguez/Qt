@@ -45,7 +45,7 @@ public:
 
     channel m_motorPoint;
 
-    void scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode);
+    void scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode, int period);
     void stopScan();
     bool isActive();
 

@@ -195,6 +195,8 @@ public:
     QLineEdit *lineEditSearchStartCurrent;
     QLabel *label_36;
     QLineEdit *lineEditSearchStopCurrent;
+    QLabel *label_38;
+    QLineEdit *lineEditPeriod;
     QCheckBox *checkBoxSuperElectrode;
     QCheckBox *checkBoxAuto;
     QSpacerItem *horizontalSpacer_3;
@@ -1085,6 +1087,16 @@ public:
 
         horizontalLayout_22->addWidget(lineEditSearchStopCurrent);
 
+        label_38 = new QLabel(tab_5);
+        label_38->setObjectName(QString::fromUtf8("label_38"));
+
+        horizontalLayout_22->addWidget(label_38);
+
+        lineEditPeriod = new QLineEdit(tab_5);
+        lineEditPeriod->setObjectName(QString::fromUtf8("lineEditPeriod"));
+
+        horizontalLayout_22->addWidget(lineEditPeriod);
+
         checkBoxSuperElectrode = new QCheckBox(tab_5);
         checkBoxSuperElectrode->setObjectName(QString::fromUtf8("checkBoxSuperElectrode"));
 
@@ -1431,6 +1443,7 @@ public:
         label_22->setText(QCoreApplication::translate("MainWindow", "Stop Elec:", nullptr));
         label_35->setText(QCoreApplication::translate("MainWindow", "Start Current:", nullptr));
         label_36->setText(QCoreApplication::translate("MainWindow", "Stop Current:", nullptr));
+        label_38->setText(QCoreApplication::translate("MainWindow", "Period (ms)", nullptr));
         checkBoxSuperElectrode->setText(QCoreApplication::translate("MainWindow", "Super Electrode", nullptr));
         checkBoxAuto->setText(QCoreApplication::translate("MainWindow", "Auto Search", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Search", nullptr));
