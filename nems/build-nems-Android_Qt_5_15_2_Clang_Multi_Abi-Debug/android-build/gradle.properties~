@@ -9,10 +9,3 @@ org.gradle.jvmargs=-Xmx2048m
 # build with the same inputs. However, over time, the cache size will
 # grow. Uncomment the following line to enable it.
 #org.gradle.caching=true
-android.bundle.enableUncompressedNativeLibs=false
-androidBuildToolsVersion=32.1.0-rc1
-androidCompileSdkVersion=32
-buildDir=build
-qt5AndroidDir=/home/saul/installs/Qt/5.15.2/android/src/android/java
-qtMinSdkVersion=21
-qtTargetSdkVersion=28

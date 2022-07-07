@@ -271,6 +271,7 @@ DIST          = ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/spec_pre.
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/spec_post.prf \
+		../nems/.qmake.stash \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -506,6 +507,7 @@ Makefile: ../nems/nems.pro ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/linux-g
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/qt_config.prf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/linux-g++/qmake.conf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/exclusive_builds.prf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/toolchain.prf \
 		../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/default_pre.prf \
@@ -719,6 +721,7 @@ Makefile: ../nems/nems.pro ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/linux-g
 ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/qt_config.prf:
 ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/linux-g++/qmake.conf:
 ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/exclusive_builds.prf:
 ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/toolchain.prf:
 ../../../../installs/Qt/5.15.2/gcc_64/mkspecs/features/default_pre.prf:
@@ -2310,6 +2313,18 @@ nmessensor.o: ../nems/nmessensor.cpp ../nems/nmessensor.h \
 		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qdebug.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qhash.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qmap.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qlocale.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qset.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
 		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/QtMath \
 		../../../../installs/Qt/5.15.2/gcc_64/include/QtCore/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nmessensor.o ../nems/nmessensor.cpp

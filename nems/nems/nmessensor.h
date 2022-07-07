@@ -17,6 +17,7 @@ private:
 
     double average;
     double energy;
+    bool data_valid;
 
     void calculateAverage();
     double calculateEnergy();
@@ -26,9 +27,12 @@ public:
 
     void test();
     void add_point(double value);
+    void clear_datavalid();
 
+    bool getDataValid();
     double getAverage();
     double getEnergy();
+
 
 signals:
 

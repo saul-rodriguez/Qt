@@ -59,6 +59,16 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
 {
     m_motorpoints[m_channel_index] = *motorpoint;
 
+    // Check if 3 motorpoints have been repeated
+    if(isFinished()) {
+        qDebug()<< "Motor point found at " << m_current;
+        qDebug()<< m_motorpoints[m_channel_index].ch1 << ":" <<
+                   m_motorpoints[m_channel_index].ch2;
+        return 1;
+    }
+
+    // Old finishing criteria
+    /*
     //Compare 3 previous motorpoints
 
     if (m_channel_index >= 2) {
@@ -72,7 +82,7 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
                        m_motorpoints[m_channel_index].ch2;
             return 1;
         }
-    }
+    } */
 
     if (m_current >= m_stopCurrent) {
         //Search finished without finding a motor point
@@ -136,6 +146,44 @@ int NMESAutomaticSearch::addMotorPoint(channel* motorpoint)
 int NMESAutomaticSearch::compareChannels(channel a, channel b)
 {
     if ((a.ch1 == b.ch1) && (a.ch2 == b.ch2) ) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+int NMESAutomaticSearch::isFinished()
+{
+
+    //Create an histogram
+    int histogram[32];
+
+    for (int i = 0; i < 32; i++) {
+        histogram[i] = 0;
+    }
+
+    for (int i = 0; i <= m_channel_index; i++) {
+        for (int j = 0; j <= m_channel_index; j++ ) {
+            if (compareChannels(m_motorpoints[i],m_motorpoints[j])) {
+                histogram[i]++;
+            }
+        }
+    }
+
+    //Select the largest ocurrence
+
+    int aux_index = 0;
+    int aux = 0;
+
+    for (int i = 0; i < 32; i++) {
+        if (histogram[i] > aux) {
+            aux = histogram[i];
+            aux_index = i;
+        };
+    }
+
+    // Criteria to stop search: 3 motorpoints equal
+    if (aux >= 3) {
         return 1;
     } else {
         return 0;

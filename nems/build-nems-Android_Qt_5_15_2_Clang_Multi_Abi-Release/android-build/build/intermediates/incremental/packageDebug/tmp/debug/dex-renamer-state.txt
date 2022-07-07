@@ -1,4 +1,4 @@
-#Sat May 14 01:26:02 CEST 2022
+#Thu Jul 07 19:02:14 CEST 2022
 base.1=/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/dex/debug/mergeProjectDexDebug/out/classes.dex
 path.1=classes.dex
 base.0=/home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/android-build/build/intermediates/dex/debug/mergeExtDexDebug/out/classes.dex

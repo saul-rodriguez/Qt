@@ -1220,6 +1220,13 @@ void MainWindow::on_verticalSliderEnergyThreshold_valueChanged(int value)
 void MainWindow::on_pushButtonResetMaxEnergy_clicked()
 {
     m_search->updateMaxEnergy(m_maxEnergy, m_maxEnergy2);
+    bool dv1 = m_sens1.getDataValid();
+    bool dv2 = m_sens2.getDataValid();
+
+    m_search->updateDataValid(dv1,dv2);
+
+    m_sens1.clear_datavalid();
+    m_sens2.clear_datavalid();
 
     m_maxEnergy = 0;
     ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
@@ -1264,6 +1271,8 @@ void MainWindow::on_actionSearch_triggered()
                        SuperElec,
                        autosearch,
                        period);
+
+    on_pushButtonResetMaxEnergy_clicked();
 }
 
 void MainWindow::on_pushButtonUpdateCh1MotorPoint_clicked()

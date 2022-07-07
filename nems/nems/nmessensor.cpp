@@ -1,4 +1,5 @@
 #include "nmessensor.h"
+#include "qdebug.h"
 #include <QtMath>
 
 NmesSensor::NmesSensor(QObject *parent) : QObject(parent)
@@ -13,6 +14,7 @@ NmesSensor::NmesSensor(QObject *parent) : QObject(parent)
     }
 
     average = 0;
+    data_valid = true;
 }
 
 void NmesSensor::test()
@@ -38,6 +40,21 @@ void NmesSensor::add_point(double value)
     double aux[DATA_POINTS];
     double aux2[AVERAGE_POINTS];
 
+    //Check if data is valid
+    //if (value > 4095) {
+    if (value > 3095) { // Only to test manually
+      data_valid = false;
+      qDebug()<<"sensor data error";
+      //return;
+    }
+
+    // data_valid needs to be externally reset in order
+    // to continue processing data
+    //if (data_valid == false) {
+    //    return;
+   // }
+
+
     //insert new data value and discard the last point
     for (int i=1; i < DATA_POINTS; i++) {
         aux[i] = data_points[i-1];
@@ -61,6 +78,16 @@ void NmesSensor::add_point(double value)
     //recalculate average and energy
     calculateAverage();
     calculateEnergy();
+}
+
+void NmesSensor::clear_datavalid()
+{
+    data_valid = true;
+}
+
+bool NmesSensor::getDataValid()
+{
+    return data_valid;
 }
 
 void NmesSensor::calculateAverage()

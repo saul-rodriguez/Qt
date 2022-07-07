@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QTextStream>
 #include <QDebug>
+#include <QThread>
 
 NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 {
@@ -28,11 +29,16 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 
     // Each search takes m_timeout ms
     m_timer = new QTimer(this);
+    m_timer_error = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()),this,SLOT(SearchTimeout()));
+    connect(m_timer_error, SIGNAL(timeout()),this,SLOT(ErrorTimeout()));
     m_timeout = 2500;
 
     m_motorPoint.ch1 = 0;
     m_motorPoint.ch2 = 0;
+
+    m_data_valid1 = false;
+    m_data_valid2 = false;
 }
 
 void NMESsearch::scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode, int period)
@@ -87,6 +93,12 @@ void NMESsearch::updateMaxEnergy(int maxEnergy, int maxEnergy2)
 
    // m_totEnergy = qSqrt((m_maxEnergy*m_maxEnergy )+ (m_maxEnergy2*m_maxEnergy2));
     m_totEnergy = maxEnergy + maxEnergy2;
+}
+
+void NMESsearch::updateDataValid(bool dv1, bool dv2)
+{
+    m_data_valid1 = dv1;
+    m_data_valid2 = dv2;
 }
 
 channel NMESsearch::getMotorPoint()
@@ -188,6 +200,21 @@ void NMESsearch::SearchTimeout()
     CopyResetMaxEnergy();
     qDebug()<<"reset energy";
 
+    if (m_data_valid1 == false || m_data_valid2 == false || m_totEnergy > 5e6) {
+        // Communication problem, the combination needs to be repeated
+
+        qDebug()<<"Comm problem, repearing point";
+        QString aux;
+        aux = "Comm problem, repeating point" ;
+        aux +=  QString::number(m_search_index);
+        aux += " (" + QString::number(m_ch1) +",";
+        aux += QString::number(m_ch2) + ")";
+        updateSearchText(aux);
+
+        m_timer_error->start(4000);
+        return;
+    }
+
     //Store channel information
     m_channel[m_search_index].ch1 = m_ch1;
     m_channel[m_search_index].ch2 = m_ch2;
@@ -259,5 +286,14 @@ void NMESsearch::SearchTimeout()
 
     }
 
+}
+
+void NMESsearch::ErrorTimeout()
+{
+    m_timer_error->stop();
+    qDebug()<<"Launch search again";
+    programNEMSbin();
+    m_timer->start(m_timeout);
+    return;
 }
 

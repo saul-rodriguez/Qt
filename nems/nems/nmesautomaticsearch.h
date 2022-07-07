@@ -36,7 +36,8 @@ public:
     void start(int startCurrent, int stopCurrent, int anode, int stopElectrodes, int startElectrodes, int SuperElectrode, bool autosearch, int period);
     void setSearch(NMESsearch *search);
     int addMotorPoint(channel *motorpoint);
-    int  compareChannels(channel a, channel b);
+    int compareChannels(channel a, channel b);
+    int isFinished();
 
 
 signals:

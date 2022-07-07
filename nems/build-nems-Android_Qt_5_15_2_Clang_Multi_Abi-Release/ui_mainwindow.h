@@ -1332,7 +1332,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(5);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1340,7 +1340,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.2", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.3", nullptr));
         action_Run->setText(QCoreApplication::translate("MainWindow", "&Run", nullptr));
 #if QT_CONFIG(shortcut)
         action_Run->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+R", nullptr));

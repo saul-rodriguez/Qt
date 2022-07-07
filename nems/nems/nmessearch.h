@@ -29,6 +29,9 @@ public:
     int m_maxEnergy2;
     int m_totEnergy;
 
+    bool m_data_valid1;
+    bool m_data_valid2;
+
     //Scan method with 1 anode in ch1 and M cathodes
     channel m_channel[NUM_CATHODES];
     unsigned int m_ch1;
@@ -42,6 +45,7 @@ public:
 
     int m_timeout;
     QTimer *m_timer;
+    QTimer *m_timer_error;
 
     channel m_motorPoint;
 
@@ -50,6 +54,8 @@ public:
     bool isActive();
 
     void updateMaxEnergy(int maxEnergy, int maxEnergy2);
+    void updateDataValid(bool dv1, bool dv2);
+
     channel getMotorPoint();
     void cleanChannels();
 
@@ -65,7 +71,8 @@ signals:
     void scanDone();
 
 private slots:
-    void SearchTimeout();  
+    void SearchTimeout();
+    void ErrorTimeout();
 
 };
 
