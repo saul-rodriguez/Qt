@@ -907,15 +907,24 @@ void MainWindow::on_action_Save_triggered()
 
 void MainWindow::on_pushButtonAmplitude_clicked()
 {
+    QByteArray data;
     QString aux = ui->lineEditAmplitude->text();
 
-    QByteArray data;
+    int amp = aux.toInt();
 
     data.append('a');
-    if (aux.size()==1) {
-        data.append('0');
+
+    if (amp <= 99) { //Saul's board
+        if (aux.size()==1) {
+            data.append('0');
+        }
+        data.append(aux);
+
+    } else { // Svekon's board
+        quint8 amp_svekon = amp;
+        data.append('B');
+        data.append(amp_svekon);
     }
-    data.append(aux);
 
     send(data);
 }
@@ -1151,15 +1160,24 @@ void MainWindow::on_pushButtonChannel4_clicked()
 
 void MainWindow::on_pushButtonAmplitude2_clicked()
 {
+    QByteArray data;
     QString aux = ui->lineEditAmplitude2->text();
 
-    QByteArray data;
+    int amp = aux.toInt();
 
     data.append('A');
-    if (aux.size()==1) {
-        data.append('0');
+
+    if (amp <= 99) { //Saul's board
+        if (aux.size()==1) {
+            data.append('0');
+        }
+        data.append(aux);
+
+    } else { // Svekon's board
+        quint8 amp_svekon = amp;
+        data.append('B');
+        data.append(amp_svekon);
     }
-    data.append(aux);
 
     send(data);
 }

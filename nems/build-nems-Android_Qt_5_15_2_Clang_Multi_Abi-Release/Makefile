@@ -1311,15 +1311,82 @@ armeabi-v7a/mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qxmlstream.h \
 		ui_mainwindow.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QAction \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qaction.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qactiongroup.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QApplication \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qapplication.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreapplication.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qeventloop.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qdesktopwidget.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qguiapplication.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qinputmethod.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QCheckBox \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qcheckbox.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qabstractbutton.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QComboBox \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qcombobox.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qabstractitemdelegate.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qstyleoption.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qabstractspinbox.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qvalidator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregularexpression.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qslider.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qabstractslider.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qstyle.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qtabbar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qrubberband.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qframe.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QGridLayout \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgridlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qlayoutitem.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qboxlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QGroupBox \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgroupbox.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QHBoxLayout \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QLabel \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qlabel.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QLineEdit \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qlineedit.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qtextcursor.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qtextformat.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qtextoption.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QMenu \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qmenu.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QMenuBar \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qmenubar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QPlainTextEdit \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qplaintextedit.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qtextedit.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qabstractscrollarea.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qtextdocument.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qabstracttextdocumentlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qtextlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qglyphrun.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qrawfont.h \
+		../../../../installs/Qt/5.15.2/android/include/QtGui/qfontdatabase.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QProgressBar \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qprogressbar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QPushButton \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qpushbutton.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QRadioButton \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qradiobutton.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QSlider \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QSpacerItem \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QStatusBar \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qstatusbar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QTabWidget \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QToolBar \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qtoolbar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QVBoxLayout \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QWidget \
 		../../../../installs/Qt/5.15.2/android/include/QtCharts/QChartView \
 		../../../../installs/Qt/5.15.2/android/include/QtCharts/qchartview.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QGraphicsView \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgraphicsview.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/qpainter.h \
-		../../../../installs/Qt/5.15.2/android/include/QtGui/qtextoption.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qscrollarea.h \
-		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qabstractscrollarea.h \
-		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qframe.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgraphicsscene.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QFileDialog \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qfiledialog.h \
