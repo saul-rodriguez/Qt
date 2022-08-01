@@ -129,7 +129,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_search,SIGNAL(send(QByteArray)),this,SLOT(send(QByteArray)));
     connect(m_search,SIGNAL(CopyResetMaxEnergy()),this,SLOT(on_pushButtonResetMaxEnergy_clicked()));
     connect(m_search,SIGNAL(scanDone()),this,SLOT(SearchDone()));
-
+    m_search->setAlgorithm(REFERENCE_ALG);
 
     //m_numSearchElectrodes = 16;
     //ui->lineEditStopElectrodes->setText(QString::number((int)m_numSearchElectrodes));
@@ -1280,6 +1280,12 @@ void MainWindow::on_actionSearch_triggered()
     bool autosearch = ui->checkBoxAuto->isChecked();
 
     int period = ui->lineEditPeriod->text().toInt();
+
+    if (ui->AlgorithmRefradioButton->isChecked()) {
+        m_search->setAlgorithm(REFERENCE_ALG);
+    } else {
+        m_search->setAlgorithm(PERMUTATION_ALG);
+    }
 
     m_autosearch.start(m_startAmplitude,
                        m_stopAmplitude,

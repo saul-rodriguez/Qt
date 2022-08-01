@@ -7,6 +7,9 @@
 //Electrode Matrix order
 #define NUM_CATHODES 31
 
+#define REFERENCE_ALG 0
+#define PERMUTATION_ALG 1
+
 typedef struct channel_struct {
     int ch1;
     int ch2;
@@ -43,6 +46,8 @@ public:
     int m_amplitude;
     int m_super_electrode;
 
+    int m_algorithm;
+
     int m_timeout;
     QTimer *m_timer;
     QTimer *m_timer_error;
@@ -64,15 +69,22 @@ public:
     void scanArray();
     void saveMeasTxtFile();
 
+    void referenceAlgorithmSearch();
+    void allPermutationSearch();
+
+    void setAlgorithm(int alg);
+
 signals:
     void send(QByteArray data);
     void updateSearchText(QString text);
     void CopyResetMaxEnergy();
     void scanDone();
 
+
 private slots:
     void SearchTimeout();
     void ErrorTimeout();
+
 
 };
 

@@ -39,6 +39,8 @@ NMESsearch::NMESsearch(QObject *parent) : QObject(parent)
 
     m_data_valid1 = false;
     m_data_valid2 = false;
+
+    m_algorithm = REFERENCE_ALG;
 }
 
 void NMESsearch::scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode, int period)
@@ -194,6 +196,84 @@ void NMESsearch::saveMeasTxtFile()
     outfile.close();
 }
 
+void NMESsearch::referenceAlgorithmSearch()
+{
+
+    int stop_count;
+
+    if(m_super_electrode) {
+        stop_count = (m_stop_cathodes - m_start_cathodes+1)/4;
+    } else {
+        stop_count = m_stop_cathodes - m_start_cathodes;
+    }
+
+     if (m_search_index < stop_count) {
+        if (m_super_electrode) {
+            //m_search_index+=4;
+            m_search_index++;
+            m_ch2+=4;
+        } else {
+            m_search_index++;
+            m_ch2++;
+        }
+
+        programNEMSbin(); // advance to next iteration
+
+        m_timer->start(m_timeout);
+    } else { // Finish search
+        saveMeasTxtFile();
+        m_search_index = 0;
+        stopScan();
+        //m_timer->stop();
+        updateSearchText("** Scan search finished **");
+        scanDone();
+
+     }
+}
+
+void NMESsearch::allPermutationSearch()
+{
+    //int stop_count;
+/*
+    if(m_super_electrode) {
+        stop_count = (m_stop_cathodes - m_start_cathodes+1)/4;
+    } else {
+        stop_count = m_stop_cathodes - m_start_cathodes;
+    }
+*/
+    if (m_ch1 < (m_stop_cathodes-1)) {
+
+    //if (m_search_index < stop_count) {
+      //  if (m_super_electrode) {
+      //      //m_search_index+=4;
+      //      m_search_index++;
+       //     m_ch2+=4;
+       // } else {
+            m_search_index++;
+
+            if (m_ch2 < m_stop_cathodes) {
+                m_ch2++;
+            } else {
+                m_ch1++;
+                m_ch2 = m_ch1 + 1;
+            }
+
+    //}
+
+        programNEMSbin(); // advance to next iteration
+
+        m_timer->start(m_timeout);
+    } else { // Finish search
+        saveMeasTxtFile();
+        m_search_index = 0;
+        stopScan();
+        //m_timer->stop();
+        updateSearchText("** Scan search finished **");
+        scanDone();
+
+     }
+}
+
 void NMESsearch::SearchTimeout()
 {
     //Update MaxEnergy and clears it in the gui for the next iteration
@@ -252,6 +332,21 @@ void NMESsearch::SearchTimeout()
 
     /*Search algorithm here*/
 
+    //referenceAlgorithmSearch();
+
+    switch (m_algorithm) {
+        case REFERENCE_ALG: referenceAlgorithmSearch();
+                            break;
+
+        case PERMUTATION_ALG: allPermutationSearch();
+                              break;
+
+        default: break;
+
+    }
+
+
+/*
     int stop_count;
 
     if(m_super_electrode) {
@@ -285,6 +380,7 @@ void NMESsearch::SearchTimeout()
         scanDone();
 
     }
+*/
 
 }
 
@@ -295,5 +391,10 @@ void NMESsearch::ErrorTimeout()
     programNEMSbin();
     m_timer->start(m_timeout);
     return;
+}
+
+void NMESsearch::setAlgorithm(int alg)
+{
+    m_algorithm = alg;
 }
 

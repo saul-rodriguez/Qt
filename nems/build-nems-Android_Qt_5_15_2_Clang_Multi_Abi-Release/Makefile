@@ -1337,11 +1337,14 @@ armeabi-v7a/mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qtabbar.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qrubberband.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qframe.h \
-		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QGridLayout \
-		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgridlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QFormLayout \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qformlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QLayout \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qlayout.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qlayoutitem.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qboxlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgridlayout.h \
+		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QGridLayout \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QGroupBox \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qgroupbox.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QHBoxLayout \

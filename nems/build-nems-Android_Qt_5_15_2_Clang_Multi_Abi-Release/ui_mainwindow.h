@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -49,8 +50,7 @@ public:
     QAction *actionSearch;
     QAction *actionStop_Search;
     QWidget *centralWidget;
-    QGridLayout *gridLayout;
-    QGridLayout *gridLayout_10;
+    QFormLayout *formLayout_2;
     QTabWidget *tabWidget;
     QWidget *Connect;
     QGridLayout *gridLayout_3;
@@ -177,8 +177,7 @@ public:
     QProgressBar *progressBarMuscle;
     QSpacerItem *horizontalSpacer;
     QWidget *tab_5;
-    QGridLayout *gridLayout_9;
-    QVBoxLayout *verticalLayout;
+    QVBoxLayout *verticalLayout_9;
     QHBoxLayout *horizontalLayout_20;
     QLabel *label_motorpoint;
     QPushButton *pushButtonUpdateCh1MotorPoint;
@@ -200,6 +199,9 @@ public:
     QCheckBox *checkBoxSuperElectrode;
     QCheckBox *checkBoxAuto;
     QSpacerItem *horizontalSpacer_3;
+    QHBoxLayout *horizontalLayout_27;
+    QRadioButton *AlgorithmPermutationradioButton;
+    QRadioButton *AlgorithmRefradioButton;
     QPlainTextEdit *plainTextEditSearch;
     QWidget *tab_6;
     QGridLayout *gridLayout_11;
@@ -235,7 +237,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(877, 682);
+        MainWindow->resize(1119, 687);
         action_Run = new QAction(MainWindow);
         action_Run->setObjectName(QString::fromUtf8("action_Run"));
         QIcon icon;
@@ -284,13 +286,10 @@ public:
         actionStop_Search->setIcon(icon8);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
-        gridLayout = new QGridLayout(centralWidget);
-        gridLayout->setSpacing(6);
-        gridLayout->setContentsMargins(11, 11, 11, 11);
-        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
-        gridLayout_10 = new QGridLayout();
-        gridLayout_10->setSpacing(6);
-        gridLayout_10->setObjectName(QString::fromUtf8("gridLayout_10"));
+        formLayout_2 = new QFormLayout(centralWidget);
+        formLayout_2->setSpacing(6);
+        formLayout_2->setContentsMargins(11, 11, 11, 11);
+        formLayout_2->setObjectName(QString::fromUtf8("formLayout_2"));
         tabWidget = new QTabWidget(centralWidget);
         tabWidget->setObjectName(QString::fromUtf8("tabWidget"));
         Connect = new QWidget();
@@ -1000,13 +999,10 @@ public:
         tabWidget->addTab(tab_4, QString());
         tab_5 = new QWidget();
         tab_5->setObjectName(QString::fromUtf8("tab_5"));
-        gridLayout_9 = new QGridLayout(tab_5);
-        gridLayout_9->setSpacing(6);
-        gridLayout_9->setContentsMargins(11, 11, 11, 11);
-        gridLayout_9->setObjectName(QString::fromUtf8("gridLayout_9"));
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setSpacing(6);
-        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
+        verticalLayout_9 = new QVBoxLayout(tab_5);
+        verticalLayout_9->setSpacing(6);
+        verticalLayout_9->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_9->setObjectName(QString::fromUtf8("verticalLayout_9"));
         horizontalLayout_20 = new QHBoxLayout();
         horizontalLayout_20->setSpacing(6);
         horizontalLayout_20->setObjectName(QString::fromUtf8("horizontalLayout_20"));
@@ -1062,7 +1058,7 @@ public:
         horizontalLayout_20->addItem(horizontalSpacer_2);
 
 
-        verticalLayout->addLayout(horizontalLayout_20);
+        verticalLayout_9->addLayout(horizontalLayout_20);
 
         horizontalLayout_22 = new QHBoxLayout();
         horizontalLayout_22->setSpacing(6);
@@ -1112,15 +1108,29 @@ public:
         horizontalLayout_22->addItem(horizontalSpacer_3);
 
 
-        verticalLayout->addLayout(horizontalLayout_22);
+        verticalLayout_9->addLayout(horizontalLayout_22);
+
+        horizontalLayout_27 = new QHBoxLayout();
+        horizontalLayout_27->setSpacing(6);
+        horizontalLayout_27->setObjectName(QString::fromUtf8("horizontalLayout_27"));
+        AlgorithmPermutationradioButton = new QRadioButton(tab_5);
+        AlgorithmPermutationradioButton->setObjectName(QString::fromUtf8("AlgorithmPermutationradioButton"));
+
+        horizontalLayout_27->addWidget(AlgorithmPermutationradioButton);
+
+        AlgorithmRefradioButton = new QRadioButton(tab_5);
+        AlgorithmRefradioButton->setObjectName(QString::fromUtf8("AlgorithmRefradioButton"));
+        AlgorithmRefradioButton->setChecked(true);
+
+        horizontalLayout_27->addWidget(AlgorithmRefradioButton);
+
+
+        verticalLayout_9->addLayout(horizontalLayout_27);
 
         plainTextEditSearch = new QPlainTextEdit(tab_5);
         plainTextEditSearch->setObjectName(QString::fromUtf8("plainTextEditSearch"));
 
-        verticalLayout->addWidget(plainTextEditSearch);
-
-
-        gridLayout_9->addLayout(verticalLayout, 0, 0, 1, 1);
+        verticalLayout_9->addWidget(plainTextEditSearch);
 
         tabWidget->addTab(tab_5, QString());
         tab_6 = new QWidget();
@@ -1254,15 +1264,12 @@ public:
 
         tabWidget->addTab(tab_6, QString());
 
-        gridLayout_10->addWidget(tabWidget, 0, 0, 1, 1);
-
-
-        gridLayout->addLayout(gridLayout_10, 0, 0, 1, 1);
+        formLayout_2->setWidget(0, QFormLayout::FieldRole, tabWidget);
 
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 877, 22));
+        menuBar->setGeometry(QRect(0, 0, 1119, 22));
         menu_Measurement = new QMenu(menuBar);
         menu_Measurement->setObjectName(QString::fromUtf8("menu_Measurement"));
         MainWindow->setMenuBar(menuBar);
@@ -1340,7 +1347,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.3", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.4", nullptr));
         action_Run->setText(QCoreApplication::translate("MainWindow", "&Run", nullptr));
 #if QT_CONFIG(shortcut)
         action_Run->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+R", nullptr));
@@ -1446,6 +1453,8 @@ public:
         label_38->setText(QCoreApplication::translate("MainWindow", "Period (ms)", nullptr));
         checkBoxSuperElectrode->setText(QCoreApplication::translate("MainWindow", "Super Electrode", nullptr));
         checkBoxAuto->setText(QCoreApplication::translate("MainWindow", "Auto Search", nullptr));
+        AlgorithmPermutationradioButton->setText(QCoreApplication::translate("MainWindow", "Permutation Algorithm", nullptr));
+        AlgorithmRefradioButton->setText(QCoreApplication::translate("MainWindow", "Reference Algorithm", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "Search", nullptr));
         label_27->setText(QCoreApplication::translate("MainWindow", "Motor Point 1:", nullptr));
         label_28->setText(QCoreApplication::translate("MainWindow", "Electrode1", nullptr));
