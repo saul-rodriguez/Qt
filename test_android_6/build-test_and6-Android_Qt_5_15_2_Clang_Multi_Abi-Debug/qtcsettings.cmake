@@ -1,0 +1,17 @@
+# This file is managed by Qt Creator, do not edit!
+
+set("CMAKE_GENERATOR" "Ninja" CACHE "STRING" "" FORCE)
+set("CMAKE_BUILD_TYPE" "Debug" CACHE "STRING" "" FORCE)
+set("QT_QMAKE_EXECUTABLE" "/opt/Qt/5.15.2/android/bin/qmake" CACHE "FILEPATH" "" FORCE)
+set("CMAKE_PREFIX_PATH" "/opt/Qt/5.15.2/android" CACHE "PATH" "" FORCE)
+set("CMAKE_C_COMPILER" "/home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang" CACHE "FILEPATH" "" FORCE)
+set("CMAKE_CXX_COMPILER" "/home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++" CACHE "FILEPATH" "" FORCE)
+set("ANDROID_PLATFORM" "android-21" CACHE "STRING" "" FORCE)
+set("ANDROID_NDK" "/home/saul/installs/android/sdk/ndk/21.3.6528147" CACHE "PATH" "" FORCE)
+set("CMAKE_TOOLCHAIN_FILE" "/home/saul/installs/android/sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake" CACHE "FILEPATH" "" FORCE)
+set("ANDROID_USE_LEGACY_TOOLCHAIN_FILE" "OFF" CACHE "BOOL" "" FORCE)
+set("ANDROID_ABI" "armeabi-v7a" CACHE "STRING" "" FORCE)
+set("ANDROID_STL" "c++_shared" CACHE "STRING" "" FORCE)
+set("CMAKE_FIND_ROOT_PATH" "/opt/Qt/5.15.2/android" CACHE "PATH" "" FORCE)
+set("ANDROID_SDK" "/home/saul/installs/android/sdk" CACHE "PATH" "" FORCE)
+set("CMAKE_CXX_FLAGS_INIT" "-DQT_QML_DEBUG" CACHE "STRING" "" FORCE)

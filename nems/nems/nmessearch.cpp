@@ -160,10 +160,16 @@ void NMESsearch::programNEMSbin()
 {
     QByteArray data;
 
+    unsigned char aux;
+
     data.append('e');
     data.append((unsigned char)m_amplitude);
-    data.append((unsigned char)m_ch1);
-    data.append((unsigned char)m_ch2);
+  //  data.append((unsigned char)m_ch1);
+  //  data.append((unsigned char)m_ch2);
+    aux = m_pinmap->getPin(m_ch1);
+    data.append((unsigned char)aux);
+    aux = m_pinmap->getPin(m_ch2);
+    data.append((unsigned char)aux);
     data.append((unsigned char)m_go);
     data.append((unsigned char)m_super_electrode);
 
@@ -396,5 +402,10 @@ void NMESsearch::ErrorTimeout()
 void NMESsearch::setAlgorithm(int alg)
 {
     m_algorithm = alg;
+}
+
+void NMESsearch::setMappingPins(NMESPinMap *pinmap)
+{
+    m_pinmap = pinmap;
 }
 

@@ -29,6 +29,7 @@ SOURCES += \
     cplotchart.cpp \
     nmesautomaticsearch.cpp \
     nmesdualmp.cpp \
+    nmespinmap.cpp \
     nmessearch.cpp \
     nmessensor.cpp
 
@@ -38,6 +39,7 @@ HEADERS += \
     cplotchart.h \
     nmesautomaticsearch.h \
     nmesdualmp.h \
+    nmespinmap.h \
     nmessearch.h \
     nmessensor.h
 

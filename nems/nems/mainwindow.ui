@@ -18,7 +18,7 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="Connect">
        <attribute name="title">
@@ -1222,6 +1222,7 @@
     <addaction name="actionSensors"/>
     <addaction name="actionSearch"/>
     <addaction name="actionStop_Search"/>
+    <addaction name="actionShow_pin_map"/>
    </widget>
    <addaction name="menu_Measurement"/>
   </widget>
@@ -1356,6 +1357,11 @@
    </property>
    <property name="text">
     <string>Stop Search</string>
+   </property>
+  </action>
+  <action name="actionShow_pin_map">
+   <property name="text">
+    <string>Show pin map</string>
    </property>
   </action>
  </widget>

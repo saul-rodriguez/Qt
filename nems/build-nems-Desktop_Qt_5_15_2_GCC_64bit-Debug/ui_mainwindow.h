@@ -49,6 +49,7 @@ public:
     QAction *actionSensors;
     QAction *actionSearch;
     QAction *actionStop_Search;
+    QAction *actionShow_pin_map;
     QWidget *centralWidget;
     QFormLayout *formLayout_2;
     QTabWidget *tabWidget;
@@ -284,6 +285,8 @@ public:
         QIcon icon8;
         icon8.addFile(QString::fromUtf8(":/images/images/cancel.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionStop_Search->setIcon(icon8);
+        actionShow_pin_map = new QAction(MainWindow);
+        actionShow_pin_map->setObjectName(QString::fromUtf8("actionShow_pin_map"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         formLayout_2 = new QFormLayout(centralWidget);
@@ -1326,6 +1329,7 @@ public:
         menu_Measurement->addAction(actionSensors);
         menu_Measurement->addAction(actionSearch);
         menu_Measurement->addAction(actionStop_Search);
+        menu_Measurement->addAction(actionShow_pin_map);
         mainToolBar->addAction(action_Run);
         mainToolBar->addAction(actionStop);
         mainToolBar->addAction(actionSensors);
@@ -1339,7 +1343,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(2);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1347,7 +1351,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.3", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.4", nullptr));
         action_Run->setText(QCoreApplication::translate("MainWindow", "&Run", nullptr));
 #if QT_CONFIG(shortcut)
         action_Run->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+R", nullptr));
@@ -1378,6 +1382,7 @@ public:
         actionSensors->setText(QCoreApplication::translate("MainWindow", "Sensors", nullptr));
         actionSearch->setText(QCoreApplication::translate("MainWindow", "Search", nullptr));
         actionStop_Search->setText(QCoreApplication::translate("MainWindow", "Stop Search", nullptr));
+        actionShow_pin_map->setText(QCoreApplication::translate("MainWindow", "Show pin map", nullptr));
         groupBoxWirelessInterface->setTitle(QCoreApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QCoreApplication::translate("MainWindow", "Discover BT", nullptr));
         radioButtonWiFi->setText(QCoreApplication::translate("MainWindow", "WiFi", nullptr));

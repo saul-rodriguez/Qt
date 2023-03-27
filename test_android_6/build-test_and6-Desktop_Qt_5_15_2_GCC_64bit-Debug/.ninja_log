@@ -1,0 +1,9 @@
+# ninja log v5
+0	122	1679488562843449323	test_and6_autogen/timestamp	3e93e6fd54ef48dd
+0	122	1679488562843449323	test_and6_autogen/mocs_compilation.cpp	3e93e6fd54ef48dd
+0	122	1679488562843449323	/home/saul/projects/Qt/test_android_6/build-test_and6-Desktop_Qt_5_15_2_GCC_64bit-Debug/test_and6_autogen/timestamp	3e93e6fd54ef48dd
+0	122	1679488562843449323	/home/saul/projects/Qt/test_android_6/build-test_and6-Desktop_Qt_5_15_2_GCC_64bit-Debug/test_and6_autogen/mocs_compilation.cpp	3e93e6fd54ef48dd
+122	779	1679488563503442646	CMakeFiles/test_and6.dir/test_and6_autogen/mocs_compilation.cpp.o	d38a25c2ca01c963
+122	913	1679488563635441311	CMakeFiles/test_and6.dir/main.cpp.o	e4e331865fb5ccaf
+123	921	1679488563643441230	CMakeFiles/test_and6.dir/mainwindow.cpp.o	29e83af4a54a317a
+921	1111	1679488563831439329	test_and6	6c6160b6e49d43b2

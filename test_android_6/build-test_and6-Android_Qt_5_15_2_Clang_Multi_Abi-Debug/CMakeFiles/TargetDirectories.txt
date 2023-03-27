@@ -1,0 +1,11 @@
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/apk.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/aab.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/test_and6.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/edit_cache.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/rebuild_cache.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/list_install_components.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/install.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/install/local.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/install/strip.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/test_and6_autogen_timestamp_deps.dir
+/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug/CMakeFiles/test_and6_autogen.dir

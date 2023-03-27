@@ -7,6 +7,7 @@
 #include "nmessearch.h"
 #include "nmesautomaticsearch.h"
 #include "nmesdualmp.h"
+#include "nmespinmap.h"
 
 #include <QMainWindow>
 #include <QDataStream>
@@ -86,6 +87,9 @@ private:
     //Dual motor point stimulation
     NMESDualMP *m_dualMPstim;
 
+    //Pin mapping
+    NMESPinMap *m_pinmap;
+
 public slots:
     void updateSearchText(QString text);
 
@@ -153,6 +157,7 @@ private slots:
     void on_pushButtonStartDualStim_clicked();
     void on_pushButtonUpdateCh2MotorPoint_clicked();
     void on_actionStop_Search_triggered();
+    void on_actionShow_pin_map_triggered();
 };
 
 #endif // MAINWINDOW_H

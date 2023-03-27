@@ -122,6 +122,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->labelEnergyMax->setText(QString::number((int)m_maxEnergy));
     ui->labelEnergyMax2->setText(QString::number((int)m_maxEnergy2));
 
+    /******* Mapping Pins ******/
+    m_pinmap = new NMESPinMap();
+    m_pinmap->loadMapping();
+
     /****** Search motor points  *****/
 
     m_search = new NMESsearch(this);
@@ -130,6 +134,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_search,SIGNAL(CopyResetMaxEnergy()),this,SLOT(on_pushButtonResetMaxEnergy_clicked()));
     connect(m_search,SIGNAL(scanDone()),this,SLOT(SearchDone()));
     m_search->setAlgorithm(REFERENCE_ALG);
+    m_search->setMappingPins(m_pinmap);
 
     //m_numSearchElectrodes = 16;
     //ui->lineEditStopElectrodes->setText(QString::number((int)m_numSearchElectrodes));
@@ -159,7 +164,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //m_timer_dualStim = new QTimer(this);
     //m_timer_dualStim->setSingleShot(true);
     //connect(m_timer_dualStim, SIGNAL(timeout()), this, SLOT(DualStimulationTimeout()));
-
+    m_dualMPstim->setPinMap(m_pinmap);
 
 }
 
@@ -672,33 +677,40 @@ void MainWindow::parseProgram(const QByteArray &data)
     parameter = parameterLst.at(n-1);
     ui->lineEditContractions->setText(parameter);
 
+    //TODO: Need to remap pins!
+    QString pmap;
+
     //channel1
     aux = dataLst.at(12);
     parameterLst = aux.split(QRegExp(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
-    ui->lineEditChannel1->setText(parameter);
+    pmap = m_pinmap->getIndString(parameter);
+    ui->lineEditChannel1->setText(pmap);
 
     //channel2
     aux = dataLst.at(13);
     parameterLst = aux.split(QRegExp(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
-    ui->lineEditChannel2->setText(parameter);
+    pmap = m_pinmap->getIndString(parameter);
+    ui->lineEditChannel2->setText(pmap);
 
     //channel3
     aux = dataLst.at(14);
     parameterLst = aux.split(QRegExp(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
-    ui->lineEditChannel3->setText(parameter);
+    pmap = m_pinmap->getIndString(parameter);
+    ui->lineEditChannel3->setText(pmap);
 
     //channel4
     aux = dataLst.at(15);
     parameterLst = aux.split(QRegExp(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
-    ui->lineEditChannel4->setText(parameter);
+    pmap = m_pinmap->getIndString(parameter);
+    ui->lineEditChannel4->setText(pmap);
 
 }
 
@@ -1053,13 +1065,15 @@ void MainWindow::on_pushButtonChannel1_clicked()
 {
     QString aux = ui->lineEditChannel1->text();
 
+    QString auxm = m_pinmap->getPinString(aux);
+
     QByteArray data;
 
     data.append('M');
-    if (aux.size()==1) {
+    if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(auxm);
 
     send(data);
 }
@@ -1068,13 +1082,15 @@ void MainWindow::on_pushButtonChannel2_clicked()
 {
     QString aux = ui->lineEditChannel2->text();
 
+    QString auxm = m_pinmap->getPinString(aux);
+
     QByteArray data;
 
     data.append('m');
-    if (aux.size()==1) {
+    if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(auxm);
 
     send(data);
 }
@@ -1132,13 +1148,15 @@ void MainWindow::on_pushButtonChannel3_clicked()
 {
     QString aux = ui->lineEditChannel3->text();
 
+    QString auxm = m_pinmap->getPinString(aux);
+
     QByteArray data;
 
     data.append('Q');
-    if (aux.size()==1) {
+    if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(auxm);
 
     send(data);
 }
@@ -1147,13 +1165,15 @@ void MainWindow::on_pushButtonChannel4_clicked()
 {
     QString aux = ui->lineEditChannel4->text();
 
+    QString auxm = m_pinmap->getPinString(aux);
+
     QByteArray data;
 
     data.append('q');
-    if (aux.size()==1) {
+    if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(auxm);
 
     send(data);
 }
@@ -1378,3 +1398,21 @@ void MainWindow::on_actionStop_Search_triggered()
 
 
 }
+
+void MainWindow::on_actionShow_pin_map_triggered()
+{
+    ui->plainTextEditAT->appendPlainText("Logic Physical");
+    QString aux;
+    int pin;
+    for (int i = 0; i < 33; i++) {
+        aux = QString::number(i);
+        aux += "  ";
+        pin = m_pinmap->getPin(i);
+        aux += QString::number(pin);
+        ui->plainTextEditAT->appendPlainText(aux);
+
+    }
+
+
+}
+

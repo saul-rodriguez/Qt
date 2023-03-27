@@ -43,11 +43,18 @@ void NMESDualMP::start(dual_motorPoint *config)
 
 }
 
+void NMESDualMP::setPinMap(NMESPinMap *pinmap)
+{
+    m_pinmap = pinmap;
+}
+
 void NMESDualMP::DualStimulationTimeout()
 {
     QByteArray data;
     unsigned char go;
     unsigned char super_electrode;
+
+    unsigned char aux;
 
     super_electrode = 0;
 
@@ -60,8 +67,15 @@ void NMESDualMP::DualStimulationTimeout()
             go = 1;
             data.append('e');
             data.append((unsigned char)m_dualMP.amp1);
-            data.append((unsigned char)m_dualMP.ch1_1);
-            data.append((unsigned char)m_dualMP.ch1_2);
+            //data.append((unsigned char)m_dualMP.ch1_1);
+            //data.append((unsigned char)m_dualMP.ch1_2);
+
+            aux = m_pinmap->getPin(m_dualMP.ch1_1);
+            data.append((unsigned char)aux);
+
+            aux = m_pinmap->getPin(m_dualMP.ch1_2);
+            data.append((unsigned char)aux);
+
             data.append((unsigned char)go);
             data.append((unsigned char)super_electrode);
             send(data);
@@ -74,8 +88,15 @@ void NMESDualMP::DualStimulationTimeout()
             go = 1;
             data.append('e');
             data.append((unsigned char)m_dualMP.amp2);
-            data.append((unsigned char)m_dualMP.ch2_1);
-            data.append((unsigned char)m_dualMP.ch2_2);
+            //data.append((unsigned char)m_dualMP.ch2_1);
+            //data.append((unsigned char)m_dualMP.ch2_2);
+
+            aux = m_pinmap->getPin(m_dualMP.ch2_1);
+            data.append((unsigned char)aux);
+
+            aux = m_pinmap->getPin(m_dualMP.ch2_2);
+            data.append((unsigned char)aux);
+
             data.append((unsigned char)go);
             data.append((unsigned char)super_electrode);
             send(data);
@@ -88,8 +109,15 @@ void NMESDualMP::DualStimulationTimeout()
             go = 0;
             data.append('e');
             data.append((unsigned char)m_dualMP.amp2);
-            data.append((unsigned char)m_dualMP.ch2_1);
-            data.append((unsigned char)m_dualMP.ch2_2);
+            //data.append((unsigned char)m_dualMP.ch2_1);
+            //data.append((unsigned char)m_dualMP.ch2_2);
+
+            aux = m_pinmap->getPin(m_dualMP.ch2_1);
+            data.append((unsigned char)aux);
+
+            aux = m_pinmap->getPin(m_dualMP.ch2_2);
+            data.append((unsigned char)aux);
+
             data.append((unsigned char)go);
             data.append((unsigned char)super_electrode);
             send(data);

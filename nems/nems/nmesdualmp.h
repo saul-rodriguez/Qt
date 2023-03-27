@@ -1,6 +1,7 @@
 #ifndef NMESDUALMP_H
 #define NMESDUALMP_H
 
+#include "nmespinmap.h"
 #include <QObject>
 #include <QTimer>
 
@@ -41,10 +42,14 @@ class NMESDualMP : public QObject
     dual_motorPoint m_dualMP;
     dual_state_t m_state;
 
+    NMESPinMap *m_pinmap;
+
 public:
     explicit NMESDualMP(QObject *parent = nullptr);
 
     void start(dual_motorPoint *config);
+
+    void setPinMap(NMESPinMap *pinmap);
 
 
 signals:

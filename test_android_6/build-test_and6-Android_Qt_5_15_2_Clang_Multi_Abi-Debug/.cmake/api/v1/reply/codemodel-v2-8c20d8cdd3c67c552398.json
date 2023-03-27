@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-c2de44843ea085b84b67.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.6.0"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "test_and6",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "aab::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-aab-Debug-43111a169505320197f4.json",
+					"name" : "aab",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "apk::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-apk-Debug-ca348b5b5b556f224b72.json",
+					"name" : "apk",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_and6::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_and6-Debug-9d557d0caafdec8a701e.json",
+					"name" : "test_and6",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_and6_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_and6_autogen-Debug-e362e9dffa5e3752a283.json",
+					"name" : "test_and6_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "test_and6_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-test_and6_autogen_timestamp_deps-Debug-ae26ede9382535be75c3.json",
+					"name" : "test_and6_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/saul/projects/Qt/test_android_6/build-test_and6-Android_Qt_5_15_2_Clang_Multi_Abi-Debug",
+		"source" : "/home/saul/projects/Qt/test_android_6/test_and6"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 4
+	}
+}

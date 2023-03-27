@@ -1,6 +1,7 @@
 #ifndef NMESSEARCH_H
 #define NMESSEARCH_H
 
+#include "nmespinmap.h"
 #include <QObject>
 #include <QTimer>
 
@@ -54,6 +55,9 @@ public:
 
     channel m_motorPoint;
 
+    //Pin mapping
+    NMESPinMap *m_pinmap;
+
     void scan(int anode, int start_electrodes, int stop_electrodes, int amplitude, int super_electrode, int period);
     void stopScan();
     bool isActive();
@@ -73,6 +77,8 @@ public:
     void allPermutationSearch();
 
     void setAlgorithm(int alg);
+
+    void setMappingPins(NMESPinMap *pinmap);
 
 signals:
     void send(QByteArray data);
