@@ -980,6 +980,7 @@ moc_mainwindow.cpp: ../nems/mainwindow.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCharts/qxyseries.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QMainWindow \
@@ -1112,6 +1113,7 @@ moc_btclient.cpp: ../nems/btclient.h \
 
 moc_nmesautomaticsearch.cpp: ../nems/nmesautomaticsearch.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
@@ -1173,6 +1175,7 @@ moc_nmesautomaticsearch.cpp: ../nems/nmesautomaticsearch.h \
 	/opt/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/opt/Qt/5.15.2/gcc_64/include -I/opt/Qt/5.15.2/gcc_64/include/QtCharts -I/opt/Qt/5.15.2/gcc_64/include/QtWidgets -I/opt/Qt/5.15.2/gcc_64/include/QtGui -I/opt/Qt/5.15.2/gcc_64/include/QtBluetooth -I/opt/Qt/5.15.2/gcc_64/include/QtNetwork -I/opt/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmesautomaticsearch.h -o moc_nmesautomaticsearch.cpp
 
 moc_nmesdualmp.cpp: ../nems/nmesdualmp.h \
+		../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
@@ -1292,6 +1295,7 @@ moc_nmespinmap.cpp: ../nems/nmespinmap.h \
 	/opt/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/opt/Qt/5.15.2/gcc_64/include -I/opt/Qt/5.15.2/gcc_64/include/QtCharts -I/opt/Qt/5.15.2/gcc_64/include/QtWidgets -I/opt/Qt/5.15.2/gcc_64/include/QtGui -I/opt/Qt/5.15.2/gcc_64/include/QtBluetooth -I/opt/Qt/5.15.2/gcc_64/include/QtNetwork -I/opt/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmespinmap.h -o moc_nmespinmap.cpp
 
 moc_nmessearch.cpp: ../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
@@ -1593,6 +1597,7 @@ main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCharts/qxyseries.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QMainWindow \
@@ -1788,6 +1793,7 @@ mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCharts/qxyseries.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QMainWindow \
@@ -1813,85 +1819,15 @@ mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QXmlStreamWriter \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qxmlstream.h \
 		ui_mainwindow.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QAction \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qaction.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qactiongroup.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QApplication \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qapplication.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qguiapplication.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qinputmethod.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QCheckBox \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qcheckbox.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qabstractbutton.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QComboBox \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qcombobox.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qstyleoption.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qvalidator.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtCore/qregularexpression.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qslider.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qabstractslider.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qstyle.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qtabbar.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qrubberband.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QFormLayout \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qformlayout.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QLayout \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qlayout.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qgridlayout.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QGridLayout \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QGroupBox \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qgroupbox.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QHBoxLayout \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QLabel \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qlabel.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QLineEdit \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qlineedit.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qtextcursor.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qtextformat.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qtextoption.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QMenu \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qmenu.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QMenuBar \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qmenubar.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QPlainTextEdit \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qplaintextedit.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qtextedit.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qtextdocument.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qtextlayout.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qglyphrun.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qrawfont.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtGui/qfontdatabase.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QProgressBar \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qprogressbar.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QPushButton \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qpushbutton.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QRadioButton \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qradiobutton.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QSlider \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QSpacerItem \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QStatusBar \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qstatusbar.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QTabWidget \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QToolBar \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qtoolbar.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QVBoxLayout \
-		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QWidget \
 		/opt/Qt/5.15.2/gcc_64/include/QtCharts/QChartView \
 		/opt/Qt/5.15.2/gcc_64/include/QtCharts/qchartview.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QGraphicsView \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qgraphicsview.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtGui/qpainter.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtGui/qtextoption.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qscrollarea.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qframe.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qgraphicsscene.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/QFileDialog \
 		/opt/Qt/5.15.2/gcc_64/include/QtWidgets/qfiledialog.h \
@@ -2140,6 +2076,7 @@ cplotchart.o: ../nems/cplotchart.cpp ../nems/cplotchart.h \
 
 nmesautomaticsearch.o: ../nems/nmesautomaticsearch.cpp ../nems/nmesautomaticsearch.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
@@ -2253,6 +2190,7 @@ nmesautomaticsearch.o: ../nems/nmesautomaticsearch.cpp ../nems/nmesautomaticsear
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nmesautomaticsearch.o ../nems/nmesautomaticsearch.cpp
 
 nmesdualmp.o: ../nems/nmesdualmp.cpp ../nems/nmesdualmp.h \
+		../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
@@ -2364,10 +2302,29 @@ nmespinmap.o: ../nems/nmespinmap.cpp ../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qmetatype.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qcontainerfwd.h \
-		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/QStandardPaths \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qstandardpaths.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qiodevice.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qlocale.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/QFile \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
+		/opt/Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o nmespinmap.o ../nems/nmespinmap.cpp
 
 nmessearch.o: ../nems/nmessearch.cpp ../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
 		/opt/Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \

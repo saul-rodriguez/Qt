@@ -10,6 +10,7 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
+#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
@@ -35,6 +36,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionStart;
+    QAction *actionStop;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -85,6 +88,16 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(598, 461);
+        actionStart = new QAction(MainWindow);
+        actionStart->setObjectName(QString::fromUtf8("actionStart"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8(":/images/images/Button-Play-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionStart->setIcon(icon);
+        actionStop = new QAction(MainWindow);
+        actionStop->setObjectName(QString::fromUtf8("actionStop"));
+        QIcon icon1;
+        icon1.addFile(QString::fromUtf8(":/images/images/Stop-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionStop->setIcon(icon1);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         gridLayout = new QGridLayout(centralWidget);
@@ -315,6 +328,10 @@ public:
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
         QWidget::setTabOrder(pushButtonATSend, plainTextEditAT);
 
+        mainToolBar->addAction(actionStart);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionStop);
+
         retranslateUi(MainWindow);
 
         tabWidget->setCurrentIndex(1);
@@ -325,7 +342,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Logger V0.3", nullptr));
+        actionStart->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
+        actionStop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
         checkBoxConfigSmoothPlot->setText(QCoreApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QCoreApplication::translate("MainWindow", "Antialias filtering", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Config", nullptr));

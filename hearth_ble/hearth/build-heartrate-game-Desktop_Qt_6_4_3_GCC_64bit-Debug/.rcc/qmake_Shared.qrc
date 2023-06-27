@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="qmldir">/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/Shared/qmldir</file>
+  </qresource>
+</RCC>
+

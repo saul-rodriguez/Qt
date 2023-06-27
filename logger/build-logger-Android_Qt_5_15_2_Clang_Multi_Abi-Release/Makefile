@@ -11,8 +11,8 @@ EQ            = =
 
 ####### Compiler, tools and options
 
-CC            = /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang
-CXX           = /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
+CC            = /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang
+CXX           = /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_CHARTS_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_BLUETOOTH_LIB -DQT_NETWORK_LIB -DQT_CORE_LIB
 CFLAGS        = -target armv7a-linux-androideabi21 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -O2 -mthumb -Oz -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -target armv7a-linux-androideabi21 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -O2 -mthumb -Oz -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
@@ -37,11 +37,11 @@ TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = liblogger_armeabi-v7a.so1.0.0
 DISTDIR = /home/saul/projects/Qt/logger/build-logger-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/liblogger_armeabi-v7a.so1.0.0
-LINK          = /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target armv7a-linux-androideabi21 -fno-limit-debug-info
+LINK          = /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target armv7a-linux-androideabi21 -fno-limit-debug-info
 LFLAGS        = -Wl,-soname,liblogger_armeabi-v7a.so -Wl,-rpath-link=/opt/Qt/5.15.2/android/lib -Wl,--build-id=sha1 -Wl,--no-undefined -Wl,-z,noexecstack -shared
 LIBS          = $(SUBLIBS) /opt/Qt/5.15.2/android/lib/libQt5Charts_armeabi-v7a.so /opt/Qt/5.15.2/android/lib/libQt5Widgets_armeabi-v7a.so /opt/Qt/5.15.2/android/lib/libQt5Gui_armeabi-v7a.so /opt/Qt/5.15.2/android/lib/libQt5Bluetooth_armeabi-v7a.so /opt/Qt/5.15.2/android/lib/libQt5Network_armeabi-v7a.so /opt/Qt/5.15.2/android/lib/libQt5Core_armeabi-v7a.so -lGLESv2   -llog -lz -lm -ldl -lc
-AR            = /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar cqs
-RANLIB        = /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ranlib
+AR            = /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/llvm-ar cqs
+RANLIB        = /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/arm-linux-androideabi-ranlib
 SED           = sed
 STRIP         = 
 
@@ -54,12 +54,14 @@ OBJECTS_DIR   = armeabi-v7a/
 SOURCES       = ../logger/main.cpp \
 		../logger/mainwindow.cpp \
 		../logger/btclient.cpp \
-		../logger/cplotchart.cpp armeabi-v7a/moc_mainwindow.cpp \
+		../logger/cplotchart.cpp armeabi-v7a/qrc_images.cpp \
+		armeabi-v7a/moc_mainwindow.cpp \
 		armeabi-v7a/moc_btclient.cpp
 OBJECTS       = armeabi-v7a/main.o \
 		armeabi-v7a/mainwindow.o \
 		armeabi-v7a/btclient.o \
 		armeabi-v7a/cplotchart.o \
+		armeabi-v7a/qrc_images.o \
 		armeabi-v7a/moc_mainwindow.o \
 		armeabi-v7a/moc_btclient.o
 DIST          = /opt/Qt/5.15.2/android/mkspecs/features/spec_pre.prf \
@@ -285,6 +287,7 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents ../logger/images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../logger/mainwindow.h ../logger/btclient.h ../logger/cplotchart.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../logger/main.cpp ../logger/mainwindow.cpp ../logger/btclient.cpp ../logger/cplotchart.cpp $(DISTDIR)/
@@ -321,13 +324,20 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: armeabi-v7a/qrc_images.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) armeabi-v7a/qrc_images.cpp
+armeabi-v7a/qrc_images.cpp: ../logger/images.qrc \
+		/opt/Qt/5.15.2/android/bin/rcc \
+		../logger/images/Button-Play-icon.png \
+		../logger/images/Stop-icon.png
+	/opt/Qt/5.15.2/android/bin/rcc -name images ../logger/images.qrc -o armeabi-v7a/qrc_images.cpp
+
 compiler_moc_predefs_make_all: armeabi-v7a/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) armeabi-v7a/moc_predefs.h
 armeabi-v7a/moc_predefs.h: /opt/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
-	/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target armv7a-linux-androideabi21 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -O2 -mthumb -Oz -std=gnu++11 -Wall -W -dM -E -o armeabi-v7a/moc_predefs.h /opt/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
+	/home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target armv7a-linux-androideabi21 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -O2 -mthumb -Oz -std=gnu++11 -Wall -W -dM -E -o armeabi-v7a/moc_predefs.h /opt/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
 
 compiler_moc_header_make_all: armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp
 compiler_moc_header_clean:
@@ -499,14 +509,9 @@ armeabi-v7a/moc_mainwindow.cpp: ../logger/mainwindow.h \
 		/opt/Qt/5.15.2/android/include/QtGui/qicon.h \
 		/opt/Qt/5.15.2/android/include/QtNetwork/QTcpSocket \
 		/opt/Qt/5.15.2/android/include/QtNetwork/qtcpsocket.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/QNetworkSession \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworksession.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworkinterface.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qhostaddress.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworkconfiguration.h \
 		armeabi-v7a/moc_predefs.h \
 		/opt/Qt/5.15.2/android/bin/moc
-	/opt/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/logger/build-logger-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/opt/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/5.15.2/android/include -I/opt/Qt/5.15.2/android/include/QtCharts -I/opt/Qt/5.15.2/android/include/QtWidgets -I/opt/Qt/5.15.2/android/include/QtGui -I/opt/Qt/5.15.2/android/include/QtBluetooth -I/opt/Qt/5.15.2/android/include/QtNetwork -I/opt/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/mainwindow.h -o armeabi-v7a/moc_mainwindow.cpp
+	/opt/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/logger/build-logger-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/opt/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/5.15.2/android/include -I/opt/Qt/5.15.2/android/include/QtCharts -I/opt/Qt/5.15.2/android/include/QtWidgets -I/opt/Qt/5.15.2/android/include/QtGui -I/opt/Qt/5.15.2/android/include/QtBluetooth -I/opt/Qt/5.15.2/android/include/QtNetwork -I/opt/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++ -I/usr/local/include -I/home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/mainwindow.h -o armeabi-v7a/moc_mainwindow.cpp
 
 armeabi-v7a/moc_btclient.cpp: ../logger/btclient.h \
 		/opt/Qt/5.15.2/android/include/QtCore/QObject \
@@ -608,7 +613,7 @@ armeabi-v7a/moc_btclient.cpp: ../logger/btclient.h \
 		/opt/Qt/5.15.2/android/include/QtCore/qbasictimer.h \
 		armeabi-v7a/moc_predefs.h \
 		/opt/Qt/5.15.2/android/bin/moc
-	/opt/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/logger/build-logger-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/opt/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/5.15.2/android/include -I/opt/Qt/5.15.2/android/include/QtCharts -I/opt/Qt/5.15.2/android/include/QtWidgets -I/opt/Qt/5.15.2/android/include/QtGui -I/opt/Qt/5.15.2/android/include/QtBluetooth -I/opt/Qt/5.15.2/android/include/QtNetwork -I/opt/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/btclient.h -o armeabi-v7a/moc_btclient.cpp
+	/opt/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/logger/build-logger-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/opt/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/5.15.2/android/include -I/opt/Qt/5.15.2/android/include/QtCharts -I/opt/Qt/5.15.2/android/include/QtWidgets -I/opt/Qt/5.15.2/android/include/QtGui -I/opt/Qt/5.15.2/android/include/QtBluetooth -I/opt/Qt/5.15.2/android/include/QtNetwork -I/opt/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++ -I/usr/local/include -I/home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../logger/btclient.h -o armeabi-v7a/moc_btclient.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -627,7 +632,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
 
@@ -798,11 +803,6 @@ armeabi-v7a/main.o: ../logger/main.cpp ../logger/mainwindow.h \
 		/opt/Qt/5.15.2/android/include/QtGui/qicon.h \
 		/opt/Qt/5.15.2/android/include/QtNetwork/QTcpSocket \
 		/opt/Qt/5.15.2/android/include/QtNetwork/qtcpsocket.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/QNetworkSession \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworksession.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworkinterface.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qhostaddress.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworkconfiguration.h \
 		/opt/Qt/5.15.2/android/include/QtWidgets/QApplication \
 		/opt/Qt/5.15.2/android/include/QtWidgets/qapplication.h \
 		/opt/Qt/5.15.2/android/include/QtCore/qcoreapplication.h \
@@ -979,12 +979,10 @@ armeabi-v7a/mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/opt/Qt/5.15.2/android/include/QtGui/qicon.h \
 		/opt/Qt/5.15.2/android/include/QtNetwork/QTcpSocket \
 		/opt/Qt/5.15.2/android/include/QtNetwork/qtcpsocket.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/QNetworkSession \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworksession.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworkinterface.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qhostaddress.h \
-		/opt/Qt/5.15.2/android/include/QtNetwork/qnetworkconfiguration.h \
 		ui_mainwindow.h \
+		/opt/Qt/5.15.2/android/include/QtWidgets/QAction \
+		/opt/Qt/5.15.2/android/include/QtWidgets/qaction.h \
+		/opt/Qt/5.15.2/android/include/QtWidgets/qactiongroup.h \
 		/opt/Qt/5.15.2/android/include/QtWidgets/QApplication \
 		/opt/Qt/5.15.2/android/include/QtWidgets/qapplication.h \
 		/opt/Qt/5.15.2/android/include/QtCore/qcoreapplication.h \
@@ -1027,8 +1025,6 @@ armeabi-v7a/mainwindow.o: ../logger/mainwindow.cpp ../logger/mainwindow.h \
 		/opt/Qt/5.15.2/android/include/QtWidgets/QMenuBar \
 		/opt/Qt/5.15.2/android/include/QtWidgets/qmenubar.h \
 		/opt/Qt/5.15.2/android/include/QtWidgets/qmenu.h \
-		/opt/Qt/5.15.2/android/include/QtWidgets/qaction.h \
-		/opt/Qt/5.15.2/android/include/QtWidgets/qactiongroup.h \
 		/opt/Qt/5.15.2/android/include/QtWidgets/QPlainTextEdit \
 		/opt/Qt/5.15.2/android/include/QtWidgets/qplaintextedit.h \
 		/opt/Qt/5.15.2/android/include/QtWidgets/qtextedit.h \
@@ -1290,6 +1286,9 @@ armeabi-v7a/cplotchart.o: ../logger/cplotchart.cpp ../logger/cplotchart.h \
 		/opt/Qt/5.15.2/android/include/QtCharts/QXYSeries \
 		/opt/Qt/5.15.2/android/include/QtCharts/qxyseries.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/cplotchart.o ../logger/cplotchart.cpp
+
+armeabi-v7a/qrc_images.o: armeabi-v7a/qrc_images.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/qrc_images.o armeabi-v7a/qrc_images.cpp
 
 armeabi-v7a/moc_mainwindow.o: armeabi-v7a/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_mainwindow.o armeabi-v7a/moc_mainwindow.cpp

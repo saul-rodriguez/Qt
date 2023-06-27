@@ -1,0 +1,19 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="qml/App.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/App.qml</file>
+    <file alias="qml/BluetoothAlarmDialog.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/BluetoothAlarmDialog.qml</file>
+    <file alias="qml/BottomLine.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/BottomLine.qml</file>
+    <file alias="qml/Connect.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/Connect.qml</file>
+    <file alias="qml/GameButton.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/GameButton.qml</file>
+    <file alias="qml/GamePage.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/GamePage.qml</file>
+    <file alias="qml/GameSettings.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/GameSettings.qml</file>
+    <file alias="qml/Measure.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/Measure.qml</file>
+    <file alias="qml/SplashScreen.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/SplashScreen.qml</file>
+    <file alias="qml/Stats.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/Stats.qml</file>
+    <file alias="qml/StatsLabel.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/StatsLabel.qml</file>
+    <file alias="qml/TitleBar.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/TitleBar.qml</file>
+    <file alias="qml/main.qml">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/main.qml</file>
+    <file alias="qml/qmldir">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/qmldir</file>
+  </qresource>
+</RCC>
+

@@ -1,0 +1,5 @@
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-game_autogen/include/../EWIEGA46WW/moc_bluetoothbaseclass.cpp.json
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-game_autogen/include/../EWIEGA46WW/moc_connectionhandler.cpp.json
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-game_autogen/include/../EWIEGA46WW/moc_devicefinder.cpp.json
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-game_autogen/include/../EWIEGA46WW/moc_devicehandler.cpp.json
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-game_autogen/include/../EWIEGA46WW/moc_deviceinfo.cpp.json

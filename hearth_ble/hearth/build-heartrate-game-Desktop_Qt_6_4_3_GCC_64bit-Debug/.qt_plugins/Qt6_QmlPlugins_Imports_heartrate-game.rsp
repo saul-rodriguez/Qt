@@ -1,0 +1,16 @@
+-rootPath
+/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game
+-cmake-output
+-output-file
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/.qt_plugins/Qt6_QmlPlugins_Imports_heartrate-game.cmake
+-importPath
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/Shared
+-importPath
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug
+-importPath
+/opt/Qt/6.4.3/gcc_64/./qml
+-qrcFiles
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/.rcc/qmake_Shared.qrc
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/.rcc/qmake_Shared_copy.qrc
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/.rcc/qml.qrc
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/.rcc/images.qrc

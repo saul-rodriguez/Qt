@@ -1,0 +1,115 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="org.qtproject.example.BLE_nus_test"
+4    android:installLocation="auto"
+5    android:versionCode="1"
+6    android:versionName="1.0" >
+7
+8    <uses-sdk
+9        android:minSdkVersion="23"
+9-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml
+10        android:targetSdkVersion="30" />
+10-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml
+11
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:7:5-67
+12-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:7:22-64
+13    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+13-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:8:5-81
+13-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:8:22-78
+14    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+14-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:9:5-79
+14-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:9:22-76
+15    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+15-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:10:5-79
+15-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:10:22-76
+16    <uses-permission android:name="android.permission.BLUETOOTH" />
+16-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:11:5-68
+16-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:11:22-65
+17    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+17-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:12:5-74
+17-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:12:22-71
+18    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+18-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:13:5-73
+18-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:13:22-70
+19    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
+19-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:14:5-78
+19-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:14:22-75
+20    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+20-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:15:5-76
+20-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:15:22-73
+21
+22    <supports-screens
+22-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:17:5-21:39
+23        android:anyDensity="true"
+23-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:18:9-34
+24        android:largeScreens="true"
+24-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:19:9-36
+25        android:normalScreens="true"
+25-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:20:9-37
+26        android:smallScreens="true" />
+26-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:21:9-36
+27
+28    <application
+28-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:22:5-54:19
+29        android:name="org.qtproject.qt.android.bindings.QtApplication"
+29-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:23:9-71
+30        android:allowBackup="true"
+30-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:28:9-35
+31        android:allowNativeHeapPointerTagging="false"
+31-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:27:9-54
+32        android:fullBackupOnly="false"
+32-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:29:9-39
+33        android:hardwareAccelerated="true"
+33-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:24:9-43
+34        android:label="BLE_nus_test"
+34-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:25:9-37
+35        android:requestLegacyExternalStorage="true" >
+35-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:26:9-52
+36        <activity
+36-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:30:9-53:20
+37            android:name="org.qtproject.qt.android.bindings.QtActivity"
+37-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:31:13-72
+38            android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation|mcc|mnc|density"
+38-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:32:13-182
+39            android:exported="true"
+39-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:36:13-36
+40            android:label="BLE_nus_test"
+40-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:33:13-41
+41            android:launchMode="singleTop"
+41-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:34:13-43
+42            android:screenOrientation="unspecified" >
+42-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:35:13-52
+43            <intent-filter>
+43-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:37:13-40:29
+44                <action android:name="android.intent.action.MAIN" />
+44-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:38:17-69
+44-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:38:25-66
+45
+46                <category android:name="android.intent.category.LAUNCHER" />
+46-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:39:17-77
+46-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:39:27-74
+47            </intent-filter>
+48
+49            <meta-data
+49-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:42:11-44:48
+50                android:name="android.app.lib_name"
+50-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:43:17-52
+51                android:value="BLE_nus_test" />
+51-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:44:17-45
+52            <meta-data
+52-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:46:11-48:36
+53                android:name="android.app.arguments"
+53-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:47:17-53
+54                android:value="" />
+54-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:48:17-33
+55            <meta-data
+55-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:50:13-52:43
+56                android:name="android.app.extract_android_style"
+56-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:51:17-65
+57                android:value="minimal" />
+57-->/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/AndroidManifest.xml:52:17-40
+58        </activity>
+59    </application>
+60
+61</manifest>

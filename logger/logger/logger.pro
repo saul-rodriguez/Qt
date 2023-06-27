@@ -58,3 +58,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 #    android/gradlew.bat
 
 #ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
+
+RESOURCES += \
+    images.qrc

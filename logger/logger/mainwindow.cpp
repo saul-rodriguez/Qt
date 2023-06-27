@@ -11,6 +11,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    /**** Toolbar ******/
+       ui->mainToolBar->setIconSize(QSize(120, 120));
+
+
+
     //config initialization, WiFi disabled
     ui->pushButtonBTconnect->setEnabled(true);
     ui->pushButtonBTdiscoverDevices->setEnabled(true);
@@ -347,3 +352,38 @@ void MainWindow::on_pushButtonBTdisconnect_clicked()
     m_bt->BTdisconnect();
     ui->labelBTstatus->setText("Disconnected");
 }
+
+void MainWindow::on_actionStart_triggered()
+{
+    QByteArray data;
+    data.append("s");
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {    //The communication with the ESP-01 module is always terminated by cr + nl
+        data.append('\r');
+        data.append('\n');
+        m_WiFiTcpSocket->write(data);
+    }
+
+    m_timer->start(m_PlotTimeout);
+
+}
+
+
+void MainWindow::on_actionStop_triggered()
+{
+    QByteArray data;
+    data.append("S");
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {    //The communication with the ESP-01 module is always terminated by cr + nl
+        data.append('\r');
+        data.append('\n');
+        m_WiFiTcpSocket->write(data);
+    }
+
+    m_timer->stop();
+}
+

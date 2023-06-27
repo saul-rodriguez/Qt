@@ -1,0 +1,32 @@
+<dependencies>
+  <compile
+      roots="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6Android.jar:unspecified@jar,__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetworkInformationBackend.jar:unspecified@jar,__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetwork.jar:unspecified@jar,__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidBluetooth.jar:unspecified@jar">
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6Android.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6Android.jar"/>
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetworkInformationBackend.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetworkInformationBackend.jar"/>
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetwork.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetwork.jar"/>
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidBluetooth.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidBluetooth.jar"/>
+  </compile>
+  <package
+      roots="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6Android.jar:unspecified@jar,__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetworkInformationBackend.jar:unspecified@jar,__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetwork.jar:unspecified@jar,__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidBluetooth.jar:unspecified@jar">
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6Android.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6Android.jar"/>
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetworkInformationBackend.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetworkInformationBackend.jar"/>
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetwork.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidNetwork.jar"/>
+    <dependency
+        name="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidBluetooth.jar:unspecified@jar"
+        simpleName="__local_aars__:/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build/libs/Qt6AndroidBluetooth.jar"/>
+  </package>
+</dependencies>

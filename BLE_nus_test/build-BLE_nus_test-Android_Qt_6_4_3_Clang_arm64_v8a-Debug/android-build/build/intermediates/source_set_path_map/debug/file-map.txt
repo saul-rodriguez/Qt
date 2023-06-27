@@ -1,0 +1,9 @@
+org.qtproject.example.BLE_nus_test-pngs-0 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/build/generated/res/pngs/debug
+org.qtproject.example.BLE_nus_test-resValues-1 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/build/generated/res/resValues/debug
+org.qtproject.example.BLE_nus_test-rs-2 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/build/generated/res/rs/debug
+org.qtproject.example.BLE_nus_test-mergeDebugResources-3 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+org.qtproject.example.BLE_nus_test-mergeDebugResources-4 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+org.qtproject.example.BLE_nus_test-merged_res-5 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/build/intermediates/merged_res/debug
+org.qtproject.example.BLE_nus_test-android-build-6 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/res
+org.qtproject.example.BLE_nus_test-debug-7 /home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Debug/android-build/src/debug/res
+org.qtproject.example.BLE_nus_test-java-8 /opt/Qt/6.4.3/android_arm64_v8a/src/android/java/res

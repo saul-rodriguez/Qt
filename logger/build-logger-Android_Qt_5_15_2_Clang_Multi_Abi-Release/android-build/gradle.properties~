@@ -10,8 +10,8 @@ org.gradle.jvmargs=-Xmx2048m
 # grow. Uncomment the following line to enable it.
 #org.gradle.caching=true
 android.bundle.enableUncompressedNativeLibs=false
-androidBuildToolsVersion=32.1.0-rc1
-androidCompileSdkVersion=32
+androidBuildToolsVersion=31.0.0
+androidCompileSdkVersion=31
 buildDir=build
 qt5AndroidDir=/opt/Qt/5.15.2/android/src/android/java
 qtMinSdkVersion=21

@@ -1,0 +1,18 @@
+<lint-module
+    format="1"
+    dir="/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_arm64_v8a-Release/android-build"
+    name=":"
+    type="APP"
+    maven=":android-build:"
+    gradle="7.2.1"
+    buildFolder="build"
+    bootClassPath="/home/saul/installs/android/sdk/platforms/android-31/android.jar:/home/saul/installs/android/sdk/build-tools/31.0.0/core-lambda-stubs.jar"
+    javaSourceLevel="1.8"
+    compileTarget="android-31"
+    neverShrinking="true">
+  <lintOptions
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="release"/>
+</lint-module>

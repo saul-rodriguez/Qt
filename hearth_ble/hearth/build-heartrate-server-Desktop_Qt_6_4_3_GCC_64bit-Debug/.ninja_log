@@ -1,0 +1,8 @@
+# ninja log v5
+0	17	1680699037326501853	heartrate-server_autogen/timestamp	c05f3791af740f31
+0	17	1680699037326501853	heartrate-server_autogen/mocs_compilation.cpp	c05f3791af740f31
+0	17	1680699037326501853	/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-server-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-server_autogen/timestamp	c05f3791af740f31
+0	17	1680699037326501853	/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-server-Desktop_Qt_6_4_3_GCC_64bit-Debug/heartrate-server_autogen/mocs_compilation.cpp	c05f3791af740f31
+17	32	1680699037338501730	CMakeFiles/heartrate-server.dir/heartrate-server_autogen/mocs_compilation.cpp.o	d4ed7a6ab0fb3007
+17	867	1680699038178493158	CMakeFiles/heartrate-server.dir/main.cpp.o	40cc1a745ffb1a66
+868	962	1680699038274492179	heartrate-server	8443ca7dcee98ab3

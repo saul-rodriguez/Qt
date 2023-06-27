@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Logger V0.3</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -252,8 +252,29 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionStart"/>
+   <addaction name="separator"/>
+   <addaction name="actionStop"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionStart">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/Button-Play-icon.png</normaloff>:/images/images/Button-Play-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Start</string>
+   </property>
+  </action>
+  <action name="actionStop">
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/images/Stop-icon.png</normaloff>:/images/images/Stop-icon.png</iconset>
+   </property>
+   <property name="text">
+    <string>Stop</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <tabstops>
@@ -271,6 +292,8 @@
   <tabstop>pushButtonATSend</tabstop>
   <tabstop>plainTextEditAT</tabstop>
  </tabstops>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>

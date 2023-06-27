@@ -1,0 +1,8 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="qml/images/bt_off_to_on.png">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/images/bt_off_to_on.png</file>
+    <file alias="qml/images/heart.png">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/images/heart.png</file>
+    <file alias="qml/images/logo.png">/home/saul/projects/Qt/hearth_ble/hearth/heartrate-game/qml/images/logo.png</file>
+  </qresource>
+</RCC>
+

@@ -7,7 +7,7 @@
 #include <QMainWindow>
 #include <QDataStream>
 #include <QTcpSocket>
-#include <QNetworkSession>
+//#include <QNetworkSession>
 
 
 
@@ -32,7 +32,7 @@ private:
 
     //WiFi
     QTcpSocket *m_WiFiTcpSocket = nullptr;
-    QNetworkSession *m_WiFiNetworkSession = nullptr;
+    //QNetworkSession *m_WiFiNetworkSession = nullptr;
     QDataStream m_WiFi_in;
 
     //Data storage
@@ -71,6 +71,8 @@ private slots:
     void on_pushButtonWiFiDisconnect_clicked();       
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();
+    void on_actionStart_triggered();
+    void on_actionStop_triggered();
 };
 
 #endif // MAINWINDOW_H

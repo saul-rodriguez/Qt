@@ -1,0 +1,45 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.qtproject.example.BLE_nus_test-mergeDebugResources-3:/values/values.xml",
+            "map": [
+                {
+                    "source": "/home/saul/projects/Qt/BLE_nus_test/build-BLE_nus_test-Android_Qt_6_4_3_Clang_armeabi_v7a-Debug/android-build/res/values/libs.xml",
+                    "from": {
+                        "startLines": "4,17,8,23,21,24,22",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "152,575,211,872,710,924,823",
+                        "endLines": "6,19,15,23,21,24,22",
+                        "endColumns": "12,12,12,50,111,47,47",
+                        "endOffsets": "203,702,567,918,817,967,866"
+                    },
+                    "to": {
+                        "startLines": "2,5,8,16,18,19,21",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,109,239,598,757,869,1007",
+                        "endLines": "4,7,15,16,18,19,21",
+                        "endColumns": "12,12,12,50,111,39,47",
+                        "endOffsets": "104,234,593,644,864,904,1050"
+                    }
+                },
+                {
+                    "source": "/opt/Qt/6.4.3/android_armv7/src/android/java/res/values/strings.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "88,197",
+                        "endColumns": "107,97",
+                        "endOffsets": "191,290"
+                    },
+                    "to": {
+                        "startLines": "17,20",
+                        "startColumns": "4,4",
+                        "startOffsets": "649,909",
+                        "endColumns": "107,97",
+                        "endOffsets": "752,1002"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/heartrate-game.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/heartrate-game_qmltyperegistration.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/all_qmltyperegistrations.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/heartrate-game_other_files.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/heartrate-game_qmlimportscan.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/edit_cache.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/rebuild_cache.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/list_install_components.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/install.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/install/local.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/install/strip.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/heartrate-game_autogen_timestamp_deps.dir
+/home/saul/projects/Qt/hearth_ble/hearth/build-heartrate-game-Desktop_Qt_6_4_3_GCC_64bit-Debug/CMakeFiles/heartrate-game_autogen.dir

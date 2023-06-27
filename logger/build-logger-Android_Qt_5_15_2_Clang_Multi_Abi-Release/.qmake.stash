@@ -14,22 +14,20 @@ QMAKE_CXX.COMPILER_MACROS = \
     QMAKE_GCC_MINOR_VERSION \
     QMAKE_GCC_PATCH_VERSION
 QMAKE_CXX.INCDIRS = \
-    /usr/include/c++/9 \
-    /usr/include/x86_64-linux-gnu/c++/9 \
-    /usr/include/c++/9/backward \
+    /usr/include/c++ \
     /usr/local/include \
-    /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include \
+    /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include \
     /usr/include/x86_64-linux-gnu \
     /usr/include
 QMAKE_CXX.LIBDIRS = \
-    /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8 \
-    /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/lib/linux/x86_64 \
-    /usr/lib/gcc/x86_64-linux-gnu/9 \
+    /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8 \
+    /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/lib/linux/x86_64 \
+    /usr/lib/gcc/x86_64-linux-gnu/12 \
     /usr/lib/x86_64-linux-gnu \
     /usr/lib64 \
-    /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64 \
+    /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64 \
     /lib/x86_64-linux-gnu \
     /lib64 \
     /usr/lib \
-    /home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib \
+    /home/saul/installs/android/sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib \
     /lib
