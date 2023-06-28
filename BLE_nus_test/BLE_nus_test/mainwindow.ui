@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>496</width>
+    <height>587</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,16 +38,16 @@
        <widget class="QLineEdit" name="lineEditMessage"/>
       </item>
       <item>
-       <widget class="QLabel" name="labelReceived">
+       <widget class="QPushButton" name="pushButtonSend">
         <property name="text">
-         <string>Received from BLE</string>
+         <string>Send</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonSend">
+       <widget class="QLabel" name="labelReceived">
         <property name="text">
-         <string>Send</string>
+         <string>Received from BLE</string>
         </property>
        </widget>
       </item>
@@ -67,7 +67,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>496</width>
      <height>22</height>
     </rect>
    </property>
