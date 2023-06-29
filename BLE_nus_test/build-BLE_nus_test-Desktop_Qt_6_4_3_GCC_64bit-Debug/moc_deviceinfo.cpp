@@ -7,7 +7,7 @@
 *****************************************************************************/
 
 #include <memory>
-#include "../BLE_nus_test/deviceinfo.h"
+#include "../../BLE_nus_test_class/BLE_nus_test/deviceinfo.h"
 #include <QtCore/qmetatype.h>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'deviceinfo.h' doesn't include <QObject>."

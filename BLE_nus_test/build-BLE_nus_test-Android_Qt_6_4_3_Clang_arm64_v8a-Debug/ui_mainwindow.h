@@ -33,8 +33,8 @@ public:
     QComboBox *comboBoxDevices;
     QPushButton *pushButtonConnect;
     QLineEdit *lineEditMessage;
-    QLabel *labelReceived;
     QPushButton *pushButtonSend;
+    QLabel *labelReceived;
     QPushButton *pushButtonDisconnect;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -43,7 +43,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(800, 600);
+        MainWindow->resize(496, 587);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
         verticalLayout_2 = new QVBoxLayout(centralwidget);
@@ -70,15 +70,15 @@ public:
 
         verticalLayout->addWidget(lineEditMessage);
 
-        labelReceived = new QLabel(centralwidget);
-        labelReceived->setObjectName("labelReceived");
-
-        verticalLayout->addWidget(labelReceived);
-
         pushButtonSend = new QPushButton(centralwidget);
         pushButtonSend->setObjectName("pushButtonSend");
 
         verticalLayout->addWidget(pushButtonSend);
+
+        labelReceived = new QLabel(centralwidget);
+        labelReceived->setObjectName("labelReceived");
+
+        verticalLayout->addWidget(labelReceived);
 
         pushButtonDisconnect = new QPushButton(centralwidget);
         pushButtonDisconnect->setObjectName("pushButtonDisconnect");
@@ -91,7 +91,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 800, 22));
+        menubar->setGeometry(QRect(0, 0, 496, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");
@@ -107,8 +107,8 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButtonDiscover->setText(QCoreApplication::translate("MainWindow", "Discover BLE", nullptr));
         pushButtonConnect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
-        labelReceived->setText(QCoreApplication::translate("MainWindow", "Received from BLE", nullptr));
         pushButtonSend->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
+        labelReceived->setText(QCoreApplication::translate("MainWindow", "Received from BLE", nullptr));
         pushButtonDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
     } // retranslateUi
 

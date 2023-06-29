@@ -12,7 +12,7 @@
    "android-target-sdk-version": "30",
    "rcc-binary": "/opt/Qt/6.4.3/gcc_64/libexec/rcc",
    "qml-importscanner-binary": "/opt/Qt/6.4.3/gcc_64/libexec/qmlimportscanner",
-   "qml-root-path": "/home/saul/projects/Qt/BLE_nus_test/BLE_nus_test",
+   "qml-root-path": "/home/saul/projects/Qt/BLE_nus_test_class/BLE_nus_test",
    "stdcpp-path": "/home/saul/installs/android/sdk/ndk/23.1.7779620/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib",
    "application-binary": "BLE_nus_test"
 }
