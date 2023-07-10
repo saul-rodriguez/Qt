@@ -57,12 +57,14 @@ SOURCES       = ../nems/main.cpp \
 		../nems/cplotchart.cpp \
 		../nems/nmesautomaticsearch.cpp \
 		../nems/nmesdualmp.cpp \
+		../nems/nmespinmap.cpp \
 		../nems/nmessearch.cpp \
 		../nems/nmessensor.cpp armeabi-v7a/qrc_images.cpp \
 		armeabi-v7a/moc_mainwindow.cpp \
 		armeabi-v7a/moc_btclient.cpp \
 		armeabi-v7a/moc_nmesautomaticsearch.cpp \
 		armeabi-v7a/moc_nmesdualmp.cpp \
+		armeabi-v7a/moc_nmespinmap.cpp \
 		armeabi-v7a/moc_nmessearch.cpp \
 		armeabi-v7a/moc_nmessensor.cpp
 OBJECTS       = armeabi-v7a/main.o \
@@ -71,6 +73,7 @@ OBJECTS       = armeabi-v7a/main.o \
 		armeabi-v7a/cplotchart.o \
 		armeabi-v7a/nmesautomaticsearch.o \
 		armeabi-v7a/nmesdualmp.o \
+		armeabi-v7a/nmespinmap.o \
 		armeabi-v7a/nmessearch.o \
 		armeabi-v7a/nmessensor.o \
 		armeabi-v7a/qrc_images.o \
@@ -78,6 +81,7 @@ OBJECTS       = armeabi-v7a/main.o \
 		armeabi-v7a/moc_btclient.o \
 		armeabi-v7a/moc_nmesautomaticsearch.o \
 		armeabi-v7a/moc_nmesdualmp.o \
+		armeabi-v7a/moc_nmespinmap.o \
 		armeabi-v7a/moc_nmessearch.o \
 		armeabi-v7a/moc_nmessensor.o
 DIST          = ../../../../installs/Qt/5.15.2/android/mkspecs/features/spec_pre.prf \
@@ -277,6 +281,7 @@ DIST          = ../../../../installs/Qt/5.15.2/android/mkspecs/features/spec_pre
 		../nems/cplotchart.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
+		../nems/nmespinmap.h \
 		../nems/nmessearch.h \
 		../nems/nmessensor.h ../nems/main.cpp \
 		../nems/mainwindow.cpp \
@@ -284,6 +289,7 @@ DIST          = ../../../../installs/Qt/5.15.2/android/mkspecs/features/spec_pre
 		../nems/cplotchart.cpp \
 		../nems/nmesautomaticsearch.cpp \
 		../nems/nmesdualmp.cpp \
+		../nems/nmespinmap.cpp \
 		../nems/nmessearch.cpp \
 		../nems/nmessensor.cpp
 QMAKE_TARGET  = libnems_armeabi-v7a.so
@@ -313,8 +319,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../installs/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmesautomaticsearch.h ../nems/nmesdualmp.h ../nems/nmessearch.h ../nems/nmessensor.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmesautomaticsearch.cpp ../nems/nmesdualmp.cpp ../nems/nmessearch.cpp ../nems/nmessensor.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmesautomaticsearch.h ../nems/nmesdualmp.h ../nems/nmespinmap.h ../nems/nmessearch.h ../nems/nmessensor.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmesautomaticsearch.cpp ../nems/nmesdualmp.cpp ../nems/nmespinmap.cpp ../nems/nmessearch.cpp ../nems/nmessensor.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/mainwindow.ui $(DISTDIR)/
 
 
@@ -371,9 +377,9 @@ compiler_moc_predefs_clean:
 armeabi-v7a/moc_predefs.h: ../../../../installs/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
 	/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target armv7a-linux-androideabi21 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -O2 -mthumb -Oz -std=gnu++11 -Wall -W -dM -E -o armeabi-v7a/moc_predefs.h ../../../../installs/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
+compiler_moc_header_make_all: armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmespinmap.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
+	-$(DEL_FILE) armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmespinmap.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
 armeabi-v7a/moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../nems/btclient.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
@@ -536,6 +542,7 @@ armeabi-v7a/moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCharts/qxyseries.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QMainWindow \
@@ -668,6 +675,7 @@ armeabi-v7a/moc_btclient.cpp: ../nems/btclient.h \
 
 armeabi-v7a/moc_nmesautomaticsearch.cpp: ../nems/nmesautomaticsearch.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
@@ -729,6 +737,7 @@ armeabi-v7a/moc_nmesautomaticsearch.cpp: ../nems/nmesautomaticsearch.h \
 	/home/saul/installs/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/home/saul/installs/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/5.15.2/android/include -I/home/saul/installs/Qt/5.15.2/android/include/QtCharts -I/home/saul/installs/Qt/5.15.2/android/include/QtWidgets -I/home/saul/installs/Qt/5.15.2/android/include/QtGui -I/home/saul/installs/Qt/5.15.2/android/include/QtBluetooth -I/home/saul/installs/Qt/5.15.2/android/include/QtNetwork -I/home/saul/installs/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmesautomaticsearch.h -o armeabi-v7a/moc_nmesautomaticsearch.cpp
 
 armeabi-v7a/moc_nmesdualmp.cpp: ../nems/nmesdualmp.h \
+		../nems/nmespinmap.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
@@ -789,7 +798,66 @@ armeabi-v7a/moc_nmesdualmp.cpp: ../nems/nmesdualmp.h \
 		../../../../installs/Qt/5.15.2/android/bin/moc
 	/home/saul/installs/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/home/saul/installs/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/5.15.2/android/include -I/home/saul/installs/Qt/5.15.2/android/include/QtCharts -I/home/saul/installs/Qt/5.15.2/android/include/QtWidgets -I/home/saul/installs/Qt/5.15.2/android/include/QtGui -I/home/saul/installs/Qt/5.15.2/android/include/QtBluetooth -I/home/saul/installs/Qt/5.15.2/android/include/QtNetwork -I/home/saul/installs/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmesdualmp.h -o armeabi-v7a/moc_nmesdualmp.cpp
 
+armeabi-v7a/moc_nmespinmap.cpp: ../nems/nmespinmap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig-bootstrapped.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlogging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qflags.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_bootstrap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_msvc.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmutex.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstring.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qchar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringview.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiterator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpair.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvector.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpoint.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregexp.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject_impl.h \
+		armeabi-v7a/moc_predefs.h \
+		../../../../installs/Qt/5.15.2/android/bin/moc
+	/home/saul/installs/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/home/saul/installs/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/5.15.2/android/include -I/home/saul/installs/Qt/5.15.2/android/include/QtCharts -I/home/saul/installs/Qt/5.15.2/android/include/QtWidgets -I/home/saul/installs/Qt/5.15.2/android/include/QtGui -I/home/saul/installs/Qt/5.15.2/android/include/QtBluetooth -I/home/saul/installs/Qt/5.15.2/android/include/QtNetwork -I/home/saul/installs/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/nmespinmap.h -o armeabi-v7a/moc_nmespinmap.cpp
+
 armeabi-v7a/moc_nmessearch.cpp: ../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
@@ -1091,6 +1159,7 @@ armeabi-v7a/main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCharts/qxyseries.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QMainWindow \
@@ -1286,6 +1355,7 @@ armeabi-v7a/mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCharts/qxyseries.h \
 		../nems/nmessensor.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QMainWindow \
@@ -1638,6 +1708,7 @@ armeabi-v7a/cplotchart.o: ../nems/cplotchart.cpp ../nems/cplotchart.h \
 
 armeabi-v7a/nmesautomaticsearch.o: ../nems/nmesautomaticsearch.cpp ../nems/nmesautomaticsearch.h \
 		../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
@@ -1751,6 +1822,7 @@ armeabi-v7a/nmesautomaticsearch.o: ../nems/nmesautomaticsearch.cpp ../nems/nmesa
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/nmesautomaticsearch.o ../nems/nmesautomaticsearch.cpp
 
 armeabi-v7a/nmesdualmp.o: ../nems/nmesdualmp.cpp ../nems/nmesdualmp.h \
+		../nems/nmespinmap.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
@@ -1809,7 +1881,82 @@ armeabi-v7a/nmesdualmp.o: ../nems/nmesdualmp.cpp ../nems/nmesdualmp.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasictimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/nmesdualmp.o ../nems/nmesdualmp.cpp
 
+armeabi-v7a/nmespinmap.o: ../nems/nmespinmap.cpp ../nems/nmespinmap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig-bootstrapped.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlogging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qflags.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_bootstrap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_msvc.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmutex.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstring.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qchar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringview.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiterator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpair.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvector.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpoint.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregexp.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QStandardPaths \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstandardpaths.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QDebug \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qdebug.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhash.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiodevice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlocale.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvariant.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qset.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QFile \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qfile.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qfiledevice.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/nmespinmap.o ../nems/nmespinmap.cpp
+
 armeabi-v7a/nmessearch.o: ../nems/nmessearch.cpp ../nems/nmessearch.h \
+		../nems/nmespinmap.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
@@ -1975,6 +2122,9 @@ armeabi-v7a/moc_nmesautomaticsearch.o: armeabi-v7a/moc_nmesautomaticsearch.cpp
 
 armeabi-v7a/moc_nmesdualmp.o: armeabi-v7a/moc_nmesdualmp.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_nmesdualmp.o armeabi-v7a/moc_nmesdualmp.cpp
+
+armeabi-v7a/moc_nmespinmap.o: armeabi-v7a/moc_nmespinmap.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_nmespinmap.o armeabi-v7a/moc_nmespinmap.cpp
 
 armeabi-v7a/moc_nmessearch.o: armeabi-v7a/moc_nmessearch.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_nmessearch.o armeabi-v7a/moc_nmessearch.cpp

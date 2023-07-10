@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "QtCore5Compat/qregexp.h"
 #include "ui_mainwindow.h"
 
 #include <QtCharts/QChartView>
@@ -7,7 +8,7 @@
 #include <QMessageBox>
 #include <QXmlStreamWriter>
 #include <QtMath>
-
+//#include <QRegExp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -47,12 +48,12 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(BTrxData(const QByteArray)));
 
     /***** WiFi ****/
-    m_WiFiTcpSocket = new QTcpSocket(this);
-    m_WiFi_in.setDevice(m_WiFiTcpSocket);
-    m_WiFi_in.setVersion(QDataStream::Qt_5_11);
-    connect(m_WiFiTcpSocket, SIGNAL(readyRead()),this, SLOT(WiFiRead()));
-    connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
-               this, &MainWindow::WiFiDisplayError);
+   // m_WiFiTcpSocket = new QTcpSocket(this);
+   // m_WiFi_in.setDevice(m_WiFiTcpSocket);
+   // m_WiFi_in.setVersion(QDataStream::Qt_5_11);
+   // connect(m_WiFiTcpSocket, SIGNAL(readyRead()),this, SLOT(WiFiRead()));
+   // connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
+   //            this, &MainWindow::WiFiDisplayError);
 
     /***** Plot *****/
 
@@ -68,7 +69,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chartViewSen1 = new QChartView(static_cast<QChart*>(m_chartSen1));
     //Set antialising properties and the chartview object to a place in layout
     m_chartViewSen1->setRenderHint(QPainter::Antialiasing, false); //false or true
-    ui->verticalLayout_3->addWidget(m_chartViewSen1,1,0);
+    //ui->verticalLayout_3->addWidget(m_chartViewSen1,1,0);
+    ui->verticalLayout_3->addWidget(m_chartViewSen1,1);
 
     //plot Sensor2
     m_chartSen2 = new CPlotChart();
@@ -80,7 +82,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chartViewSen2 = new QChartView(static_cast<QChart*>(m_chartSen2));
     //Set antialising properties and the chartview object to a place in layout
     m_chartViewSen2->setRenderHint(QPainter::Antialiasing, false); //false or true
-    ui->verticalLayout_3->addWidget(m_chartViewSen2,1,0);
+    //ui->verticalLayout_3->addWidget(m_chartViewSen2,1,0);
+    ui->verticalLayout_3->addWidget(m_chartViewSen2,1);
 
     //timer to refresh the plot
     m_timer = new QTimer(this);
@@ -591,7 +594,8 @@ void MainWindow::parseProgram(const QByteArray &data)
 
     dataStr = QString::fromStdString(data.toStdString());
 
-    dataLst = dataStr.split(QRegExp("\n"));
+    //TODO
+    dataLst = dataStr.split(QRegularExpression("\n"));
 
     int n = dataLst.count();
 
@@ -609,70 +613,70 @@ void MainWindow::parseProgram(const QByteArray &data)
 
     //Amplitude1
     aux = dataLst.at(2);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditAmplitude->setText(parameter);
 
     //Amplitude2
     aux = dataLst.at(3);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditAmplitude2->setText(parameter);
 
     //Frequency
     aux = dataLst.at(4);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditFrequency->setText(parameter);
 
     //Phase Duration
     aux = dataLst.at(5);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditPhase->setText(parameter);
 
     //Symmetry Factor
     aux = dataLst.at(6);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditSymetry->setText(parameter);
 
     //ON Time
     aux = dataLst.at(7);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditON->setText(parameter);
 
     //OFF Time
     aux = dataLst.at(8);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditOFF->setText(parameter);
 
     //Ramp up
     aux = dataLst.at(9);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditRampUp->setText(parameter);
 
     //Ramp down
     aux = dataLst.at(10);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditRampDown->setText(parameter);
 
     //Contractions
     aux = dataLst.at(11);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     ui->lineEditContractions->setText(parameter);
@@ -682,7 +686,7 @@ void MainWindow::parseProgram(const QByteArray &data)
 
     //channel1
     aux = dataLst.at(12);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     pmap = m_pinmap->getIndString(parameter);
@@ -690,7 +694,7 @@ void MainWindow::parseProgram(const QByteArray &data)
 
     //channel2
     aux = dataLst.at(13);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     pmap = m_pinmap->getIndString(parameter);
@@ -698,7 +702,7 @@ void MainWindow::parseProgram(const QByteArray &data)
 
     //channel3
     aux = dataLst.at(14);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     pmap = m_pinmap->getIndString(parameter);
@@ -706,7 +710,7 @@ void MainWindow::parseProgram(const QByteArray &data)
 
     //channel4
     aux = dataLst.at(15);
-    parameterLst = aux.split(QRegExp(" "));
+    parameterLst = aux.split(QRegularExpression(" "));
     n = parameterLst.count();
     parameter = parameterLst.at(n-1);
     pmap = m_pinmap->getIndString(parameter);
@@ -767,8 +771,8 @@ void MainWindow::on_pushButtonATSend_clicked()
 */
     QString aux = ui->lineEditAT->text();
 
-    QByteArray data;
-    data.append(aux);
+    QByteArray data;    
+    data.append(aux.toUtf8());
 
 
     if (ui->radioButtonBT->isChecked()) {
@@ -930,7 +934,7 @@ void MainWindow::on_pushButtonAmplitude_clicked()
         if (aux.size()==1) {
             data.append('0');
         }
-        data.append(aux);
+        data.append(aux.toUtf8());
 
     } else { // Svekon's board
         quint8 amp_svekon = amp;
@@ -951,7 +955,7 @@ void MainWindow::on_pushButtonFrequency_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -966,7 +970,7 @@ void MainWindow::on_pushButtonPhase_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -981,7 +985,7 @@ void MainWindow::on_pushButtonSymetry_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -996,7 +1000,7 @@ void MainWindow::on_pushButtonOnTime_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -1011,7 +1015,7 @@ void MainWindow::on_pushButtonOFF_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -1026,7 +1030,7 @@ void MainWindow::on_pushButtonRampUp_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -1041,7 +1045,7 @@ void MainWindow::on_pushButtonRampDown_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -1056,7 +1060,7 @@ void MainWindow::on_pushButtonContractions_clicked()
     if (aux.size()==1) {
         data.append('0');
     }
-    data.append(aux);
+    data.append(aux.toUtf8());
 
     send(data);
 }
@@ -1073,7 +1077,7 @@ void MainWindow::on_pushButtonChannel1_clicked()
     if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(auxm);
+    data.append(auxm.toUtf8());
 
     send(data);
 }
@@ -1090,7 +1094,7 @@ void MainWindow::on_pushButtonChannel2_clicked()
     if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(auxm);
+    data.append(auxm.toUtf8());
 
     send(data);
 }
@@ -1156,7 +1160,7 @@ void MainWindow::on_pushButtonChannel3_clicked()
     if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(auxm);
+    data.append(auxm.toUtf8());
 
     send(data);
 }
@@ -1173,7 +1177,7 @@ void MainWindow::on_pushButtonChannel4_clicked()
     if (auxm.size()==1) {
         data.append('0');
     }
-    data.append(auxm);
+    data.append(auxm.toUtf8());
 
     send(data);
 }
@@ -1191,7 +1195,7 @@ void MainWindow::on_pushButtonAmplitude2_clicked()
         if (aux.size()==1) {
             data.append('0');
         }
-        data.append(aux);
+        data.append(aux.toUtf8());
 
     } else { // Svekon's board
         quint8 amp_svekon = amp;

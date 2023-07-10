@@ -12,7 +12,7 @@
 #include <QMainWindow>
 #include <QDataStream>
 #include <QTcpSocket>
-#include <QNetworkSession>
+//#include <QNetworkSession>
 #include <QTime>
 #include <QStandardItemModel>
 #include <QXmlStreamWriter>
@@ -38,7 +38,7 @@ private:
 
     //WiFi
     QTcpSocket *m_WiFiTcpSocket = nullptr;
-    QNetworkSession *m_WiFiNetworkSession = nullptr;
+    //QNetworkSession *m_WiFiNetworkSession = nullptr;
     QDataStream m_WiFi_in;
 
     //Data storage
