@@ -35,6 +35,7 @@ private slots:
     /* Slots for BLE */
     void deviceFound(QString device);
     void rxData(const QByteArray &data);
+    void updateBLEstatus(QString &status);
 
     void on_pushButtonDiscover_clicked();
 

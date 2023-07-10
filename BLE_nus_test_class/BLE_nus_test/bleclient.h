@@ -58,7 +58,8 @@ private slots:
 
 signals:
     void deviceFound(QString device);
-    void rxData(const QByteArray &data);
+    void rxData(const QByteArray &data);    
+    void BLEupdateStatus(QString &status);
 
 private:
 

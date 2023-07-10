@@ -35,6 +35,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QLabel" name="labelStatus">
+        <property name="text">
+         <string>Disconnected</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLineEdit" name="lineEditMessage"/>
       </item>
       <item>
@@ -47,7 +54,7 @@
       <item>
        <widget class="QLabel" name="labelReceived">
         <property name="text">
-         <string>Received from BLE</string>
+         <string>Text Received from BLE</string>
         </property>
        </widget>
       </item>

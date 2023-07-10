@@ -91,6 +91,9 @@ void BLEClient::BLEconnect(int index)
     m_state = Connecting;
     qDebug() << "Connecting";
 
+    QString stat = "Connecting";
+    emit BLEupdateStatus(stat);
+
 }
 
 void BLEClient::BLEdisconnect()
@@ -98,6 +101,9 @@ void BLEClient::BLEdisconnect()
     m_control->disconnectFromDevice();
     delete m_service;
     m_service = 0;
+
+    QString stat = "Disconnecting";
+    emit BLEupdateStatus(stat);
 }
 
 void BLEClient::write(const QByteArray &data)
@@ -200,19 +206,29 @@ void BLEClient::serviceScanDone()
 void BLEClient::controllerError(QLowEnergyController::Error newError)
 {
     qDebug()<<"Controller error";
+
+    QString stat = "Controller Error";
+    emit BLEupdateStatus(stat);
 }
 
 void BLEClient::deviceConnected()
 {
     qDebug()<<"Device connected";
 
+    QString stat = "Connected";
+    emit BLEupdateStatus(stat);
+
     //Discover services
     m_control->discoverServices();
+
 }
 
 void BLEClient::deviceDisconnected()
 {
     qDebug()<<"Device disconnected";
+
+    QString stat = "Disconnected";
+    emit BLEupdateStatus(stat);
 }
 
 void BLEClient::serviceStateChanged(QLowEnergyService::ServiceState s)

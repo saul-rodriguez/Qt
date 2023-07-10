@@ -32,6 +32,7 @@ public:
     QPushButton *pushButtonDiscover;
     QComboBox *comboBoxDevices;
     QPushButton *pushButtonConnect;
+    QLabel *labelStatus;
     QLineEdit *lineEditMessage;
     QPushButton *pushButtonSend;
     QLabel *labelReceived;
@@ -64,6 +65,11 @@ public:
         pushButtonConnect->setObjectName("pushButtonConnect");
 
         verticalLayout->addWidget(pushButtonConnect);
+
+        labelStatus = new QLabel(centralwidget);
+        labelStatus->setObjectName("labelStatus");
+
+        verticalLayout->addWidget(labelStatus);
 
         lineEditMessage = new QLineEdit(centralwidget);
         lineEditMessage->setObjectName("lineEditMessage");
@@ -107,8 +113,9 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButtonDiscover->setText(QCoreApplication::translate("MainWindow", "Discover BLE", nullptr));
         pushButtonConnect->setText(QCoreApplication::translate("MainWindow", "Connect", nullptr));
+        labelStatus->setText(QCoreApplication::translate("MainWindow", "Disconnected", nullptr));
         pushButtonSend->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
-        labelReceived->setText(QCoreApplication::translate("MainWindow", "Received from BLE", nullptr));
+        labelReceived->setText(QCoreApplication::translate("MainWindow", "Text Received from BLE", nullptr));
         pushButtonDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect", nullptr));
     } // retranslateUi
 

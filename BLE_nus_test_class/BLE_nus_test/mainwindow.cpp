@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     m_ble = new BLEClient(this);
     connect(m_ble, &BLEClient::deviceFound, this, &MainWindow::deviceFound);
     connect(m_ble, &BLEClient::rxData, this, &MainWindow::rxData);
+    connect(m_ble, &BLEClient::BLEupdateStatus, this, &MainWindow::updateBLEstatus);
 }
 
 MainWindow::~MainWindow()
@@ -28,6 +29,11 @@ void MainWindow::rxData(const QByteArray &data)
     QString aux;
     aux = QString::fromStdString(data.toStdString());
     ui->labelReceived->setText(aux);
+}
+
+void MainWindow::updateBLEstatus(QString &status)
+{
+    ui->labelStatus->setText(status);
 }
 
 
