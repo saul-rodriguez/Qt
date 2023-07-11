@@ -1,0 +1,45 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.qtproject.example.nems-mergeDebugResources-4:/values/values.xml",
+            "map": [
+                {
+                    "source": "/home/saul/installs/Qt/6.5.1/android_arm64_v8a/src/android/java/res/values/strings.xml",
+                    "from": {
+                        "startLines": "3,4",
+                        "startColumns": "4,4",
+                        "startOffsets": "85,193",
+                        "endColumns": "107,97",
+                        "endOffsets": "188,286"
+                    },
+                    "to": {
+                        "startLines": "26,29",
+                        "startColumns": "4,4",
+                        "startOffsets": "1100,1360",
+                        "endColumns": "107,97",
+                        "endOffsets": "1203,1453"
+                    }
+                },
+                {
+                    "source": "/home/saul/projects/Qt/nems/build-nems-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/res/values/libs.xml",
+                    "from": {
+                        "startLines": "4,26,8,32,30,33,31",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "148,1018,203,1305,1145,1356,1257",
+                        "endLines": "6,28,24,32,30,33,31",
+                        "endColumns": "12,12,12,50,111,47,47",
+                        "endOffsets": "197,1139,1012,1351,1252,1399,1300"
+                    },
+                    "to": {
+                        "startLines": "2,5,8,25,27,28,30",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "55,109,235,1049,1208,1320,1458",
+                        "endLines": "4,7,24,25,27,28,30",
+                        "endColumns": "12,12,12,50,111,39,47",
+                        "endOffsets": "104,230,1044,1095,1315,1355,1501"
+                    }
+                }
+            ]
+        }
+    ]
+}

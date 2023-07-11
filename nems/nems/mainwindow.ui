@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>NMES V0.6</string>
+   <string>NMES V0.65</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QFormLayout" name="formLayout_2">
@@ -40,10 +40,55 @@
                </property>
               </widget>
              </item>
+             <item row="1" column="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_3">
+               <item>
+                <widget class="QPushButton" name="pushButtonBLEdiscover">
+                 <property name="text">
+                  <string>Discover BLE</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="0" column="2">
               <widget class="QRadioButton" name="radioButtonWiFi">
                <property name="text">
-                <string>WiFi</string>
+                <string>Bluetooth BLE</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QComboBox" name="comboBoxBTdevices"/>
+             </item>
+             <item row="0" column="0">
+              <widget class="QRadioButton" name="radioButtonBT">
+               <property name="text">
+                <string>Bluetooth Classic</string>
+               </property>
+               <property name="checked">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
+               <item>
+                <widget class="QComboBox" name="comboBoxBLEdevices"/>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="0">
+              <widget class="QPushButton" name="pushButtonBTconnect">
+               <property name="text">
+                <string>Connect BT</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QPushButton" name="pushButtonBTdisconnect">
+               <property name="text">
+                <string>Disconnect BT</string>
                </property>
               </widget>
              </item>
@@ -54,93 +99,24 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QRadioButton" name="radioButtonBT">
-               <property name="text">
-                <string>Bluetooth</string>
-               </property>
-               <property name="checked">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QComboBox" name="comboBoxBTdevices"/>
-             </item>
-             <item row="5" column="0">
-              <widget class="QPushButton" name="pushButtonBTconnect">
-               <property name="text">
-                <string>Connect BT</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_3">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>IP Address:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEditWiFiAddress">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="5" column="2">
-              <widget class="QPushButton" name="pushButtonWiFiConnect">
-               <property name="text">
-                <string>Connect WiFi</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="2">
-              <widget class="QLabel" name="labelWiFiStatus">
+              <widget class="QLabel" name="labelBLEStatus">
                <property name="text">
                 <string>Status:</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="2">
-              <layout class="QHBoxLayout" name="horizontalLayout_4">
-               <item>
-                <widget class="QLabel" name="labelWiFiPort">
-                 <property name="text">
-                  <string>Port:</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="lineEditWiFiPort">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="6" column="2">
-              <widget class="QPushButton" name="pushButtonWiFiDisconnect">
+             <item row="5" column="2">
+              <widget class="QPushButton" name="pushButtonBLEconnect">
                <property name="text">
-                <string>Disconnect WiFi</string>
+                <string>Connect BLE</string>
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QPushButton" name="pushButtonBTdisconnect">
+             <item row="6" column="2">
+              <widget class="QPushButton" name="pushButtonBLEdisconnect">
                <property name="text">
-                <string>Disconnect BT</string>
+                <string>Disconnect BLE</string>
                </property>
               </widget>
              </item>
@@ -1395,12 +1371,8 @@
   <tabstop>lineEditChannel2</tabstop>
   <tabstop>pushButtonChannel2</tabstop>
   <tabstop>radioButtonWiFi</tabstop>
-  <tabstop>lineEditWiFiAddress</tabstop>
   <tabstop>plainTextEditAT</tabstop>
-  <tabstop>pushButtonWiFiConnect</tabstop>
   <tabstop>radioButtonBT</tabstop>
-  <tabstop>lineEditWiFiPort</tabstop>
-  <tabstop>pushButtonWiFiDisconnect</tabstop>
   <tabstop>pushButtonBTdisconnect</tabstop>
  </tabstops>
  <resources>

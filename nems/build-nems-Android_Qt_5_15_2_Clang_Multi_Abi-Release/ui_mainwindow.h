@@ -59,21 +59,19 @@ public:
     QGridLayout *gridLayout_2;
     QGridLayout *gridLayout_4;
     QPushButton *pushButtonBTdiscoverDevices;
-    QRadioButton *radioButtonWiFi;
-    QLabel *labelBTstatus;
-    QRadioButton *radioButtonBT;
-    QComboBox *comboBoxBTdevices;
-    QPushButton *pushButtonBTconnect;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *label;
-    QLineEdit *lineEditWiFiAddress;
-    QPushButton *pushButtonWiFiConnect;
-    QLabel *labelWiFiStatus;
+    QPushButton *pushButtonBLEdiscover;
+    QRadioButton *radioButtonWiFi;
+    QComboBox *comboBoxBTdevices;
+    QRadioButton *radioButtonBT;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *labelWiFiPort;
-    QLineEdit *lineEditWiFiPort;
-    QPushButton *pushButtonWiFiDisconnect;
+    QComboBox *comboBoxBLEdevices;
+    QPushButton *pushButtonBTconnect;
     QPushButton *pushButtonBTdisconnect;
+    QLabel *labelBTstatus;
+    QLabel *labelBLEStatus;
+    QPushButton *pushButtonBLEconnect;
+    QPushButton *pushButtonBLEdisconnect;
     QWidget *tab_3;
     QGridLayout *gridLayout_7;
     QHBoxLayout *horizontalLayout_18;
@@ -315,15 +313,26 @@ public:
 
         gridLayout_4->addWidget(pushButtonBTdiscoverDevices, 1, 0, 1, 1);
 
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setSpacing(6);
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        pushButtonBLEdiscover = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBLEdiscover->setObjectName(QString::fromUtf8("pushButtonBLEdiscover"));
+
+        horizontalLayout_3->addWidget(pushButtonBLEdiscover);
+
+
+        gridLayout_4->addLayout(horizontalLayout_3, 1, 2, 1, 1);
+
         radioButtonWiFi = new QRadioButton(groupBoxWirelessInterface);
         radioButtonWiFi->setObjectName(QString::fromUtf8("radioButtonWiFi"));
 
         gridLayout_4->addWidget(radioButtonWiFi, 0, 2, 1, 1);
 
-        labelBTstatus = new QLabel(groupBoxWirelessInterface);
-        labelBTstatus->setObjectName(QString::fromUtf8("labelBTstatus"));
+        comboBoxBTdevices = new QComboBox(groupBoxWirelessInterface);
+        comboBoxBTdevices->setObjectName(QString::fromUtf8("comboBoxBTdevices"));
 
-        gridLayout_4->addWidget(labelBTstatus, 3, 0, 1, 1);
+        gridLayout_4->addWidget(comboBoxBTdevices, 2, 0, 1, 1);
 
         radioButtonBT = new QRadioButton(groupBoxWirelessInterface);
         radioButtonBT->setObjectName(QString::fromUtf8("radioButtonBT"));
@@ -331,77 +340,46 @@ public:
 
         gridLayout_4->addWidget(radioButtonBT, 0, 0, 1, 1);
 
-        comboBoxBTdevices = new QComboBox(groupBoxWirelessInterface);
-        comboBoxBTdevices->setObjectName(QString::fromUtf8("comboBoxBTdevices"));
+        horizontalLayout_4 = new QHBoxLayout();
+        horizontalLayout_4->setSpacing(6);
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
+        comboBoxBLEdevices = new QComboBox(groupBoxWirelessInterface);
+        comboBoxBLEdevices->setObjectName(QString::fromUtf8("comboBoxBLEdevices"));
 
-        gridLayout_4->addWidget(comboBoxBTdevices, 2, 0, 1, 1);
+        horizontalLayout_4->addWidget(comboBoxBLEdevices);
+
+
+        gridLayout_4->addLayout(horizontalLayout_4, 2, 2, 1, 1);
 
         pushButtonBTconnect = new QPushButton(groupBoxWirelessInterface);
         pushButtonBTconnect->setObjectName(QString::fromUtf8("pushButtonBTconnect"));
 
         gridLayout_4->addWidget(pushButtonBTconnect, 5, 0, 1, 1);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        label = new QLabel(groupBoxWirelessInterface);
-        label->setObjectName(QString::fromUtf8("label"));
-
-        horizontalLayout_3->addWidget(label);
-
-        lineEditWiFiAddress = new QLineEdit(groupBoxWirelessInterface);
-        lineEditWiFiAddress->setObjectName(QString::fromUtf8("lineEditWiFiAddress"));
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(lineEditWiFiAddress->sizePolicy().hasHeightForWidth());
-        lineEditWiFiAddress->setSizePolicy(sizePolicy);
-
-        horizontalLayout_3->addWidget(lineEditWiFiAddress);
-
-
-        gridLayout_4->addLayout(horizontalLayout_3, 1, 2, 1, 1);
-
-        pushButtonWiFiConnect = new QPushButton(groupBoxWirelessInterface);
-        pushButtonWiFiConnect->setObjectName(QString::fromUtf8("pushButtonWiFiConnect"));
-
-        gridLayout_4->addWidget(pushButtonWiFiConnect, 5, 2, 1, 1);
-
-        labelWiFiStatus = new QLabel(groupBoxWirelessInterface);
-        labelWiFiStatus->setObjectName(QString::fromUtf8("labelWiFiStatus"));
-
-        gridLayout_4->addWidget(labelWiFiStatus, 3, 2, 1, 1);
-
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setSpacing(6);
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        labelWiFiPort = new QLabel(groupBoxWirelessInterface);
-        labelWiFiPort->setObjectName(QString::fromUtf8("labelWiFiPort"));
-
-        horizontalLayout_4->addWidget(labelWiFiPort);
-
-        lineEditWiFiPort = new QLineEdit(groupBoxWirelessInterface);
-        lineEditWiFiPort->setObjectName(QString::fromUtf8("lineEditWiFiPort"));
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(lineEditWiFiPort->sizePolicy().hasHeightForWidth());
-        lineEditWiFiPort->setSizePolicy(sizePolicy1);
-
-        horizontalLayout_4->addWidget(lineEditWiFiPort);
-
-
-        gridLayout_4->addLayout(horizontalLayout_4, 2, 2, 1, 1);
-
-        pushButtonWiFiDisconnect = new QPushButton(groupBoxWirelessInterface);
-        pushButtonWiFiDisconnect->setObjectName(QString::fromUtf8("pushButtonWiFiDisconnect"));
-
-        gridLayout_4->addWidget(pushButtonWiFiDisconnect, 6, 2, 1, 1);
-
         pushButtonBTdisconnect = new QPushButton(groupBoxWirelessInterface);
         pushButtonBTdisconnect->setObjectName(QString::fromUtf8("pushButtonBTdisconnect"));
 
         gridLayout_4->addWidget(pushButtonBTdisconnect, 6, 0, 1, 1);
+
+        labelBTstatus = new QLabel(groupBoxWirelessInterface);
+        labelBTstatus->setObjectName(QString::fromUtf8("labelBTstatus"));
+
+        gridLayout_4->addWidget(labelBTstatus, 3, 0, 1, 1);
+
+        labelBLEStatus = new QLabel(groupBoxWirelessInterface);
+        labelBLEStatus->setObjectName(QString::fromUtf8("labelBLEStatus"));
+
+        gridLayout_4->addWidget(labelBLEStatus, 3, 2, 1, 1);
+
+        pushButtonBLEconnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBLEconnect->setObjectName(QString::fromUtf8("pushButtonBLEconnect"));
+
+        gridLayout_4->addWidget(pushButtonBLEconnect, 5, 2, 1, 1);
+
+        pushButtonBLEdisconnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBLEdisconnect->setObjectName(QString::fromUtf8("pushButtonBLEdisconnect"));
+
+        gridLayout_4->addWidget(pushButtonBLEdisconnect, 6, 2, 1, 1);
 
 
         gridLayout_2->addLayout(gridLayout_4, 0, 0, 1, 1);
@@ -431,11 +409,11 @@ public:
 
         pushButtonChannel4 = new QPushButton(tab_3);
         pushButtonChannel4->setObjectName(QString::fromUtf8("pushButtonChannel4"));
-        QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(0);
-        sizePolicy2.setVerticalStretch(0);
-        sizePolicy2.setHeightForWidth(pushButtonChannel4->sizePolicy().hasHeightForWidth());
-        pushButtonChannel4->setSizePolicy(sizePolicy2);
+        QSizePolicy sizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(pushButtonChannel4->sizePolicy().hasHeightForWidth());
+        pushButtonChannel4->setSizePolicy(sizePolicy);
 
         horizontalLayout_18->addWidget(pushButtonChannel4);
 
@@ -452,18 +430,18 @@ public:
 
         lineEditRampUp = new QLineEdit(tab_3);
         lineEditRampUp->setObjectName(QString::fromUtf8("lineEditRampUp"));
-        QSizePolicy sizePolicy3(QSizePolicy::Expanding, QSizePolicy::Fixed);
-        sizePolicy3.setHorizontalStretch(0);
-        sizePolicy3.setVerticalStretch(0);
-        sizePolicy3.setHeightForWidth(lineEditRampUp->sizePolicy().hasHeightForWidth());
-        lineEditRampUp->setSizePolicy(sizePolicy3);
+        QSizePolicy sizePolicy1(QSizePolicy::Expanding, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(0);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(lineEditRampUp->sizePolicy().hasHeightForWidth());
+        lineEditRampUp->setSizePolicy(sizePolicy1);
 
         horizontalLayout_12->addWidget(lineEditRampUp);
 
         pushButtonRampUp = new QPushButton(tab_3);
         pushButtonRampUp->setObjectName(QString::fromUtf8("pushButtonRampUp"));
-        sizePolicy3.setHeightForWidth(pushButtonRampUp->sizePolicy().hasHeightForWidth());
-        pushButtonRampUp->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonRampUp->sizePolicy().hasHeightForWidth());
+        pushButtonRampUp->setSizePolicy(sizePolicy1);
 
         horizontalLayout_12->addWidget(pushButtonRampUp);
 
@@ -485,8 +463,8 @@ public:
 
         pushButtonRampDown = new QPushButton(tab_3);
         pushButtonRampDown->setObjectName(QString::fromUtf8("pushButtonRampDown"));
-        sizePolicy3.setHeightForWidth(pushButtonRampDown->sizePolicy().hasHeightForWidth());
-        pushButtonRampDown->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonRampDown->sizePolicy().hasHeightForWidth());
+        pushButtonRampDown->setSizePolicy(sizePolicy1);
 
         horizontalLayout_13->addWidget(pushButtonRampDown);
 
@@ -503,15 +481,15 @@ public:
 
         lineEditChannel3 = new QLineEdit(tab_3);
         lineEditChannel3->setObjectName(QString::fromUtf8("lineEditChannel3"));
-        sizePolicy2.setHeightForWidth(lineEditChannel3->sizePolicy().hasHeightForWidth());
-        lineEditChannel3->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(lineEditChannel3->sizePolicy().hasHeightForWidth());
+        lineEditChannel3->setSizePolicy(sizePolicy);
 
         horizontalLayout_8->addWidget(lineEditChannel3);
 
         pushButtonChannel3 = new QPushButton(tab_3);
         pushButtonChannel3->setObjectName(QString::fromUtf8("pushButtonChannel3"));
-        sizePolicy2.setHeightForWidth(pushButtonChannel3->sizePolicy().hasHeightForWidth());
-        pushButtonChannel3->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(pushButtonChannel3->sizePolicy().hasHeightForWidth());
+        pushButtonChannel3->setSizePolicy(sizePolicy);
 
         horizontalLayout_8->addWidget(pushButtonChannel3);
 
@@ -528,15 +506,15 @@ public:
 
         lineEditSymetry = new QLineEdit(tab_3);
         lineEditSymetry->setObjectName(QString::fromUtf8("lineEditSymetry"));
-        sizePolicy3.setHeightForWidth(lineEditSymetry->sizePolicy().hasHeightForWidth());
-        lineEditSymetry->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditSymetry->sizePolicy().hasHeightForWidth());
+        lineEditSymetry->setSizePolicy(sizePolicy1);
 
         horizontalLayout_9->addWidget(lineEditSymetry);
 
         pushButtonSymetry = new QPushButton(tab_3);
         pushButtonSymetry->setObjectName(QString::fromUtf8("pushButtonSymetry"));
-        sizePolicy3.setHeightForWidth(pushButtonSymetry->sizePolicy().hasHeightForWidth());
-        pushButtonSymetry->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonSymetry->sizePolicy().hasHeightForWidth());
+        pushButtonSymetry->setSizePolicy(sizePolicy1);
 
         horizontalLayout_9->addWidget(pushButtonSymetry);
 
@@ -553,15 +531,15 @@ public:
 
         lineEditPhase = new QLineEdit(tab_3);
         lineEditPhase->setObjectName(QString::fromUtf8("lineEditPhase"));
-        sizePolicy3.setHeightForWidth(lineEditPhase->sizePolicy().hasHeightForWidth());
-        lineEditPhase->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditPhase->sizePolicy().hasHeightForWidth());
+        lineEditPhase->setSizePolicy(sizePolicy1);
 
         horizontalLayout_7->addWidget(lineEditPhase);
 
         pushButtonPhase = new QPushButton(tab_3);
         pushButtonPhase->setObjectName(QString::fromUtf8("pushButtonPhase"));
-        sizePolicy3.setHeightForWidth(pushButtonPhase->sizePolicy().hasHeightForWidth());
-        pushButtonPhase->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonPhase->sizePolicy().hasHeightForWidth());
+        pushButtonPhase->setSizePolicy(sizePolicy1);
 
         horizontalLayout_7->addWidget(pushButtonPhase);
 
@@ -579,15 +557,15 @@ public:
 
         lineEditAmplitude = new QLineEdit(tab_3);
         lineEditAmplitude->setObjectName(QString::fromUtf8("lineEditAmplitude"));
-        sizePolicy3.setHeightForWidth(lineEditAmplitude->sizePolicy().hasHeightForWidth());
-        lineEditAmplitude->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditAmplitude->sizePolicy().hasHeightForWidth());
+        lineEditAmplitude->setSizePolicy(sizePolicy1);
 
         horizontalLayout_5->addWidget(lineEditAmplitude);
 
         pushButtonAmplitude = new QPushButton(tab_3);
         pushButtonAmplitude->setObjectName(QString::fromUtf8("pushButtonAmplitude"));
-        sizePolicy3.setHeightForWidth(pushButtonAmplitude->sizePolicy().hasHeightForWidth());
-        pushButtonAmplitude->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonAmplitude->sizePolicy().hasHeightForWidth());
+        pushButtonAmplitude->setSizePolicy(sizePolicy1);
 
         horizontalLayout_5->addWidget(pushButtonAmplitude);
 
@@ -604,15 +582,15 @@ public:
 
         lineEditOFF = new QLineEdit(tab_3);
         lineEditOFF->setObjectName(QString::fromUtf8("lineEditOFF"));
-        sizePolicy3.setHeightForWidth(lineEditOFF->sizePolicy().hasHeightForWidth());
-        lineEditOFF->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditOFF->sizePolicy().hasHeightForWidth());
+        lineEditOFF->setSizePolicy(sizePolicy1);
 
         horizontalLayout_11->addWidget(lineEditOFF);
 
         pushButtonOFF = new QPushButton(tab_3);
         pushButtonOFF->setObjectName(QString::fromUtf8("pushButtonOFF"));
-        sizePolicy3.setHeightForWidth(pushButtonOFF->sizePolicy().hasHeightForWidth());
-        pushButtonOFF->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonOFF->sizePolicy().hasHeightForWidth());
+        pushButtonOFF->setSizePolicy(sizePolicy1);
 
         horizontalLayout_11->addWidget(pushButtonOFF);
 
@@ -634,8 +612,8 @@ public:
 
         pushButtonContractions = new QPushButton(tab_3);
         pushButtonContractions->setObjectName(QString::fromUtf8("pushButtonContractions"));
-        sizePolicy3.setHeightForWidth(pushButtonContractions->sizePolicy().hasHeightForWidth());
-        pushButtonContractions->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonContractions->sizePolicy().hasHeightForWidth());
+        pushButtonContractions->setSizePolicy(sizePolicy1);
 
         horizontalLayout_14->addWidget(pushButtonContractions);
 
@@ -652,15 +630,15 @@ public:
 
         lineEditChannel2 = new QLineEdit(tab_3);
         lineEditChannel2->setObjectName(QString::fromUtf8("lineEditChannel2"));
-        sizePolicy3.setHeightForWidth(lineEditChannel2->sizePolicy().hasHeightForWidth());
-        lineEditChannel2->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditChannel2->sizePolicy().hasHeightForWidth());
+        lineEditChannel2->setSizePolicy(sizePolicy1);
 
         horizontalLayout_16->addWidget(lineEditChannel2);
 
         pushButtonChannel2 = new QPushButton(tab_3);
         pushButtonChannel2->setObjectName(QString::fromUtf8("pushButtonChannel2"));
-        sizePolicy3.setHeightForWidth(pushButtonChannel2->sizePolicy().hasHeightForWidth());
-        pushButtonChannel2->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonChannel2->sizePolicy().hasHeightForWidth());
+        pushButtonChannel2->setSizePolicy(sizePolicy1);
 
         horizontalLayout_16->addWidget(pushButtonChannel2);
 
@@ -677,15 +655,15 @@ public:
 
         lineEditChannel1 = new QLineEdit(tab_3);
         lineEditChannel1->setObjectName(QString::fromUtf8("lineEditChannel1"));
-        sizePolicy3.setHeightForWidth(lineEditChannel1->sizePolicy().hasHeightForWidth());
-        lineEditChannel1->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditChannel1->sizePolicy().hasHeightForWidth());
+        lineEditChannel1->setSizePolicy(sizePolicy1);
 
         horizontalLayout_15->addWidget(lineEditChannel1);
 
         pushButtonChannel1 = new QPushButton(tab_3);
         pushButtonChannel1->setObjectName(QString::fromUtf8("pushButtonChannel1"));
-        sizePolicy3.setHeightForWidth(pushButtonChannel1->sizePolicy().hasHeightForWidth());
-        pushButtonChannel1->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonChannel1->sizePolicy().hasHeightForWidth());
+        pushButtonChannel1->setSizePolicy(sizePolicy1);
 
         horizontalLayout_15->addWidget(pushButtonChannel1);
 
@@ -702,15 +680,15 @@ public:
 
         lineEditON = new QLineEdit(tab_3);
         lineEditON->setObjectName(QString::fromUtf8("lineEditON"));
-        sizePolicy3.setHeightForWidth(lineEditON->sizePolicy().hasHeightForWidth());
-        lineEditON->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditON->sizePolicy().hasHeightForWidth());
+        lineEditON->setSizePolicy(sizePolicy1);
 
         horizontalLayout_10->addWidget(lineEditON);
 
         pushButtonOnTime = new QPushButton(tab_3);
         pushButtonOnTime->setObjectName(QString::fromUtf8("pushButtonOnTime"));
-        sizePolicy3.setHeightForWidth(pushButtonOnTime->sizePolicy().hasHeightForWidth());
-        pushButtonOnTime->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonOnTime->sizePolicy().hasHeightForWidth());
+        pushButtonOnTime->setSizePolicy(sizePolicy1);
 
         horizontalLayout_10->addWidget(pushButtonOnTime);
 
@@ -727,15 +705,15 @@ public:
 
         lineEditFrequency = new QLineEdit(tab_3);
         lineEditFrequency->setObjectName(QString::fromUtf8("lineEditFrequency"));
-        sizePolicy3.setHeightForWidth(lineEditFrequency->sizePolicy().hasHeightForWidth());
-        lineEditFrequency->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(lineEditFrequency->sizePolicy().hasHeightForWidth());
+        lineEditFrequency->setSizePolicy(sizePolicy1);
 
         horizontalLayout_6->addWidget(lineEditFrequency);
 
         pushButtonFrequency = new QPushButton(tab_3);
         pushButtonFrequency->setObjectName(QString::fromUtf8("pushButtonFrequency"));
-        sizePolicy3.setHeightForWidth(pushButtonFrequency->sizePolicy().hasHeightForWidth());
-        pushButtonFrequency->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonFrequency->sizePolicy().hasHeightForWidth());
+        pushButtonFrequency->setSizePolicy(sizePolicy1);
 
         horizontalLayout_6->addWidget(pushButtonFrequency);
 
@@ -757,8 +735,8 @@ public:
 
         pushButtonAmplitude2 = new QPushButton(tab_3);
         pushButtonAmplitude2->setObjectName(QString::fromUtf8("pushButtonAmplitude2"));
-        sizePolicy2.setHeightForWidth(pushButtonAmplitude2->sizePolicy().hasHeightForWidth());
-        pushButtonAmplitude2->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(pushButtonAmplitude2->sizePolicy().hasHeightForWidth());
+        pushButtonAmplitude2->setSizePolicy(sizePolicy);
 
         horizontalLayout_17->addWidget(pushButtonAmplitude2);
 
@@ -1051,8 +1029,11 @@ public:
 
         lineEditStopElectrodes = new QLineEdit(tab_5);
         lineEditStopElectrodes->setObjectName(QString::fromUtf8("lineEditStopElectrodes"));
-        sizePolicy1.setHeightForWidth(lineEditStopElectrodes->sizePolicy().hasHeightForWidth());
-        lineEditStopElectrodes->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(lineEditStopElectrodes->sizePolicy().hasHeightForWidth());
+        lineEditStopElectrodes->setSizePolicy(sizePolicy2);
 
         horizontalLayout_20->addWidget(lineEditStopElectrodes);
 
@@ -1240,8 +1221,8 @@ public:
 
         lineEditDelay = new QLineEdit(tab_6);
         lineEditDelay->setObjectName(QString::fromUtf8("lineEditDelay"));
-        sizePolicy2.setHeightForWidth(lineEditDelay->sizePolicy().hasHeightForWidth());
-        lineEditDelay->setSizePolicy(sizePolicy2);
+        sizePolicy.setHeightForWidth(lineEditDelay->sizePolicy().hasHeightForWidth());
+        lineEditDelay->setSizePolicy(sizePolicy);
 
         horizontalLayout_21->addWidget(lineEditDelay);
 
@@ -1250,8 +1231,8 @@ public:
 
         pushButtonStartDualStim = new QPushButton(tab_6);
         pushButtonStartDualStim->setObjectName(QString::fromUtf8("pushButtonStartDualStim"));
-        sizePolicy3.setHeightForWidth(pushButtonStartDualStim->sizePolicy().hasHeightForWidth());
-        pushButtonStartDualStim->setSizePolicy(sizePolicy3);
+        sizePolicy1.setHeightForWidth(pushButtonStartDualStim->sizePolicy().hasHeightForWidth());
+        pushButtonStartDualStim->setSizePolicy(sizePolicy1);
 
         horizontalLayout_25->addWidget(pushButtonStartDualStim);
 
@@ -1311,13 +1292,9 @@ public:
         QWidget::setTabOrder(pushButtonChannel1, lineEditChannel2);
         QWidget::setTabOrder(lineEditChannel2, pushButtonChannel2);
         QWidget::setTabOrder(pushButtonChannel2, radioButtonWiFi);
-        QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
-        QWidget::setTabOrder(lineEditWiFiAddress, plainTextEditAT);
-        QWidget::setTabOrder(plainTextEditAT, pushButtonWiFiConnect);
-        QWidget::setTabOrder(pushButtonWiFiConnect, radioButtonBT);
-        QWidget::setTabOrder(radioButtonBT, lineEditWiFiPort);
-        QWidget::setTabOrder(lineEditWiFiPort, pushButtonWiFiDisconnect);
-        QWidget::setTabOrder(pushButtonWiFiDisconnect, pushButtonBTdisconnect);
+        QWidget::setTabOrder(radioButtonWiFi, plainTextEditAT);
+        QWidget::setTabOrder(plainTextEditAT, radioButtonBT);
+        QWidget::setTabOrder(radioButtonBT, pushButtonBTdisconnect);
 
         menuBar->addAction(menu_Measurement->menuAction());
         menu_Measurement->addAction(action_Run);
@@ -1351,7 +1328,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.5", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "NMES V0.65", nullptr));
         action_Run->setText(QCoreApplication::translate("MainWindow", "&Run", nullptr));
 #if QT_CONFIG(shortcut)
         action_Run->setShortcut(QCoreApplication::translate("MainWindow", "Ctrl+R", nullptr));
@@ -1385,16 +1362,15 @@ public:
         actionShow_pin_map->setText(QCoreApplication::translate("MainWindow", "Show pin map", nullptr));
         groupBoxWirelessInterface->setTitle(QCoreApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QCoreApplication::translate("MainWindow", "Discover BT", nullptr));
-        radioButtonWiFi->setText(QCoreApplication::translate("MainWindow", "WiFi", nullptr));
-        labelBTstatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
-        radioButtonBT->setText(QCoreApplication::translate("MainWindow", "Bluetooth", nullptr));
+        pushButtonBLEdiscover->setText(QCoreApplication::translate("MainWindow", "Discover BLE", nullptr));
+        radioButtonWiFi->setText(QCoreApplication::translate("MainWindow", "Bluetooth BLE", nullptr));
+        radioButtonBT->setText(QCoreApplication::translate("MainWindow", "Bluetooth Classic", nullptr));
         pushButtonBTconnect->setText(QCoreApplication::translate("MainWindow", "Connect BT", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "IP Address:", nullptr));
-        pushButtonWiFiConnect->setText(QCoreApplication::translate("MainWindow", "Connect WiFi", nullptr));
-        labelWiFiStatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
-        labelWiFiPort->setText(QCoreApplication::translate("MainWindow", "Port:", nullptr));
-        pushButtonWiFiDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect WiFi", nullptr));
         pushButtonBTdisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect BT", nullptr));
+        labelBTstatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
+        labelBLEStatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
+        pushButtonBLEconnect->setText(QCoreApplication::translate("MainWindow", "Connect BLE", nullptr));
+        pushButtonBLEdisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect BLE", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Connect), QCoreApplication::translate("MainWindow", "Connect", nullptr));
         label_14->setText(QCoreApplication::translate("MainWindow", "Ch2 Electrode 2", nullptr));
         pushButtonChannel4->setText(QCoreApplication::translate("MainWindow", "Update Ch2 El2", nullptr));

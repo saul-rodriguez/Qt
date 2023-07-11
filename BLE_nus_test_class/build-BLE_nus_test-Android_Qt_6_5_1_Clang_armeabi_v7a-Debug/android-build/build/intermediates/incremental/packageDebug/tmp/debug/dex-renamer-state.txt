@@ -1,0 +1,13 @@
+#Tue Jul 11 09:35:29 CEST 2023
+path.3=11/classes.dex
+path.2=10/classes.dex
+path.1=0/classes.dex
+path.0=classes.dex
+base.3=/home/saul/projects/Qt/BLE_nus_test_class/build-BLE_nus_test-Android_Qt_6_5_1_Clang_armeabi_v7a-Debug/android-build/build/intermediates/dex/debug/mergeProjectDexDebug/11/classes.dex
+base.2=/home/saul/projects/Qt/BLE_nus_test_class/build-BLE_nus_test-Android_Qt_6_5_1_Clang_armeabi_v7a-Debug/android-build/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
+base.1=/home/saul/projects/Qt/BLE_nus_test_class/build-BLE_nus_test-Android_Qt_6_5_1_Clang_armeabi_v7a-Debug/android-build/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.0=/home/saul/projects/Qt/BLE_nus_test_class/build-BLE_nus_test-Android_Qt_6_5_1_Clang_armeabi_v7a-Debug/android-build/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+renamed.3=classes4.dex
+renamed.2=classes3.dex
+renamed.1=classes2.dex
+renamed.0=classes.dex

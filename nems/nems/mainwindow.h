@@ -17,6 +17,14 @@
 #include <QStandardItemModel>
 #include <QXmlStreamWriter>
 
+#include <QBluetoothDeviceDiscoveryAgent>
+#include <QBluetoothDeviceInfo>
+#include <QLowEnergyController>
+#include <QLowEnergyService>
+#include "deviceinfo.h"
+
+#include "bleclient.h"
+
 namespace Ui {
 class MainWindow;
 }
@@ -35,11 +43,16 @@ private:
     //Bluetooth
     BTClient *m_bt;
     QByteArray m_data;
+    QByteArray m_program;
 
     //WiFi
-    QTcpSocket *m_WiFiTcpSocket = nullptr;
+    //QTcpSocket *m_WiFiTcpSocket = nullptr;
     //QNetworkSession *m_WiFiNetworkSession = nullptr;
-    QDataStream m_WiFi_in;
+    //QDataStream m_WiFi_in;
+
+    //BLE
+    BLEClient *m_ble;
+    bluetoothleState m_state;
 
     //Data storage
     DataTrace m_trace;
@@ -98,9 +111,13 @@ private slots:
     void BTConnected(QString name);
     void BTrxData(const QByteArray &data);
 
+    /* Slots for BLE */
+    void deviceFound(QString device);
+    void rxData(const QByteArray &data);
+    void updateBLEstatus(QString &status);
 
-    void WiFiRead();
-    void WiFiDisplayError(QAbstractSocket::SocketError socketError);
+    //void WiFiRead();
+    //void WiFiDisplayError(QAbstractSocket::SocketError socketError);
 
     void PlotRx(const QByteArray &data);
     void PlotTimeout();    
@@ -119,8 +136,8 @@ private slots:
     void on_pushButtonATSend_clicked();
     void on_radioButtonWiFi_toggled(bool checked);
     void on_radioButtonBT_toggled(bool checked);
-    void on_pushButtonWiFiConnect_clicked();
-    void on_pushButtonWiFiDisconnect_clicked();       
+   // void on_pushButtonWiFiConnect_clicked();
+   // void on_pushButtonWiFiDisconnect_clicked();
     void on_checkBoxConfigAntialias_toggled(bool checked);
     void on_pushButtonBTdisconnect_clicked();    
 
@@ -158,6 +175,9 @@ private slots:
     void on_pushButtonUpdateCh2MotorPoint_clicked();
     void on_actionStop_Search_triggered();
     void on_actionShow_pin_map_triggered();
+    void on_pushButtonBLEdiscover_clicked();
+    void on_pushButtonBLEconnect_clicked();
+    void on_pushButtonBLEdisconnect_clicked();
 };
 
 #endif // MAINWINDOW_H

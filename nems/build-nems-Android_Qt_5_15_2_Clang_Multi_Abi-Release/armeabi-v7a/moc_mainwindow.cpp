@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_MainWindow_t {
-    QByteArrayData data[65];
-    char stringdata0[1521];
+    QByteArrayData data[68];
+    char stringdata0[1543];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,77 +41,78 @@ QT_MOC_LITERAL(5, 46, 4), // "name"
 QT_MOC_LITERAL(6, 51, 11), // "BTConnected"
 QT_MOC_LITERAL(7, 63, 8), // "BTrxData"
 QT_MOC_LITERAL(8, 72, 4), // "data"
-QT_MOC_LITERAL(9, 77, 8), // "WiFiRead"
-QT_MOC_LITERAL(10, 86, 16), // "WiFiDisplayError"
-QT_MOC_LITERAL(11, 103, 28), // "QAbstractSocket::SocketError"
-QT_MOC_LITERAL(12, 132, 11), // "socketError"
-QT_MOC_LITERAL(13, 144, 6), // "PlotRx"
-QT_MOC_LITERAL(14, 151, 11), // "PlotTimeout"
-QT_MOC_LITERAL(15, 163, 14), // "SilenceTimeout"
-QT_MOC_LITERAL(16, 178, 16), // "UpdateSensorData"
-QT_MOC_LITERAL(17, 195, 10), // "SearchDone"
-QT_MOC_LITERAL(18, 206, 4), // "send"
-QT_MOC_LITERAL(19, 211, 12), // "parseProgram"
-QT_MOC_LITERAL(20, 224, 38), // "on_pushButtonBTdiscoverDevice..."
-QT_MOC_LITERAL(21, 263, 30), // "on_pushButtonBTconnect_clicked"
-QT_MOC_LITERAL(22, 294, 27), // "on_pushButtonATSend_clicked"
-QT_MOC_LITERAL(23, 322, 26), // "on_radioButtonWiFi_toggled"
-QT_MOC_LITERAL(24, 349, 7), // "checked"
-QT_MOC_LITERAL(25, 357, 24), // "on_radioButtonBT_toggled"
-QT_MOC_LITERAL(26, 382, 32), // "on_pushButtonWiFiConnect_clicked"
-QT_MOC_LITERAL(27, 415, 35), // "on_pushButtonWiFiDisconnect_c..."
-QT_MOC_LITERAL(28, 451, 34), // "on_checkBoxConfigAntialias_to..."
-QT_MOC_LITERAL(29, 486, 33), // "on_pushButtonBTdisconnect_cli..."
-QT_MOC_LITERAL(30, 520, 11), // "resizeEvent"
-QT_MOC_LITERAL(31, 532, 13), // "QResizeEvent*"
-QT_MOC_LITERAL(32, 546, 5), // "event"
-QT_MOC_LITERAL(33, 552, 23), // "on_action_Run_triggered"
-QT_MOC_LITERAL(34, 576, 25), // "on_action_Clean_triggered"
-QT_MOC_LITERAL(35, 602, 32), // "on_action_Delete_sweep_triggered"
-QT_MOC_LITERAL(36, 635, 24), // "on_action_Save_triggered"
-QT_MOC_LITERAL(37, 660, 30), // "on_pushButtonAmplitude_clicked"
-QT_MOC_LITERAL(38, 691, 30), // "on_pushButtonFrequency_clicked"
-QT_MOC_LITERAL(39, 722, 26), // "on_pushButtonPhase_clicked"
-QT_MOC_LITERAL(40, 749, 28), // "on_pushButtonSymetry_clicked"
-QT_MOC_LITERAL(41, 778, 27), // "on_pushButtonOnTime_clicked"
-QT_MOC_LITERAL(42, 806, 24), // "on_pushButtonOFF_clicked"
-QT_MOC_LITERAL(43, 831, 27), // "on_pushButtonRampUp_clicked"
-QT_MOC_LITERAL(44, 859, 29), // "on_pushButtonRampDown_clicked"
-QT_MOC_LITERAL(45, 889, 33), // "on_pushButtonContractions_cli..."
-QT_MOC_LITERAL(46, 923, 29), // "on_pushButtonChannel1_clicked"
-QT_MOC_LITERAL(47, 953, 29), // "on_pushButtonChannel2_clicked"
-QT_MOC_LITERAL(48, 983, 23), // "on_actionStop_triggered"
-QT_MOC_LITERAL(49, 1007, 24), // "on_action_Open_triggered"
-QT_MOC_LITERAL(50, 1032, 35), // "on_action_Display_program_tri..."
-QT_MOC_LITERAL(51, 1068, 29), // "on_pushButtonChannel3_clicked"
-QT_MOC_LITERAL(52, 1098, 29), // "on_pushButtonChannel4_clicked"
-QT_MOC_LITERAL(53, 1128, 31), // "on_pushButtonAmplitude2_clicked"
-QT_MOC_LITERAL(54, 1160, 26), // "on_actionSensors_triggered"
-QT_MOC_LITERAL(55, 1187, 39), // "on_verticalSliderEnergyMax_va..."
-QT_MOC_LITERAL(56, 1227, 5), // "value"
-QT_MOC_LITERAL(57, 1233, 45), // "on_verticalSliderEnergyThresh..."
-QT_MOC_LITERAL(58, 1279, 35), // "on_pushButtonResetMaxEnergy_c..."
-QT_MOC_LITERAL(59, 1315, 25), // "on_actionSearch_triggered"
-QT_MOC_LITERAL(60, 1341, 40), // "on_pushButtonUpdateCh1MotorPo..."
-QT_MOC_LITERAL(61, 1382, 34), // "on_pushButtonStartDualStim_cl..."
-QT_MOC_LITERAL(62, 1417, 40), // "on_pushButtonUpdateCh2MotorPo..."
-QT_MOC_LITERAL(63, 1458, 30), // "on_actionStop_Search_triggered"
-QT_MOC_LITERAL(64, 1489, 31) // "on_actionShow_pin_map_triggered"
+QT_MOC_LITERAL(9, 77, 11), // "deviceFound"
+QT_MOC_LITERAL(10, 89, 6), // "device"
+QT_MOC_LITERAL(11, 96, 6), // "rxData"
+QT_MOC_LITERAL(12, 103, 15), // "updateBLEstatus"
+QT_MOC_LITERAL(13, 119, 8), // "QString&"
+QT_MOC_LITERAL(14, 128, 6), // "status"
+QT_MOC_LITERAL(15, 135, 6), // "PlotRx"
+QT_MOC_LITERAL(16, 142, 11), // "PlotTimeout"
+QT_MOC_LITERAL(17, 154, 14), // "SilenceTimeout"
+QT_MOC_LITERAL(18, 169, 16), // "UpdateSensorData"
+QT_MOC_LITERAL(19, 186, 10), // "SearchDone"
+QT_MOC_LITERAL(20, 197, 4), // "send"
+QT_MOC_LITERAL(21, 202, 12), // "parseProgram"
+QT_MOC_LITERAL(22, 215, 38), // "on_pushButtonBTdiscoverDevice..."
+QT_MOC_LITERAL(23, 254, 30), // "on_pushButtonBTconnect_clicked"
+QT_MOC_LITERAL(24, 285, 27), // "on_pushButtonATSend_clicked"
+QT_MOC_LITERAL(25, 313, 26), // "on_radioButtonWiFi_toggled"
+QT_MOC_LITERAL(26, 340, 7), // "checked"
+QT_MOC_LITERAL(27, 348, 24), // "on_radioButtonBT_toggled"
+QT_MOC_LITERAL(28, 373, 34), // "on_checkBoxConfigAntialias_to..."
+QT_MOC_LITERAL(29, 408, 33), // "on_pushButtonBTdisconnect_cli..."
+QT_MOC_LITERAL(30, 442, 11), // "resizeEvent"
+QT_MOC_LITERAL(31, 454, 13), // "QResizeEvent*"
+QT_MOC_LITERAL(32, 468, 5), // "event"
+QT_MOC_LITERAL(33, 474, 23), // "on_action_Run_triggered"
+QT_MOC_LITERAL(34, 498, 25), // "on_action_Clean_triggered"
+QT_MOC_LITERAL(35, 524, 32), // "on_action_Delete_sweep_triggered"
+QT_MOC_LITERAL(36, 557, 24), // "on_action_Save_triggered"
+QT_MOC_LITERAL(37, 582, 30), // "on_pushButtonAmplitude_clicked"
+QT_MOC_LITERAL(38, 613, 30), // "on_pushButtonFrequency_clicked"
+QT_MOC_LITERAL(39, 644, 26), // "on_pushButtonPhase_clicked"
+QT_MOC_LITERAL(40, 671, 28), // "on_pushButtonSymetry_clicked"
+QT_MOC_LITERAL(41, 700, 27), // "on_pushButtonOnTime_clicked"
+QT_MOC_LITERAL(42, 728, 24), // "on_pushButtonOFF_clicked"
+QT_MOC_LITERAL(43, 753, 27), // "on_pushButtonRampUp_clicked"
+QT_MOC_LITERAL(44, 781, 29), // "on_pushButtonRampDown_clicked"
+QT_MOC_LITERAL(45, 811, 33), // "on_pushButtonContractions_cli..."
+QT_MOC_LITERAL(46, 845, 29), // "on_pushButtonChannel1_clicked"
+QT_MOC_LITERAL(47, 875, 29), // "on_pushButtonChannel2_clicked"
+QT_MOC_LITERAL(48, 905, 23), // "on_actionStop_triggered"
+QT_MOC_LITERAL(49, 929, 24), // "on_action_Open_triggered"
+QT_MOC_LITERAL(50, 954, 35), // "on_action_Display_program_tri..."
+QT_MOC_LITERAL(51, 990, 29), // "on_pushButtonChannel3_clicked"
+QT_MOC_LITERAL(52, 1020, 29), // "on_pushButtonChannel4_clicked"
+QT_MOC_LITERAL(53, 1050, 31), // "on_pushButtonAmplitude2_clicked"
+QT_MOC_LITERAL(54, 1082, 26), // "on_actionSensors_triggered"
+QT_MOC_LITERAL(55, 1109, 39), // "on_verticalSliderEnergyMax_va..."
+QT_MOC_LITERAL(56, 1149, 5), // "value"
+QT_MOC_LITERAL(57, 1155, 45), // "on_verticalSliderEnergyThresh..."
+QT_MOC_LITERAL(58, 1201, 35), // "on_pushButtonResetMaxEnergy_c..."
+QT_MOC_LITERAL(59, 1237, 25), // "on_actionSearch_triggered"
+QT_MOC_LITERAL(60, 1263, 40), // "on_pushButtonUpdateCh1MotorPo..."
+QT_MOC_LITERAL(61, 1304, 34), // "on_pushButtonStartDualStim_cl..."
+QT_MOC_LITERAL(62, 1339, 40), // "on_pushButtonUpdateCh2MotorPo..."
+QT_MOC_LITERAL(63, 1380, 30), // "on_actionStop_Search_triggered"
+QT_MOC_LITERAL(64, 1411, 31), // "on_actionShow_pin_map_triggered"
+QT_MOC_LITERAL(65, 1443, 32), // "on_pushButtonBLEdiscover_clicked"
+QT_MOC_LITERAL(66, 1476, 31), // "on_pushButtonBLEconnect_clicked"
+QT_MOC_LITERAL(67, 1508, 34) // "on_pushButtonBLEdisconnect_cl..."
 
     },
     "MainWindow\0updateSearchText\0\0text\0"
     "BTgetDevice\0name\0BTConnected\0BTrxData\0"
-    "data\0WiFiRead\0WiFiDisplayError\0"
-    "QAbstractSocket::SocketError\0socketError\0"
-    "PlotRx\0PlotTimeout\0SilenceTimeout\0"
-    "UpdateSensorData\0SearchDone\0send\0"
-    "parseProgram\0on_pushButtonBTdiscoverDevices_clicked\0"
+    "data\0deviceFound\0device\0rxData\0"
+    "updateBLEstatus\0QString&\0status\0PlotRx\0"
+    "PlotTimeout\0SilenceTimeout\0UpdateSensorData\0"
+    "SearchDone\0send\0parseProgram\0"
+    "on_pushButtonBTdiscoverDevices_clicked\0"
     "on_pushButtonBTconnect_clicked\0"
     "on_pushButtonATSend_clicked\0"
     "on_radioButtonWiFi_toggled\0checked\0"
     "on_radioButtonBT_toggled\0"
-    "on_pushButtonWiFiConnect_clicked\0"
-    "on_pushButtonWiFiDisconnect_clicked\0"
     "on_checkBoxConfigAntialias_toggled\0"
     "on_pushButtonBTdisconnect_clicked\0"
     "resizeEvent\0QResizeEvent*\0event\0"
@@ -145,7 +146,10 @@ QT_MOC_LITERAL(64, 1489, 31) // "on_actionShow_pin_map_triggered"
     "on_pushButtonStartDualStim_clicked\0"
     "on_pushButtonUpdateCh2MotorPoint_clicked\0"
     "on_actionStop_Search_triggered\0"
-    "on_actionShow_pin_map_triggered"
+    "on_actionShow_pin_map_triggered\0"
+    "on_pushButtonBLEdiscover_clicked\0"
+    "on_pushButtonBLEconnect_clicked\0"
+    "on_pushButtonBLEdisconnect_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -155,7 +159,7 @@ static const uint qt_meta_data_MainWindow[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-      54,   14, // methods
+      56,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -163,68 +167,71 @@ static const uint qt_meta_data_MainWindow[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    1,  284,    2, 0x0a /* Public */,
-       4,    1,  287,    2, 0x08 /* Private */,
-       6,    1,  290,    2, 0x08 /* Private */,
-       7,    1,  293,    2, 0x08 /* Private */,
-       9,    0,  296,    2, 0x08 /* Private */,
-      10,    1,  297,    2, 0x08 /* Private */,
-      13,    1,  300,    2, 0x08 /* Private */,
-      14,    0,  303,    2, 0x08 /* Private */,
-      15,    0,  304,    2, 0x08 /* Private */,
-      16,    0,  305,    2, 0x08 /* Private */,
-      17,    0,  306,    2, 0x08 /* Private */,
-      18,    1,  307,    2, 0x08 /* Private */,
-      19,    1,  310,    2, 0x08 /* Private */,
-      20,    0,  313,    2, 0x08 /* Private */,
-      21,    0,  314,    2, 0x08 /* Private */,
-      22,    0,  315,    2, 0x08 /* Private */,
-      23,    1,  316,    2, 0x08 /* Private */,
-      25,    1,  319,    2, 0x08 /* Private */,
-      26,    0,  322,    2, 0x08 /* Private */,
-      27,    0,  323,    2, 0x08 /* Private */,
-      28,    1,  324,    2, 0x08 /* Private */,
-      29,    0,  327,    2, 0x08 /* Private */,
-      30,    1,  328,    2, 0x08 /* Private */,
-      33,    0,  331,    2, 0x08 /* Private */,
-      34,    0,  332,    2, 0x08 /* Private */,
-      35,    0,  333,    2, 0x08 /* Private */,
-      36,    0,  334,    2, 0x08 /* Private */,
-      37,    0,  335,    2, 0x08 /* Private */,
-      38,    0,  336,    2, 0x08 /* Private */,
-      39,    0,  337,    2, 0x08 /* Private */,
-      40,    0,  338,    2, 0x08 /* Private */,
-      41,    0,  339,    2, 0x08 /* Private */,
-      42,    0,  340,    2, 0x08 /* Private */,
-      43,    0,  341,    2, 0x08 /* Private */,
-      44,    0,  342,    2, 0x08 /* Private */,
-      45,    0,  343,    2, 0x08 /* Private */,
-      46,    0,  344,    2, 0x08 /* Private */,
-      47,    0,  345,    2, 0x08 /* Private */,
-      48,    0,  346,    2, 0x08 /* Private */,
-      49,    0,  347,    2, 0x08 /* Private */,
-      50,    0,  348,    2, 0x08 /* Private */,
-      51,    0,  349,    2, 0x08 /* Private */,
-      52,    0,  350,    2, 0x08 /* Private */,
-      53,    0,  351,    2, 0x08 /* Private */,
-      54,    1,  352,    2, 0x08 /* Private */,
-      55,    1,  355,    2, 0x08 /* Private */,
-      57,    1,  358,    2, 0x08 /* Private */,
-      58,    0,  361,    2, 0x08 /* Private */,
-      59,    0,  362,    2, 0x08 /* Private */,
-      60,    0,  363,    2, 0x08 /* Private */,
-      61,    0,  364,    2, 0x08 /* Private */,
-      62,    0,  365,    2, 0x08 /* Private */,
-      63,    0,  366,    2, 0x08 /* Private */,
-      64,    0,  367,    2, 0x08 /* Private */,
+       1,    1,  294,    2, 0x0a /* Public */,
+       4,    1,  297,    2, 0x08 /* Private */,
+       6,    1,  300,    2, 0x08 /* Private */,
+       7,    1,  303,    2, 0x08 /* Private */,
+       9,    1,  306,    2, 0x08 /* Private */,
+      11,    1,  309,    2, 0x08 /* Private */,
+      12,    1,  312,    2, 0x08 /* Private */,
+      15,    1,  315,    2, 0x08 /* Private */,
+      16,    0,  318,    2, 0x08 /* Private */,
+      17,    0,  319,    2, 0x08 /* Private */,
+      18,    0,  320,    2, 0x08 /* Private */,
+      19,    0,  321,    2, 0x08 /* Private */,
+      20,    1,  322,    2, 0x08 /* Private */,
+      21,    1,  325,    2, 0x08 /* Private */,
+      22,    0,  328,    2, 0x08 /* Private */,
+      23,    0,  329,    2, 0x08 /* Private */,
+      24,    0,  330,    2, 0x08 /* Private */,
+      25,    1,  331,    2, 0x08 /* Private */,
+      27,    1,  334,    2, 0x08 /* Private */,
+      28,    1,  337,    2, 0x08 /* Private */,
+      29,    0,  340,    2, 0x08 /* Private */,
+      30,    1,  341,    2, 0x08 /* Private */,
+      33,    0,  344,    2, 0x08 /* Private */,
+      34,    0,  345,    2, 0x08 /* Private */,
+      35,    0,  346,    2, 0x08 /* Private */,
+      36,    0,  347,    2, 0x08 /* Private */,
+      37,    0,  348,    2, 0x08 /* Private */,
+      38,    0,  349,    2, 0x08 /* Private */,
+      39,    0,  350,    2, 0x08 /* Private */,
+      40,    0,  351,    2, 0x08 /* Private */,
+      41,    0,  352,    2, 0x08 /* Private */,
+      42,    0,  353,    2, 0x08 /* Private */,
+      43,    0,  354,    2, 0x08 /* Private */,
+      44,    0,  355,    2, 0x08 /* Private */,
+      45,    0,  356,    2, 0x08 /* Private */,
+      46,    0,  357,    2, 0x08 /* Private */,
+      47,    0,  358,    2, 0x08 /* Private */,
+      48,    0,  359,    2, 0x08 /* Private */,
+      49,    0,  360,    2, 0x08 /* Private */,
+      50,    0,  361,    2, 0x08 /* Private */,
+      51,    0,  362,    2, 0x08 /* Private */,
+      52,    0,  363,    2, 0x08 /* Private */,
+      53,    0,  364,    2, 0x08 /* Private */,
+      54,    1,  365,    2, 0x08 /* Private */,
+      55,    1,  368,    2, 0x08 /* Private */,
+      57,    1,  371,    2, 0x08 /* Private */,
+      58,    0,  374,    2, 0x08 /* Private */,
+      59,    0,  375,    2, 0x08 /* Private */,
+      60,    0,  376,    2, 0x08 /* Private */,
+      61,    0,  377,    2, 0x08 /* Private */,
+      62,    0,  378,    2, 0x08 /* Private */,
+      63,    0,  379,    2, 0x08 /* Private */,
+      64,    0,  380,    2, 0x08 /* Private */,
+      65,    0,  381,    2, 0x08 /* Private */,
+      66,    0,  382,    2, 0x08 /* Private */,
+      67,    0,  383,    2, 0x08 /* Private */,
 
  // slots: parameters
     QMetaType::Void, QMetaType::QString,    3,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void, QMetaType::QString,    5,
     QMetaType::Void, QMetaType::QByteArray,    8,
-    QMetaType::Void,
-    QMetaType::Void, 0x80000000 | 11,   12,
+    QMetaType::Void, QMetaType::QString,   10,
+    QMetaType::Void, QMetaType::QByteArray,    8,
+    QMetaType::Void, 0x80000000 | 13,   14,
     QMetaType::Void, QMetaType::QByteArray,    8,
     QMetaType::Void,
     QMetaType::Void,
@@ -235,11 +242,9 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   24,
-    QMetaType::Void, QMetaType::Bool,   24,
-    QMetaType::Void,
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   24,
+    QMetaType::Void, QMetaType::Bool,   26,
+    QMetaType::Void, QMetaType::Bool,   26,
+    QMetaType::Void, QMetaType::Bool,   26,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 31,   32,
     QMetaType::Void,
@@ -263,9 +268,12 @@ static const uint qt_meta_data_MainWindow[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   24,
+    QMetaType::Void, QMetaType::Bool,   26,
     QMetaType::Void, QMetaType::Int,   56,
     QMetaType::Void, QMetaType::Int,   56,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -287,68 +295,59 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 1: _t->BTgetDevice((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 2: _t->BTConnected((*reinterpret_cast< QString(*)>(_a[1]))); break;
         case 3: _t->BTrxData((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
-        case 4: _t->WiFiRead(); break;
-        case 5: _t->WiFiDisplayError((*reinterpret_cast< QAbstractSocket::SocketError(*)>(_a[1]))); break;
-        case 6: _t->PlotRx((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
-        case 7: _t->PlotTimeout(); break;
-        case 8: _t->SilenceTimeout(); break;
-        case 9: _t->UpdateSensorData(); break;
-        case 10: _t->SearchDone(); break;
-        case 11: _t->send((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
-        case 12: _t->parseProgram((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
-        case 13: _t->on_pushButtonBTdiscoverDevices_clicked(); break;
-        case 14: _t->on_pushButtonBTconnect_clicked(); break;
-        case 15: _t->on_pushButtonATSend_clicked(); break;
-        case 16: _t->on_radioButtonWiFi_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 17: _t->on_radioButtonBT_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 18: _t->on_pushButtonWiFiConnect_clicked(); break;
-        case 19: _t->on_pushButtonWiFiDisconnect_clicked(); break;
-        case 20: _t->on_checkBoxConfigAntialias_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 21: _t->on_pushButtonBTdisconnect_clicked(); break;
-        case 22: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
-        case 23: _t->on_action_Run_triggered(); break;
-        case 24: _t->on_action_Clean_triggered(); break;
-        case 25: _t->on_action_Delete_sweep_triggered(); break;
-        case 26: _t->on_action_Save_triggered(); break;
-        case 27: _t->on_pushButtonAmplitude_clicked(); break;
-        case 28: _t->on_pushButtonFrequency_clicked(); break;
-        case 29: _t->on_pushButtonPhase_clicked(); break;
-        case 30: _t->on_pushButtonSymetry_clicked(); break;
-        case 31: _t->on_pushButtonOnTime_clicked(); break;
-        case 32: _t->on_pushButtonOFF_clicked(); break;
-        case 33: _t->on_pushButtonRampUp_clicked(); break;
-        case 34: _t->on_pushButtonRampDown_clicked(); break;
-        case 35: _t->on_pushButtonContractions_clicked(); break;
-        case 36: _t->on_pushButtonChannel1_clicked(); break;
-        case 37: _t->on_pushButtonChannel2_clicked(); break;
-        case 38: _t->on_actionStop_triggered(); break;
-        case 39: _t->on_action_Open_triggered(); break;
-        case 40: _t->on_action_Display_program_triggered(); break;
-        case 41: _t->on_pushButtonChannel3_clicked(); break;
-        case 42: _t->on_pushButtonChannel4_clicked(); break;
-        case 43: _t->on_pushButtonAmplitude2_clicked(); break;
-        case 44: _t->on_actionSensors_triggered((*reinterpret_cast< bool(*)>(_a[1]))); break;
-        case 45: _t->on_verticalSliderEnergyMax_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 46: _t->on_verticalSliderEnergyThreshold_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 47: _t->on_pushButtonResetMaxEnergy_clicked(); break;
-        case 48: _t->on_actionSearch_triggered(); break;
-        case 49: _t->on_pushButtonUpdateCh1MotorPoint_clicked(); break;
-        case 50: _t->on_pushButtonStartDualStim_clicked(); break;
-        case 51: _t->on_pushButtonUpdateCh2MotorPoint_clicked(); break;
-        case 52: _t->on_actionStop_Search_triggered(); break;
-        case 53: _t->on_actionShow_pin_map_triggered(); break;
+        case 4: _t->deviceFound((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 5: _t->rxData((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 6: _t->updateBLEstatus((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 7: _t->PlotRx((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 8: _t->PlotTimeout(); break;
+        case 9: _t->SilenceTimeout(); break;
+        case 10: _t->UpdateSensorData(); break;
+        case 11: _t->SearchDone(); break;
+        case 12: _t->send((*reinterpret_cast< QByteArray(*)>(_a[1]))); break;
+        case 13: _t->parseProgram((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 14: _t->on_pushButtonBTdiscoverDevices_clicked(); break;
+        case 15: _t->on_pushButtonBTconnect_clicked(); break;
+        case 16: _t->on_pushButtonATSend_clicked(); break;
+        case 17: _t->on_radioButtonWiFi_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 18: _t->on_radioButtonBT_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 19: _t->on_checkBoxConfigAntialias_toggled((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 20: _t->on_pushButtonBTdisconnect_clicked(); break;
+        case 21: _t->resizeEvent((*reinterpret_cast< QResizeEvent*(*)>(_a[1]))); break;
+        case 22: _t->on_action_Run_triggered(); break;
+        case 23: _t->on_action_Clean_triggered(); break;
+        case 24: _t->on_action_Delete_sweep_triggered(); break;
+        case 25: _t->on_action_Save_triggered(); break;
+        case 26: _t->on_pushButtonAmplitude_clicked(); break;
+        case 27: _t->on_pushButtonFrequency_clicked(); break;
+        case 28: _t->on_pushButtonPhase_clicked(); break;
+        case 29: _t->on_pushButtonSymetry_clicked(); break;
+        case 30: _t->on_pushButtonOnTime_clicked(); break;
+        case 31: _t->on_pushButtonOFF_clicked(); break;
+        case 32: _t->on_pushButtonRampUp_clicked(); break;
+        case 33: _t->on_pushButtonRampDown_clicked(); break;
+        case 34: _t->on_pushButtonContractions_clicked(); break;
+        case 35: _t->on_pushButtonChannel1_clicked(); break;
+        case 36: _t->on_pushButtonChannel2_clicked(); break;
+        case 37: _t->on_actionStop_triggered(); break;
+        case 38: _t->on_action_Open_triggered(); break;
+        case 39: _t->on_action_Display_program_triggered(); break;
+        case 40: _t->on_pushButtonChannel3_clicked(); break;
+        case 41: _t->on_pushButtonChannel4_clicked(); break;
+        case 42: _t->on_pushButtonAmplitude2_clicked(); break;
+        case 43: _t->on_actionSensors_triggered((*reinterpret_cast< bool(*)>(_a[1]))); break;
+        case 44: _t->on_verticalSliderEnergyMax_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 45: _t->on_verticalSliderEnergyThreshold_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 46: _t->on_pushButtonResetMaxEnergy_clicked(); break;
+        case 47: _t->on_actionSearch_triggered(); break;
+        case 48: _t->on_pushButtonUpdateCh1MotorPoint_clicked(); break;
+        case 49: _t->on_pushButtonStartDualStim_clicked(); break;
+        case 50: _t->on_pushButtonUpdateCh2MotorPoint_clicked(); break;
+        case 51: _t->on_actionStop_Search_triggered(); break;
+        case 52: _t->on_actionShow_pin_map_triggered(); break;
+        case 53: _t->on_pushButtonBLEdiscover_clicked(); break;
+        case 54: _t->on_pushButtonBLEconnect_clicked(); break;
+        case 55: _t->on_pushButtonBLEdisconnect_clicked(); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        switch (_id) {
-        default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-        case 5:
-            switch (*reinterpret_cast<int*>(_a[1])) {
-            default: *reinterpret_cast<int*>(_a[0]) = -1; break;
-            case 0:
-                *reinterpret_cast<int*>(_a[0]) = qRegisterMetaType< QAbstractSocket::SocketError >(); break;
-            }
-            break;
         }
     }
 }
@@ -382,13 +381,13 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 54)
+        if (_id < 56)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 54;
+        _id -= 56;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 54)
-            qt_static_metacall(this, _c, _id, _a);
-        _id -= 54;
+        if (_id < 56)
+            *reinterpret_cast<int*>(_a[0]) = -1;
+        _id -= 56;
     }
     return _id;
 }

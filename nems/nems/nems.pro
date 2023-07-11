@@ -23,6 +23,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    bleclient.cpp \
+    deviceinfo.cpp \
         main.cpp \
         mainwindow.cpp \
     btclient.cpp \
@@ -34,6 +36,8 @@ SOURCES += \
     nmessensor.cpp
 
 HEADERS += \
+    bleclient.h \
+    deviceinfo.h \
         mainwindow.h \
     btclient.h \
     cplotchart.h \

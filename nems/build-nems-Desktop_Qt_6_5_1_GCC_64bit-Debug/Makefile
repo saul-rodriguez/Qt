@@ -52,7 +52,9 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../nems/main.cpp \
+SOURCES       = ../nems/bleclient.cpp \
+		../nems/deviceinfo.cpp \
+		../nems/main.cpp \
 		../nems/mainwindow.cpp \
 		../nems/btclient.cpp \
 		../nems/cplotchart.cpp \
@@ -61,6 +63,8 @@ SOURCES       = ../nems/main.cpp \
 		../nems/nmespinmap.cpp \
 		../nems/nmessearch.cpp \
 		../nems/nmessensor.cpp qrc_images.cpp \
+		moc_bleclient.cpp \
+		moc_deviceinfo.cpp \
 		moc_mainwindow.cpp \
 		moc_btclient.cpp \
 		moc_nmesautomaticsearch.cpp \
@@ -68,7 +72,9 @@ SOURCES       = ../nems/main.cpp \
 		moc_nmespinmap.cpp \
 		moc_nmessearch.cpp \
 		moc_nmessensor.cpp
-OBJECTS       = main.o \
+OBJECTS       = bleclient.o \
+		deviceinfo.o \
+		main.o \
 		mainwindow.o \
 		btclient.o \
 		cplotchart.o \
@@ -78,6 +84,8 @@ OBJECTS       = main.o \
 		nmessearch.o \
 		nmessensor.o \
 		qrc_images.o \
+		moc_bleclient.o \
+		moc_deviceinfo.o \
 		moc_mainwindow.o \
 		moc_btclient.o \
 		moc_nmesautomaticsearch.o \
@@ -384,14 +392,18 @@ DIST          = ../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/spec_pre.p
 		../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/exceptions.prf \
 		../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/yacc.prf \
 		../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/lex.prf \
-		../nems/nems.pro ../nems/mainwindow.h \
+		../nems/nems.pro ../nems/bleclient.h \
+		../nems/deviceinfo.h \
+		../nems/mainwindow.h \
 		../nems/btclient.h \
 		../nems/cplotchart.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		../nems/nmespinmap.h \
 		../nems/nmessearch.h \
-		../nems/nmessensor.h ../nems/main.cpp \
+		../nems/nmessensor.h ../nems/bleclient.cpp \
+		../nems/deviceinfo.cpp \
+		../nems/main.cpp \
 		../nems/mainwindow.cpp \
 		../nems/btclient.cpp \
 		../nems/cplotchart.cpp \
@@ -1048,8 +1060,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmesautomaticsearch.h ../nems/nmesdualmp.h ../nems/nmespinmap.h ../nems/nmessearch.h ../nems/nmessensor.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmesautomaticsearch.cpp ../nems/nmesdualmp.cpp ../nems/nmespinmap.cpp ../nems/nmessearch.cpp ../nems/nmessensor.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/bleclient.h ../nems/deviceinfo.h ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmesautomaticsearch.h ../nems/nmesdualmp.h ../nems/nmespinmap.h ../nems/nmessearch.h ../nems/nmessensor.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/bleclient.cpp ../nems/deviceinfo.cpp ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmesautomaticsearch.cpp ../nems/nmesdualmp.cpp ../nems/nmespinmap.cpp ../nems/nmessearch.cpp ../nems/nmessensor.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/mainwindow.ui $(DISTDIR)/
 
 
@@ -1097,9 +1109,278 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -fPIC -dM -E -o moc_predefs.h ../../../../installs/Qt/6.5.1/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_btclient.cpp moc_nmesautomaticsearch.cpp moc_nmesdualmp.cpp moc_nmespinmap.cpp moc_nmessearch.cpp moc_nmessensor.cpp
+compiler_moc_header_make_all: moc_bleclient.cpp moc_deviceinfo.cpp moc_mainwindow.cpp moc_btclient.cpp moc_nmesautomaticsearch.cpp moc_nmesdualmp.cpp moc_nmespinmap.cpp moc_nmessearch.cpp moc_nmessensor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_btclient.cpp moc_nmesautomaticsearch.cpp moc_nmesdualmp.cpp moc_nmespinmap.cpp moc_nmessearch.cpp moc_nmessensor.cpp
+	-$(DEL_FILE) moc_bleclient.cpp moc_deviceinfo.cpp moc_mainwindow.cpp moc_btclient.cpp moc_nmesautomaticsearch.cpp moc_nmesdualmp.cpp moc_nmespinmap.cpp moc_nmessearch.cpp moc_nmessensor.cpp
+moc_bleclient.cpp: ../nems/bleclient.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QObject \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtnoop.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qassert.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypes.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversion.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qflags.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qforeach.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmalloc.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qminmax.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qoverload.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qswap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtresource.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttranslation.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstring.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qchar.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qpair.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qanystringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdatastream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfloat16.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmath.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterable.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMetaType \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/quuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QDebug \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdebug.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qset.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhash.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20memory.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothAddress \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothaddress.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QByteArray \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QString \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QSharedPointer \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetooth.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariantMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariantmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariant \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariant.h \
+		../nems/deviceinfo.h \
+		moc_predefs.h \
+		../../../../installs/Qt/6.5.1/gcc_64/libexec/moc
+	/home/saul/installs/Qt/6.5.1/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_6_5_1_GCC_64bit-Debug/moc_predefs.h -I/home/saul/installs/Qt/6.5.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/6.5.1/gcc_64/include -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtCharts -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtOpenGLWidgets -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtWidgets -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtOpenGL -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtGui -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtBluetooth -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtNetwork -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtDBus -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/bleclient.h -o moc_bleclient.cpp
+
+moc_deviceinfo.cpp: ../nems/deviceinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtnoop.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qassert.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypes.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversion.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qflags.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qforeach.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmalloc.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qminmax.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qoverload.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qswap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtresource.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttranslation.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMetaType \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qpair.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdatastream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfloat16.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmath.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstring.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qchar.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qanystringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterable.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/quuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QDebug \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdebug.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qset.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhash.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20memory.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QObject \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QString \
+		moc_predefs.h \
+		../../../../installs/Qt/6.5.1/gcc_64/libexec/moc
+	/home/saul/installs/Qt/6.5.1/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_6_5_1_GCC_64bit-Debug/moc_predefs.h -I/home/saul/installs/Qt/6.5.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/6.5.1/gcc_64/include -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtCharts -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtOpenGLWidgets -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtWidgets -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtOpenGL -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtGui -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtBluetooth -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtNetwork -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtDBus -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/deviceinfo.h -o moc_deviceinfo.cpp
+
 moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../nems/btclient.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QObject \
@@ -1340,6 +1621,23 @@ moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxmlstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariantMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariantmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMap \
+		../nems/deviceinfo.h \
+		../nems/bleclient.h \
 		moc_predefs.h \
 		../../../../installs/Qt/6.5.1/gcc_64/libexec/moc
 	/home/saul/installs/Qt/6.5.1/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Desktop_Qt_6_5_1_GCC_64bit-Debug/moc_predefs.h -I/home/saul/installs/Qt/6.5.1/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/6.5.1/gcc_64/include -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtCharts -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtOpenGLWidgets -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtWidgets -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtOpenGL -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtGui -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtBluetooth -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtNetwork -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtDBus -I/home/saul/installs/Qt/6.5.1/gcc_64/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/mainwindow.h -o moc_mainwindow.cpp
@@ -1998,6 +2296,274 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
+bleclient.o: ../nems/bleclient.cpp ../nems/bleclient.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QObject \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtnoop.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qassert.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypes.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversion.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qflags.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qforeach.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmalloc.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qminmax.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qoverload.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qswap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtresource.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttranslation.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstring.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qchar.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qpair.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qanystringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdatastream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfloat16.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmath.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterable.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMetaType \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/quuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QDebug \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdebug.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qset.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhash.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20memory.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothAddress \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothaddress.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QByteArray \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QString \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QSharedPointer \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetooth.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariantMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariantmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariant \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariant.h \
+		../nems/deviceinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bleclient.o ../nems/bleclient.cpp
+
+deviceinfo.o: ../nems/deviceinfo.cpp ../nems/deviceinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobal.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversionchecks.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconfig.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtconfigmacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtcoreexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtnoop.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qassert.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypes.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtversion.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlogging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qflags.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qconstructormacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdarwinhelpers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qexceptionhandling.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qforeach.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttypetraits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfunctionpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmalloc.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qminmax.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qoverload.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qswap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtresource.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qttranslation.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QtGlobal \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMetaType \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtmetamacros.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qpair.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydatapointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qarraydataops.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxptype_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearrayview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringfwd.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20type_traits.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcompare.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdatastream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiodevicebase.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfloat16.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmath.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstring.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qchar.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qanystringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qutf8stringview.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringtokenizer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterable.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmetacontainer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontainerinfo.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtaggedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qscopeguard.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QUuid \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/quuid.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QDebug \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdebug.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringconverter_base.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qiterator.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qshareddata_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qset.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qhash.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/q20memory.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QObject \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qbindingstorage.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QString \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QBluetoothAddress \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qbluetoothaddress.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QByteArray
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o deviceinfo.o ../nems/deviceinfo.cpp
+
 main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../nems/btclient.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QObject \
@@ -2238,6 +2804,23 @@ main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxmlstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariantMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariantmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMap \
+		../nems/deviceinfo.h \
+		../nems/bleclient.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QApplication \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qapplication.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreapplication.h \
@@ -2501,99 +3084,36 @@ mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qabstractitemmodel.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qxmlstream.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QVariantMap \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qvariantmap.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/QMap \
+		../nems/deviceinfo.h \
+		../nems/bleclient.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore5Compat/qregexp.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore5Compat/qcore5global.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore5Compat/qtcore5compat-config.h \
 		ui_mainwindow.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/QAction \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QApplication \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qapplication.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qeventloop.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qcoreapplication_platform.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfuture.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfutureinterface.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qmutex.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qtsan_impl.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qresultstore.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qfuture_impl.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qthreadpool.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qthread.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qdeadlinetimer.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qelapsedtimer.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qrunnable.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qexception.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qpromise.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qguiapplication.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qinputmethod.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qguiapplication_platform.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QCheckBox \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qcheckbox.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractbutton.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QComboBox \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qcombobox.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qstyleoption.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractspinbox.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qvalidator.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtCore/qregularexpression.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qslider.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractslider.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qstyle.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qtabbar.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qrubberband.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qframe.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QFormLayout \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qformlayout.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QLayout \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qlayout.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QGridLayout \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QGroupBox \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qgroupbox.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QHBoxLayout \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QLabel \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qlabel.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qpicture.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qtextdocument.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QLineEdit \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qlineedit.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qtextcursor.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qtextformat.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qtextoption.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QMenu \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qmenu.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QMenuBar \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qmenubar.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QPlainTextEdit \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qplaintextedit.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qtextedit.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qabstracttextdocumentlayout.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qtextlayout.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qglyphrun.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qrawfont.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qfontdatabase.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QProgressBar \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qprogressbar.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QPushButton \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qpushbutton.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QRadioButton \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qradiobutton.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QSlider \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QSpacerItem \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QStatusBar \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qstatusbar.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QTabWidget \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QToolBar \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qtoolbar.h \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QVBoxLayout \
-		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QWidget \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCharts/QChartView \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtCharts/qchartview.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QGraphicsView \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qgraphicsview.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qpainter.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtGui/qtextoption.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qscrollarea.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qframe.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qgraphicsscene.h \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/QFileDialog \
 		../../../../installs/Qt/6.5.1/gcc_64/include/QtWidgets/qfiledialog.h \
@@ -3543,6 +4063,12 @@ nmessensor.o: ../nems/nmessensor.cpp ../nems/nmessensor.h \
 
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+
+moc_bleclient.o: moc_bleclient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bleclient.o moc_bleclient.cpp
+
+moc_deviceinfo.o: moc_deviceinfo.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_deviceinfo.o moc_deviceinfo.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

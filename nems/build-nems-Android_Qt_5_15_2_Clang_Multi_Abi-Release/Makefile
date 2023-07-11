@@ -51,7 +51,9 @@ OBJECTS_DIR   = armeabi-v7a/
 
 ####### Files
 
-SOURCES       = ../nems/main.cpp \
+SOURCES       = ../nems/bleclient.cpp \
+		../nems/deviceinfo.cpp \
+		../nems/main.cpp \
 		../nems/mainwindow.cpp \
 		../nems/btclient.cpp \
 		../nems/cplotchart.cpp \
@@ -60,6 +62,8 @@ SOURCES       = ../nems/main.cpp \
 		../nems/nmespinmap.cpp \
 		../nems/nmessearch.cpp \
 		../nems/nmessensor.cpp armeabi-v7a/qrc_images.cpp \
+		armeabi-v7a/moc_bleclient.cpp \
+		armeabi-v7a/moc_deviceinfo.cpp \
 		armeabi-v7a/moc_mainwindow.cpp \
 		armeabi-v7a/moc_btclient.cpp \
 		armeabi-v7a/moc_nmesautomaticsearch.cpp \
@@ -67,7 +71,9 @@ SOURCES       = ../nems/main.cpp \
 		armeabi-v7a/moc_nmespinmap.cpp \
 		armeabi-v7a/moc_nmessearch.cpp \
 		armeabi-v7a/moc_nmessensor.cpp
-OBJECTS       = armeabi-v7a/main.o \
+OBJECTS       = armeabi-v7a/bleclient.o \
+		armeabi-v7a/deviceinfo.o \
+		armeabi-v7a/main.o \
 		armeabi-v7a/mainwindow.o \
 		armeabi-v7a/btclient.o \
 		armeabi-v7a/cplotchart.o \
@@ -77,6 +83,8 @@ OBJECTS       = armeabi-v7a/main.o \
 		armeabi-v7a/nmessearch.o \
 		armeabi-v7a/nmessensor.o \
 		armeabi-v7a/qrc_images.o \
+		armeabi-v7a/moc_bleclient.o \
+		armeabi-v7a/moc_deviceinfo.o \
 		armeabi-v7a/moc_mainwindow.o \
 		armeabi-v7a/moc_btclient.o \
 		armeabi-v7a/moc_nmesautomaticsearch.o \
@@ -276,14 +284,18 @@ DIST          = ../../../../installs/Qt/5.15.2/android/mkspecs/features/spec_pre
 		../../../../installs/Qt/5.15.2/android/mkspecs/features/exceptions.prf \
 		../../../../installs/Qt/5.15.2/android/mkspecs/features/yacc.prf \
 		../../../../installs/Qt/5.15.2/android/mkspecs/features/lex.prf \
-		../nems/nems.pro ../nems/mainwindow.h \
+		../nems/nems.pro ../nems/bleclient.h \
+		../nems/deviceinfo.h \
+		../nems/mainwindow.h \
 		../nems/btclient.h \
 		../nems/cplotchart.h \
 		../nems/nmesautomaticsearch.h \
 		../nems/nmesdualmp.h \
 		../nems/nmespinmap.h \
 		../nems/nmessearch.h \
-		../nems/nmessensor.h ../nems/main.cpp \
+		../nems/nmessensor.h ../nems/bleclient.cpp \
+		../nems/deviceinfo.cpp \
+		../nems/main.cpp \
 		../nems/mainwindow.cpp \
 		../nems/btclient.cpp \
 		../nems/cplotchart.cpp \
@@ -319,8 +331,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../installs/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmesautomaticsearch.h ../nems/nmesdualmp.h ../nems/nmespinmap.h ../nems/nmessearch.h ../nems/nmessensor.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmesautomaticsearch.cpp ../nems/nmesdualmp.cpp ../nems/nmespinmap.cpp ../nems/nmessearch.cpp ../nems/nmessensor.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/bleclient.h ../nems/deviceinfo.h ../nems/mainwindow.h ../nems/btclient.h ../nems/cplotchart.h ../nems/nmesautomaticsearch.h ../nems/nmesdualmp.h ../nems/nmespinmap.h ../nems/nmessearch.h ../nems/nmessensor.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../nems/bleclient.cpp ../nems/deviceinfo.cpp ../nems/main.cpp ../nems/mainwindow.cpp ../nems/btclient.cpp ../nems/cplotchart.cpp ../nems/nmesautomaticsearch.cpp ../nems/nmesdualmp.cpp ../nems/nmespinmap.cpp ../nems/nmessearch.cpp ../nems/nmessensor.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../nems/mainwindow.ui $(DISTDIR)/
 
 
@@ -377,9 +389,173 @@ compiler_moc_predefs_clean:
 armeabi-v7a/moc_predefs.h: ../../../../installs/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
 	/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target armv7a-linux-androideabi21 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -O2 -mthumb -Oz -std=gnu++11 -Wall -W -dM -E -o armeabi-v7a/moc_predefs.h ../../../../installs/Qt/5.15.2/android/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmespinmap.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
+compiler_moc_header_make_all: armeabi-v7a/moc_bleclient.cpp armeabi-v7a/moc_deviceinfo.cpp armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmespinmap.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmespinmap.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
+	-$(DEL_FILE) armeabi-v7a/moc_bleclient.cpp armeabi-v7a/moc_deviceinfo.cpp armeabi-v7a/moc_mainwindow.cpp armeabi-v7a/moc_btclient.cpp armeabi-v7a/moc_nmesautomaticsearch.cpp armeabi-v7a/moc_nmesdualmp.cpp armeabi-v7a/moc_nmespinmap.cpp armeabi-v7a/moc_nmessearch.cpp armeabi-v7a/moc_nmessensor.cpp
+armeabi-v7a/moc_bleclient.cpp: ../nems/bleclient.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig-bootstrapped.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlogging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qflags.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_bootstrap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_msvc.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmutex.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstring.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qchar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringview.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiterator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpair.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvector.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpoint.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregexp.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothAddress \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothaddress.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QByteArray \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QString \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QMetaType \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QtGlobal \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QUuid \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/quuid.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QDebug \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qdebug.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhash.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiodevice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlocale.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvariant.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qset.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QSharedPointer \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetooth.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QVariantMap \
+		../nems/deviceinfo.h \
+		armeabi-v7a/moc_predefs.h \
+		../../../../installs/Qt/5.15.2/android/bin/moc
+	/home/saul/installs/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/home/saul/installs/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/5.15.2/android/include -I/home/saul/installs/Qt/5.15.2/android/include/QtCharts -I/home/saul/installs/Qt/5.15.2/android/include/QtWidgets -I/home/saul/installs/Qt/5.15.2/android/include/QtGui -I/home/saul/installs/Qt/5.15.2/android/include/QtBluetooth -I/home/saul/installs/Qt/5.15.2/android/include/QtNetwork -I/home/saul/installs/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/bleclient.h -o armeabi-v7a/moc_bleclient.cpp
+
+armeabi-v7a/moc_deviceinfo.cpp: ../nems/deviceinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig-bootstrapped.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlogging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qflags.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_bootstrap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_msvc.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmutex.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstring.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qchar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringview.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpair.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvector.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiterator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpoint.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregexp.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QString \
+		armeabi-v7a/moc_predefs.h \
+		../../../../installs/Qt/5.15.2/android/bin/moc
+	/home/saul/installs/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/home/saul/installs/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/5.15.2/android/include -I/home/saul/installs/Qt/5.15.2/android/include/QtCharts -I/home/saul/installs/Qt/5.15.2/android/include/QtWidgets -I/home/saul/installs/Qt/5.15.2/android/include/QtGui -I/home/saul/installs/Qt/5.15.2/android/include/QtBluetooth -I/home/saul/installs/Qt/5.15.2/android/include/QtNetwork -I/home/saul/installs/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/deviceinfo.h -o armeabi-v7a/moc_deviceinfo.cpp
+
 armeabi-v7a/moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../nems/btclient.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
@@ -555,11 +731,6 @@ armeabi-v7a/moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/qicon.h \
 		../../../../installs/Qt/5.15.2/android/include/QtNetwork/QTcpSocket \
 		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qtcpsocket.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/QNetworkSession \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworksession.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworkinterface.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qhostaddress.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworkconfiguration.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QTime \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qdatetime.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/QStandardItemModel \
@@ -567,6 +738,19 @@ armeabi-v7a/moc_mainwindow.cpp: ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qabstractitemmodel.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qxmlstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QVariantMap \
+		../nems/deviceinfo.h \
+		../nems/bleclient.h \
 		armeabi-v7a/moc_predefs.h \
 		../../../../installs/Qt/5.15.2/android/bin/moc
 	/home/saul/installs/Qt/5.15.2/android/bin/moc $(DEFINES) --include /home/saul/projects/Qt/nems/build-nems-Android_Qt_5_15_2_Clang_Multi_Abi-Release/armeabi-v7a/moc_predefs.h -I/home/saul/installs/Qt/5.15.2/android/mkspecs/android-clang -I/home/saul/projects/Qt/nems/nems -I/home/saul/installs/Qt/5.15.2/android/include -I/home/saul/installs/Qt/5.15.2/android/include/QtCharts -I/home/saul/installs/Qt/5.15.2/android/include/QtWidgets -I/home/saul/installs/Qt/5.15.2/android/include/QtGui -I/home/saul/installs/Qt/5.15.2/android/include/QtBluetooth -I/home/saul/installs/Qt/5.15.2/android/include/QtNetwork -I/home/saul/installs/Qt/5.15.2/android/include/QtCore -I. -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/local/include -I/home/saul/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/9.0.8/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../nems/mainwindow.h -o armeabi-v7a/moc_mainwindow.cpp
@@ -997,6 +1181,188 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
+armeabi-v7a/bleclient.o: ../nems/bleclient.cpp ../nems/bleclient.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig-bootstrapped.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlogging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qflags.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_bootstrap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_msvc.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmutex.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstring.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qchar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringview.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiterator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpair.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvector.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpoint.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregexp.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothAddress \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothaddress.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QByteArray \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QString \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QMetaType \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QtGlobal \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QUuid \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/quuid.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QDebug \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qdebug.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhash.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiodevice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlocale.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvariant.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qset.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QSharedPointer \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetooth.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QVariantMap \
+		../nems/deviceinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/bleclient.o ../nems/bleclient.cpp
+
+armeabi-v7a/deviceinfo.o: ../nems/deviceinfo.cpp ../nems/deviceinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothDeviceInfo \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetoothglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobal.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig-bootstrapped.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qconfig.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtcore-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsystemdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qprocessordetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcompilerdetection.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtypeinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsysinfo.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlogging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qflags.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbasicatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_bootstrap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qgenericatomic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_cxx11.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qatomic_msvc.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qglobalstatic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmutex.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnumeric.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qversiontagging.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qtbluetooth-config.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstring.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qchar.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qrefcount.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qnamespace.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qarraydata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringliteral.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringview.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringbuilder.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmetatype.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvarlengtharray.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainerfwd.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qalgorithms.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontainertools_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhashfunctions.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpair.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobjectdefs_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvector.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiterator.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qpoint.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qbytearraylist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringlist.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qregexp.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qstringmatcher.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreevent.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qscopedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qobject_impl.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QString \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothAddress \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothaddress.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QByteArray \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QMetaType \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QBluetoothUuid \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qbluetoothuuid.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QtGlobal \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QUuid \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/quuid.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QDebug \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qdebug.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qhash.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qmap.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qtextstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qiodevice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qlocale.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qvariant.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qshareddata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qset.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qcontiguouscache.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/qsharedpointer_impl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/deviceinfo.o ../nems/deviceinfo.cpp
+
 armeabi-v7a/main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../nems/btclient.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QObject \
@@ -1172,11 +1538,6 @@ armeabi-v7a/main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/qicon.h \
 		../../../../installs/Qt/5.15.2/android/include/QtNetwork/QTcpSocket \
 		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qtcpsocket.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/QNetworkSession \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworksession.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworkinterface.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qhostaddress.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworkconfiguration.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QTime \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qdatetime.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/QStandardItemModel \
@@ -1184,6 +1545,19 @@ armeabi-v7a/main.o: ../nems/main.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qabstractitemmodel.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qxmlstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QVariantMap \
+		../nems/deviceinfo.h \
+		../nems/bleclient.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QApplication \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qapplication.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qcoreapplication.h \
@@ -1368,11 +1742,6 @@ armeabi-v7a/mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/qicon.h \
 		../../../../installs/Qt/5.15.2/android/include/QtNetwork/QTcpSocket \
 		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qtcpsocket.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/QNetworkSession \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworksession.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworkinterface.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qhostaddress.h \
-		../../../../installs/Qt/5.15.2/android/include/QtNetwork/qnetworkconfiguration.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QTime \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qdatetime.h \
 		../../../../installs/Qt/5.15.2/android/include/QtGui/QStandardItemModel \
@@ -1380,6 +1749,19 @@ armeabi-v7a/mainwindow.o: ../nems/mainwindow.cpp ../nems/mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qabstractitemmodel.h \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/QXmlStreamWriter \
 		../../../../installs/Qt/5.15.2/android/include/QtCore/qxmlstream.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyController \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycontroller.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyAdvertisingData \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyService \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergyservice.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyCharacteristic \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergycharacteristic.h \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/QLowEnergyDescriptor \
+		../../../../installs/Qt/5.15.2/android/include/QtBluetooth/qlowenergydescriptor.h \
+		../../../../installs/Qt/5.15.2/android/include/QtCore/QVariantMap \
+		../nems/deviceinfo.h \
+		../nems/bleclient.h \
 		ui_mainwindow.h \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/QAction \
 		../../../../installs/Qt/5.15.2/android/include/QtWidgets/qaction.h \
@@ -2110,6 +2492,12 @@ armeabi-v7a/nmessensor.o: ../nems/nmessensor.cpp ../nems/nmessensor.h \
 
 armeabi-v7a/qrc_images.o: armeabi-v7a/qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/qrc_images.o armeabi-v7a/qrc_images.cpp
+
+armeabi-v7a/moc_bleclient.o: armeabi-v7a/moc_bleclient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_bleclient.o armeabi-v7a/moc_bleclient.cpp
+
+armeabi-v7a/moc_deviceinfo.o: armeabi-v7a/moc_deviceinfo.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_deviceinfo.o armeabi-v7a/moc_deviceinfo.cpp
 
 armeabi-v7a/moc_mainwindow.o: armeabi-v7a/moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armeabi-v7a/moc_mainwindow.o armeabi-v7a/moc_mainwindow.cpp

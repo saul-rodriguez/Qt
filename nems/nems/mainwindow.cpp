@@ -8,7 +8,6 @@
 #include <QMessageBox>
 #include <QXmlStreamWriter>
 #include <QtMath>
-//#include <QRegExp>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -17,7 +16,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     /**** Toolbar ******/
-   ui->mainToolBar->setIconSize(QSize(120, 120));
+   ui->mainToolBar->setIconSize(QSize(100, 100));
+
 
   // ui->mainToolBar->setFixedHeight(50);
 
@@ -25,11 +25,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->pushButtonBTconnect->setEnabled(true);
     ui->pushButtonBTdiscoverDevices->setEnabled(true);
-    ui->pushButtonWiFiConnect->setEnabled(false);
-    ui->pushButtonWiFiDisconnect->setEnabled(false);
-    ui->lineEditWiFiAddress->setEnabled(false);
-    ui->lineEditWiFiPort->setEnabled(false);
+    ui->pushButtonBTdisconnect->setEnabled(true);
+    ui->pushButtonBLEdiscover->setEnabled(false);
+    ui->pushButtonBLEconnect->setEnabled(false);
+    ui->pushButtonBLEdisconnect->setEnabled(false);
 
+
+    /**** Config plot ****/
     m_MaxDataPlot = 640;
     m_DataCounter = 0;
     m_MaxNumSamples = 6000; //Max Number of samples to be recorded before the buffers are cleared
@@ -54,6 +56,11 @@ MainWindow::MainWindow(QWidget *parent) :
    // connect(m_WiFiTcpSocket, SIGNAL(readyRead()),this, SLOT(WiFiRead()));
    // connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
    //            this, &MainWindow::WiFiDisplayError);
+
+    m_ble = new BLEClient(this);
+    connect(m_ble, &BLEClient::deviceFound, this, &MainWindow::deviceFound);
+    connect(m_ble, &BLEClient::rxData, this, &MainWindow::rxData);
+    connect(m_ble, &BLEClient::BLEupdateStatus, this, &MainWindow::updateBLEstatus);
 
     /***** Plot *****/
 
@@ -169,6 +176,9 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect(m_timer_dualStim, SIGNAL(timeout()), this, SLOT(DualStimulationTimeout()));
     m_dualMPstim->setPinMap(m_pinmap);
 
+    /* display version in AT */
+    ui->plainTextEditAT->appendPlainText(windowTitle());
+
 }
 
 MainWindow::~MainWindow()
@@ -232,6 +242,7 @@ void MainWindow::BTrxData(const QByteArray &data)
 
 }
 
+/*
 void MainWindow::WiFiRead()
 {
     m_WiFi_in.startTransaction();
@@ -262,7 +273,9 @@ void MainWindow::WiFiRead()
     }
 
 }
+*/
 
+/*
 void MainWindow::WiFiDisplayError(QAbstractSocket::SocketError socketError)
 {
     switch (socketError) {
@@ -286,6 +299,8 @@ void MainWindow::WiFiDisplayError(QAbstractSocket::SocketError socketError)
                                       .arg(m_WiFiTcpSocket->errorString()));
          }
 }
+*/
+
 
 void MainWindow::PlotRx(const QByteArray &data)
 {
@@ -576,9 +591,10 @@ void MainWindow::send(QByteArray data)
     if (ui->radioButtonBT->isChecked()) {
         m_bt->BTwrite(data);
     } else {    //The communication with the ESP-01 module is always terminated by cr + nl
-        data.append('\r');
-        data.append('\n');
-        m_WiFiTcpSocket->write(data);
+       // data.append('\r');
+       // data.append('\n');
+       // m_WiFiTcpSocket->write(data);
+        m_ble->write(data);
     }
 
     m_timer_silence->start(150);
@@ -592,7 +608,11 @@ void MainWindow::parseProgram(const QByteArray &data)
     QString aux;
     QString parameter;
 
-    dataStr = QString::fromStdString(data.toStdString());
+    m_program.append(data);
+
+
+    //dataStr = QString::fromStdString(data.toStdString());
+    dataStr = QString::fromStdString(m_program.toStdString());
 
     //TODO
     dataLst = dataStr.split(QRegularExpression("\n"));
@@ -610,6 +630,7 @@ void MainWindow::parseProgram(const QByteArray &data)
     }
 
     // extract program data
+    m_program.clear();
 
     //Amplitude1
     aux = dataLst.at(2);
@@ -778,9 +799,10 @@ void MainWindow::on_pushButtonATSend_clicked()
     if (ui->radioButtonBT->isChecked()) {
         m_bt->BTwrite(data);
     } else {    //The communication with the ESP-01 module is always terminated by cr + nl
-        data.append('\r');
-        data.append('\n');
-        m_WiFiTcpSocket->write(data);
+       // data.append('\r');
+       // data.append('\n');
+       // m_WiFiTcpSocket->write(data);
+        m_ble->write(data);
     }
 
 }
@@ -790,10 +812,12 @@ void MainWindow::on_radioButtonWiFi_toggled(bool checked)
     if (checked) {
         ui->pushButtonBTconnect->setEnabled(false);
         ui->pushButtonBTdiscoverDevices->setEnabled(false);
-        ui->pushButtonWiFiConnect->setEnabled(true);
-        ui->pushButtonWiFiDisconnect->setEnabled(true);
-        ui->lineEditWiFiAddress->setEnabled(true);
-        ui->lineEditWiFiPort->setEnabled(true);
+        ui->pushButtonBTdisconnect->setEnabled(false);
+        ui->pushButtonBLEdiscover->setEnabled(true);
+        ui->pushButtonBLEconnect->setEnabled(true);
+        ui->pushButtonBLEdisconnect->setEnabled(true);
+        //ui->lineEditWiFiAddress->setEnabled(true);
+        //ui->lineEditWiFiPort->setEnabled(true);
     }
 }
 
@@ -802,14 +826,16 @@ void MainWindow::on_radioButtonBT_toggled(bool checked)
     if (checked) {
         ui->pushButtonBTconnect->setEnabled(true);
         ui->pushButtonBTdiscoverDevices->setEnabled(true);
-        ui->pushButtonWiFiConnect->setEnabled(false);
-        ui->pushButtonWiFiDisconnect->setEnabled(false);
-        ui->lineEditWiFiAddress->setEnabled(false);
-        ui->lineEditWiFiPort->setEnabled(false);
+        ui->pushButtonBTdisconnect->setEnabled(true);
+        ui->pushButtonBLEdiscover->setEnabled(false);
+        ui->pushButtonBLEconnect->setEnabled(false);
+        ui->pushButtonBLEdisconnect->setEnabled(false);
+        //ui->lineEditWiFiAddress->setEnabled(false);
+        //ui->lineEditWiFiPort->setEnabled(false);
     }
-
 }
 
+/*
 void MainWindow::on_pushButtonWiFiConnect_clicked()
 {
     QString address = ui->lineEditWiFiAddress->text();
@@ -833,7 +859,7 @@ void MainWindow::on_pushButtonWiFiDisconnect_clicked()
     ui->labelWiFiStatus->setText("Disconnecting...");
     m_WiFiTcpSocket->disconnectFromHost();;
 }
-
+*/
 
 void MainWindow::on_checkBoxConfigAntialias_toggled(bool checked)
 {
@@ -871,7 +897,7 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 void MainWindow::on_action_Run_triggered()
 {
     //Ceck if BT is connected
-    if (ui->labelBTstatus->text() != "Connected")
+    if (ui->labelBTstatus->text() != "Connected" && ui->labelBLEStatus->text() != "Connected")
         return;
 
     QByteArray data;
@@ -1101,8 +1127,8 @@ void MainWindow::on_pushButtonChannel2_clicked()
 
 void MainWindow::on_actionStop_triggered()
 {
-    //Ceck if BT is connected
-    if (ui->labelBTstatus->text() != "Connected")
+    //Ceck if BT is connected    
+    if (ui->labelBTstatus->text() != "Connected" && ui->labelBLEStatus->text() != "Connected")
         return;
 
     QByteArray data;
@@ -1128,8 +1154,8 @@ void MainWindow::on_actionStop_triggered()
 
 void MainWindow::on_action_Open_triggered()
 {
-    //Ceck if BT is connected
-    if (ui->labelBTstatus->text() != "Connected")
+    //Check if BT is connected
+    if (ui->labelBTstatus->text() != "Connected" && ui->labelBLEStatus->text() != "Connected")
         return;
 
     QByteArray data;
@@ -1139,9 +1165,11 @@ void MainWindow::on_action_Open_triggered()
 
 void MainWindow::on_action_Display_program_triggered()
 {
-    //Ceck if BT is connected
-    if (ui->labelBTstatus->text() != "Connected")
+    //Check if BT is connected
+    if (ui->labelBTstatus->text() != "Connected" && ui->labelBLEStatus->text() != "Connected")
         return;
+
+    m_program.clear();
 
     QByteArray data;
     data.append('p');
@@ -1280,7 +1308,7 @@ void MainWindow::on_pushButtonResetMaxEnergy_clicked()
 void MainWindow::on_actionSearch_triggered()
 {
     //Ceck if BT is connected
-    if (ui->labelBTstatus->text() != "Connected")
+    if (ui->labelBTstatus->text() != "Connected" && ui->labelBLEStatus->text() != "Connected")
         return;
 
     QString start_electrode;
@@ -1416,7 +1444,44 @@ void MainWindow::on_actionShow_pin_map_triggered()
         ui->plainTextEditAT->appendPlainText(aux);
 
     }
+}
+
+void MainWindow::deviceFound(QString device)
+{
+    ui->comboBoxBLEdevices->addItem(device);
+}
+
+void MainWindow::rxData(const QByteArray &data)
+{
+    QString aux;
+    aux = QString::fromStdString(data.toStdString());
+    //ui->labelBLEStatus->setText(aux);
+    qDebug()<< aux;
+    BTrxData(data);
+}
+
+void MainWindow::updateBLEstatus(QString &status)
+{
+    ui->labelBLEStatus->setText(status);
+}
 
 
+void MainWindow::on_pushButtonBLEdiscover_clicked()
+{
+    ui->comboBoxBLEdevices->clear();
+    m_ble->discover();
+}
+
+
+void MainWindow::on_pushButtonBLEconnect_clicked()
+{
+    int index = ui->comboBoxBLEdevices->currentIndex();
+    m_ble->BLEconnect(index);
+}
+
+
+void MainWindow::on_pushButtonBLEdisconnect_clicked()
+{
+    m_ble->BLEdisconnect();
 }
 
