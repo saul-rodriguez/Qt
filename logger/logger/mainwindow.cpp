@@ -45,8 +45,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_WiFi_in.setDevice(m_WiFiTcpSocket);
     m_WiFi_in.setVersion(QDataStream::Qt_5_11);
     connect(m_WiFiTcpSocket, SIGNAL(readyRead()),this, SLOT(WiFiRead()));
-    connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
-               this, &MainWindow::WiFiDisplayError);
+   // connect(m_WiFiTcpSocket, QOverload<QAbstractSocket::SocketError>::of(&QAbstractSocket::error),
+     //          this, &MainWindow::WiFiDisplayError);
 
     //Plot
     m_chart = new CPlotChart();
@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chartView = new QChartView(static_cast<QChart*>(m_chart));
     //Set antialising properties and the chartview object to a place in layout
     m_chartView->setRenderHint(QPainter::Antialiasing, false); //false or true
-    ui->verticalLayout_3->addWidget(m_chartView,1,0);
+    ui->verticalLayout_3->addWidget(m_chartView,1);
 
     //timer to refresh the plot
     m_timer = new QTimer(this);
@@ -263,8 +263,8 @@ void MainWindow::on_pushButtonATSend_clicked()
     QString aux = ui->lineEditAT->text();
 
     QByteArray data;
-    data.append(aux);
-
+    data.append(aux.toUtf8());
+    //data.append()
 
     if (ui->radioButtonBT->isChecked()) {
         m_bt->BTwrite(data);

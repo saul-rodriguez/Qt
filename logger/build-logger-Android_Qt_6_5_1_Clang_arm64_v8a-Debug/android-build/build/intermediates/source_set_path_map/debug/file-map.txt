@@ -1,0 +1,9 @@
+org.qtproject.example.logger-java-0 /home/saul/installs/Qt/6.5.1/android_arm64_v8a/src/android/java/res
+org.qtproject.example.logger-pngs-1 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/build/generated/res/pngs/debug
+org.qtproject.example.logger-resValues-2 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/build/generated/res/resValues/debug
+org.qtproject.example.logger-rs-3 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/build/generated/res/rs/debug
+org.qtproject.example.logger-mergeDebugResources-4 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/build/intermediates/incremental/debug/mergeDebugResources/merged.dir
+org.qtproject.example.logger-mergeDebugResources-5 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/build/intermediates/incremental/debug/mergeDebugResources/stripped.dir
+org.qtproject.example.logger-merged_res-6 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/build/intermediates/merged_res/debug
+org.qtproject.example.logger-android-build-7 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/res
+org.qtproject.example.logger-debug-8 /home/saul/projects/Qt/logger/build-logger-Android_Qt_6_5_1_Clang_arm64_v8a-Debug/android-build/src/debug/res

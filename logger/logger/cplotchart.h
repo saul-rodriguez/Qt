@@ -7,12 +7,12 @@
 #include <QtCharts/QChartGlobal>
 #include <QtCharts/QLineSeries>
 
-QT_CHARTS_BEGIN_NAMESPACE
+//QT_CHARTS_BEGIN_NAMESPACE
 class QChartView;
 class QChart;
-QT_CHARTS_END_NAMESPACE
+//QT_CHARTS_END_NAMESPACE
 
-QT_CHARTS_USE_NAMESPACE
+//QT_CHARTS_USE_NAMESPACE
 
 
 //This type definitions create suitable list to handle data

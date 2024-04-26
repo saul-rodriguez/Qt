@@ -1,7 +1,8 @@
 #define ANDROID 1
 #define _GNU_SOURCE 1
 #define _ILP32 1
-#define __ANDROID_API__ 21
+#define __ANDROID_API__ __ANDROID_MIN_SDK_VERSION__
+#define __ANDROID_MIN_SDK_VERSION__ 21
 #define __ANDROID__ 1
 #define __APCS_32__ 1
 #define __ARMEL__ 1
@@ -114,6 +115,7 @@
 #define __GCC_ATOMIC_SHORT_LOCK_FREE 2
 #define __GCC_ATOMIC_TEST_AND_SET_TRUEVAL 1
 #define __GCC_ATOMIC_WCHAR_T_LOCK_FREE 2
+#define __GCC_HAVE_DWARF2_CFI_ASM 1
 #define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_1 1
 #define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_2 1
 #define __GCC_HAVE_SYNC_COMPARE_AND_SWAP_4 1
@@ -253,6 +255,7 @@
 #define __SIZE_WIDTH__ 32
 #define __SSP_STRONG__ 2
 #define __STDCPP_DEFAULT_NEW_ALIGNMENT__ 8U
+#define __STDCPP_THREADS__ 1
 #define __STDC_HOSTED__ 1
 #define __STDC_UTF_16__ 1
 #define __STDC_UTF_32__ 1
@@ -350,7 +353,7 @@
 #define __UINT_LEAST8_MAX__ 255
 #define __UINT_LEAST8_TYPE__ unsigned char
 #define __USER_LABEL_PREFIX__ 
-#define __VERSION__ "4.2.1 Compatible Android (6454773 based on r365631c2) Clang 9.0.8 (https://android.googlesource.com/toolchain/llvm-project 98c855489587874b2a325e7a516b99d838599c6f)"
+#define __VERSION__ "Android (8075178, based on r437112b) Clang 14.0.1 (https://android.googlesource.com/toolchain/llvm-project 8671348b81b95fc603505dfc881b45103bee1731)"
 #define __VFP_FP__ 1
 #define __WCHAR_MAX__ 4294967295U
 #define __WCHAR_TYPE__ unsigned int
@@ -363,14 +366,17 @@
 #define __arm 1
 #define __arm__ 1
 #define __clang__ 1
-#define __clang_major__ 9
+#define __clang_literal_encoding__ "UTF-8"
+#define __clang_major__ 14
 #define __clang_minor__ 0
-#define __clang_patchlevel__ 8
-#define __clang_version__ "9.0.8 (https://android.googlesource.com/toolchain/llvm-project 98c855489587874b2a325e7a516b99d838599c6f)"
+#define __clang_patchlevel__ 1
+#define __clang_version__ "14.0.1 (https://android.googlesource.com/toolchain/llvm-project 8671348b81b95fc603505dfc881b45103bee1731)"
+#define __clang_wide_literal_encoding__ "UTF-32"
 #define __cplusplus 201103L
 #define __cpp_alias_templates 200704L
 #define __cpp_attributes 200809L
 #define __cpp_constexpr 200704
+#define __cpp_constexpr_in_decltype 201711L
 #define __cpp_decltype 200707L
 #define __cpp_delegating_constructors 200604L
 #define __cpp_exceptions 199711L
