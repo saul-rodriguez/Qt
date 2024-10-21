@@ -163,6 +163,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //Automatic Mode
     m_am = 0;
+
+    m_log = 0;
 }
 
 MainWindow::~MainWindow()
@@ -407,6 +409,13 @@ void MainWindow::MeasurementTimeout()
 
 
     m_measurements[m_currentMeasurement].printSweep(); //print sweep in debug mode
+
+    /**************************************************/
+    /* TODO: Log measurement                          */
+    /**************************************************/
+    if (m_log) {
+        logdata();
+    }
 
     PlotMeasurement();    
 
@@ -1377,5 +1386,50 @@ void MainWindow::on_actionAM_toggled(bool arg1)
     } else {
         m_am = false;
     }
+
+}
+
+void MainWindow::on_actionLOG_toggled(bool arg1)
+{
+    if (arg1) {
+        m_log = true;
+
+        // Open file to save
+        QDate cd = QDate::currentDate();
+        QTime ct = QTime::currentTime();
+
+        QString date = cd.toString(Qt::ISODate);
+        QString time = "T" + ct.toString("hh") + "_" + ct.toString("mm") + "_" + ct.toString("ss");
+
+        m_logFilename = date + time + ".txt";
+        qDebug()<<"LOG all data on " + m_logFilename;
+
+    } else {
+
+        m_log = false;
+    }
+}
+
+
+void MainWindow::logdata()
+{
+    QString sweep;
+    sweep= m_measurements[m_currentMeasurement].getSweep();
+    //qDebug()<<sweep;
+
+    QTime ct = QTime::currentTime();
+    int time_sec = (ct.toString("hh")).toInt()*3600 + (ct.toString("mm")).toInt()*60 + (ct.toString("ss")).toInt(); // Time in sec
+
+    QString logdata;
+    logdata = QString::number(time_sec) + " " + sweep + "\n";
+
+    qDebug()<<logdata;
+
+    QFile outfile(m_logFilename);
+    outfile.open(QIODevice::ReadWrite | QIODevice::Text | QIODevice::Append);
+    QTextStream stream(&outfile);
+    stream << logdata;
+    outfile.close();
+
 
 }

@@ -13,6 +13,7 @@ public:
     void addImpedance(bioimpedance *impedance);
     void cleanSweep();
     void printSweep();
+    QString getSweep();
     int getCount();
     DataTrace getTraceMag();
     DataTrace getTracePha();

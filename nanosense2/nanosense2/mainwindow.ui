@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Nanonets2Sense</string>
+   <string>Implantable 2</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -547,6 +547,7 @@
    <addaction name="action_Delete_sweep"/>
    <addaction name="separator"/>
    <addaction name="actionAM"/>
+   <addaction name="actionLOG"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Run">
@@ -619,6 +620,14 @@
    </property>
    <property name="toolTip">
     <string>AM</string>
+   </property>
+  </action>
+  <action name="actionLOG">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>LOG</string>
    </property>
   </action>
  </widget>

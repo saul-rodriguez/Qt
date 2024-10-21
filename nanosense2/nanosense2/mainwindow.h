@@ -88,6 +88,10 @@ private:
     //Automatic Mode
     bool m_am;
 
+    //Log Mode
+    bool m_log;
+    QString m_logFilename;
+
 
 private slots:
     void BTgetDevice(QString name);
@@ -111,6 +115,8 @@ private slots:
     void updateStatistics();
 
     void MeasurementDelayedTimeout();
+
+    void logdata();
 
     void on_pushButtonBTdiscoverDevices_clicked();
     void on_pushButtonBTconnect_clicked();
@@ -141,6 +147,7 @@ private slots:
     void on_pushButtonPA_Config_clicked();
     void on_actionRun_Timer_triggered();
     void on_actionAM_toggled(bool arg1);
+    void on_actionLOG_toggled(bool arg1);
 };
 
 #endif // MAINWINDOW_H

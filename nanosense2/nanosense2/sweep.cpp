@@ -31,6 +31,27 @@ void sweep::printSweep()
     }
 }
 
+QString sweep::getSweep()
+{
+    QString tempo;
+
+    int N = m_measurement.size();
+
+    for (int i = 0; i < N; i++) {
+        //qDebug()<<"Freq = "<<m_measurement[i]->getFrequency()<<", mag = "<<m_measurement[i]->getMagnitude()<<", pha = "<<m_measurement[i]->getPhase();
+        tempo += QString::number(m_measurement[i]->getMagnitude());
+        tempo += " ";
+    }
+
+    for (int i = 0; i < N; i++) {
+        //qDebug()<<"Freq = "<<m_measurement[i]->getFrequency()<<", mag = "<<m_measurement[i]->getMagnitude()<<", pha = "<<m_measurement[i]->getPhase();
+        tempo += QString::number(m_measurement[i]->getPhase());
+        tempo += " ";
+    }
+
+    return tempo;
+}
+
 int sweep::getCount()
 {
     return m_measurement.size();
