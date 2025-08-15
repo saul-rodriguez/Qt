@@ -14,6 +14,7 @@ BTClient::BTClient(QObject *parent) : QObject(parent)
     m_RX_timeout = RX_TIMEOUT;
     m_RX_state = btRxState::BT_IDLE;
 
+
 }
 
 BTClient::~BTClient()
