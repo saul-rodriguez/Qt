@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = logger1.0.0
-DISTDIR = /home/saul/projects/Qt/logger/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/.tmp/logger1.0.0
+DISTDIR = /home/saul/projects/Qt/logger_ble/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/.tmp/logger1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/opt/Qt/6.5.3/gcc_64/lib
 LIBS          = $(SUBLIBS) /opt/Qt/6.5.3/gcc_64/lib/libQt6Charts.so /opt/Qt/6.5.3/gcc_64/lib/libQt6OpenGLWidgets.so /opt/Qt/6.5.3/gcc_64/lib/libQt6Widgets.so /opt/Qt/6.5.3/gcc_64/lib/libQt6OpenGL.so /opt/Qt/6.5.3/gcc_64/lib/libQt6Gui.so /opt/Qt/6.5.3/gcc_64/lib/libQt6Bluetooth.so -pthread /opt/Qt/6.5.3/gcc_64/lib/libQt6Network.so /opt/Qt/6.5.3/gcc_64/lib/libQt6DBus.so /opt/Qt/6.5.3/gcc_64/lib/libQt6Core.so -lpthread -lGL   
@@ -52,17 +52,25 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../main.cpp \
+SOURCES       = ../../bleclient.cpp \
+		../../deviceinfo.cpp \
+		../../main.cpp \
 		../../mainwindow.cpp \
 		../../btclient.cpp \
 		../../cplotchart.cpp qrc_images.cpp \
+		moc_bleclient.cpp \
+		moc_deviceinfo.cpp \
 		moc_mainwindow.cpp \
 		moc_btclient.cpp
-OBJECTS       = main.o \
+OBJECTS       = bleclient.o \
+		deviceinfo.o \
+		main.o \
 		mainwindow.o \
 		btclient.o \
 		cplotchart.o \
 		qrc_images.o \
+		moc_bleclient.o \
+		moc_deviceinfo.o \
 		moc_mainwindow.o \
 		moc_btclient.o
 DIST          = /opt/Qt/6.5.3/gcc_64/mkspecs/features/spec_pre.prf \
@@ -340,6 +348,7 @@ DIST          = /opt/Qt/6.5.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/spec_post.prf \
+		../../.qmake.stash \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/default_pre.prf \
@@ -363,9 +372,13 @@ DIST          = /opt/Qt/6.5.3/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/lex.prf \
-		../../../../logger.pro ../../mainwindow.h \
+		../../../../logger.pro ../../bleclient.h \
+		../../deviceinfo.h \
+		../../mainwindow.h \
 		../../btclient.h \
-		../../cplotchart.h ../../main.cpp \
+		../../cplotchart.h ../../bleclient.cpp \
+		../../deviceinfo.cpp \
+		../../main.cpp \
 		../../mainwindow.cpp \
 		../../btclient.cpp \
 		../../cplotchart.cpp
@@ -655,6 +668,7 @@ Makefile: ../../logger.pro /opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++/qmake.conf /op
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/qt_config.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++/qmake.conf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/toolchain.prf \
 		/opt/Qt/6.5.3/gcc_64/mkspecs/features/default_pre.prf \
@@ -965,6 +979,7 @@ Makefile: ../../logger.pro /opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++/qmake.conf /op
 /opt/Qt/6.5.3/gcc_64/mkspecs/features/qt_config.prf:
 /opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++/qmake.conf:
 /opt/Qt/6.5.3/gcc_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /opt/Qt/6.5.3/gcc_64/mkspecs/features/exclusive_builds.prf:
 /opt/Qt/6.5.3/gcc_64/mkspecs/features/toolchain.prf:
 /opt/Qt/6.5.3/gcc_64/mkspecs/features/default_pre.prf:
@@ -1015,8 +1030,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/6.5.3/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../mainwindow.h ../../btclient.h ../../cplotchart.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../mainwindow.cpp ../../btclient.cpp ../../cplotchart.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bleclient.h ../../deviceinfo.h ../../mainwindow.h ../../btclient.h ../../cplotchart.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bleclient.cpp ../../deviceinfo.cpp ../../main.cpp ../../mainwindow.cpp ../../btclient.cpp ../../cplotchart.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -1056,9 +1071,278 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt/6.5.3/gcc_64/mkspecs/features/data/dummy.cpp
 	g++ -pipe -g -Wall -Wextra -fPIC -dM -E -o moc_predefs.h /opt/Qt/6.5.3/gcc_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_btclient.cpp
+compiler_moc_header_make_all: moc_bleclient.cpp moc_deviceinfo.cpp moc_mainwindow.cpp moc_btclient.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_btclient.cpp
+	-$(DEL_FILE) moc_bleclient.cpp moc_deviceinfo.cpp moc_mainwindow.cpp moc_btclient.cpp
+moc_bleclient.cpp: ../../bleclient.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QObject \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothAddress \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothaddress.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QByteArray \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QString \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QSharedPointer \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetooth.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariant \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariant.h \
+		../../deviceinfo.h \
+		moc_predefs.h \
+		/opt/Qt/6.5.3/gcc_64/libexec/moc
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/gcc_64/include -I/opt/Qt/6.5.3/gcc_64/include/QtCharts -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGL -I/opt/Qt/6.5.3/gcc_64/include/QtGui -I/opt/Qt/6.5.3/gcc_64/include/QtBluetooth -I/opt/Qt/6.5.3/gcc_64/include/QtNetwork -I/opt/Qt/6.5.3/gcc_64/include/QtDBus -I/opt/Qt/6.5.3/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../bleclient.h -o moc_bleclient.cpp
+
+moc_deviceinfo.cpp: ../../deviceinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QObject \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QString \
+		moc_predefs.h \
+		/opt/Qt/6.5.3/gcc_64/libexec/moc
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/gcc_64/include -I/opt/Qt/6.5.3/gcc_64/include/QtCharts -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGL -I/opt/Qt/6.5.3/gcc_64/include/QtGui -I/opt/Qt/6.5.3/gcc_64/include/QtBluetooth -I/opt/Qt/6.5.3/gcc_64/include/QtNetwork -I/opt/Qt/6.5.3/gcc_64/include/QtDBus -I/opt/Qt/6.5.3/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../deviceinfo.h -o moc_deviceinfo.cpp
+
 moc_mainwindow.cpp: ../../mainwindow.h \
 		../../btclient.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtCore/QObject \
@@ -1282,9 +1566,26 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qtnetworkexports.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qabstractsocket.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../bleclient.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMap \
+		../../deviceinfo.h \
 		moc_predefs.h \
 		/opt/Qt/6.5.3/gcc_64/libexec/moc
-	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/6.5.3/gcc_64/include -I/opt/Qt/6.5.3/gcc_64/include/QtCharts -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGL -I/opt/Qt/6.5.3/gcc_64/include/QtGui -I/opt/Qt/6.5.3/gcc_64/include/QtBluetooth -I/opt/Qt/6.5.3/gcc_64/include/QtNetwork -I/opt/Qt/6.5.3/gcc_64/include/QtDBus -I/opt/Qt/6.5.3/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/gcc_64/include -I/opt/Qt/6.5.3/gcc_64/include/QtCharts -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGL -I/opt/Qt/6.5.3/gcc_64/include/QtGui -I/opt/Qt/6.5.3/gcc_64/include/QtBluetooth -I/opt/Qt/6.5.3/gcc_64/include/QtNetwork -I/opt/Qt/6.5.3/gcc_64/include/QtDBus -I/opt/Qt/6.5.3/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
 
 moc_btclient.cpp: ../../btclient.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtCore/QObject \
@@ -1424,7 +1725,7 @@ moc_btclient.cpp: ../../btclient.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbasictimer.h \
 		moc_predefs.h \
 		/opt/Qt/6.5.3/gcc_64/libexec/moc
-	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/6.5.3/gcc_64/include -I/opt/Qt/6.5.3/gcc_64/include/QtCharts -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGL -I/opt/Qt/6.5.3/gcc_64/include/QtGui -I/opt/Qt/6.5.3/gcc_64/include/QtBluetooth -I/opt/Qt/6.5.3/gcc_64/include/QtNetwork -I/opt/Qt/6.5.3/gcc_64/include/QtDBus -I/opt/Qt/6.5.3/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../btclient.h -o moc_btclient.cpp
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/moc_predefs.h -I/opt/Qt/6.5.3/gcc_64/mkspecs/linux-g++ -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/gcc_64/include -I/opt/Qt/6.5.3/gcc_64/include/QtCharts -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtWidgets -I/opt/Qt/6.5.3/gcc_64/include/QtOpenGL -I/opt/Qt/6.5.3/gcc_64/include/QtGui -I/opt/Qt/6.5.3/gcc_64/include/QtBluetooth -I/opt/Qt/6.5.3/gcc_64/include/QtNetwork -I/opt/Qt/6.5.3/gcc_64/include/QtDBus -I/opt/Qt/6.5.3/gcc_64/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/usr/lib/gcc/x86_64-linux-gnu/13/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../btclient.h -o moc_btclient.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1446,6 +1747,274 @@ compiler_lex_clean:
 compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+bleclient.o: ../../bleclient.cpp ../../bleclient.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QObject \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothAddress \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothaddress.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QByteArray \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QString \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QSharedPointer \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetooth.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariant \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariant.h \
+		../../deviceinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bleclient.o ../../bleclient.cpp
+
+deviceinfo.o: ../../deviceinfo.cpp ../../deviceinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QObject \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QString \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QBluetoothAddress \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qbluetoothaddress.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QByteArray
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o deviceinfo.o ../../deviceinfo.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
 		../../btclient.h \
@@ -1670,6 +2239,23 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qtnetworkexports.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qabstractsocket.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../bleclient.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMap \
+		../../deviceinfo.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt/6.5.3/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtCore/qcoreapplication.h \
@@ -1917,6 +2503,23 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qtnetworkexports.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qabstractsocket.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtNetwork/qhostaddress.h \
+		../../bleclient.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/gcc_64/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/gcc_64/include/QtCore/QMap \
+		../../deviceinfo.h \
 		ui_mainwindow.h \
 		/opt/Qt/6.5.3/gcc_64/include/QtCharts/QChartView \
 		/opt/Qt/6.5.3/gcc_64/include/QtCharts/qchartview.h \
@@ -2254,6 +2857,12 @@ cplotchart.o: ../../cplotchart.cpp ../../cplotchart.h \
 
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+
+moc_bleclient.o: moc_bleclient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bleclient.o moc_bleclient.cpp
+
+moc_deviceinfo.o: moc_deviceinfo.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_deviceinfo.o moc_deviceinfo.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

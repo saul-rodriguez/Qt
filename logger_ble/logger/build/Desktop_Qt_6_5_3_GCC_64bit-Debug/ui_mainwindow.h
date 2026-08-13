@@ -54,20 +54,18 @@ public:
     QGridLayout *gridLayout_2;
     QGridLayout *gridLayout_4;
     QPushButton *pushButtonBTdiscoverDevices;
-    QRadioButton *radioButtonWiFi;
+    QRadioButton *radioButtonBLE;
     QLabel *labelBTstatus;
     QRadioButton *radioButtonBT;
     QComboBox *comboBoxBTdevices;
     QPushButton *pushButtonBTconnect;
     QHBoxLayout *horizontalLayout_3;
-    QLabel *label;
-    QLineEdit *lineEditWiFiAddress;
-    QPushButton *pushButtonWiFiConnect;
-    QLabel *labelWiFiStatus;
+    QPushButton *pushButtonBLEDiscover;
+    QPushButton *pushButtonBLEConnect;
+    QLabel *labelBLEStatus;
     QHBoxLayout *horizontalLayout_4;
-    QLabel *labelWiFiPort;
-    QLineEdit *lineEditWiFiPort;
-    QPushButton *pushButtonWiFiDisconnect;
+    QComboBox *comboBoxBLE;
+    QPushButton *pushButtonBLEDisconnect;
     QPushButton *pushButtonBTdisconnect;
     QWidget *tab_2;
     QGridLayout *gridLayout_5;
@@ -156,10 +154,11 @@ public:
 
         gridLayout_4->addWidget(pushButtonBTdiscoverDevices, 1, 0, 1, 1);
 
-        radioButtonWiFi = new QRadioButton(groupBoxWirelessInterface);
-        radioButtonWiFi->setObjectName("radioButtonWiFi");
+        radioButtonBLE = new QRadioButton(groupBoxWirelessInterface);
+        radioButtonBLE->setObjectName("radioButtonBLE");
+        radioButtonBLE->setChecked(true);
 
-        gridLayout_4->addWidget(radioButtonWiFi, 0, 2, 1, 1);
+        gridLayout_4->addWidget(radioButtonBLE, 0, 2, 1, 1);
 
         labelBTstatus = new QLabel(groupBoxWirelessInterface);
         labelBTstatus->setObjectName("labelBTstatus");
@@ -168,7 +167,7 @@ public:
 
         radioButtonBT = new QRadioButton(groupBoxWirelessInterface);
         radioButtonBT->setObjectName("radioButtonBT");
-        radioButtonBT->setChecked(true);
+        radioButtonBT->setChecked(false);
 
         gridLayout_4->addWidget(radioButtonBT, 0, 0, 1, 1);
 
@@ -185,59 +184,39 @@ public:
         horizontalLayout_3 = new QHBoxLayout();
         horizontalLayout_3->setSpacing(6);
         horizontalLayout_3->setObjectName("horizontalLayout_3");
-        label = new QLabel(groupBoxWirelessInterface);
-        label->setObjectName("label");
+        pushButtonBLEDiscover = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBLEDiscover->setObjectName("pushButtonBLEDiscover");
 
-        horizontalLayout_3->addWidget(label);
-
-        lineEditWiFiAddress = new QLineEdit(groupBoxWirelessInterface);
-        lineEditWiFiAddress->setObjectName("lineEditWiFiAddress");
-        QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(0);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(lineEditWiFiAddress->sizePolicy().hasHeightForWidth());
-        lineEditWiFiAddress->setSizePolicy(sizePolicy);
-
-        horizontalLayout_3->addWidget(lineEditWiFiAddress);
+        horizontalLayout_3->addWidget(pushButtonBLEDiscover);
 
 
         gridLayout_4->addLayout(horizontalLayout_3, 1, 2, 1, 1);
 
-        pushButtonWiFiConnect = new QPushButton(groupBoxWirelessInterface);
-        pushButtonWiFiConnect->setObjectName("pushButtonWiFiConnect");
+        pushButtonBLEConnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBLEConnect->setObjectName("pushButtonBLEConnect");
 
-        gridLayout_4->addWidget(pushButtonWiFiConnect, 5, 2, 1, 1);
+        gridLayout_4->addWidget(pushButtonBLEConnect, 5, 2, 1, 1);
 
-        labelWiFiStatus = new QLabel(groupBoxWirelessInterface);
-        labelWiFiStatus->setObjectName("labelWiFiStatus");
+        labelBLEStatus = new QLabel(groupBoxWirelessInterface);
+        labelBLEStatus->setObjectName("labelBLEStatus");
 
-        gridLayout_4->addWidget(labelWiFiStatus, 3, 2, 1, 1);
+        gridLayout_4->addWidget(labelBLEStatus, 3, 2, 1, 1);
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setSpacing(6);
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        labelWiFiPort = new QLabel(groupBoxWirelessInterface);
-        labelWiFiPort->setObjectName("labelWiFiPort");
+        comboBoxBLE = new QComboBox(groupBoxWirelessInterface);
+        comboBoxBLE->setObjectName("comboBoxBLE");
 
-        horizontalLayout_4->addWidget(labelWiFiPort);
-
-        lineEditWiFiPort = new QLineEdit(groupBoxWirelessInterface);
-        lineEditWiFiPort->setObjectName("lineEditWiFiPort");
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(lineEditWiFiPort->sizePolicy().hasHeightForWidth());
-        lineEditWiFiPort->setSizePolicy(sizePolicy1);
-
-        horizontalLayout_4->addWidget(lineEditWiFiPort);
+        horizontalLayout_4->addWidget(comboBoxBLE);
 
 
         gridLayout_4->addLayout(horizontalLayout_4, 2, 2, 1, 1);
 
-        pushButtonWiFiDisconnect = new QPushButton(groupBoxWirelessInterface);
-        pushButtonWiFiDisconnect->setObjectName("pushButtonWiFiDisconnect");
+        pushButtonBLEDisconnect = new QPushButton(groupBoxWirelessInterface);
+        pushButtonBLEDisconnect->setObjectName("pushButtonBLEDisconnect");
 
-        gridLayout_4->addWidget(pushButtonWiFiDisconnect, 6, 2, 1, 1);
+        gridLayout_4->addWidget(pushButtonBLEDisconnect, 6, 2, 1, 1);
 
         pushButtonBTdisconnect = new QPushButton(groupBoxWirelessInterface);
         pushButtonBTdisconnect->setObjectName("pushButtonBTdisconnect");
@@ -307,7 +286,7 @@ public:
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName("menuBar");
-        menuBar->setGeometry(QRect(0, 0, 598, 22));
+        menuBar->setGeometry(QRect(0, 0, 598, 23));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName("mainToolBar");
@@ -315,12 +294,10 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName("statusBar");
         MainWindow->setStatusBar(statusBar);
-        QWidget::setTabOrder(radioButtonBT, radioButtonWiFi);
-        QWidget::setTabOrder(radioButtonWiFi, lineEditWiFiAddress);
-        QWidget::setTabOrder(lineEditWiFiAddress, lineEditWiFiPort);
-        QWidget::setTabOrder(lineEditWiFiPort, pushButtonWiFiConnect);
-        QWidget::setTabOrder(pushButtonWiFiConnect, pushButtonWiFiDisconnect);
-        QWidget::setTabOrder(pushButtonWiFiDisconnect, pushButtonBTdiscoverDevices);
+        QWidget::setTabOrder(radioButtonBT, radioButtonBLE);
+        QWidget::setTabOrder(radioButtonBLE, pushButtonBLEConnect);
+        QWidget::setTabOrder(pushButtonBLEConnect, pushButtonBLEDisconnect);
+        QWidget::setTabOrder(pushButtonBLEDisconnect, pushButtonBTdiscoverDevices);
         QWidget::setTabOrder(pushButtonBTdiscoverDevices, comboBoxBTdevices);
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
         QWidget::setTabOrder(pushButtonBTconnect, tabWidget);
@@ -342,7 +319,7 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Logger V0.3", nullptr));
+        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Logger BLE V0.4", nullptr));
         actionStart->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         actionStop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
         checkBoxConfigSmoothPlot->setText(QCoreApplication::translate("MainWindow", "Smooth Plot", nullptr));
@@ -350,15 +327,14 @@ public:
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Config", nullptr));
         groupBoxWirelessInterface->setTitle(QCoreApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QCoreApplication::translate("MainWindow", "Discover BT", nullptr));
-        radioButtonWiFi->setText(QCoreApplication::translate("MainWindow", "WiFi", nullptr));
+        radioButtonBLE->setText(QCoreApplication::translate("MainWindow", "Bluetooth BLE", nullptr));
         labelBTstatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
-        radioButtonBT->setText(QCoreApplication::translate("MainWindow", "Bluetooth", nullptr));
+        radioButtonBT->setText(QCoreApplication::translate("MainWindow", "Bluetooth Classic", nullptr));
         pushButtonBTconnect->setText(QCoreApplication::translate("MainWindow", "Connect BT", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "IP Address:", nullptr));
-        pushButtonWiFiConnect->setText(QCoreApplication::translate("MainWindow", "Connect WiFi", nullptr));
-        labelWiFiStatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
-        labelWiFiPort->setText(QCoreApplication::translate("MainWindow", "Port:", nullptr));
-        pushButtonWiFiDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect WiFi", nullptr));
+        pushButtonBLEDiscover->setText(QCoreApplication::translate("MainWindow", "Discover BLE", nullptr));
+        pushButtonBLEConnect->setText(QCoreApplication::translate("MainWindow", "Connect BLE", nullptr));
+        labelBLEStatus->setText(QCoreApplication::translate("MainWindow", "Status:", nullptr));
+        pushButtonBLEDisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect BLE", nullptr));
         pushButtonBTdisconnect->setText(QCoreApplication::translate("MainWindow", "Disconnect BT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(Connect), QCoreApplication::translate("MainWindow", "Connect", nullptr));
         pushButtonATSend->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
