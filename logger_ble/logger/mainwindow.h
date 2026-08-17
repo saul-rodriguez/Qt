@@ -53,6 +53,7 @@ private:
     int m_PlotNumUpdate; // Number of additional data points to plot at timeout
     QTimer *m_timer;
     int m_PlotTimeout;
+    int m_MaxVerticalRange; // This is the ADC full range 2^n-1
 
 
 private slots:

@@ -32,6 +32,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_PlotCounter = 0;
     m_PlotTimeout = 100; //time in ms
     m_PlotNumUpdate = 10; //number of samples to update every m_PlotTimeout
+    m_MaxVerticalRange = 4096;
 
     //Bluetooth
     m_bt = new BTClient(this);
@@ -53,7 +54,8 @@ MainWindow::MainWindow(QWidget *parent) :
     m_chart = new CPlotChart();
     m_chart->setTitles("","Time","ADC");
     m_chart->setXMinXax(0,m_MaxDataPlot);
-    m_chart->setYMinXax(0,1024);
+    //m_chart->setYMinXax(0,1024);
+    m_chart->setYMinXax(0,m_MaxVerticalRange);
     m_chart->initializePlot();
     m_chartView = new QChartView(static_cast<QChart*>(m_chart));
     //Set antialising properties and the chartview object to a place in layout
