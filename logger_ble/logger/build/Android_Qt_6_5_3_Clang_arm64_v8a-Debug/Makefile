@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = liblogger_arm64-v8a.so1.0.0
-DISTDIR = /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/.tmp/liblogger_arm64-v8a.so1.0.0
+DISTDIR = /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/.tmp/liblogger_arm64-v8a.so1.0.0
 LINK          = /home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target aarch64-linux-android23 -fno-limit-debug-info
 LFLAGS        = -Wl,-soname,liblogger_arm64-v8a.so -Wl,--build-id=sha1 -Wl,--no-undefined -Wl,-z,noexecstack -shared
 LIBS          = $(SUBLIBS) /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6Charts_arm64-v8a.so /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6OpenGLWidgets_arm64-v8a.so /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6Widgets_arm64-v8a.so /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6OpenGL_arm64-v8a.so /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6Gui_arm64-v8a.so -lEGL /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6Bluetooth_arm64-v8a.so /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6Network_arm64-v8a.so /opt/Qt/6.5.3/android_arm64_v8a/lib/libQt6Core_arm64-v8a.so -llog -pthread -lGLESv2   -llog -lz -lm -ldl -lc
@@ -52,17 +52,25 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = ../../main.cpp \
+SOURCES       = ../../bleclient.cpp \
+		../../deviceinfo.cpp \
+		../../main.cpp \
 		../../mainwindow.cpp \
 		../../btclient.cpp \
 		../../cplotchart.cpp qrc_images.cpp \
+		moc_bleclient.cpp \
+		moc_deviceinfo.cpp \
 		moc_mainwindow.cpp \
 		moc_btclient.cpp
-OBJECTS       = main.o \
+OBJECTS       = bleclient.o \
+		deviceinfo.o \
+		main.o \
 		mainwindow.o \
 		btclient.o \
 		cplotchart.o \
 		qrc_images.o \
+		moc_bleclient.o \
+		moc_deviceinfo.o \
 		moc_mainwindow.o \
 		moc_btclient.o
 DIST          = /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/spec_pre.prf \
@@ -314,6 +322,7 @@ DIST          = /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/spec_pre.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang/qmake.conf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/spec_post.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/android/spec_post.prf \
+		../../.qmake.stash \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/toolchain.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/default_pre.prf \
@@ -339,9 +348,13 @@ DIST          = /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/spec_pre.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/exceptions.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/yacc.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/lex.prf \
-		../../../../logger.pro ../../mainwindow.h \
+		../../../../logger.pro ../../bleclient.h \
+		../../deviceinfo.h \
+		../../mainwindow.h \
 		../../btclient.h \
-		../../cplotchart.h ../../main.cpp \
+		../../cplotchart.h ../../bleclient.cpp \
+		../../deviceinfo.cpp \
+		../../main.cpp \
 		../../mainwindow.cpp \
 		../../btclient.cpp \
 		../../cplotchart.cpp
@@ -605,6 +618,7 @@ Makefile: ../../logger.pro /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang/qmake.conf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/spec_post.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/android/spec_post.prf \
+		.qmake.stash \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/exclusive_builds.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/toolchain.prf \
 		/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/default_pre.prf \
@@ -890,6 +904,7 @@ Makefile: ../../logger.pro /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang
 /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang/qmake.conf:
 /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/spec_post.prf:
 /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/android/spec_post.prf:
+.qmake.stash:
 /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/exclusive_builds.prf:
 /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/toolchain.prf:
 /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/default_pre.prf:
@@ -941,8 +956,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../../images.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../../mainwindow.h ../../btclient.h ../../cplotchart.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../../main.cpp ../../mainwindow.cpp ../../btclient.cpp ../../cplotchart.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bleclient.h ../../deviceinfo.h ../../mainwindow.h ../../btclient.h ../../cplotchart.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../../bleclient.cpp ../../deviceinfo.cpp ../../main.cpp ../../mainwindow.cpp ../../btclient.cpp ../../cplotchart.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../../mainwindow.ui $(DISTDIR)/
 
 
@@ -960,13 +975,13 @@ distclean: clean
 ####### Sub-libraries
 
 aab: apk_install_target
-	/opt/Qt/6.5.3/gcc_64/bin/androiddeployqt --input /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-logger-deployment-settings.json --output /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build --aab --apk /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build/logger.apk
+	/opt/Qt/6.5.3/gcc_64/bin/androiddeployqt --input /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-logger-deployment-settings.json --output /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build --aab --apk /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build/logger.apk
 
 apk: apk_install_target
-	/opt/Qt/6.5.3/gcc_64/bin/androiddeployqt --input /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-logger-deployment-settings.json --output /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build --apk /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build/logger.apk
+	/opt/Qt/6.5.3/gcc_64/bin/androiddeployqt --input /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-logger-deployment-settings.json --output /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build --apk /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build/logger.apk
 
 apk_install_target: first
-	$(MAKE) -f $(MAKEFILE) INSTALL_ROOT=/home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build install
+	$(MAKE) -f $(MAKEFILE) INSTALL_ROOT=/home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/android-build install
 
 mocclean: compiler_moc_header_clean compiler_moc_objc_header_clean compiler_moc_source_clean
 
@@ -991,9 +1006,278 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/data/dummy.cpp
 	/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ -target aarch64-linux-android23 -fno-limit-debug-info -fPIC -fstack-protector-strong -DANDROID -g -std=gnu++1z -Wall -W -dM -E -o moc_predefs.h /opt/Qt/6.5.3/android_arm64_v8a/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_btclient.cpp
+compiler_moc_header_make_all: moc_bleclient.cpp moc_deviceinfo.cpp moc_mainwindow.cpp moc_btclient.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_btclient.cpp
+	-$(DEL_FILE) moc_bleclient.cpp moc_deviceinfo.cpp moc_mainwindow.cpp moc_btclient.cpp
+moc_bleclient.cpp: ../../bleclient.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QObject \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothAddress \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothaddress.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QByteArray \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QString \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QSharedPointer \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetooth.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariant \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariant.h \
+		../../deviceinfo.h \
+		moc_predefs.h \
+		/opt/Qt/6.5.3/gcc_64/libexec/moc
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/moc_predefs.h -I/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/android_arm64_v8a/include -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGL -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtGui -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.6/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../bleclient.h -o moc_bleclient.cpp
+
+moc_deviceinfo.cpp: ../../deviceinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QObject \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QString \
+		moc_predefs.h \
+		/opt/Qt/6.5.3/gcc_64/libexec/moc
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/moc_predefs.h -I/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/android_arm64_v8a/include -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGL -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtGui -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.6/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../deviceinfo.h -o moc_deviceinfo.cpp
+
 moc_mainwindow.cpp: ../../mainwindow.h \
 		../../btclient.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QObject \
@@ -1217,9 +1501,26 @@ moc_mainwindow.cpp: ../../mainwindow.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qtnetworkexports.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qabstractsocket.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qhostaddress.h \
+		../../bleclient.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMap \
+		../../deviceinfo.h \
 		moc_predefs.h \
 		/opt/Qt/6.5.3/gcc_64/libexec/moc
-	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/moc_predefs.h -I/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/6.5.3/android_arm64_v8a/include -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGL -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtGui -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.6/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/moc_predefs.h -I/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/android_arm64_v8a/include -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGL -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtGui -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.6/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../mainwindow.h -o moc_mainwindow.cpp
 
 moc_btclient.cpp: ../../btclient.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QObject \
@@ -1359,7 +1660,7 @@ moc_btclient.cpp: ../../btclient.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbasictimer.h \
 		moc_predefs.h \
 		/opt/Qt/6.5.3/gcc_64/libexec/moc
-	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/moc_predefs.h -I/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang -I/home/saul/projects/Qt/logger/logger -I/opt/Qt/6.5.3/android_arm64_v8a/include -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGL -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtGui -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.6/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../btclient.h -o moc_btclient.cpp
+	/opt/Qt/6.5.3/gcc_64/libexec/moc $(DEFINES) --include /home/saul/projects/Qt/logger_ble/logger/build/Android_Qt_6_5_3_Clang_arm64_v8a-Debug/moc_predefs.h -I/opt/Qt/6.5.3/android_arm64_v8a/mkspecs/android-clang -I/home/saul/projects/Qt/logger_ble/logger -I/opt/Qt/6.5.3/android_arm64_v8a/include -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGLWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtOpenGL -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtGui -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork -I/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore -I. -I/usr/include/c++/13 -I/usr/include/x86_64-linux-gnu/c++/13 -I/usr/include/c++/13/backward -I/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/lib64/clang/14.0.6/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../../btclient.h -o moc_btclient.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -1381,6 +1682,274 @@ compiler_lex_clean:
 compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
 
 ####### Compile
+
+bleclient.o: ../../bleclient.cpp ../../bleclient.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QObject \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothDeviceDiscoveryAgent \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothdevicediscoveryagent.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothAddress \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothaddress.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QByteArray \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QString \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QSharedPointer \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetooth.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariant \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariant.h \
+		../../deviceinfo.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o bleclient.o ../../bleclient.cpp
+
+deviceinfo.o: ../../deviceinfo.cpp ../../deviceinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothDeviceInfo \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothdeviceinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobal.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversionchecks.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconfig.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcore-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtconfigmacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtcoreexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtpreprocessorsupport.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtnoop.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsystemdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qprocessordetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompilerdetection.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qassert.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypes.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtclasshelpermacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtversion.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtypeinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsysinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlogging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qflags.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbasicatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qatomic_cxx11.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qgenericatomic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qconstructormacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdarwinhelpers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qexceptionhandling.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qforeach.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtdeprecationmarkers.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttypetraits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfunctionpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qglobalstatic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmalloc.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qminmax.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnumeric.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qoverload.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qswap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtenvironmentvariables.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtresource.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qttranslation.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qversiontagging.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetooth-config.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qtbluetoothexports.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothuuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QtGlobal \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMetaType \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetatype.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qrefcount.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qnamespace.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtmetamacros.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qpair.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydatapointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qarraydataops.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainertools_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qxptype_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearrayview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringfwd.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20type_traits.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcompare.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdatastream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiodevicebase.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qfloat16.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhashfunctions.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstring.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qchar.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringliteral.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qanystringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qutf8stringview.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringtokenizer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringbuilder.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmath.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qalgorithms.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterable.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmetacontainer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontainerinfo.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtaggedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobjectdefs_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qscopeguard.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QUuid \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/quuid.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QDebug \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qdebug.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qtextstream.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringconverter_base.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcontiguouscache.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qsharedpointer_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qiterator.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbytearraylist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringlist.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qstringmatcher.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qshareddata_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qset.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qhash.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvarlengtharray.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/q20memory.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QObject \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcoreevent.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qobject_impl.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qbindingstorage.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QString \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QBluetoothAddress \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qbluetoothaddress.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QByteArray
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o deviceinfo.o ../../deviceinfo.cpp
 
 main.o: ../../main.cpp ../../mainwindow.h \
 		../../btclient.h \
@@ -1605,6 +2174,23 @@ main.o: ../../main.cpp ../../mainwindow.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qtnetworkexports.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qabstractsocket.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qhostaddress.h \
+		../../bleclient.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMap \
+		../../deviceinfo.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets/QApplication \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtWidgets/qapplication.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qcoreapplication.h \
@@ -1853,6 +2439,23 @@ mainwindow.o: ../../mainwindow.cpp ../../mainwindow.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qtnetworkexports.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qabstractsocket.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtNetwork/qhostaddress.h \
+		../../bleclient.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyController \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycontroller.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyAdvertisingData \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyadvertisingdata.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyConnectionParameters \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyconnectionparameters.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyService \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergyservice.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyCharacteristic \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergycharacteristic.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/QLowEnergyDescriptor \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtBluetooth/qlowenergydescriptor.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QVariantMap \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/qvariantmap.h \
+		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCore/QMap \
+		../../deviceinfo.h \
 		ui_mainwindow.h \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts/QChartView \
 		/opt/Qt/6.5.3/android_arm64_v8a/include/QtCharts/qchartview.h \
@@ -2190,6 +2793,12 @@ cplotchart.o: ../../cplotchart.cpp ../../cplotchart.h \
 
 qrc_images.o: qrc_images.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_images.o qrc_images.cpp
+
+moc_bleclient.o: moc_bleclient.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_bleclient.o moc_bleclient.cpp
+
+moc_deviceinfo.o: moc_deviceinfo.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_deviceinfo.o moc_deviceinfo.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

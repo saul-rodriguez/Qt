@@ -46,7 +46,7 @@ private:
 
     //Plot
     QChartView *m_chartView;
-    CPlotChart *m_chart;    
+    CPlotChart *m_chart = nullptr;
     DataTrace m_plot_trace;
     int m_MaxDataPlot; //Max number of samples to plot
     int m_PlotCounter;
@@ -87,6 +87,8 @@ private slots:
     void on_pushButtonBLEDiscover_clicked();
     void on_pushButtonBLEConnect_clicked();
     void on_pushButtonBLEDisconnect_clicked();
+    //void on_comboBoxHorizontalScale_currentIndexChanged(int index);
+    void on_comboBoxHorizontalScale_currentTextChanged(const QString &arg1);
 };
 
 #endif // MAINWINDOW_H

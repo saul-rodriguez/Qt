@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     /**** Toolbar ******/
-       ui->mainToolBar->setIconSize(QSize(120, 120));
+    //   ui->mainToolBar->setIconSize(QSize(120, 120));
 
     //config initialization, BLE set as default
 
@@ -24,11 +24,24 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->pushButtonBLEDiscover->setEnabled(true);
     ui->pushButtonBLEDisconnect->setEnabled(false);
 
+    ui->comboBoxHorizontalScale->addItem("640");
+    ui->comboBoxHorizontalScale->addItem("1280");
+    ui->comboBoxHorizontalScale->addItem("2560");
+    ui->comboBoxHorizontalScale->addItem("5120");
+
+
+
+
     // Plot configuration
 
+
+
     m_MaxDataPlot = 640;
+    //m_MaxDataPlot = 1280;
+    //m_MaxDataPlot = 2560;
     m_DataCounter = 0;
-    m_MaxNumSamples = 6000; //Max Number of samples to be recorded before the buffers are cleared
+    //m_MaxNumSamples = 6000; //Max Number of samples to be recorded before the buffers are cleared
+    m_MaxNumSamples = m_MaxDataPlot*4; //Max Number of samples to be recorded before the buffers are cleared
     m_PlotCounter = 0;
     m_PlotTimeout = 100; //time in ms
     m_PlotNumUpdate = 10; //number of samples to update every m_PlotTimeout
@@ -100,7 +113,8 @@ void MainWindow::BTrxData(const QByteArray &data)
     if (!m_timer->isActive())
         return;
 
-    int size = data.count();
+    //int size = data.count();
+    int size = data.length();
     if (size%2) { //each values is 2 bytes. There is an incomplete value!
         qDebug()<<"Odd number of bytes received";
         return; //wait for the next rx
@@ -118,7 +132,8 @@ void MainWindow::PlotRx(const QByteArray &data)
     int index = 0;   
     quint16 value;
 
-    int size = data.count()/2; //Each converted value comes in 2 bytes unsigned short.
+    //int size = data.count()/2; //Each converted value comes in 2 bytes unsigned short.
+    int size = data.length()/2; //Each converted value comes in 2 bytes unsigned short.
 
     for (int i = 0; i < size; i++) {
         //reconstruct the digital value
@@ -362,5 +377,23 @@ void MainWindow::on_pushButtonBLEConnect_clicked()
 void MainWindow::on_pushButtonBLEDisconnect_clicked()
 {
     m_ble->BLEdisconnect();
+}
+
+void MainWindow::on_comboBoxHorizontalScale_currentTextChanged(const QString &arg1)
+{
+
+    if (m_chart == nullptr)
+        return;
+
+
+    m_MaxDataPlot = arg1.toInt();
+    qDebug()<< m_MaxDataPlot;
+
+
+    m_chart->setXMinXax(0,m_MaxDataPlot);
+
+    m_MaxNumSamples = m_MaxDataPlot*4;
+
+
 }
 

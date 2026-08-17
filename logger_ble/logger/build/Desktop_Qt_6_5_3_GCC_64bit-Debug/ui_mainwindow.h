@@ -47,6 +47,8 @@ public:
     QVBoxLayout *verticalLayout_4;
     QCheckBox *checkBoxConfigSmoothPlot;
     QCheckBox *checkBoxConfigAntialias;
+    QLabel *label;
+    QComboBox *comboBoxHorizontalScale;
     QSpacerItem *verticalSpacer;
     QWidget *Connect;
     QGridLayout *gridLayout_3;
@@ -125,6 +127,16 @@ public:
         checkBoxConfigAntialias->setObjectName("checkBoxConfigAntialias");
 
         verticalLayout_4->addWidget(checkBoxConfigAntialias);
+
+        label = new QLabel(tab_3);
+        label->setObjectName("label");
+
+        verticalLayout_4->addWidget(label);
+
+        comboBoxHorizontalScale = new QComboBox(tab_3);
+        comboBoxHorizontalScale->setObjectName("comboBoxHorizontalScale");
+
+        verticalLayout_4->addWidget(comboBoxHorizontalScale);
 
         verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
@@ -311,7 +323,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -324,6 +336,7 @@ public:
         actionStop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
         checkBoxConfigSmoothPlot->setText(QCoreApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QCoreApplication::translate("MainWindow", "Antialias filtering", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Horizontal Scale (Max Samples)", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_3), QCoreApplication::translate("MainWindow", "Config", nullptr));
         groupBoxWirelessInterface->setTitle(QCoreApplication::translate("MainWindow", "Wireless interface:", nullptr));
         pushButtonBTdiscoverDevices->setText(QCoreApplication::translate("MainWindow", "Discover BT", nullptr));

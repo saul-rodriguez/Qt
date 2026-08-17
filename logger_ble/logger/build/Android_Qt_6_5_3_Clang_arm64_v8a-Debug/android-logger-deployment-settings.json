@@ -7,7 +7,7 @@
    "qtPluginsDirectory": "plugins",
    "qtQmlDirectory": "qml",
    "sdk": "/home/saul/Android/Sdk",
-   "sdkBuildToolsRevision": "33.0.0",
+   "sdkBuildToolsRevision": "35.0.0",
    "ndk": "/home/saul/Android/Sdk/ndk/25.1.8937393",
    "toolchain-prefix": "llvm",
    "tool-prefix": "llvm",
@@ -17,8 +17,8 @@
    "android-target-sdk-version": "31",
    "rcc-binary": "/opt/Qt/6.5.3/gcc_64/libexec/rcc",
    "qml-importscanner-binary": "/opt/Qt/6.5.3/gcc_64/libexec/qmlimportscanner",
-   "qml-root-path": "/home/saul/projects/Qt/logger/logger",
+   "qml-root-path": "/home/saul/projects/Qt/logger_ble/logger",
    "stdcpp-path": "/home/saul/Android/Sdk/ndk/25.1.8937393/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/lib",
-   "qrcFiles": "/home/saul/projects/Qt/logger/logger/images.qrc",
+   "qrcFiles": "/home/saul/projects/Qt/logger_ble/logger/images.qrc",
    "application-binary": "logger"
 }
