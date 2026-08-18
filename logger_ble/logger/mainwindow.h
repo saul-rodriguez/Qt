@@ -89,6 +89,7 @@ private slots:
     void on_pushButtonBLEDisconnect_clicked();
     //void on_comboBoxHorizontalScale_currentIndexChanged(int index);
     void on_comboBoxHorizontalScale_currentTextChanged(const QString &arg1);
+    void on_pushButtonSendSPI_clicked();
 };
 
 #endif // MAINWINDOW_H

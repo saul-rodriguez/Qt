@@ -289,9 +289,10 @@ void MainWindow::on_actionStart_triggered()
     if (ui->radioButtonBT->isChecked()) {
         m_bt->BTwrite(data);
     } else {    //The communication with the ESP-01 module is always terminated by cr + nl
-        data.append('\r');
-        data.append('\n');
+        //data.append('\r');
+        //data.append('\n');
         //m_WiFiTcpSocket->write(data);
+        m_ble->write(data);
     }
 
     m_timer->start(m_PlotTimeout);
@@ -307,9 +308,10 @@ void MainWindow::on_actionStop_triggered()
     if (ui->radioButtonBT->isChecked()) {
         m_bt->BTwrite(data);
     } else {    //The communication with the ESP-01 module is always terminated by cr + nl
-        data.append('\r');
-        data.append('\n');
+        //data.append('\r');
+        //data.append('\n');
         //m_WiFiTcpSocket->write(data);
+        m_ble->write(data);
     }
 
     m_timer->stop();
@@ -394,6 +396,43 @@ void MainWindow::on_comboBoxHorizontalScale_currentTextChanged(const QString &ar
 
     m_MaxNumSamples = m_MaxDataPlot*4;
 
+}
+
+
+void MainWindow::on_pushButtonSendSPI_clicked()
+{
+    QString SPIaddress = ui->lineEditSPIAddr->text();
+    QString SPIval = ui->lineEditSPIVal->text();
+
+
+    uint32_t SPIaddress_num = SPIaddress.toInt();
+
+    bool ok;
+    uint32_t SPIval_num = SPIval.toUInt(&ok, 16);
+
+    if(!ok) {
+        qDebug()<<"error parsing SPI hexadecimal register value";
+        return;
+    }
+
+    QByteArray data;
+    data.clear();
+
+    // Send identifier for command
+    data.append('w');
+
+    data.append((uint8_t)SPIaddress_num);
+
+    data.append((uint8_t)(SPIval_num & 0xff));
+    data.append((uint8_t)((SPIval_num >> 8) & 0xff));
+    data.append((uint8_t)((SPIval_num >> 16) & 0xff));
+    data.append((uint8_t)((SPIval_num >> 24) & 0xff));
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {
+        m_ble->write(data);
+    }
 
 }
 

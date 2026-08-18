@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -79,6 +80,16 @@ public:
     QWidget *tab;
     QGridLayout *gridLayout_6;
     QVBoxLayout *verticalLayout_3;
+    QWidget *tab_4;
+    QFormLayout *formLayout;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_2;
+    QLineEdit *lineEditSPIAddr;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_3;
+    QLineEdit *lineEditSPIVal;
+    QPushButton *pushButtonSendSPI;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -289,6 +300,56 @@ public:
         gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
         tabWidget->addTab(tab, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName("tab_4");
+        formLayout = new QFormLayout(tab_4);
+        formLayout->setSpacing(6);
+        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setObjectName("formLayout");
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName("verticalLayout_5");
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        label_2 = new QLabel(tab_4);
+        label_2->setObjectName("label_2");
+
+        horizontalLayout_2->addWidget(label_2);
+
+        lineEditSPIAddr = new QLineEdit(tab_4);
+        lineEditSPIAddr->setObjectName("lineEditSPIAddr");
+
+        horizontalLayout_2->addWidget(lineEditSPIAddr);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_2);
+
+
+        formLayout->setLayout(0, QFormLayout::FieldRole, verticalLayout_5);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        label_3 = new QLabel(tab_4);
+        label_3->setObjectName("label_3");
+
+        horizontalLayout_6->addWidget(label_3);
+
+        lineEditSPIVal = new QLineEdit(tab_4);
+        lineEditSPIVal->setObjectName("lineEditSPIVal");
+
+        horizontalLayout_6->addWidget(lineEditSPIVal);
+
+
+        formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_6);
+
+        pushButtonSendSPI = new QPushButton(tab_4);
+        pushButtonSendSPI->setObjectName("pushButtonSendSPI");
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, pushButtonSendSPI);
+
+        tabWidget->addTab(tab_4, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -312,8 +373,7 @@ public:
         QWidget::setTabOrder(pushButtonBLEDisconnect, pushButtonBTdiscoverDevices);
         QWidget::setTabOrder(pushButtonBTdiscoverDevices, comboBoxBTdevices);
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
-        QWidget::setTabOrder(pushButtonBTconnect, tabWidget);
-        QWidget::setTabOrder(tabWidget, lineEditAT);
+        QWidget::setTabOrder(pushButtonBTconnect, lineEditAT);
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
         QWidget::setTabOrder(pushButtonATSend, plainTextEditAT);
 
@@ -323,7 +383,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -353,6 +413,10 @@ public:
         pushButtonATSend->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "AT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Plot", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Reg Address:", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "RegVal:", nullptr));
+        pushButtonSendSPI->setText(QCoreApplication::translate("MainWindow", "SPI send", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "SPI", nullptr));
     } // retranslateUi
 
 };
