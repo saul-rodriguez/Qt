@@ -90,6 +90,8 @@ private slots:
     //void on_comboBoxHorizontalScale_currentIndexChanged(int index);
     void on_comboBoxHorizontalScale_currentTextChanged(const QString &arg1);
     void on_pushButtonSendSPI_clicked();
+    void on_actionOut1_triggered();
+    void on_actionOut2_triggered();
 };
 
 #endif // MAINWINDOW_H

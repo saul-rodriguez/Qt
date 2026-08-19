@@ -436,3 +436,48 @@ void MainWindow::on_pushButtonSendSPI_clicked()
 
 }
 
+
+void MainWindow::on_actionOut1_triggered()
+{
+    QByteArray data;
+    data.clear();
+
+    if (ui->actionOut1->isChecked()) {
+        qDebug()<<"Out1 checked";
+        data.append('o');
+
+    } else {
+        qDebug()<<"Out1 unchecked";
+        data.append('O');
+    }
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {
+        m_ble->write(data);
+    }
+
+}
+
+
+void MainWindow::on_actionOut2_triggered()
+{
+    QByteArray data;
+    data.clear();
+
+    if (ui->actionOut2->isChecked()) {
+        qDebug()<<"Out2 checked";
+        data.append('p');
+
+    } else {
+        qDebug()<<"Out2 unchecked";
+        data.append('P');
+    }
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {
+        m_ble->write(data);
+    }
+}
+

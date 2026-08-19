@@ -39,6 +39,8 @@ class Ui_MainWindow
 public:
     QAction *actionStart;
     QAction *actionStop;
+    QAction *actionOut1;
+    QAction *actionOut2;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -109,6 +111,14 @@ public:
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/images/images/Stop-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionStop->setIcon(icon1);
+        actionOut1 = new QAction(MainWindow);
+        actionOut1->setObjectName("actionOut1");
+        actionOut1->setCheckable(true);
+        actionOut1->setMenuRole(QAction::NoRole);
+        actionOut2 = new QAction(MainWindow);
+        actionOut2->setObjectName("actionOut2");
+        actionOut2->setCheckable(true);
+        actionOut2->setMenuRole(QAction::NoRole);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName("centralWidget");
         gridLayout = new QGridLayout(centralWidget);
@@ -380,6 +390,8 @@ public:
         mainToolBar->addAction(actionStart);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionStop);
+        mainToolBar->addAction(actionOut1);
+        mainToolBar->addAction(actionOut2);
 
         retranslateUi(MainWindow);
 
@@ -394,6 +406,8 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Logger BLE V0.4", nullptr));
         actionStart->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         actionStop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
+        actionOut1->setText(QCoreApplication::translate("MainWindow", "Out1", nullptr));
+        actionOut2->setText(QCoreApplication::translate("MainWindow", "Out2", nullptr));
         checkBoxConfigSmoothPlot->setText(QCoreApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QCoreApplication::translate("MainWindow", "Antialias filtering", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Horizontal Scale (Max Samples)", nullptr));
