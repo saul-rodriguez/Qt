@@ -92,6 +92,7 @@ private slots:
     void on_pushButtonSendSPI_clicked();
     void on_actionOut1_triggered();
     void on_actionOut2_triggered();
+    void on_actionCLK_triggered();
 };
 
 #endif // MAINWINDOW_H

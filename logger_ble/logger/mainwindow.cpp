@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->comboBoxHorizontalScale->addItem("5120");
 
 
-
+    ui->lineEditClkFreq->setText("1");
 
     // Plot configuration
 
@@ -472,6 +472,35 @@ void MainWindow::on_actionOut2_triggered()
     } else {
         qDebug()<<"Out2 unchecked";
         data.append('P');
+    }
+
+    if (ui->radioButtonBT->isChecked()) {
+        m_bt->BTwrite(data);
+    } else {
+        m_ble->write(data);
+    }
+}
+
+
+void MainWindow::on_actionCLK_triggered()
+{
+    QByteArray data;
+    data.clear();
+
+    if (ui->actionCLK->isChecked()) {
+        qDebug()<<"Clk checked";
+        data.append('c');
+
+        QString aux = ui->lineEditClkFreq->text();
+        uint8_t aux_num = (uint8_t)aux.toUInt();
+
+        qDebug()<<"Clk freq: "<<aux_num;
+
+        data.append(aux_num);
+
+    } else {
+        qDebug()<<"Clk unchecked";
+        data.append('C');
     }
 
     if (ui->radioButtonBT->isChecked()) {

@@ -41,6 +41,7 @@ public:
     QAction *actionStop;
     QAction *actionOut1;
     QAction *actionOut2;
+    QAction *actionCLK;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -92,6 +93,12 @@ public:
     QLabel *label_3;
     QLineEdit *lineEditSPIVal;
     QPushButton *pushButtonSendSPI;
+    QWidget *tab_5;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_4;
+    QLineEdit *lineEditClkFreq;
+    QSpacerItem *verticalSpacer_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -119,6 +126,10 @@ public:
         actionOut2->setObjectName("actionOut2");
         actionOut2->setCheckable(true);
         actionOut2->setMenuRole(QAction::NoRole);
+        actionCLK = new QAction(MainWindow);
+        actionCLK->setObjectName("actionCLK");
+        actionCLK->setCheckable(true);
+        actionCLK->setMenuRole(QAction::NoRole);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName("centralWidget");
         gridLayout = new QGridLayout(centralWidget);
@@ -360,6 +371,33 @@ public:
         formLayout->setWidget(2, QFormLayout::FieldRole, pushButtonSendSPI);
 
         tabWidget->addTab(tab_4, QString());
+        tab_5 = new QWidget();
+        tab_5->setObjectName("tab_5");
+        verticalLayout_6 = new QVBoxLayout(tab_5);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName("verticalLayout_6");
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        label_4 = new QLabel(tab_5);
+        label_4->setObjectName("label_4");
+
+        horizontalLayout_5->addWidget(label_4);
+
+        lineEditClkFreq = new QLineEdit(tab_5);
+        lineEditClkFreq->setObjectName("lineEditClkFreq");
+
+        horizontalLayout_5->addWidget(lineEditClkFreq);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_5);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_6->addItem(verticalSpacer_2);
+
+        tabWidget->addTab(tab_5, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -392,10 +430,11 @@ public:
         mainToolBar->addAction(actionStop);
         mainToolBar->addAction(actionOut1);
         mainToolBar->addAction(actionOut2);
+        mainToolBar->addAction(actionCLK);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(4);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -408,6 +447,7 @@ public:
         actionStop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
         actionOut1->setText(QCoreApplication::translate("MainWindow", "Out1", nullptr));
         actionOut2->setText(QCoreApplication::translate("MainWindow", "Out2", nullptr));
+        actionCLK->setText(QCoreApplication::translate("MainWindow", "CLK", nullptr));
         checkBoxConfigSmoothPlot->setText(QCoreApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QCoreApplication::translate("MainWindow", "Antialias filtering", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Horizontal Scale (Max Samples)", nullptr));
@@ -431,6 +471,8 @@ public:
         label_3->setText(QCoreApplication::translate("MainWindow", "RegVal:", nullptr));
         pushButtonSendSPI->setText(QCoreApplication::translate("MainWindow", "SPI send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "SPI", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Clk Freq (kHz):", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "CLK", nullptr));
     } // retranslateUi
 
 };
