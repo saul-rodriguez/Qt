@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QComboBox>
+#include <QtWidgets/QFormLayout>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHBoxLayout>
@@ -38,6 +39,9 @@ class Ui_MainWindow
 public:
     QAction *actionStart;
     QAction *actionStop;
+    QAction *actionOut1;
+    QAction *actionOut2;
+    QAction *actionCLK;
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QVBoxLayout *verticalLayout;
@@ -79,6 +83,22 @@ public:
     QWidget *tab;
     QGridLayout *gridLayout_6;
     QVBoxLayout *verticalLayout_3;
+    QWidget *tab_4;
+    QFormLayout *formLayout;
+    QVBoxLayout *verticalLayout_5;
+    QHBoxLayout *horizontalLayout_2;
+    QLabel *label_2;
+    QLineEdit *lineEditSPIAddr;
+    QHBoxLayout *horizontalLayout_6;
+    QLabel *label_3;
+    QLineEdit *lineEditSPIVal;
+    QPushButton *pushButtonSendSPI;
+    QWidget *tab_5;
+    QVBoxLayout *verticalLayout_6;
+    QHBoxLayout *horizontalLayout_5;
+    QLabel *label_4;
+    QLineEdit *lineEditClkFreq;
+    QSpacerItem *verticalSpacer_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -98,6 +118,18 @@ public:
         QIcon icon1;
         icon1.addFile(QString::fromUtf8(":/images/images/Stop-icon.png"), QSize(), QIcon::Normal, QIcon::Off);
         actionStop->setIcon(icon1);
+        actionOut1 = new QAction(MainWindow);
+        actionOut1->setObjectName("actionOut1");
+        actionOut1->setCheckable(true);
+        actionOut1->setMenuRole(QAction::NoRole);
+        actionOut2 = new QAction(MainWindow);
+        actionOut2->setObjectName("actionOut2");
+        actionOut2->setCheckable(true);
+        actionOut2->setMenuRole(QAction::NoRole);
+        actionCLK = new QAction(MainWindow);
+        actionCLK->setObjectName("actionCLK");
+        actionCLK->setCheckable(true);
+        actionCLK->setMenuRole(QAction::NoRole);
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName("centralWidget");
         gridLayout = new QGridLayout(centralWidget);
@@ -289,6 +321,83 @@ public:
         gridLayout_6->addLayout(verticalLayout_3, 0, 0, 1, 1);
 
         tabWidget->addTab(tab, QString());
+        tab_4 = new QWidget();
+        tab_4->setObjectName("tab_4");
+        formLayout = new QFormLayout(tab_4);
+        formLayout->setSpacing(6);
+        formLayout->setContentsMargins(11, 11, 11, 11);
+        formLayout->setObjectName("formLayout");
+        verticalLayout_5 = new QVBoxLayout();
+        verticalLayout_5->setSpacing(6);
+        verticalLayout_5->setObjectName("verticalLayout_5");
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        label_2 = new QLabel(tab_4);
+        label_2->setObjectName("label_2");
+
+        horizontalLayout_2->addWidget(label_2);
+
+        lineEditSPIAddr = new QLineEdit(tab_4);
+        lineEditSPIAddr->setObjectName("lineEditSPIAddr");
+
+        horizontalLayout_2->addWidget(lineEditSPIAddr);
+
+
+        verticalLayout_5->addLayout(horizontalLayout_2);
+
+
+        formLayout->setLayout(0, QFormLayout::FieldRole, verticalLayout_5);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setSpacing(6);
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        label_3 = new QLabel(tab_4);
+        label_3->setObjectName("label_3");
+
+        horizontalLayout_6->addWidget(label_3);
+
+        lineEditSPIVal = new QLineEdit(tab_4);
+        lineEditSPIVal->setObjectName("lineEditSPIVal");
+
+        horizontalLayout_6->addWidget(lineEditSPIVal);
+
+
+        formLayout->setLayout(1, QFormLayout::FieldRole, horizontalLayout_6);
+
+        pushButtonSendSPI = new QPushButton(tab_4);
+        pushButtonSendSPI->setObjectName("pushButtonSendSPI");
+
+        formLayout->setWidget(2, QFormLayout::FieldRole, pushButtonSendSPI);
+
+        tabWidget->addTab(tab_4, QString());
+        tab_5 = new QWidget();
+        tab_5->setObjectName("tab_5");
+        verticalLayout_6 = new QVBoxLayout(tab_5);
+        verticalLayout_6->setSpacing(6);
+        verticalLayout_6->setContentsMargins(11, 11, 11, 11);
+        verticalLayout_6->setObjectName("verticalLayout_6");
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setSpacing(6);
+        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        label_4 = new QLabel(tab_5);
+        label_4->setObjectName("label_4");
+
+        horizontalLayout_5->addWidget(label_4);
+
+        lineEditClkFreq = new QLineEdit(tab_5);
+        lineEditClkFreq->setObjectName("lineEditClkFreq");
+
+        horizontalLayout_5->addWidget(lineEditClkFreq);
+
+
+        verticalLayout_6->addLayout(horizontalLayout_5);
+
+        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        verticalLayout_6->addItem(verticalSpacer_2);
+
+        tabWidget->addTab(tab_5, QString());
 
         verticalLayout->addWidget(tabWidget);
 
@@ -312,18 +421,20 @@ public:
         QWidget::setTabOrder(pushButtonBLEDisconnect, pushButtonBTdiscoverDevices);
         QWidget::setTabOrder(pushButtonBTdiscoverDevices, comboBoxBTdevices);
         QWidget::setTabOrder(comboBoxBTdevices, pushButtonBTconnect);
-        QWidget::setTabOrder(pushButtonBTconnect, tabWidget);
-        QWidget::setTabOrder(tabWidget, lineEditAT);
+        QWidget::setTabOrder(pushButtonBTconnect, lineEditAT);
         QWidget::setTabOrder(lineEditAT, pushButtonATSend);
         QWidget::setTabOrder(pushButtonATSend, plainTextEditAT);
 
         mainToolBar->addAction(actionStart);
         mainToolBar->addSeparator();
         mainToolBar->addAction(actionStop);
+        mainToolBar->addAction(actionOut1);
+        mainToolBar->addAction(actionOut2);
+        mainToolBar->addAction(actionCLK);
 
         retranslateUi(MainWindow);
 
-        tabWidget->setCurrentIndex(0);
+        tabWidget->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -334,6 +445,9 @@ public:
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "Logger BLE V0.4", nullptr));
         actionStart->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
         actionStop->setText(QCoreApplication::translate("MainWindow", "Stop", nullptr));
+        actionOut1->setText(QCoreApplication::translate("MainWindow", "Out1", nullptr));
+        actionOut2->setText(QCoreApplication::translate("MainWindow", "Out2", nullptr));
+        actionCLK->setText(QCoreApplication::translate("MainWindow", "CLK", nullptr));
         checkBoxConfigSmoothPlot->setText(QCoreApplication::translate("MainWindow", "Smooth Plot", nullptr));
         checkBoxConfigAntialias->setText(QCoreApplication::translate("MainWindow", "Antialias filtering", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Horizontal Scale (Max Samples)", nullptr));
@@ -353,6 +467,12 @@ public:
         pushButtonATSend->setText(QCoreApplication::translate("MainWindow", "Send", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab_2), QCoreApplication::translate("MainWindow", "AT", nullptr));
         tabWidget->setTabText(tabWidget->indexOf(tab), QCoreApplication::translate("MainWindow", "Plot", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Reg Address:", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "RegVal:", nullptr));
+        pushButtonSendSPI->setText(QCoreApplication::translate("MainWindow", "SPI send", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_4), QCoreApplication::translate("MainWindow", "SPI", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Clk Freq (kHz):", nullptr));
+        tabWidget->setTabText(tabWidget->indexOf(tab_5), QCoreApplication::translate("MainWindow", "CLK", nullptr));
     } // retranslateUi
 
 };
