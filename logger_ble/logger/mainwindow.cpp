@@ -262,6 +262,9 @@ void MainWindow::on_radioButtonBT_toggled(bool checked)
         ui->pushButtonBLEDiscover->setEnabled(false);
         ui->pushButtonBLEDisconnect->setEnabled(false);
 
+        m_MaxVerticalRange = 1024;
+        m_chart->setYMinXax(0,m_MaxVerticalRange);
+
     }
 
 }
@@ -329,6 +332,9 @@ void MainWindow::on_radioButtonBLE_toggled(bool checked)
         ui->pushButtonBTconnect->setEnabled(false);
         ui->pushButtonBTdiscoverDevices->setEnabled(false);
         ui->pushButtonBTdisconnect->setEnabled(false);
+
+        m_MaxVerticalRange = 4096;
+        m_chart->setYMinXax(0,m_MaxVerticalRange);
     }
 }
 
