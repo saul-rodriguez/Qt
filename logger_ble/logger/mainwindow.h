@@ -93,6 +93,8 @@ private slots:
     void on_actionOut1_triggered();
     void on_actionOut2_triggered();
     void on_actionCLK_triggered();
+
+    void on_checkBoxPlotText_stateChanged(int arg1);
 };
 
 #endif // MAINWINDOW_H

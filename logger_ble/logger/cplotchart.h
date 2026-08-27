@@ -33,6 +33,7 @@ public:
     void clearTable();
     void setXMinXax(double min, double max);
     void setYMinXax(double min, double max);
+    void setTextInvisible(bool val);
 
 private:
     QString m_title;
@@ -42,6 +43,7 @@ private:
     double m_maxX;
     double m_minY;
     double m_maxY;
+    int m_hideText;
 
     DataTable m_DataTable;
 

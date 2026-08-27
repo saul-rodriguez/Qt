@@ -1,4 +1,5 @@
 #include "cplotchart.h"
+#include <QValueAxis>
 
 CPlotChart::CPlotChart()
 {
@@ -10,6 +11,8 @@ CPlotChart::CPlotChart()
     m_maxX = 1.0;
     m_minY = -1.0;
     m_maxY = 1.0;
+
+    m_hideText = false;
 }
 
 void CPlotChart::initializePlot()
@@ -70,7 +73,20 @@ void CPlotChart::updatePlot()
     setTitle(m_title);
     axisX()->setTitleText(m_xAxisName);
     axisY()->setTitleText(m_yAxisName);
-   //legend()->show(); // hide()/show()
+
+    if (m_hideText == true) {
+        axisX()->setTitleVisible(false);
+        axisY()->setTitleVisible(false);
+
+        QAbstractAxis *axisX = this->axes(Qt::Horizontal).first();
+        axisX->setLabelsVisible(false); // Gömmer text/siffror
+
+        QAbstractAxis *axisY = this->axes(Qt::Vertical).first();
+        axisY->setLabelsVisible(false); // Gömmer text/siffror
+    }
+
+
+    //legend()->show(); // hide()/show()
    // legend()->setAlignment(Qt::AlignmentFlag::AlignRight);
 
 }
@@ -95,6 +111,15 @@ void CPlotChart::setYMinXax(double min, double max)
 {
     m_minY = min;
     m_maxY = max;
+}
+
+void CPlotChart::setTextInvisible(bool val)
+{
+    if (val == true) {
+        m_hideText = true;
+    } else {
+        m_hideText = false;
+    }
 }
 
 

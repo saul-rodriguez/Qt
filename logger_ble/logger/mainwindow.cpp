@@ -510,3 +510,14 @@ void MainWindow::on_actionCLK_triggered()
     }
 }
 
+
+
+void MainWindow::on_checkBoxPlotText_stateChanged(int arg1)
+{
+    if (ui->checkBoxPlotText->isChecked()) {
+        m_chart->setTextInvisible(true);
+    } else {
+        m_chart->setTextInvisible(false);
+    }
+}
+
